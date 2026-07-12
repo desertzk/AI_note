@@ -1,0 +1,1510 @@
+[00:00] Okay, as you can see, I'm trying use uh
+[00:02] several different ways to record my own
+[00:04] lecture so that I can combine these uh
+[00:07] videos together. Then um if you know um
+[00:11] last year I taught this course before
+[00:14] the same time the spring in 2025. So the
+[00:18] video are on all on YouTube. So feel
+[00:20] free to watch last year's video. The
+[00:22] skeleton of this year will be pretty
+[00:25] much the same at least for the first
+[00:27] half of the semester. Then I try to
+[00:30] extend more content towards the second
+[00:33] half of the semester then to go a little
+[00:35] bit more advanced that fits a like a PhD
+[00:38] level course. Okay. So well the code is
+[00:41] there again. Well at least it's not part
+[00:44] of my recording I guess. So uh how many
+[00:46] of you are undergraduate students?
+[00:50] Uh
+[00:52] f four right four student. Okay. How
+[00:55] many of you are master?
+[00:58] Okay. Three. Four. Then five. Okay. Then
+[01:02] the rest. How many of you are PhD
+[01:04] students here? Okay. So roughly the same
+[01:08] amount of undergraduate and the graduate
+[01:10] master and PhD student. That's good. So
+[01:13] uh this the um this course is advanced
+[01:16] computer architecture. So I guess most
+[01:19] of you have never taken a computer
+[01:21] architecture course, right? How many of
+[01:24] you have taken a basic computer
+[01:26] architecture course? Okay. Okay, there
+[01:27] are several of you. So, how many of you
+[01:30] know what is uh sequential logic and uh
+[01:34] uh combinational logic that you're
+[01:36] comfortable with in this content?
+[01:39] Um, okay. A little bit. Okay. So,
+[01:43] typically when I say advanced computer
+[01:45] architecture, we do not teach uh
+[01:47] sequential logic and combination logic.
+[01:49] But because most of you do not have this
+[01:51] background, I probably will spend two
+[01:53] weeks time to review those content.
+[01:56] Those are not super important for this
+[01:58] course but it's the basics for you to
+[02:00] understand that no matter what advanced
+[02:02] the features that we're designing in
+[02:04] computer architecture they're eventually
+[02:06] uh implemented with basic features.
+[02:09] Okay. So uh what this course is about
+[02:13] this is a full fully lecture based
+[02:15] courses. So we're not expecting uh read
+[02:18] papers or doing presentations. And uh
+[02:21] we're going to cover topics like
+[02:23] starting from boolean logic
+[02:24] combinational logic sequential logic uh
+[02:27] probably ver log simulation risk 5 is
+[02:31] computer CPU core architecture branch
+[02:33] prediction spective execution DRM cache
+[02:37] co uh co coherency and consistency
+[02:39] network on chip and especially GPU
+[02:41] architectures. So a lot of topic then uh
+[02:46] last year we do not really have DM there
+[02:48] uh covered then we do not have much
+[02:51] speculative execution we didn't cover
+[02:54] verog probably this year we're not going
+[02:56] to cover verog again then we covered
+[02:59] coherency we didn't cover consistency
+[03:01] let's see if we have time to cover
+[03:03] consistency or not we didn't cover
+[03:05] network on chip but this year that's
+[03:07] something that I really want to add okay
+[03:09] and if you watched the video last year
+[03:11] on GPU architecture ure GPU architecture
+[03:13] I didn't have slides I just write it
+[03:16] using uh blackboard so um and this year
+[03:19] I'm going to make slides for it now
+[03:21] we're going to have assignment and
+[03:22] quizzes quizzes are more likely to be um
+[03:27] um on Google forms so that you can just
+[03:30] fill in a few selection questions then
+[03:32] that you immediately can get a like a
+[03:34] grading okay then simulation is a core
+[03:37] topic now I'm going to you teach you how
+[03:39] to run uh computer architecture
+[03:41] simulations
+[03:42] Then um for for you to verify if you
+[03:46] fully understand the idea, I ask you to
+[03:48] write some simulation code. Okay, I ask
+[03:51] you to write some simulation code so
+[03:52] that you can like say when we learn
+[03:54] cache, I may ask you to write some cache
+[03:56] simulation code so that then I know you
+[03:59] understand how cache works basically.
+[04:02] Then um in general I consider you can
+[04:05] use generative AI then either to say ask
+[04:08] questions what is a cache how does way
+[04:10] associve cache works if you do not
+[04:12] understand the concepts in the lectures
+[04:15] uh if you write code totally it's okay
+[04:17] to use generative generative are
+[04:19] everywhere then you can use it to help
+[04:22] you learn and uh for simulation um since
+[04:27] since we're going to use the Akida
+[04:29] simulation framework that is a
+[04:30] simulation framework developed by me uh
+[04:33] where you're going to use the go program
+[04:35] language. So if you have no go
+[04:37] experience, don't worry. It's easy. It's
+[04:41] easier than Python. So uh especially
+[04:43] when work with generative AI, it's
+[04:47] um probably
+[04:49] you just don't need to learn. Just see
+[04:50] examples and write code as long as you
+[04:52] can read it is good enough. Uh so on the
+[04:57] syllabus there's a textbook. There's no
+[04:59] need to buy the textbook. I will cover
+[05:01] all the content and I will if you want
+[05:03] to buy it that's okay. is a very good
+[05:05] textbook that I learned the basic things
+[05:07] from that textbook. Um but I will also
+[05:10] provide uh further reading
+[05:12] recommendations. So that textbook is
+[05:15] undergraduate level computer
+[05:17] architecture or even digital design
+[05:19] level. Um it's a basic u computer
+[05:22] architecture textbook for some advanced
+[05:25] fe uh advanced uh features like
+[05:28] consistency network on chip there are
+[05:30] very good textbooks there. So I may um
+[05:33] recommend reading then you can get uh
+[05:35] electronic version from our library.
+[05:38] Okay. So I won't cover the uh syllabus
+[05:43] again. So I'm basically just directly
+[05:45] going to uh cover real content starting
+[05:48] from what is computer architecture. Um
+[05:51] the syllabus is not online. I think you
+[05:54] are all uh you can all see the course
+[05:56] website and you are all in the discord,
+[05:58] right? So that's good. So if you have
+[06:01] questions, let me know. Now what is
+[06:04] computer architecture? And you probably
+[06:06] have seen this type of uh technology
+[06:08] stacks and starting from application to
+[06:12] physics. Now we want to use physics
+[06:15] properties. For example, we have
+[06:17] electrons, we have neutrons or we have
+[06:19] magnets, we have uh electricity. Those
+[06:23] are all physics properties or something
+[06:25] fall from um from above to bottom. Those
+[06:29] are physics properties. And we have
+[06:31] applications. For example, we want to
+[06:33] write documents. We want to write uh we
+[06:36] want to have have AI to help us think.
+[06:39] Those are applications. Those are
+[06:40] something that we want to do. So we want
+[06:43] to bridge the physics and application to
+[06:45] use those physics properties to solve
+[06:47] applications for some very basic cases.
+[06:51] Now we can almost directly use physics
+[06:53] to solve problems. For example, that's a
+[06:55] level and that's a um compass compass,
+[06:58] right? So we can directly use the
+[07:00] magnets to point north and south. that
+[07:02] we can almost directly solve the
+[07:04] problem. Not that hard. Then we don't
+[07:06] really need a technology stack. A single
+[07:08] person may probably be able to produce
+[07:11] these type of tools. But for computer
+[07:14] architecture and for the whole computing
+[07:16] domain, so probably there are some
+[07:18] people working on AI algorithms, for
+[07:20] some people working on making those
+[07:22] chips, for some people working on
+[07:23] producing these chips. There's almost
+[07:25] impossible for a single person to work
+[07:28] on everything. So we divide this whole
+[07:30] technology stack into stack frames. We
+[07:34] divi uh into individual tech layers
+[07:37] there in the technology stack. So some
+[07:39] people work on this layer, some people
+[07:41] work on that layer. Now so if we can
+[07:44] define the interface between the layers
+[07:46] then people can collaborate with each
+[07:48] other and can help us use the physics
+[07:51] properties to achieve our designed goal.
+[07:54] And this is the computing technology
+[07:57] stack. I think this is definitely a
+[07:59] oversimplified version of a computing
+[08:02] technology stack. Um it's probably a
+[08:06] stack may not be the best way to
+[08:08] describe the computing
+[08:11] landscape this year is probably a graph
+[08:13] that there's so many domains that um
+[08:16] that people work on different things and
+[08:18] then they combine so that we can run
+[08:20] generative AI today, right? Um so but
+[08:24] this is a simplified version that we can
+[08:26] see we typically call it when it's
+[08:28] closer to the application we call it uh
+[08:31] on the top of the stack when it's close
+[08:33] to the physics we target on the bottom
+[08:35] of the stack. There's no good or bad
+[08:36] it's just different things. Um so for
+[08:39] example at the bottom we have devices
+[08:41] now we typically transistors right? So
+[08:44] um those t super small things that are
+[08:47] doing on and off switches. Now we have
+[08:50] gates and gates not not gates at least
+[08:52] not that's something you should be
+[08:53] familiar the micro architecture is how
+[08:56] these chips are designed internally and
+[08:58] we have instruction set architecture
+[09:00] we'll explain this later from here on
+[09:02] top we start to go to the software
+[09:05] domain
+[09:07] start from here we start to go with the
+[09:09] software domain for example we have
+[09:11] assembly and the machine code right the
+[09:13] very basic software that we're using to
+[09:15] communicate with the hardware now we
+[09:17] have operating system have program here
+[09:19] program language here and algorithm
+[09:21] those are some course titles that you
+[09:23] have may have already taken then what is
+[09:26] instruction set architecture then
+[09:28] especially when we talk about computer
+[09:29] architecture we say it's somewhere
+[09:32] between this region then instruction set
+[09:35] architecture or ISA ISA you probably
+[09:38] have heard of this name is a protocol
+[09:42] between the software and hardware so
+[09:44] probably you have heard these terms of
+[09:47] x86 or X uh or AMD 64 or ARM or IBM
+[09:53] power PC
+[09:54] um or risk five. Those are all
+[09:58] protocols. Those are the defines say
+[10:01] okay 0000001 means to um add operation
+[10:05] add two numbers together. 02 means a
+[10:08] subtract operation that means to minus
+[10:10] from one number to another uh minus a
+[10:12] number to from another number. So this
+[10:15] is the protocol between software and
+[10:17] hardware. Then if you re uh go back to
+[10:21] the early ages by that time we don't
+[10:23] really have this layer by that time we
+[10:26] probably have much fewer layers right
+[10:28] then by the time then people use a tape
+[10:31] a tape of uh paper those papers with
+[10:35] punch holes then those punch holes
+[10:37] directly represent zeros and ones we
+[10:39] don't really have that number so in that
+[10:41] time every computer may have their own
+[10:44] instruction set their own program
+[10:46] language so if you program for one
+[10:48] computer computer. Then later on we have
+[10:51] a new computer. Then the pro the
+[10:53] software you totally need to write new
+[10:54] software and people do not really care
+[10:56] that much because software by that time
+[10:59] was pretty much disposal that you use
+[11:01] one time then you get the result and
+[11:03] then you're done with this software
+[11:05] right so but later on we want reuse we
+[11:07] want to save time so we write one
+[11:09] program we want to use again and again
+[11:11] and especially when we want to have new
+[11:14] computers then the program still runs
+[11:16] then we added this layer. This layer is
+[11:19] probably the most stable layer
+[11:22] uh in the whole
+[11:25] in the whole architecture right in the
+[11:27] whole stack. Like consider devices we
+[11:29] have three nanometer we have seven
+[11:31] nanometer it's changing really fast then
+[11:34] we have uh something like a mossfat
+[11:37] finfat you don't really need to
+[11:38] understand what those things but those
+[11:40] are totally different devices right but
+[11:43] consider how difficult Apple switch from
+[11:46] power PC to x86 it's very early ages
+[11:49] then Apple switched from x86 from Intel
+[11:53] CPUs to ARM CPUs to their own CPUs then
+[11:57] Apple was the success uccessful example.
+[11:58] There are so many unsuccessful example
+[12:00] is a very hard high cost be because if
+[12:03] you change this thing you need to
+[12:05] redesign everything below and redesign
+[12:07] everything on the top. That's a lot of
+[12:08] work. Okay. Then another separation of
+[12:13] this technology stack then you probably
+[12:16] have heard of this department. Now we at
+[12:20] the Mario we only have computer science.
+[12:22] So in computer science we probably have
+[12:24] to cover more things but in some
+[12:27] universities they have electrical
+[12:28] engineering they have computer
+[12:30] engineering they have computer science
+[12:32] right so where are their boundaries they
+[12:34] typically consider electric anything
+[12:36] below instruction set architecture or
+[12:38] electrical engineering although this
+[12:40] year's electrical engineering department
+[12:42] are doing AI
+[12:44] but typically we consider the basic
+[12:46] things device level are electrical
+[12:48] engineering computer science are on the
+[12:51] software software side, right? But if
+[12:53] you talk about computer architecture,
+[12:56] it's typically the system side to divide
+[12:58] to uh to micro architecture side, right?
+[13:01] So it really depends on the how the
+[13:03] departments are uh defined. Now in term
+[13:06] of computer architecture, we're talking
+[13:08] about this middle layer, right? So when
+[13:11] we talk about this middle layer, you
+[13:13] consider it's like the core muscle of a
+[13:16] human, right? If you want to say play uh
+[13:19] tennis, right? you need to um
+[13:23] um hit a ball hard then you really need
+[13:26] your core muscle. So look at here then
+[13:29] applications are keep changing then
+[13:31] right we have generative AI we have many
+[13:36] many new things like uh the image
+[13:37] generation then we have new software
+[13:40] appearing almost every day then we have
+[13:42] new devices 7 nanometer 3 nanometer 2
+[13:45] nanometer or something like um the
+[13:49] compute in memory right so there's so
+[13:51] many things that happens at this layer
+[13:54] so they de develop rather
+[13:57] independently on their own. they just
+[13:59] want faster and faster smaller low
+[14:01] energy and then this side and they just
+[14:03] develop on their own just say oh we want
+[14:07] generative AI we want to do something
+[14:08] then computer architecture in the center
+[14:10] is connecting these two parts so
+[14:13] whenever there's some new application
+[14:15] new algorithm we have to think oh how we
+[14:17] can make those algorithm run faster then
+[14:20] whenever there's new hardware there's
+[14:22] new device we need to consider how we
+[14:25] can use these things to make uh the top
+[14:29] layer run faster and run more sec in a
+[14:33] more secure way. Um and actually then as
+[14:36] I say it makes things run faster faster.
+[14:40] It's not only about faster. Just think
+[14:42] about AI, right? Think about why AI was
+[14:45] not a thing even before 2012, right? In
+[14:49] what what happens in 2012? Do you know
+[14:52] why I say 2012?
+[14:57] So 2012 marks one thing is the
+[14:59] development of a convolutional neural
+[15:02] network called Alexnet.
+[15:04] Okay, Alexnut
+[15:07] significantly increase the accuracy of
+[15:09] image recognition. It it just like
+[15:12] another level, right? Is whenever the
+[15:16] quartz
+[15:18] watch, right, the watch that runs on the
+[15:21] crystals, right, is so much accurate
+[15:23] than mechanics um than mechanical
+[15:26] watches, right? It's just suddenly a new
+[15:29] type of animal entered the game. That's
+[15:31] Alex Nat. Then starting that point in a
+[15:34] few years you see image recognition are
+[15:36] very mature and in commercial um
+[15:40] products right like face recognition is
+[15:42] probably in every camera after that
+[15:44] point then so
+[15:47] 2012 is definitely a big thing it's
+[15:49] probably more important than the year
+[15:52] when chhatt was u released so
+[15:57] why that thing Alex net started in 2012
+[16:01] there are two big reasons. One is
+[16:03] imageet. Image net is from Stanford.
+[16:06] It's a big data set. So people start to
+[16:09] care about the quality of the data set,
+[16:11] the training set. And another thing is
+[16:12] people start to use GPUs to do
+[16:14] calculation. If you consider GPUs versus
+[16:18] CPUs on generative on AI workload, it's
+[16:22] not because the CPU cannot do it. It's
+[16:24] just because CPU is slow. But if we can
+[16:26] accelerate it by 10 times or 100 times,
+[16:29] think about 100 times. If it's a year's
+[16:32] task that you can reduce it to three
+[16:35] days that's you're turning something
+[16:38] impossible to possible right so the
+[16:41] comput so in this sense computer
+[16:43] architecture are enabler of new
+[16:45] technologies
+[16:48] okay so those are the point of computer
+[16:50] architecture and why we study computer
+[16:52] architecture so on as we say computer
+[16:57] architecture is uh
+[17:01] is in the center of this technology
+[17:03] stack. I often compare computer
+[17:04] architecture with um so you you probably
+[17:08] have heard of the people who write very
+[17:10] low code who design circuits. Those are
+[17:13] um rather intra-level jobs. Now what's
+[17:15] the jobs for computer architecture? So
+[17:17] computer architecture are typically
+[17:19] considered a slightly higher level jobs
+[17:22] are research type of jobs or manager
+[17:25] type of jobs. uh uh it can be compared
+[17:28] with something like a software developer
+[17:30] and a UX developer. So UX developer
+[17:32] there it's a um it's a designer and also
+[17:37] u project manager. So in big companies
+[17:39] like AMD or media Intel they have
+[17:43] developers who write very low code that
+[17:45] implements the next generation of their
+[17:47] software right they also have computer
+[17:49] architect who looks one generation
+[17:52] beyond two generation beyond their um
+[17:55] like three years product line say what
+[17:57] features we want to implement at this
+[17:59] layer you just probably have many many
+[18:01] ideas that you not all ideas may work
+[18:04] you just have to discard all those ideas
+[18:07] um then eventually you decide what are
+[18:09] valuable, what are practical, then you
+[18:11] give it to the um entry- levelvel jobs
+[18:13] or verog writers to implement the
+[18:16] circuit. Okay. So at this sense we
+[18:19] really need to understand a lot of
+[18:21] things. We need to understand what
+[18:22] happens at device level and what happens
+[18:24] at application level so that you can um
+[18:29] really design the right thing.
+[18:32] So I don't want to waste time. So let's
+[18:35] start from transistors and see um there
+[18:38] are many things that we need to consider
+[18:40] when we design computer architecture as
+[18:43] a higher level design. So transistors we
+[18:47] know we all know transistors are the
+[18:49] building blocks of chips right. So at
+[18:53] the beginning transistors are something
+[18:56] looks like this. These are not even the
+[18:58] beginning. These are like uh 80s or 90s
+[19:01] and people are built like radios and
+[19:03] they just use this type of um devices.
+[19:06] So whenever we have a transistor we
+[19:08] typically say it's a three pin device.
+[19:11] So three pins one to three right. So
+[19:13] they can they have either output or
+[19:16] input they have just connected to
+[19:18] outside world with the three pins right.
+[19:21] So when we talk about digital logic you
+[19:23] know digital logic we consider zero and
+[19:25] one. So it's either zero or one that is
+[19:27] passing to this each pin. Okay. So when
+[19:31] we consider pins is actually a very
+[19:33] important uh concept in computer
+[19:36] architecture. So
+[19:38] it's something similar to when you are
+[19:40] doing visualization. when you're doing
+[19:42] com uh computer or interactive
+[19:44] visualization the pixels on the screen
+[19:48] is actually a limiting factor that you
+[19:50] let's consider this one is 1024 by 768
+[19:54] that's older standard but that's about
+[19:57] less than a million pixels so that means
+[19:59] you cannot really show you cannot really
+[20:01] show more than one million elements
+[20:03] right that's a hard limiting factor when
+[20:06] you consider
+[20:07] chips the number of pins are the how
+[20:10] fast that this pin can communicate with
+[20:12] the outside world. That's also another
+[20:14] hard limit that people easily ignore.
+[20:19] It's a three pin device. Then you
+[20:21] probably have heard of these vacuum
+[20:23] tubes. Then those are the early type
+[20:25] tubes that are built in early computers.
+[20:29] So I just want to introduce how they
+[20:31] works. So this is a vacuum tube.
+[20:34] Internally is there's no air. There's
+[20:37] nothing in it, right? It's a it's a
+[20:39] piece of glass. So it connects with two
+[20:43] powers actually I I would yeah it
+[20:46] connects with two powers right. So this
+[20:50] is one thing. This is the control side
+[20:53] the control grid and this is the
+[20:57] um I would say this is the load side
+[20:59] that is the where you put a bob or
+[21:01] something then um then we use the signal
+[21:04] on this side we want to use the control.
+[21:06] So roughly speaking, it's a switch. Then
+[21:09] we want to turn it on or off. And how it
+[21:12] works is there's something there's a
+[21:14] control grid. The control grid that if
+[21:16] this power is connected, it's heating
+[21:19] this control grid. It heats it up.
+[21:21] Whenever it heats up,
+[21:24] then this electrons can flow from this
+[21:27] side to the other side. Then exact like
+[21:29] I don't know the exact physics here, but
+[21:31] you just can treat it how it works.
+[21:33] Whenever this the electrons can flow
+[21:36] from one side to other to the other the
+[21:38] circuit is closed then this side is
+[21:40] connected. Right? So even today we want
+[21:44] to have a transistor works in a very
+[21:46] simple way. We have a control signal.
+[21:49] It can be either one or zero. Let's say
+[21:52] one means to connect this circuit. Zero
+[21:55] means to close to disconnect this
+[21:58] circuit. Then that's simple. That is how
+[22:00] transistor works. Although transistors
+[22:02] can be super complex but for computer
+[22:04] architecture that's the basic things you
+[22:07] need to understand. Now with this if
+[22:09] this can represent a zero and one then
+[22:12] we can combine these transistors to make
+[22:14] logics right.
+[22:19] So later on we don't use vacuum tubes.
+[22:21] What's the problem with vacuum tubes?
+[22:24] It's really not it's really big first
+[22:27] right? Think about the early age
+[22:29] computer. It takes the whole room or the
+[22:31] whole building and only can store
+[22:33] hundreds of bits there. Then
+[22:37] it's very and it's very energy
+[22:39] consuming. Consider there are two
+[22:41] things. Heating up something. Heating up
+[22:43] metal takes a lot of energy. On the
+[22:46] other side, this is a circuit that is
+[22:48] keep flowing, right? So the energy keeps
+[22:51] being wasted. It's like a short circuit
+[22:53] here that energy is wasted at this on
+[22:56] this side. Right? So we don't want this
+[22:58] energy keeps running. We want to save
+[23:00] energy. Just consider energy is probably
+[23:03] even more important today than
+[23:06] performance. Why is it? Because if you
+[23:08] consider today generative, you probably
+[23:10] have heard of this generative AI um that
+[23:14] the bottleneck of the capability of
+[23:16] gener is electricity. How much
+[23:18] electricity that we can generate, right?
+[23:20] So if we have more electricity, we can
+[23:23] gen we can if I have more electricity,
+[23:25] we can have more powerful AI. On the
+[23:27] other side, this electricity, no matter
+[23:31] like what type of devices, if we put
+[23:33] electricity in it, if like my laptop
+[23:35] takes like 25 volts of power,
+[23:39] the energy the 25 volt is eventually
+[23:42] turned into heat. Then we have we even
+[23:45] need to have more energy to bring the
+[23:47] heat away. So we either need to use air
+[23:50] conditioner to bring the heat away or we
+[23:53] need fans or to blow the heat away. that
+[23:56] even we blow the heat away. We need we
+[23:58] need air conditioner to to bring it out
+[24:01] from the room, right? Um um and also
+[24:06] sometimes we can just build the
+[24:08] supercomputing center near a river so
+[24:10] the river water can uh can bring the
+[24:12] heat away. There's also proposal that
+[24:15] put data center um under the ocean or
+[24:19] put in the outer space. So there are
+[24:21] many different proposals that consider
+[24:23] how to bring the heat away. So I I asked
+[24:25] someone who built a data center, they
+[24:27] say it takes more energy to bring the
+[24:30] heat away than to power the computer
+[24:33] itself. Okay. So
+[24:38] um and because we can bring the heat
+[24:41] away in a certain speed, we cannot
+[24:43] really generate the heat faster um too
+[24:47] fast, right? If it's generating heat too
+[24:49] fast that the temperature of the chip is
+[24:51] too high is below a certain degree then
+[24:53] it would the chip will melt. So we have
+[24:55] to turn off some cores or some part of
+[24:58] the circuit so that we can within the
+[25:01] power limit. Now because of this if we
+[25:04] can reduce the energy consumption we can
+[25:06] have more parts of like more cores
+[25:07] enabled then we have more performance
+[25:09] right it's not really about uh
+[25:12] conservation it's not really about
+[25:14] environmental like definitely
+[25:16] environmental consider is a big
+[25:18] consideration but even you if you just
+[25:20] consider performance you need to
+[25:22] consider energy consumption
+[25:25] okay so then later on they use BJT BJT
+[25:29] is a semiconductor before that is not
+[25:31] even semiconductor BJT semiconductor
+[25:33] then uh so there's three layers three
+[25:36] ends emitter collector and base then the
+[25:38] base is the control so B if the base is
+[25:41] connected with one then this part are
+[25:43] connected if it's not one if it's zero
+[25:46] then this part are not connected so BJT
+[25:50] solves the heating problem that we don't
+[25:52] need to heat up metal to enable it but
+[25:54] it's still current driven it's not
+[25:57] totally bad it's still useful in some
+[25:59] cases it's just not the the technology
+[26:01] that we use in modern uh computer chip
+[26:06] design today. What do we use today? You
+[26:08] probably have heard of this thing called
+[26:10] SIMOS. It's called complimentary metal
+[26:13] oxide semiconductor.
+[26:15] Okay, let me introduce this part first.
+[26:18] Metal oxide semiconductor. So this is
+[26:22] like the side view of u I call it
+[26:26] something called a gate. But we can just
+[26:28] focus on this part.
+[26:30] So we have a P substrate
+[26:33] um physics don't cons don't wor too much
+[26:37] about physics okay now we have a unwell
+[26:40] and another unwell then here is oxide
+[26:44] right it's not like the electricity
+[26:46] cannot go through now here is a piece of
+[26:49] metal on top of it okay if you apply a
+[26:53] voltage on G there's some magic things
+[26:57] happen in the semiconductor here then
+[26:59] this N and this N are connected
+[27:01] together.
+[27:03] Okay, if we do not apply a voltage here,
+[27:05] this N and and this N are not connected
+[27:08] at all. Okay, so this is how it works.
+[27:13] You just just don't don't consider
+[27:15] what's N what's P. Just just know if
+[27:17] there's a voltage, these two are
+[27:19] connected. If there no no voltage, these
+[27:21] two are not connected. On the other
+[27:24] side, it's the other way around. If
+[27:26] there's no voltage, these two are
+[27:27] connected. is there's a voltage these
+[27:29] two are not connected. Okay. So this is
+[27:32] why we call it complimentary.
+[27:36] So you can consider one side is P uh is
+[27:40] a N MOS one side is a POS. Don't even
+[27:43] need to consider which part is N MOS
+[27:45] which part is P MOS. Just see if there's
+[27:47] a circle in term of C uh in term of like
+[27:50] circuit uh annotation. this means kind
+[27:53] of a not sign that on the input side
+[27:55] that means if it's zero it's enabled uh
+[27:58] on this side if it's one then it's
+[28:00] enabled okay let's look at what's going
+[28:04] on here
+[28:06] let's say if a is one okay if a is one
+[28:12] so vsss is ground is zero voltdd is one
+[28:17] is 5 volt or 1.3 volt uh it depends on
+[28:21] the definition sometimes 12 volt then if
+[28:25] a is one this part is not connected and
+[28:29] this part is connected
+[28:32] this part is not connected just when
+[28:34] it's not connected just ignore this part
+[28:36] just assume this part is not even there
+[28:39] okay then this part is connected with Q
+[28:41] so Q will equal VSSs
+[28:47] question
+[28:48] >> so this is like a electrical version of
+[28:50] mechanical
+[28:52] switch or wire.
+[28:54] >> Yeah. Yeah. It's a it's a signal
+[28:58] controlled switch. This switch is
+[29:00] connected. Just consider there's a wire.
+[29:03] Okay. Only consider there's a wire
+[29:04] connecting these two. There's no wire
+[29:06] connecting from here. Okay.
+[29:10] So, it's zero volt then zero volt goes
+[29:12] here. If it's one, if it's zero, this
+[29:16] part is connected. Just consider there's
+[29:18] a wire. There's no wire here.
+[29:21] Okay, it's disconnected. This part is
+[29:23] connected and Q equals V DD and that
+[29:25] means Q equals to 1. So summarize this.
+[29:30] If A is one, Q is zero. If A is zero, Q
+[29:34] is one.
+[29:36] Okay, so that's a not gate. So Q always
+[29:40] equals to the other side of A.
+[29:44] Okay, comfortable with this design?
+[29:52] So what a problem it solves.
+[29:55] There's no current here. There's only
+[29:57] voltage control.
+[30:00] Right? So the this part is not
+[30:03] connected. So this metal is totally
+[30:06] disconnected with the rest of the
+[30:08] circuit. And this metal is the white
+[30:10] part on the top. It's totally
+[30:11] disconnected with the M part here. So
+[30:14] there's no current going through. WDD
+[30:16] and VSSS are never connected.
+[30:21] Okay, they're never connected. When Q is
+[30:24] connected to VSSS, is it voltage drops
+[30:26] to zero. When VDD connects to Q, the
+[30:28] voltage rise to one, but there's still
+[30:30] no current going through.
+[30:33] So what's the energy consumption? And
+[30:36] typically we say a chip cons
+[30:40] consumes two part of energy. One is
+[30:43] dynamic energy, one static energy.
+[30:46] Static energy means there's no pure
+[30:48] isolation, right? There's always some
+[30:51] voltage, some electrons goes from VSSs
+[30:54] to VDD. It's the current goes the other
+[30:57] way. So that's but in cos this is really
+[31:01] small and no matter is one or zero, it's
+[31:06] still that small. It's still static,
+[31:08] right? But if you consider BJD BJ BJT if
+[31:12] it's one then this is connected and
+[31:14] consumes a lot lot of energy. If it's
+[31:16] zero and not connected it's not
+[31:17] consuming much energy. So here the
+[31:20] static energy is really slow no matter
+[31:22] it's one or zero. Now what's the dynamic
+[31:24] part is those are switches right
+[31:28] switching the state means some electrons
+[31:31] goes from here to there. Then there are
+[31:33] some energy consumption to switch on and
+[31:36] off these uh gates this this the this
+[31:39] these switches right so those are
+[31:41] dynamic energy and static energy and
+[31:44] dynamic energy those are two parts of
+[31:46] energy consumption and summing up these
+[31:49] two part of energy is the total energy
+[31:51] consumption of a chip. Okay. So today we
+[31:55] definitely want to reduce the dynam uh
+[31:57] static energy and static energy today is
+[31:59] actually rather low um this these days
+[32:04] uh it's mainly dynamic energy
+[32:06] consumption. Now if you look at the NAND
+[32:08] gate I think I can leave it as an
+[32:10] exercise for you to analyze how this
+[32:12] nand gate works. But just consider if A
+[32:16] is zero, B is zero. This part is not
+[32:18] connected. Right? And A is zero. This is
+[32:21] connected. This is connected. Both of
+[32:22] them are connected. Then the output is
+[32:26] one. Z output one. So it's
+[32:31] and get the other side of end. Flip it.
+[32:35] Okay. You can do it as exercise. I want
+[32:37] to go too deep on here.
+[32:40] Any question?
+[32:50] Okay. So then consider early days uh
+[32:55] BJTs or transistors are in this way. You
+[32:58] probably have used the breadboard to
+[33:01] build a circuit. you know the pain then
+[33:03] you if you have built it then the even
+[33:08] breadboard the largest breadboard like
+[33:11] when I was undergraduate student I built
+[33:13] a two breadboard and that's basically
+[33:17] two full breadboard that's basically a
+[33:20] clock 24-hour clock that's the maximum I
+[33:24] can do then using PCB is much better
+[33:27] because we have those uh circuit
+[33:30] pre-built
+[33:31] Um so in this way it's not very likely
+[33:36] to build a whole very complex chip in
+[33:38] this way. So then people start to build
+[33:42] integrated circuit and integrated
+[33:44] circuit was first built by people from
+[33:47] this company called Firechild. Although
+[33:49] this company is not there, he's still a
+[33:51] legend because there are many people
+[33:54] coming out from this company is becoming
+[33:57] very important person and very important
+[33:59] other companies in the later time. Then
+[34:02] people start to build this thing called
+[34:05] very large scale integrated circuit or
+[34:08] IC as integrated circuit first. Then
+[34:10] they build larger scale. the larger
+[34:12] scale they have large scale integrated
+[34:14] circuit then then when they grow very
+[34:16] large they go they call it very large
+[34:18] scale integrated circuit so Visi is a
+[34:21] term today that people probably do not
+[34:24] just spell it out but it stands for very
+[34:26] large scale integrated circuit this is
+[34:28] what looks like in this way so uh
+[34:34] you don't really have to understand too
+[34:35] much about that but this different
+[34:38] colors means different things for
+[34:39] example um red may means P well green
+[34:43] may mean Nwell and this blue part may
+[34:46] means copper right those coppers are
+[34:48] wires connected then those X are coppers
+[34:52] that goes down so that it can connect
+[34:55] with the bottom layers so don't worry
+[34:58] too much about this and when people
+[35:00] consider this is basically some like the
+[35:03] process of going from breadboard to PCB
+[35:06] like we want to be able to print the
+[35:08] circuit into something that is really
+[35:10] small.
+[35:12] Okay. So later on we'll talk about how
+[35:14] these are can help uh making a chip.
+[35:17] Then how chips are made.
+[35:20] So then very large uh from Fairchild
+[35:26] there comes two two people. One is
+[35:28] Robert Noise, one is Golden. they
+[35:30] started this company called Intel which
+[35:32] is like really the company that um make
+[35:38] VI or integrate circuit a very important
+[35:42] um business practical business and if
+[35:45] you heard of Gordon Gordon Moro
+[35:49] Gordon
+[35:50] Moore this name you should be very
+[35:53] familiar with one thing that's Mors law
+[35:55] right and that's what he proposed now he
+[35:58] proposed this law at a very early age
+[36:01] when the integrated circuit may only
+[36:03] have a few like tens or hundreds of
+[36:07] transistors there. So what is more slow?
+[36:15] >> Yeah.
+[36:22] >> Yeah. Okay. So let me repeat. So Morris
+[36:26] law at the beginning is in this form.
+[36:29] The number of components per integrate
+[36:32] circuit have can be doubling every year.
+[36:34] That's the original form. Then later on
+[36:36] this is slightly changed. So the
+[36:38] computer performance will roughly double
+[36:40] 18 performance. But this performance is
+[36:44] today we measure by number of
+[36:45] transistors. So the number of
+[36:47] transistors on computer chips doubles
+[36:49] every 18 months with no increase in
+[36:52] power consumption. We'll talk about this
+[36:53] part later. This is more on Dar scaling
+[36:56] part. But um this 18 months is also a
+[37:00] modified version that later on that's u
+[37:03] it fits the curve.
+[37:06] So then this is so since 1990 people are
+[37:12] saying oh we're close to the end of mors
+[37:15] law and close to the end of mors law
+[37:19] they say oh our chips are our
+[37:20] transistors are one micrometers large
+[37:24] like 1,000 nanometer large how can it be
+[37:26] smaller than 25 or 35 years later we're
+[37:30] still saying we're at the end of the
+[37:32] mors law but mors law is it still
+[37:35] So there are two figures here. One is
+[37:38] from Wikipedia, one is our own data.
+[37:41] Okay.
+[37:43] So we have a data set that pretty much
+[37:45] summarize all the CPU and GPUs that is
+[37:47] commercially available on the market and
+[37:49] if they release their uh they release
+[37:52] their technical information. Now you can
+[37:55] see on Wikipedia is still rather linear,
+[37:59] right? So if you consider on this side
+[38:01] is exponential, right? is logarithm log
+[38:03] scale. So that is growing exponentially.
+[38:07] Now here from our own data it also shows
+[38:10] that it grows exponentially. that I can
+[38:13] also even explain what's going on here
+[38:16] is basically when Intel like the later
+[38:19] version of Intel they stopped releasing
+[38:21] their number of transistor information
+[38:23] and seems more slow stopped a few years
+[38:26] then when either they start to release
+[38:28] or AMD is catching up then this trend is
+[38:30] still kind of growing
+[38:36] okay so mors law is still there now we
+[38:38] know the uh we know how this is achieved
+[38:42] is by making the transistor smaller and
+[38:45] smaller. Now, how small is our
+[38:47] transistor? You may probably heard of
+[38:49] this uh transistor size that a few years
+[38:53] ago we have 7 nanometer technology.
+[38:56] Today probably the mainstream is 5
+[38:58] nanometer or even 3 nanometer. So
+[39:00] probably next year you can get two two
+[39:02] nanometer technology. But I have to say
+[39:06] um
+[39:08] this number of transistor size is more
+[39:10] and more a commercial term. It's not
+[39:14] describing the real uh transistor size
+[39:17] anymore. Okay.
+[39:21] Um it's not really describing the
+[39:23] transistor side anymore. It's more
+[39:26] especially this is TSMC the Taiwan
+[39:28] semiconductor manufacturing company.
+[39:31] It's their terminology. Intel follows a
+[39:33] different terminology. That's why Intel
+[39:35] is still in the 14 nanometer uh era. And
+[39:38] even Intel is going more and more
+[39:40] commercial. So that their number doesn't
+[39:42] really represent the size of the
+[39:47] um the transistors. But this is
+[39:51] a summary of density per chip. Now we
+[39:56] simply just calculate from our 4,000
+[39:59] chips, right? the commercial available
+[40:01] the number of transistors and the die
+[40:03] size. The die size is how large the chip
+[40:06] is just so that's a uh transistor per
+[40:10] millimeter square. Then pretty much you
+[40:13] can see for every
+[40:17] um transistor size and we only take the
+[40:19] the TSMC
+[40:23] data there um TSMC is something called a
+[40:27] foundry. Foundry is the manufacturer of
+[40:30] the chip. So there are three major manu
+[40:33] uh foundry in the world.
+[40:36] Uh Intel Intel they can produce chips on
+[40:39] their own. Then global foundry
+[40:42] and another one is TSMC. Definitely
+[40:45] today TSMC is probably the best and
+[40:48] Samsung can also produce and ZTE can
+[40:51] also produce and there are several um
+[40:53] other companies but their technology
+[40:55] cannot compete with uh the other three.
+[40:59] So but if you look at TSMC data then
+[41:02] pretty much like for every technology
+[41:04] for every process size their scope is
+[41:08] very small and their density is
+[41:10] consistently increasing right and even 7
+[41:15] nanometer is much higher much better
+[41:16] than 12 nanometer technology. So if you
+[41:19] compare with non uh atom size so what
+[41:23] atom size how large is atom is typically
+[41:25] 100 to 200
+[41:28] pometer right. So pometer is one
+[41:31] lightwood below.
+[41:33] So 1,000 of a nanometer. So if you
+[41:36] consider those are tens to hundreds of
+[41:40] atoms per transistor. That's it. So just
+[41:45] it's pretty much atom level control. So
+[41:48] are we at the end of Mars law? Then if
+[41:52] you consider the number of atoms that we
+[41:54] control, probably yes. But if you look
+[41:57] at the trend now probably we can go with
+[41:59] a few probably a few tens of years.
+[42:04] So how are chips made? How can chips are
+[42:07] made so small and just I need to review
+[42:10] the whole process so that you can know
+[42:12] there are some fundamental constraints
+[42:14] um of this whole process so that you
+[42:17] know why we design computer architecture
+[42:18] in this way. Why we need to care about
+[42:21] number of transistors not much care
+[42:23] about energy consumption that much and
+[42:25] care about the dites that much? So
+[42:29] transistors are starting from silicon
+[42:31] crystals. Silicon crystals are made from
+[42:34] sand. So it's a magic converting from
+[42:36] sand to chips, right? But um we
+[42:40] typically start from here. TSMC just buy
+[42:43] silicon crystals from other companies.
+[42:46] Then these silicon crystals are super
+[42:49] pure. That's 99.999 or many nice is much
+[42:53] pure uh much more pure much purer than
+[42:57] the gold that you can buy today. So they
+[42:59] really need super pure uh silicon
+[43:02] because if there's some something that
+[43:05] is not a silicon item there the whole
+[43:07] chip may not work. So it's very
+[43:09] important. Then with this silicon
+[43:12] crystal they slice it into wafers. Okay.
+[43:16] So, it's definitely um
+[43:19] comparable to those cookies, crackers as
+[43:24] wafers. Then, how large is this wafer?
+[43:29] This wafer are typically like smaller
+[43:32] than 20 inches in diameter. So, consider
+[43:34] a mediumsiz pizza or small pizza. That's
+[43:37] about the size of a wafer. Okay. So, how
+[43:40] large is a chip?
+[43:47] Right. The largest chip today if you do
+[43:50] not consider something like AMD Thread
+[43:52] Reaper, a chip is about
+[43:55] um let's say about a cap like that's a
+[43:58] large rather large chip, right? A CPU
+[44:00] chip or something that's about the cap
+[44:02] of this uh whiteboard pan or two of
+[44:05] them. That's a very reasonable CPU size
+[44:08] for GPUs that can be slightly larger.
+[44:11] Uh so how it works is we first really
+[44:14] produce the chips on there then we slice
+[44:17] them okay make them smaller ones and how
+[44:20] these chips are manufactured is a
+[44:22] process called lithography and this is
+[44:25] uh if you heard of this company called
+[44:28] ASML then those are the masters of
+[44:30] lithography then they produce these
+[44:34] tools they're so precise that they
+[44:36] control atoms
+[44:38] so how it's
+[44:41] Now we prepare wafer and we slice it.
+[44:43] It's super clear. They use a lot of pure
+[44:45] water to clean it. Then we first put a
+[44:48] coat of photoresistant is a gel, right?
+[44:52] And we pre-bake some technology just
+[44:54] make the gel more persistent. Then we
+[44:57] put a line and expose. What does that
+[45:00] mean? Is we put a mask
+[45:04] on top of it. So consider how precise
+[45:07] this mask is. A wire,
+[45:11] a wire is nanometer level, number of
+[45:14] atom level, right? And we put a mask on
+[45:18] top of it and we use light to
+[45:22] cast light on it. So this photoresist
+[45:27] material are sensitive to light. If
+[45:29] light cast on it, they will disappear.
+[45:33] Okay, they will disappear. So then we
+[45:36] have this thing. So, so probably here
+[45:39] are the parts that we want to unwell or
+[45:42] pe or copper or something, right?
+[45:46] Then what they do is they use each they
+[45:50] basically use a chemical to wash away so
+[45:53] that it goes deeper. Then they can build
+[45:55] things on it. So they probably also use
+[45:57] some um like use as a target to have a
+[46:00] particle stream to heat it so that they
+[46:02] can start to build things on top of it,
+[46:04] right? Uh so consider this thing. This
+[46:08] is so small. It's so small. Like you
+[46:10] probably have heard of this light may
+[46:13] scatter when it goes through a very
+[46:16] narrow gap, right? So how how much
+[46:21] scatter they have depends on the
+[46:24] wavelengths. The smaller the
+[46:25] wavelengths, the less scatter they have,
+[46:28] right? So that's why you have heard of
+[46:32] probably heard of this uh extreme
+[46:36] ultraviolet today ultraviolet extreme
+[46:39] ultraviolet those are technologies
+[46:41] developed by ASML because the more
+[46:44] towards the ultraviolet site the smaller
+[46:47] the wavelengths then the more precise
+[46:49] that we can control this thing this
+[46:52] these
+[46:54] gaps here and also they have done lot of
+[46:58] crazy things uh to make it precise. For
+[47:01] example, they can really not even the
+[47:04] gap itself they can really not have
+[47:06] control a few atoms. So what they do is
+[47:09] they first each they first each this
+[47:11] side this first only cut this side then
+[47:14] they put another
+[47:16] um another layer then each another time
+[47:18] so that they can um produce a very thin
+[47:22] wire in their um on their chip. So this
+[47:26] whole process is very precise is very
+[47:28] difficult.
+[47:32] Then after that we have something called
+[47:35] packaging. So don't underestimate the
+[47:38] power of packaging. It's actually very
+[47:40] very important. So early days we have
+[47:42] this packaging that the pins on the
+[47:44] side. So packaging is basically the chip
+[47:47] is in center. Then we use wires to
+[47:49] connect with the pins outside. Then we
+[47:50] use a piece of plastic on top of it.
+[47:53] Now, you probably have seen those toy
+[47:55] watches. If you open those toy watches,
+[47:58] there's a big
+[48:01] black thing, like a a round black thing.
+[48:05] So, that's the easiest way to do
+[48:08] packaging. So, they put the chip
+[48:10] directly on top of the PCB. Then, they
+[48:12] drop a piece of plastic or wax or
+[48:15] something just to seal it so that it's
+[48:17] not interfering with the outside world.
+[48:20] So uh so so even like this it it
+[48:24] provides a basic level of protection for
+[48:26] the chip. Even this if you touch the
+[48:29] chip the plastic part of the chip like
+[48:32] the static electricity may damage the
+[48:34] chip. Um but that's something very
+[48:38] important. Then these pins are on the
+[48:41] side but consider if it's on the side
+[48:43] how many pins that we can have right
+[48:45] then later on we have ball pins
+[48:47] underneath. So today
+[48:50] um how many pins are there? Can you
+[48:53] guess how many pins are there in AMD or
+[48:56] Intel CPUs?
+[49:01] It's a roughly rough estimation.
+[49:05] >> Yeah.
+[49:14] >> Pins.
+[49:15] >> Oh, pins.
+[49:16] >> Pins. How many pins?
+[49:18] Um
+[49:20] probably like
+[49:24] >> there's there's a little bit too much.
+[49:29] >> Yeah. So look at here. So basically on
+[49:31] this type of device is on the side.
+[49:33] Yeah. Go ahead.
+[49:38] >> Uh a couple of hundred is u lower
+[49:42] estimation for lower-end chips. That's
+[49:44] reasonable. So higher end ones are 1,000
+[49:48] 2,000 that level. Okay. So consider this
+[49:51] on the side is probably tens of them. So
+[49:54] with the bottom ones they can have
+[49:55] thousands of them. But even with
+[49:57] thousands of them that's the number of
+[50:00] number of bits that you can communicate
+[50:02] with outside world per cycle. Okay.
+[50:08] Actually they can do more. They can send
+[50:09] more bits. But probably in each cycle in
+[50:12] one ghahz if it's 1 ghahz there's one
+[50:15] ncond right one ncond then they can
+[50:18] probably send out 16 um bits out from
+[50:22] one pin question
+[50:28] >> yeah so they send out data in many
+[50:31] different ways for example CPU may read
+[50:34] and read and write memory right the
+[50:36] memory and the memory are inerted on
+[50:40] your motherboard. They may send video
+[50:42] signals to your monitor, right? They may
+[50:45] send signals to the Wi-Fi package. They
+[50:48] may send signals to the hard drive. So,
+[50:50] those are all how CPUs communicate with
+[50:53] the rest of the world.
+[50:56] Okay. So, packaging technologies are
+[50:58] developing on its own. So, for example,
+[51:00] today we have this packaging called
+[51:02] multi-chiplet
+[51:04] um or chiplet uh multi-chip module
+[51:07] packaging or chiplet technology. So
+[51:10] consider today the highest end CPUs and
+[51:12] GPUs are all chiplet based technology.
+[51:17] So if you consider one thing
+[51:21] when we say Morse law the original Morse
+[51:24] law saying the number of transistors on
+[51:27] one chip doubles every certain number of
+[51:30] months right does this count
+[51:34] this like by the original definition
+[51:37] this doesn't count because there are so
+[51:38] many chips in there right and they can
+[51:40] comm combine the chips in one package in
+[51:44] one product
+[51:46] so that's Why
+[51:48] in this figure if you look at this
+[51:50] figure there are many of them on this
+[51:52] corner are multi-chip technologies. So
+[51:55] Mors law is growing in many different
+[51:58] ways that Gordon Moore himself cannot
+[52:02] imagine by that time. There are many
+[52:04] different like
+[52:06] u creative ways to continue mors law
+[52:11] and we'll talk about why multitude
+[52:13] module is so important this years. Then
+[52:16] uh TSMC also announced a technology
+[52:19] called wafer system on wafer s then it
+[52:23] should be announced in 20
+[52:26] um
+[52:28] 2027 so next year. So what's the
+[52:31] technology? So you can see here this is
+[52:35] called a package and this is called a
+[52:37] interposer. Sometimes we call it
+[52:38] interposer sometimes we call it sub
+[52:40] substrate. What is a interposer? is
+[52:43] basically a layer that provides
+[52:45] communication of these chips. Right? So
+[52:49] um we say chips or three there are three
+[52:52] tiers of network in chip network in
+[52:54] package network and off package network.
+[52:58] So each layer consumes like the lower
+[53:00] the layer they consume more energy and
+[53:04] they're slower right. So with the
+[53:06] interposer it provides faster network
+[53:09] than going off chip going to the PCIe
+[53:12] bus or something else right that's why
+[53:15] this technology is so important.
+[53:18] >> So is this the same thing as the system
+[53:19] chip? Um
+[53:23] no system chip is
+[53:26] is basically you have different modules
+[53:28] different IP cores what is IP cores for
+[53:31] example uh Wi-Fi module uh memory
+[53:34] controller those are different IP cores
+[53:37] or CPU cores GPU cores accelerators
+[53:40] those things are integrated into one
+[53:42] circuit that's a that's a
+[53:47] uh SOC system on chip Um so a chip can
+[53:51] is not only about the CPU it's
+[53:53] everything. So that's system on chip.
+[53:56] Then uh system on wafer is more uh like
+[54:00] a packaging terminology. So it doesn't
+[54:04] really have to be a ter uh it doesn't
+[54:06] really have to be a system. For example,
+[54:07] a manufacturer may just want to produce
+[54:09] a super large GPU. Yes, they can. They
+[54:12] just many many GPU chips and they put it
+[54:15] on a wafer right that's possible. So
+[54:18] it's just different terms in different
+[54:20] domains. But as you can see the
+[54:23] interposer is a piece of silicon. What's
+[54:26] the largest size of a silicon? It
+[54:28] depends on the wafer right? So the wafer
+[54:31] is the maximum size of a silicon. That's
+[54:33] because that's the piece that we can
+[54:35] slice. So system on wafer is probably
+[54:39] the largest net we can imagine on this
+[54:41] type of technology that's expected to
+[54:43] deliver high performance communication
+[54:45] between chips. um probably we can see
+[54:48] super expensive devices coming out in
+[54:51] 2027 or 2028.
+[54:54] When we talk about chips design, we have
+[54:56] to talk about uh defects and yield. What
+[55:00] is yield? Yield is on a piece of wafer,
+[55:05] right? This is a wafer and when they
+[55:07] produce chips, they actually produce all
+[55:08] of them together, right? They produce
+[55:11] all of them together.
+[55:13] Then um
+[55:17] later on they slice it.
+[55:22] So
+[55:24] there are several thing um so sometimes
+[55:27] just imagine a piece of dust or a hair a
+[55:31] piece of hair that falls on it. A hair
+[55:33] is micrometer level or even
+[55:37] millimeter micrometer level right. So it
+[55:41] can hit thousands, millions of
+[55:43] transistors like pretty much a hair
+[55:45] falls on a piece of chip that chip,
+[55:47] there's no way to use it. So we talk
+[55:50] about like dust may just randomly fall
+[55:54] on these wafers when they manufacture.
+[55:56] Even they have super clean rooms that
+[55:59] have airs keep blowing from top to
+[56:01] bottom. They have to wash and then put
+[56:04] on those special clotheses all day long
+[56:06] um to work in a super clean room. then
+[56:10] um low yield may be always there and
+[56:14] especially when we have smaller and
+[56:16] smaller transistors the yield is getting
+[56:19] lower and lower. So if you consider we
+[56:21] build a we build a wafer and many of
+[56:24] them we have to discard the cost of
+[56:26] manufacturing a chip is rising right but
+[56:31] if you consider like where this dust
+[56:34] falls it's a distribution is follows
+[56:38] something like a gshian distribution or
+[56:40] like a 2D poson distribution then the
+[56:44] larger your die size each chip the more
+[56:48] likely that a piece of dust fall on it
+[56:51] right then that means the larger die
+[56:53] sides generates low yield
+[56:57] okay so that's why larger high-end chips
+[57:00] are so expensive because while you were
+[57:03] producing this number of chips a lot of
+[57:05] them have to be discarded and that's one
+[57:08] thing
+[57:09] now see these are patents of this wafer
+[57:12] which uh part of the wafer is not
+[57:19] So this is very likely a piece of hair
+[57:22] that falls on it or a piece of long
+[57:24] things that falls on it that makes this
+[57:26] stripe not working. So what's going on
+[57:28] here?
+[57:32] This is very likely caused by a reason
+[57:34] that your mask is slightly like like a
+[57:38] few
+[57:40] um arc second twisted in the center.
+[57:44] It's okay. It's not that bad. But if
+[57:46] it's not perfectly aligned on the side,
+[57:48] it just have no way to work. Okay.
+[57:52] And this is probably more like uh
+[57:55] something happened in center, something
+[57:56] happened here. This just about
+[58:00] um probably some misalignments or
+[58:02] something falls on it. But this is a
+[58:03] very common pattern. Then it's always
+[58:06] like this that the center tiles are more
+[58:08] likely to be good ones than on side are
+[58:11] likely to be the bad ones.
+[58:15] See what's next then. So what's the
+[58:17] largest D size that we can see today?
+[58:19] And this is also from our data set. And
+[58:22] you can see there are a few large ones
+[58:23] that's one kilo 1,00 millimeter square.
+[58:27] But those are multi-chip multi uh multi-
+[58:30] there chiplet technologies, right? The
+[58:33] combined we have to combine all those
+[58:34] chips together. For single chips, that's
+[58:37] pretty much 80 800 millime square. So
+[58:40] Nvidia H100, Amidia A100, those are all
+[58:44] fall in this region. We have no way to
+[58:46] continually increasing this number
+[58:48] because of the yield difficulty. And
+[58:50] another thing is because the light comes
+[58:53] from a single source, right? So it
+[58:56] somehow needs to be scattered a little
+[58:58] bit, right? So if it's scattered, it's
+[59:00] not that precise. So we cannot really
+[59:02] have each each of them
+[59:05] um very large.
+[59:08] So that's why the number of the largest
+[59:11] dice size pretty much limits the number
+[59:13] of transistors that we can have. The
+[59:15] only way to increase transistor is to
+[59:18] make the transistor smaller.
+[59:25] Okay. And they're doing something even
+[59:27] more crazy. They know probably there's
+[59:30] always there's no way to avoid
+[59:34] problems with those chips, right? So
+[59:36] what they do, I don't know if you heard
+[59:39] of this. This is a screenshot from
+[59:41] Apple. So they sell
+[59:46] 8 core CPU with four performance cores
+[59:48] and there okay they sell 8 core GPU, 10
+[59:51] core GPU and 10 core GPU.
+[59:54] Why they have two different versions?
+[60:00] Yeah.
+[60:04] Yeah, that's right. So, they may detect,
+[60:08] okay, two GPU cores are not working.
+[60:11] Rather than wasting it, let's sell it as
+[60:13] lower-end devices. Okay, that's why you
+[60:16] see MacBook Air has this weird seven
+[60:19] core GPU design. It's probably just one
+[60:21] GPU core is not working. Okay, and
+[60:24] actually chip pinning
+[60:27] is almost always there. And sometimes
+[60:29] they even do something like this. The
+[60:32] demand of this is really high. People
+[60:34] like to buy low-end devices. But the
+[60:37] yield is pretty good. Then we produce a
+[60:39] lot of these things. What they do is
+[60:43] they just use software to disable 2GPU
+[60:45] cores and sell as this thing. Then
+[60:47] there's always hacky person hacky
+[60:50] people. They just say, "Oh, we can use
+[60:52] some software to turn it off so that we
+[60:54] can pay the price of this one, get the
+[60:56] quantity of this one." So there's always
+[60:58] something called a chip lottery. So you
+[61:00] buy a chip not all the chips are the
+[61:02] same. They are this different than that
+[61:05] difference, right? Um so even you see 10
+[61:09] cores perhaps what they actually have is
+[61:12] 12 cores. When they you say 2 megabytes
+[61:15] of cache they probably build 2.4
+[61:19] megabyte of cache just for redundancy so
+[61:22] that they can sell um reasonable device.
+[61:26] Okay, this thing is called chip bin and
+[61:29] sometimes this chip bin may impact
+[61:30] performance. Let's say these 10 cores
+[61:32] are may connected with a network, right?
+[61:35] Maybe this network these two are closer
+[61:38] to the center faster. These two are fast
+[61:41] away from the center slower. Just
+[61:44] examples. Then you might you buy a chip
+[61:47] that the center one is broken. Then I
+[61:49] buy a chip the side one is broken. So
+[61:51] they both have 10 cores GPU but they may
+[61:53] have slight different performance. That
+[61:55] can happen.
+[61:59] Okay. Then on the other side, uh we're
+[62:02] talking about energy consumption. Now
+[62:04] what's the energy consumption? Today
+[62:07] we have this term called TDP, thermal
+[62:10] design power. So this thermal design
+[62:12] power is not the actual power that is
+[62:14] design that's consumed by this this
+[62:16] chip. If we really want this chip to run
+[62:18] faster and faster, if we can use a
+[62:20] liquid nitrogen as a cooling method,
+[62:23] then we can make this it consume a very
+[62:25] high power and make it run really fast.
+[62:28] But this TDP is designed to say in a
+[62:30] typical case I want my chips to work in
+[62:33] this way. Let's say uh my laptop is
+[62:36] running some reasonable like Figma,
+[62:39] Microsoft Word, Adobe, Photoshop, then
+[62:42] my my computer will consume 100 watts of
+[62:45] energy. Okay. It's it's the suggestion
+[62:48] to suggestion for what type of cooling
+[62:51] method we really need.
+[62:54] So
+[62:57] it's stuck. It's just slow. It's
+[62:59] probably
+[63:03] large
+[63:05] large image. So with less than 25 volts,
+[63:10] we probably can just use passive coal
+[63:11] cooling. 45 volts we need a fan. 200
+[63:14] watts we need a liquor cooling right
+[63:16] it's just suggestions but what's the
+[63:18] typical um TDP so at early age you see
+[63:21] the TD TDP are at this range right and
+[63:25] the blue ones are CPUs the orange ones
+[63:28] are GPUs CPUs are rather stable like
+[63:32] tops at about 100 then these years
+[63:34] they're definitely growing and we want
+[63:36] more and more powerful devices then GPUs
+[63:39] at the beginning are only low-end GPUs
+[63:41] then start we start higherend GPU and
+[63:44] GPUs because it's more flexible that you
+[63:48] you always buy the whole thing from one
+[63:50] company like including the cooling
+[63:52] technology they can have much higher um
+[63:55] TDP so typically that the highest TDP
+[63:58] today we see are 300 volts or 350 volts
+[64:01] but still there's a limitation that we
+[64:03] cannot have that much energy consumption
+[64:07] then so remember uh when we say go uh
+[64:12] the mors law. The last part actually
+[64:16] that part is describing this thing
+[64:17] called Dar scaling. So what standard
+[64:20] scaling says as transistors get smaller
+[64:24] their power density stays the same.
+[64:28] So in other words, if I have a 80 8 mm
+[64:32] square chip, no matter if I use 3
+[64:35] nometer technology, 7 nanometer
+[64:37] technology or 20 nome technology, they
+[64:40] should spend the same amount of energy.
+[64:43] Okay. So is standard scaling still
+[64:46] holding then
+[64:49] pretty much if you can see these are
+[64:52] energy consumption watts per billion
+[64:54] transistors.
+[64:56] So
+[64:58] and on this side is watt per millimeter
+[65:00] squared. So this thing is actually
+[65:02] reducing. So per transistor energy
+[65:04] consumption is reducing. Then transistor
+[65:08] per
+[65:10] uh energy consumption per millimeter
+[65:12] squared is rather stable other than 7
+[65:15] nanometer technology.
+[65:18] So these are rather old data when 7
+[65:20] nanometer just comes out. Then I took a
+[65:23] data I took a new data relative
+[65:26] recently. It's not as good as the
+[65:28] previous one. But as you can see here u
+[65:31] as we increase the die size the TDP is
+[65:34] somehow increasing right it's somehow
+[65:38] increasing. As we increase the D size so
+[65:41] the TDP is somehow increasing. So I
+[65:43] would say Der scaling is not as
+[65:48] um valid as Mors law today. So standard
+[65:51] scaling is seriously being challenged
+[65:54] and even you look at this one it looks
+[65:56] like is rather stable right it seems
+[65:59] standard scaling is there
+[66:03] but when der scaling was first
+[66:05] introduced it's supposed to be a
+[66:10] device level matrix that means no matter
+[66:13] what we do we don't need special
+[66:15] technology we build that chip that chip
+[66:16] will consume that energy that amount of
+[66:18] energy
+[66:20] Today den scaling if we really do that
+[66:23] thing den scaling will not hold because
+[66:26] we have one thing called dark silicon
+[66:29] effect. What is dark silicon effect?
+[66:32] Dark silicon effect means if you want to
+[66:34] consume that amount of energy if you
+[66:36] want to stay within TDP we cannot have
+[66:39] our whole chip to be working at the same
+[66:42] time. So we either have to turn off some
+[66:44] cores, turn some part of memory, some
+[66:46] caches or we just turn some fine grain
+[66:50] registers off to save energy.
+[66:53] So this is called power gating. That
+[66:55] means we just do not provide power to
+[66:58] part of the chip so that it can stay at
+[67:02] the stay within the TDP level or
+[67:05] sometimes we even reduce the frequency.
+[67:07] So for example, you pro probably have
+[67:09] most experience if your phone gets too
+[67:11] hot it feel really slow right. So that's
+[67:17] an example that der scaling may not
+[67:19] simply hold that we may need system
+[67:21] level software level technology or
+[67:24] architecture level technology to help
+[67:26] these things to keep holding to help
+[67:30] scaling to keep holding.
+[67:34] Okay.
+[67:36] So morsel and der scaling are probably
+[67:39] the most important um guidance for the
+[67:43] performance that we can achieve today.
+[67:46] So I would say der scaling is a more
+[67:48] like a physics law. Morris law is more
+[67:51] like a psychology or business law is
+[67:55] because people are expecting is growing
+[67:57] that fast that I have to do I have to to
+[68:00] win the competition. have to reach that
+[68:03] level and they just start to think about
+[68:05] new method to reach that level.
+[68:10] Okay, just a conclusion takeaways for
+[68:13] today's lecture. What is computer
+[68:14] architecture? It uh it connects the
+[68:17] device technology with applications.
+[68:19] It's the center of the computing
+[68:21] technology stack. It's uh leading the
+[68:25] chip design industry. So we're
+[68:27] considering a few generations away then
+[68:30] it's the backstage hero some of some
+[68:32] ultra fast chips. So you may think oh
+[68:36] the power comes from smaller and smaller
+[68:38] transistors but to make those
+[68:40] transistors to work then we may face
+[68:42] lots of lots of new challenges that we
+[68:44] have to use some novel architecture
+[68:46] solutions to solve those things. For
+[68:48] example, power gating or fine grain
+[68:51] power gating. Those are all technology
+[68:53] architecture level technology that we
+[68:56] have to have those new technologies to
+[68:59] make 7 nanometer, 5 nanometer, 3
+[69:01] nanometer technologies to work.
+[69:04] Okay. So next week we're going to start
+[69:07] with combination logic and sequential
+[69:09] logic and uh a little bit on the boolean
+[69:12] logic.

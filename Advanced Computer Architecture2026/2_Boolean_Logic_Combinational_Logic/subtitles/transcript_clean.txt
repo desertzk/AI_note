@@ -1,0 +1,1494 @@
+[00:00] Today we're mainly going to talk about
+[00:03] binary uh binary
+[00:06] digit uh binary logic binary numbers and
+[00:08] the combination logic. So this is as a
+[00:10] review course a review lecture that help
+[00:13] you to understand the very basic things
+[00:15] about computer architecture. Then when
+[00:18] we talk about boolean logic, binary
+[00:19] numbers and combination logic especially
+[00:21] combinational logic
+[00:23] um is the part that if you design
+[00:27] circuit on your own very low level
+[00:28] design that is something really
+[00:30] important that you really have to know.
+[00:32] Then uh but as a computer architecture
+[00:35] researcher if you want to research
+[00:36] something at a higher level you probably
+[00:39] do not need to know things at this
+[00:42] level. Then you only need to like say
+[00:44] when you need a cache okay you need a
+[00:46] cache just imagine as if it's a software
+[00:48] but executed the algorithm is executed
+[00:51] in hardware then that's good enough for
+[00:53] computer architectural design but I want
+[00:55] you know to say I want you to avoid a
+[00:58] feeling that say um
+[01:04] when I design something really advanced
+[01:06] like a CPU core a GPU core or um a cache
+[01:11] unit that your it feels So missing that
+[01:13] how these things are implemented
+[01:14] internally at the low level right so
+[01:17] that's why I want to introduce this
+[01:19] topic at the very beginning the key idea
+[01:21] is eventually you know oh if I want to
+[01:24] implement something that is complex I
+[01:26] know oh this is possible if I spend a
+[01:29] lot of time probably a few months to
+[01:31] years with low-level design then I can
+[01:34] make it or if I have team of people who
+[01:36] work for a month they can probably help
+[01:38] me design these type of things that just
+[01:40] want you know that things are possible.
+[01:43] Okay, so starting with boolean logic.
+[01:46] Then what is boolean logic? You probably
+[01:48] uh write code on your own that's true
+[01:50] and false, right? Or in circuit we just
+[01:53] call it zero and one. So there it's
+[01:56] either true or false zero or one that
+[01:58] are logic values, right? Then high and
+[02:01] low are voltages. Now we typically use
+[02:03] high voltage to represent one and low uh
+[02:06] voltage to represent zero. Now why this
+[02:09] is why we use boolean values is because
+[02:13] we want to increase this reliability
+[02:16] that um you need to consider although we
+[02:20] consider digital logic always works in
+[02:23] zero and one high voltage and low
+[02:25] voltage internally every digital
+[02:29] um every digital circuits are actually
+[02:32] analog circuits. So when we say analog
+[02:34] circuit it's has no zero and one it's
+[02:37] always a continuous uh voltage or
+[02:39] current right um but if you consider
+[02:42] these things are
+[02:46] analog circuit then you need to consider
+[02:49] oh sometimes if I consider five volt is
+[02:52] the highest voltage then my value is may
+[02:55] not be as high as as 5 volt it may be
+[02:57] 3.3 volt and do I consider it as a one
+[03:01] or zero right I if I simply set a
+[03:04] threshold is the most reliable way. Then
+[03:07] of course you can design things that um
+[03:11] design a computer that works in
+[03:14] not a boolean design. You can have 012
+[03:18] three numbers. Then to set say 0 to one
+[03:21] volt is zero. The one to two volt is one
+[03:25] above two volt is uh is two. That works.
+[03:29] And there are even some prototype of
+[03:32] hardware is designed in that way. It's
+[03:35] just not that simple, not that easy. And
+[03:38] uh the transistor has this strong like
+[03:41] shutdown and close effect that makes
+[03:45] this
+[03:46] um zero and one design really simple
+[03:48] that you you simply use zero and one to
+[03:50] control if a transistor is connected or
+[03:53] not. Okay. So uh if we I don't know
+[03:57] anyone has watched this video before
+[04:01] you should have you should watch try to
+[04:02] watch this video this is a very
+[04:04] educational video and this is a very um
+[04:09] very important research direction in the
+[04:11] computer architecture domain is the is
+[04:13] generally typically called reliability.
+[04:16] No computer is safe because those things
+[04:19] that keeps the high voltage and the low
+[04:22] voltage especially keeps the transistor
+[04:24] shut or connected is only a few
+[04:27] electrons right it's only a few atoms
+[04:30] then but there's high energy rays in the
+[04:34] from the universe that that may hit your
+[04:37] uh computer then may hit your CPU or
+[04:40] GPUs in your computer then it may flip a
+[04:43] bit then cause some data to be wrong so
+[04:45] This is a real consideration that if you
+[04:48] have multiple values more than u zero
+[04:50] and one it's more likely to make the
+[04:52] flip. Okay. Now later on we can try to
+[04:56] discuss some of uh the effect of how we
+[04:58] can prevent these type of reliability
+[05:01] problems. But here we're talking about
+[05:03] logic operations. Now you should be very
+[05:05] comfortable with these type of things.
+[05:07] Now we only have three basic uh logic
+[05:10] operations not and and or. we list the
+[05:14] possible values with choose
+[05:17] uh with the truth table. So on the um
+[05:20] left side is the input and on the right
+[05:23] side of this vertical bar is the output.
+[05:25] So if we have zero then output was one.
+[05:28] If I want the output is zero for not uh
+[05:31] operation. Then and means if both of
+[05:35] them are one or true then our output is
+[05:37] true for all. If any of them is one then
+[05:40] the output is one. Okay.
+[05:43] Then so by the way we use this type of
+[05:46] representations as uh a prime sign as
+[05:50] not and xy as end. So if you consider
+[05:53] anything multiply zero is zero. Right?
+[05:56] Just a easy way to help you understand.
+[05:59] Then we use a plus sign. There's a
+[06:01] little problem that 1 plus 1 is still
+[06:02] one. But it's just you need to know this
+[06:05] is blend logic. Okay. Then we also have
+[06:09] a one extra uh operation that is called
+[06:13] xor. So it's defined in this way. Okay,
+[06:16] it's if they're different they're one.
+[06:18] If they're the same they're zero.
+[06:21] Okay. Then uh actually x or can be
+[06:25] represented with and or and not uh
+[06:28] representation. So sometimes you want to
+[06:29] use x or sometimes you can just use very
+[06:32] simple uh representations.
+[06:36] um there are different representation
+[06:38] then uh with logic representation java
+[06:40] or java bitwise operation or circuit
+[06:43] operation now here we're using this set
+[06:45] of uh representations
+[06:48] there are some very simple rules I don't
+[06:50] want to teach you to do the calculation
+[06:51] then uh if there are some really hard
+[06:55] problem it going to take some time for
+[06:57] you to
+[06:59] for you to solve those problems but
+[07:01] those are not the most important part of
+[07:04] this course But let's read these rules
+[07:06] together. Identity that means one or x
+[07:11] is still x and zero is still x. Okay.
+[07:14] Then complimentary is x or x
+[07:20] and x prime
+[07:24] is zero. x or x prime is one. Right?
+[07:26] Either there itself or the reverse must
+[07:30] be true. So because they're opposite
+[07:36] then
+[07:38] uh they can swap then they can apply
+[07:41] this type of rules and uh associative
+[07:44] they can also apply this type of rules
+[07:46] then it's basically the same rule as
+[07:49] multiplication and sum operations.
+[07:53] Then there are more rules than uh if we
+[07:57] consider zero then the opposite side of
+[08:00] zero is one then x prime prime is x
+[08:03] itself.
+[08:05] Um and this is the other way compared to
+[08:08] identity absorption. Then this is I
+[08:11] think these two rules are slightly
+[08:13] slightly more advanced and useful. That
+[08:16] means if we x is already there
+[08:19] x plus y this is x or y. Now x and x or
+[08:25] y is still x. This y is not useful.
+[08:28] Um,
+[08:32] this is a a little bit hard to think if
+[08:35] you I only give you a few second time.
+[08:38] Then
+[08:41] at this stage, don't think too much
+[08:43] about this. Then if you want to verify
+[08:45] this, the easiest way is just to list
+[08:47] the truth table. There's only four
+[08:49] possible inputs. Then calculate them.
+[08:52] Then you can see on this side is always
+[08:54] the same as this side. Okay. Then de
+[08:56] Morgan's law that mean that means x or y
+[09:00] prime is equivalent to x prime and x and
+[09:04] y prime equals x prime or y prime right
+[09:09] then the morgan's law is something that
+[09:12] I some I really use in writing a program
+[09:16] sometimes I write if statement the
+[09:19] condition is a little bit complex the
+[09:20] condition is something like this I mean
+[09:22] feel represented in this way is easier
+[09:25] then I mean just change it to this
+[09:27] style. Okay, so it's slightly useful in
+[09:30] writing program. Um I just want to you
+[09:34] to know okay there are some rules that
+[09:36] you can do the calculation. We can
+[09:38] mathematically prove them or we can just
+[09:40] list the truth table and to compare this
+[09:42] side they always uh equivalent.
+[09:47] Okay. So later on we will see different
+[09:50] type of gates. There are end gates or
+[09:53] gates can implement this type of logic
+[09:55] and can perform um complex calculations.
+[10:00] But before we go there let's consider
+[10:03] how we can how we can make the binary
+[10:05] really useful. How this binary can
+[10:08] represent more complex things. Okay. So
+[10:11] when we talk about integer we want to
+[10:13] use binary to represent integers. So
+[10:15] that's a base two number, right? I think
+[10:18] you probably all have learned how to
+[10:20] convert um a base 10 number to a base
+[10:24] two number, right? Um so base 10 number
+[10:28] can be represented in this way. It's a
+[10:30] it's the digit five multiply by 10 to
+[10:33] the power of zero. That's one then
+[10:36] that's 10 that's 100 that's 1,000.
+[10:38] That's how the internal meaning of this
+[10:40] number.
+[10:42] Now if we consider a binary number is
+[10:44] basically the same thing. Then base is
+[10:47] represent here right. So base 10 is use
+[10:49] the 10 as the um power base and here use
+[10:53] the two use number two as the power
+[10:55] base. So this number represent one one
+[10:58] zero and one.
+[11:00] Okay 1 multiply two to power zero
+[11:02] because it has a weight of one. It has a
+[11:05] weight of two has a weight of four. It's
+[11:07] a weight of eight. You just sum them
+[11:09] together. If you do this calculation,
+[11:11] you can easily convert something to a
+[11:16] um convert this thing to a a base 10
+[11:21] number.
+[11:23] So if I quickly ask you to convert 1101
+[11:28] to a base base 10 number, what would you
+[11:31] do?
+[11:34] >> I'm sorry.
+[11:39] That would be
+[11:40] Yeah. So, uh,
+[11:44] so you can calculate this, right? That's
+[11:46] a a little bit more formal way. Then
+[11:49] sometimes I'm too lazy to do this. I
+[11:51] just count from zero or I count from
+[11:53] somewhere I know. For example, I know uh
+[11:57] one one is f uh one 0 0 is eight, right?
+[12:02] I just start to count from there. is
+[12:05] probably
+[12:07] if it's not too long then it's
+[12:10] it it can happen. So, so how I count is
+[12:14] 0 1 1 0 1 1 0 0 1 0 1 1 1 0 1 1 then 1 0
+[12:20] 0 0 then don't read it as 1,00 just read
+[12:23] it as one 0 0.
+[12:26] Okay. Then one quick operation is shift.
+[12:30] Then this shift is very important
+[12:31] operation that we'll learn in computer
+[12:33] architecture. Almost every computer
+[12:35] architecture support this shift
+[12:37] operation. Then uh for shift then if we
+[12:40] shift the digit to the left by one in
+[12:43] base 10 we basically multiply this
+[12:45] number by 10 because we add a zero
+[12:47] there. Now if we shift it left in a
+[12:51] binary number in base two number we
+[12:53] still add a zero. Then this means we
+[12:56] multiply by number by two.
+[12:59] Okay. So left shift is multiply by the
+[13:03] base and the right shift is divided by
+[13:05] the base.
+[13:11] Okay. So we want to do calculation in uh
+[13:17] in base 10 we do calculation right? Then
+[13:19] in base two we also do calculation. How
+[13:21] we can do calculation? The rule is
+[13:24] roughly the same. If we do this is five
+[13:27] 6 + 5 = 11. Then we put a dot or plus
+[13:31] put a one there. Now 1 4 6 is one. So
+[13:35] here we basically follow the same rule.
+[13:38] 0 plus 0 is still zero.
+[13:41] This is real plus. Okay, this is not the
+[13:43] or operation. 0 + 0 is 0. 1 + 1 is zero
+[13:49] and put one here. Right? Then 1 0 1 is
+[13:52] zero and put one here. 1 one is a one.
+[13:55] Then put an extra one there. Okay? So if
+[13:59] we do this type of operation
+[14:02] it's equivalent to doing the same
+[14:04] operation in base 10 it gets so if we
+[14:09] get this the value of this number the
+[14:10] value of this number the value of this
+[14:12] number in base 10 they are the same.
+[14:15] Okay. So the sum the add operation
+[14:18] multiplication operation division
+[14:19] operation they are the same in different
+[14:22] basis is it won't change that that makes
+[14:26] the um the digital design that is two
+[14:31] based in a two-based system possible.
+[14:38] Okay. Later on we're going to see how we
+[14:41] can design an adder in binary.
+[14:44] Adder in binary is basically we first
+[14:47] add this number this number but we also
+[14:49] need to consider a carry bas. So we are
+[14:51] basically adding three digits together.
+[14:53] So if we know the rule of
+[14:57] if we know the rule of how to do the sum
+[14:59] operation of two of two digit and if we
+[15:02] can write the possibility all the
+[15:04] possibilities and do the calculation and
+[15:07] we can calculate for this input we can
+[15:09] get this output for this input we can
+[15:11] get that output and if we can list all
+[15:13] the possibilities then we can express
+[15:15] them in a combinational logic we can um
+[15:19] calculate calculate them in a
+[15:23] um with circuit
+[15:26] and then you also as a computer science
+[15:30] student you should also quickly know
+[15:32] these hex number conversions. Um so from
+[15:36] decimal to binary octal and hex number
+[15:39] are just you can use this table to make
+[15:41] the conversion or you can make you can
+[15:43] make uh
+[15:45] uh you can just count
+[15:49] then so from binary to octto and to hex
+[15:53] number conversion is actually very easy.
+[15:56] Then for from binary to octto you just
+[15:58] simply combine three digits then you can
+[16:01] put one digit there. For a hex number,
+[16:04] you can just put four digits and it
+[16:07] makes one number, one digit there in the
+[16:11] hex representation. So when we write
+[16:13] down a number like f FFF, why we want to
+[16:16] write four f there rather than zero and
+[16:18] one, a lot of one, it's just much easier
+[16:20] to write, right? I don't want to spend
+[16:22] this long piece of paper. So writing in
+[16:26] hex is a much more concise number. So
+[16:29] when you see hex number you should need
+[16:30] to have a feeling about what's the value
+[16:34] of this number in decimal and in b in
+[16:38] binary.
+[16:40] Then bit and bite are typical
+[16:43] um units that we're going to use. Then
+[16:47] just consider one bit is a very small
+[16:49] thing and one bite is a a bite. Just
+[16:52] consider you bite something you bite a
+[16:53] piece of food. Right? In early days bit
+[16:56] and bite conversion is not necessarily
+[16:58] zero eight bit per bite. So in early
+[17:02] systems it can be four or five or
+[17:04] something and later on it just converge
+[17:06] and that everyone use um eight bit.
+[17:11] Then this is a very important topic
+[17:14] about data range. So if you use one bit
+[17:17] you can only represent zero and one
+[17:19] right and if you use two bit you can
+[17:22] represent four numbers. is 0 one two
+[17:25] three then if you use one bite that's
+[17:28] eight numbers then you can represent
+[17:29] number zero to 255 then four bytes is
+[17:33] this amount 4 million something then
+[17:36] this is not actually a very big number
+[17:39] if you consider the number of bytes in
+[17:41] your system but remember early days we
+[17:43] use 32-bit
+[17:45] system right what does 32-bit system
+[17:48] means is
+[17:51] a 32-bit system basically use 32 to bit
+[17:54] number to represent an address. An
+[17:56] address is a bite in your memory.
+[18:00] Okay, is a bite in your memory. So you
+[18:03] can have at most this number of bytes in
+[18:05] your your memory. So what's the value
+[18:07] here?
+[18:10] The value h
+[18:12] >> it's only 4 GB, right? Everyone pretty
+[18:15] much even my phone has more than 4 GB of
+[18:17] memory. So if we're using 32-bit
+[18:20] machine, then we are limited to 4 GB of
+[18:22] memory. That's why pretty much all the
+[18:24] machines even phones are migrated from
+[18:27] 32-bit to 64-bit machine.
+[18:30] Then just just consider 32bit right if
+[18:33] we add one extra bit that becomes 8 GB.
+[18:36] Then two extra by that becomes six uh 16
+[18:40] GB. So 64 GB is almost um unlimited
+[18:45] space
+[18:47] at the standard of right now. Now maybe
+[18:50] 10 years later that's also too limited.
+[18:52] We're moving to 128 bit system.
+[18:57] Okay let's talk about how negative
+[18:59] numbers are represented. Then negative
+[19:02] numbers that we the simplest method is
+[19:06] in this way. Uh
+[19:10] we can dedicate one bit the first bit to
+[19:14] represent the sign. So if it's zero we
+[19:19] just say it's a positive number and it's
+[19:21] a one then we say it's a negative
+[19:23] number. This is me one. And
+[19:31] so what's the problem with this design?
+[19:37] The problem is we're duplicating zero.
+[19:40] Right? For zero we have a positive zero
+[19:42] and a negative zero. We have two
+[19:44] different ways to represent zero. And
+[19:46] also if we want to sum these two numbers
+[19:50] together, we need a separate type of
+[19:53] logic like a combination logic uh
+[19:56] different set of circuit to calculate.
+[19:59] We need a we need a method to calculate
+[20:03] positive and positive negative and
+[20:06] negative and positive and negative. We
+[20:07] need three different set of um ways to
+[20:11] calculate these numbers. So this is
+[20:14] really annoying and that's why we want
+[20:16] to kind of want to avoid this number.
+[20:20] So the second way is we can flip out a
+[20:23] bit and this method is called once
+[20:26] complement
+[20:27] then it's not really useful but it's a
+[20:30] just intermediate step right. So we can
+[20:33] first flip this representation then we
+[20:37] say okay this is a negative number and
+[20:39] we can still use the first bit to tell
+[20:41] if it's positive or negative.
+[20:45] Okay still it won't solve the problem
+[20:48] that uh we cannot use the same
+[20:52] digital circuit to calculate positive
+[20:54] number and negative number the sum
+[20:56] operation between positive number and
+[20:58] the calculate number. So we add this
+[21:01] minor tweak to flip all the bits and add
+[21:05] one.
+[21:08] This is very counterintuitive at the
+[21:10] beginning that how it works. But I can
+[21:12] tell you that this is how we represent
+[21:15] negative 82. Just you just assume this
+[21:18] is positive 82. Don't need to verify
+[21:21] this. But if we flip all the bit you can
+[21:24] see the last bit is
+[21:28] the last the last four digit should be
+[21:30] one one zero one right then we add one
+[21:33] that becomes one zero 1 1 0 that's
+[21:37] something we call two's complement
+[21:39] representation
+[21:42] then
+[21:44] so what's the advantage of two's
+[21:46] complement representation just use one
+[21:49] example
+[21:51] How we represent zero?
+[21:58] We represent zero without zero. That's
+[22:00] simple, right? So
+[22:03] how we represent one? Nothing changed.
+[22:06] How we represent negative one?
+[22:10] Just use all one to represent negative
+[22:12] one. Just consider we're com we're
+[22:15] converting this to one one one one zero,
+[22:19] right?
+[22:20] Flip all the bits and plus one. One,
+[22:23] one, one, one, one, one, one, zero. Then
+[22:26] this zero. By adding one, the last zero
+[22:29] becomes one. So then we get all ones.
+[22:37] Just think about this. If one if zero
+[22:41] minus one, right, what will happen is
+[22:45] something that we call a natural
+[22:46] overflow,
+[22:48] right? So just imagine we have we have a
+[22:51] one there. Then if we if we have
+[22:54] imaginary one in front of it and we
+[22:57] reduce by one it becomes zero one one
+[22:59] one
+[23:02] right? Then we remove the imaginary one
+[23:05] in front of it we get a one there. The
+[23:09] logic still holds just one set of logic
+[23:13] that one set of circuit that guaranteed
+[23:16] to work for both positive number and
+[23:19] negative numbers.
+[23:22] Okay, that's how to compliment is works.
+[23:28] Just consider like whenever I think
+[23:30] about this, I just feel the early
+[23:33] computer design, they're just too short
+[23:36] of devices. They want to reduce the
+[23:38] number of gates. They don't want to de
+[23:40] develop a new set of numbering system.
+[23:42] They don't want they don't want to
+[23:45] design a new type of
+[23:48] like operator like the circuit that's
+[23:50] for positive and negative number
+[23:52] calculation. So they tweak the the
+[23:54] numbering system a lot so that it works
+[23:58] like perfectly for both positive numbers
+[24:00] and negative numbers. Okay. always use
+[24:03] these a few special numbers to help me
+[24:06] remember how these two complimentary
+[24:08] system works.
+[24:13] Okay, we're talking about numbers. By
+[24:16] the way, if I have a
+[24:19] one bite to represent negative numbers,
+[24:23] what are my range? What's the smallest
+[24:25] number that I can represent and what's
+[24:28] the largest number I can represent?
+[24:33] The large number
+[24:43] and small
+[24:50] just use binary. What is the largest
+[24:54] number in binary that we can represent?
+[25:00] 127, right? So 0 11 one one.
+[25:04] So 127, right?
+[25:08] Then what's the smallest number that we
+[25:10] can represent?
+[25:11] It's basically 1 0 0 0.
+[25:17] That's - 128. Okay. Just consider if we
+[25:21] consider zero as positive number, it's
+[25:24] half and half.
+[25:26] Okay. negative 128 to positive 127.
+[25:31] So remember there's always a feeling of
+[25:34] encoding. What is encoding? Your
+[25:37] computer always just work in binary. It
+[25:40] doesn't really know
+[25:42] what the meaning of this number. It
+[25:44] doesn't really know it's a sign number
+[25:46] or unzine number. If we have a uni
+[25:48] number the highest value we can
+[25:51] represent is this way is 2 255
+[25:54] right? So 255 can be both negative one
+[25:58] or can be two
+[26:02] 8 ones can be both negative 1 or 255
+[26:06] depending on how you define this number.
+[26:10] Okay. So we're using two different
+[26:12] encoding methods to encode the same list
+[26:16] of binaries.
+[26:19] Okay. There's always a
+[26:22] way like the under the encoding meaning
+[26:25] of these binaries your hardware your
+[26:28] memory is just a huge list of four giga
+[26:31] bytes 4 giga multiply by 8 the number of
+[26:34] zero and ones how you use those number
+[26:37] it depends on your program how you trade
+[26:39] it how you trade those numbers
+[26:43] so how we can represent the floatingoint
+[26:45] number that means that's not an integer
+[26:47] then like 5.5 how we could represent it.
+[26:51] Then according to ITE E754
+[26:54] standard, this is how we represent it.
+[26:58] We just encode it in the more complex
+[27:02] way. So by the way, this is how what we
+[27:05] call a single precision. A single
+[27:07] precision basically use 32 bit to
+[27:10] represent one floating point number.
+[27:15] Okay, I'm just going to use an example
+[27:18] to tell you how it works.
+[27:21] Let's say 5.75.
+[27:24] Okay, how is negative 5.75 works? Let's
+[27:28] do it step by step. Now, we can convert
+[27:31] this to a
+[27:36] we can convert this to a binary number.
+[27:38] Just the we didn't talk about the
+[27:41] decimal part. is basically this one is
+[27:44] 0.5 this one is 0.25 25 right just
+[27:47] consider two to the^ of negative 1 and 2
+[27:50] to the^ of -2 right so that's where this
+[27:54] 75 comes from
+[27:59] then we normalize it what does it mean
+[28:02] by normalize is remember um
+[28:06] you have probably have learned
+[28:08] scientific representation right when you
+[28:10] use scientific representation you only
+[28:12] have want to have one digit right before
+[28:15] the dot,
+[28:18] right? You only have want to have one
+[28:20] digit right before the dot. And here in
+[28:23] scientific representation, you use 10 to
+[28:24] the^ two or 10 to the^ something. But in
+[28:27] scientific representation of binary, we
+[28:30] use two to the^ something. So this is
+[28:32] how we normalize this number.
+[28:36] Consider the sign we have a one, right?
+[28:38] So we can already define this sign bit
+[28:40] is one.
+[28:42] exponent
+[28:44] is this number is two right. So here
+[28:48] this exponent we just write two there or
+[28:51] one or one zero right then here is the
+[28:56] exponent exponent with bias.
+[29:00] Okay, so this is how it represents
+[29:03] a both a positive number and a negative
+[29:05] number.
+[29:11] It's we actually store 129 there. So
+[29:15] just consider if we store
+[29:19] a negative number there and plus 127
+[29:22] then it becomes a positive number. So
+[29:24] it's just another way to represent
+[29:26] positive and negative numbers. So here
+[29:28] what we're recording is 1 0 0 0 and one
+[29:32] and the mantisa is the real value of
+[29:35] this number. So we keep it 0 one one one
+[29:39] one 0 one one one one
+[29:44] there's actual there's an actual one
+[29:46] there. So we do not represent the first
+[29:50] one in front of the decimal point
+[29:52] because we know there must be a one
+[29:54] before the decimal point. We just skip
+[29:56] that one. Right? So this is eventually
+[30:00] how we represent
+[30:02] the floating point number. Okay. It's a
+[30:05] it requires a complex conversion.
+[30:14] Okay.
+[30:28] So basically we can roughly estimate
+[30:32] what's the range of numbers that we can
+[30:34] represent right. So what's the range of
+[30:37] number we can represent if this exponent
+[30:40] exponent field that we can go with
+[30:43] negative 127 or positive 128.
+[30:50] They don't come we don't need to
+[30:52] consider the B boundary case just
+[30:56] negative about one negative 127 to
+[30:58] positive 127 that's a 2 to the^ of 256
+[31:02] that's the range of number that we can
+[31:04] represent right now 2 to the^ of 127
+[31:10] is actually a very very large number.
+[31:18] So the quick question is
+[31:21] if we use eight bite to represent
+[31:24] integers versus use eight byte to
+[31:28] represent floatingoint numbers which one
+[31:30] can represent more numbers.
+[31:42] Um technically the same number but one
+[31:46] will have a larger
+[31:49] Yeah, that's the that's a very good
+[31:52] answer. So the quick answer is they can
+[31:54] represent the same number of numbers.
+[31:58] The total possible numbers to be
+[32:00] represented by 32bit is only 2 to the^
+[32:04] 32.
+[32:06] It's just a matter of encoding because
+[32:09] we have the exponent value so large. If
+[32:13] we have that large value and it's two to
+[32:16] the^ 127 in theory we should have 127
+[32:21] digits in the mantisa part to to fully
+[32:23] represent that number to have a full
+[32:25] precision right but that's impossible.
+[32:28] We only have this part. So if you
+[32:30] represent a large number super large
+[32:32] number we are somehow sacrificing some
+[32:35] accuracy there. Right? But we think this
+[32:38] is typically good enough for
+[32:41] representing um the or normal cases or
+[32:45] to describe a real word.
+[32:48] So there's a big problem with floating
+[32:49] numbers. What's the problem with
+[32:52] floating number? 12 divided by four.
+[32:55] What we get? We don't exactly know
+[32:58] actually. We can get 3.0 or we can get
+[33:02] 2.9999999999999.
+[33:05] Right now if we take a floor operation
+[33:08] it can either be three or two just hard
+[33:10] to say.
+[33:12] Okay. So this is a big problem with
+[33:14] floatingoint numbers with a single
+[33:17] precision floatingoint numbers. So if
+[33:19] you need more precision you can go with
+[33:22] double precision and double precision is
+[33:25] basically using 64bit
+[33:27] values to represent a floatingoint
+[33:30] number. then you can describe with much
+[33:32] higher precision than which even higher
+[33:35] range.
+[33:37] However, more likely these days people
+[33:40] do not care about that precision
+[33:42] especially when machine learning
+[33:44] workloads are there and people more care
+[33:46] care about the calculation capability
+[33:49] right because the more bits you have the
+[33:52] harder the calculation is the fewer the
+[33:54] bit you have the more likely that you
+[33:56] can have the calculation I'm just
+[33:59] comparing this pretty much the
+[34:01] state-of-the-art uh Nvidia
+[34:04] GPUs right Let's look at this MV link
+[34:08] version
+[34:10] for 64 floating point 64. It can support
+[34:14] 30 teraflops. So by the way, what is
+[34:16] teraflops?
+[34:18] What does flops represent?
+[34:23] Okay. So if you're Yeah.
+[34:26] Yeah. So if you work on computing trying
+[34:29] to estimate the computing power flops is
+[34:32] probably the most important uh values
+[34:34] that you can that you need to consider.
+[34:37] By the way this is screenshot I take I
+[34:40] don't exactly remember I where I take
+[34:42] this screenshot they just mix the use of
+[34:44] this lower case and higher um uppercase
+[34:48] S. So typically we consider lowerase S
+[34:51] and uppercase S means different things.
+[34:53] So FL means floating floating point.
+[34:56] Okay. OP means operation.
+[35:00] So floating point operation lowerase S
+[35:03] is
+[35:05] plural form of flop. Flops. Okay.
+[35:11] I think it's a mistake. Okay. But I'm
+[35:14] just telling you this. Uppercase S is
+[35:17] floating point. O represents operation.
+[35:20] P represents per. S represent per
+[35:23] second. So this represents
+[35:26] capital S represents how fast or the
+[35:30] capability of a device. Lowerase S
+[35:33] typically represent the workload that is
+[35:36] required to be to be done.
+[35:39] Okay. But anyway just consider these are
+[35:41] uppercase S. If you look at FB 64 and XP
+[35:47] 32 it typically doubles,
+[35:50] right? If you consider
+[35:56] uh there's no F there's no FP
+[36:00] 16 right
+[36:04] and we can only compare this
+[36:07] tensor course FP64 tensor core is 60
+[36:12] then FP32 is much much hotter much much
+[36:15] higher then FP16 tensor core is about
+[36:20] twice the value FP8 is again twice the
+[36:24] value of FP 16. Okay, this is how these
+[36:28] things are how this um systems are
+[36:32] typically configured in GPUs. So the
+[36:35] lower as we go with half the length of
+[36:38] this floating point number we double the
+[36:40] calculation capability.
+[36:45] So even some GPUs especially today if
+[36:47] you buy um
+[36:51] um gaming GPU a graphics GPU they very
+[36:54] likely they do not equip the the
+[36:56] capability of calculating FB64 numbers
+[36:59] they think it's not useful it's we don't
+[37:01] really need that precise because
+[37:03] eventually you need rendering right like
+[37:05] how how precise your color
+[37:08] probably you won't tell the difference
+[37:10] if you are really using FP64
+[37:14] Okay. So, IP6 there are different um how
+[37:19] how is the way that we represent it?
+[37:21] It's basically one 510. The bit sign is
+[37:24] always there. We cannot really ignore
+[37:26] the sign bit. Right? Then the expo
+[37:30] exponent is five. It's still we can
+[37:32] represent reasonable range of numbers.
+[37:35] Then the mantisa is much smaller because
+[37:38] we don't care about the precision that
+[37:39] much. Now it's widely used in deep
+[37:41] learning especially a few years ago if
+[37:44] you consider LM were starting to use FP8
+[37:47] or some people even using F4.
+[37:51] Um there are two different ways to
+[37:53] represent F8 is 152 have more range but
+[37:57] very low precision.
+[38:00] Then if you consider two that's
+[38:02] basically only
+[38:04] um two bit four possible values 0 0 1 1
+[38:08] 0 and 1 one. So basically that's
+[38:11] represent
+[38:13] 0.25 25 0.5 0.75
+[38:16] that's pretty much the only value that I
+[38:18] can represent right then with 143 we
+[38:22] have smaller range but slightly higher
+[38:25] precisions to represent
+[38:28] then so floating point representation
+[38:32] um
+[38:37] so other than floating point when we say
+[38:39] floating point is the the point can
+[38:42] float can move everywhere because we use
+[38:44] an expon exponent field to represent the
+[38:47] scale of this number. But sometimes we
+[38:50] if we know the range that we're going to
+[38:52] use for example in machine learning
+[38:53] system if we know we're only going to
+[38:55] use positive2 to negative -2 and we're
+[38:58] not going to use huge range ranges we
+[39:01] can simply use fixed point
+[39:02] representation. What is fixed point
+[39:04] representation? It's just another way to
+[39:06] encode this zero and ones. So
+[39:11] for example we can always just scale
+[39:14] just represent a integer and we
+[39:17] externally define the scaling factor
+[39:19] right for example where scaling factor
+[39:21] is one over 100 that means if we store
+[39:24] 50 then we always get number 0.5 okay
+[39:28] it's a much easier way to represent uh
+[39:31] floating point num uh decimal numbers so
+[39:35] this type of system is used in some like
+[39:40] uh
+[39:41] neural engines that can calculate
+[39:44] machine learning workload
+[39:47] or we can use this integer part to
+[39:50] represent the integer for integer part
+[39:52] and integer for fraction part.
+[39:55] Here for example we can use six bit to
+[39:57] represent the integer part and another
+[39:59] 10 bit to represent the fraction part.
+[40:03] And you can see here
+[40:08] uh as in this representation using a
+[40:11] fixed point number is not very different
+[40:14] from the floatingoint number but we can
+[40:16] reduce the number of bit that we use to
+[40:19] represent these numbers. And in term of
+[40:21] area and the power that is used to
+[40:23] calculate these values then area is much
+[40:27] smaller and power is also much smaller.
+[40:31] Right? When we extremely care about
+[40:34] performance but we can sacrifice some
+[40:36] performance. Yes, we can go with a
+[40:40] different type of numbering
+[40:41] representation, different encoding.
+[40:43] Okay. So this comes to a fundamental
+[40:46] problem than in computer architecture.
+[40:48] In computer architecture there's
+[40:49] typically there's no best way to solve a
+[40:52] problem. You need to find say oh I I
+[40:55] find a particular problem. I really want
+[40:57] to optimize from my problem. Then you
+[40:59] observe the characteristics the
+[41:01] uniqueness of your problem then find a
+[41:03] solution to solve your problem. Okay. So
+[41:07] in term of machine learning or at least
+[41:09] the type a type of machine learning
+[41:11] algorithm their uniqueness is their
+[41:14] range of this number are relative fixed.
+[41:16] Okay then they that's why they can use
+[41:20] uh fixed point representation to
+[41:23] represent these numbers.
+[41:29] Okay,
+[41:33] any questions so far?
+[41:37] So, quickly go through a few other type
+[41:39] of uh values that for strings you
+[41:42] probably know this ask representation
+[41:45] right for every uh letter or every
+[41:48] symbol like M we use number 77 to
+[41:52] represent it. So this is a predefined
+[41:55] encoding then it's a consensus of the
+[41:58] whole human world to say which number
+[42:01] represents to which symbol. Then ASKI
+[42:03] can only use 128 numbers. So
+[42:07] um it's only seven bit um but basically
+[42:13] these are only English letters and if
+[42:16] you represent something like u like
+[42:19] Italian or Spanish word and there's some
+[42:22] special symbols you just have no way to
+[42:24] represent or um other
+[42:28] like Chinese or Korean or Japanese
+[42:32] character set then ask is not sufficient
+[42:34] then They define this thing called uni
+[42:37] code. Uni code is a it's not an
+[42:40] encoding. It's basically a character
+[42:42] side character set. So which character
+[42:45] that we need to represent. Now it has a
+[42:47] number but this number is not
+[42:49] necessarily the encoding that we use in
+[42:51] memory. What is encoding? A more common
+[42:54] encoding is UTF8.
+[42:57] Then UTF8 is can use either one bite,
+[43:00] two bytes, three bite or four bytes to
+[43:02] represent
+[43:04] a character.
+[43:07] So a quick question,
+[43:11] how can it support both one bite and two
+[43:13] bite and three byte and four by?
+[43:22] Yeah, it's a very common way for
+[43:25] compression that for example here. So
+[43:27] the first the first bite is always ask
+[43:32] code but there's a reserved bit right
+[43:34] remember we say as key is seven bit then
+[43:37] there's a one reserved bit if that bit
+[43:39] is one then that means oh one bite is
+[43:42] not enough we use an extra bite to
+[43:44] encode it and there's also reserved a
+[43:46] bit in the second bite there's always
+[43:48] reserved bit in the third bite so that
+[43:50] we know how many bytes are there in a
+[43:52] character right up to four bytes that
+[43:55] actually can represent a lot
+[43:58] um characters and also it can it's
+[44:02] rather compact that the file size is not
+[44:05] super large then can avoid say if only
+[44:09] write in English eight one bite is good
+[44:12] enough to represent one character then
+[44:13] or file size is not super large question
+[44:31] So I would say it's just encoding just
+[44:34] different encoding.
+[44:59] So uh so UTF32 is a
+[45:07] UTF16
+[45:09] my understanding is it's more efficient
+[45:12] for Chinese or for Japanese uh numbers
+[45:17] because if you encode in UTF8 it
+[45:20] requires three bytes but in UTF 16 you
+[45:22] only require two bytes but two bytes is
+[45:25] kind of limited. Uh but UTF 32 is
+[45:30] less efficient
+[45:34] still UTF8 is the most is is still the
+[45:39] most common encoding method that we use
+[45:41] today.
+[45:45] Okay. So for strings another thing you
+[45:48] need to consider is termination. Uh we
+[45:50] can either use zero to represent the
+[45:52] termination or we can use length based
+[45:54] in C we start with we use zero then it
+[45:58] creates a lot of pain for us. And if we
+[46:00] have a length based basically have
+[46:02] another integer to the first integer to
+[46:04] represent the the length of this string
+[46:07] then it's just more flexible.
+[46:10] Now for images we know we have pixels
+[46:13] and brightness right and for brightness
+[46:16] we can either represent with an integer
+[46:18] number from 0 to 255 or we can use a
+[46:20] floatingoint number from 0 to one. Then
+[46:23] in machine learning definitely is more
+[46:24] common to use 0 and one but for more
+[46:27] efficient storage we are more likely to
+[46:29] use an integer from 0 to 255.
+[46:33] Now we have different ways to store
+[46:35] these values especially we consider
+[46:38] channels and channels are different
+[46:40] colors for human eyes we can only see
+[46:42] red green and blue so we can have
+[46:46] different channels and there's different
+[46:48] channel order so for example we have N
+[46:51] is the pictures different pictures C is
+[46:54] the channel HW right so if we have NCHW
+[46:58] then we store in this way 0.3 0.3 0.4 4
+[47:03] no 0.1 0.2 0.3
+[47:06] I need to consider a second row 0.3 0.3
+[47:09] 0.4 0.3 0.4 4 3.5 we store in this way
+[47:13] then go to the next channel right this
+[47:15] channel if they're closer to the left
+[47:17] side they're outer um
+[47:20] they're out loops then if in this way
+[47:23] NHWC
+[47:25] we store in 0.3 0.1 0.3 okay so in
+[47:31] machine learning especially in GPU
+[47:32] architecture you can you will eventually
+[47:35] see they can cause very different uh
+[47:38] very different performance just by
+[47:41] encoding these um pictures in different
+[47:44] ways. Then for vector writes the image
+[47:48] that's there's no pixels but we use
+[47:50] these symbols to represent they're
+[47:52] basically coordinates. They move to a
+[47:54] certain number which is a I don't really
+[47:57] remember h is a horizontal line. So it's
+[48:00] another way to represent images. Now for
+[48:03] audio now we basically quantize
+[48:07] every sample right now we use a number
+[48:10] different number of bit to represent how
+[48:12] strong a signal is at this point. So the
+[48:15] key point until this point is pretty
+[48:18] much everything that in our world can be
+[48:21] represented by digital
+[48:24] uh values digital values by pure binary
+[48:27] numbers. Now if we know how to convert a
+[48:30] binary number to another binary number
+[48:33] then we can design circuit to process
+[48:35] things and to automate things. That's
+[48:37] how um computer was designed at the very
+[48:41] root level.
+[48:44] So that comes combinational logic. Last
+[48:46] year I spent two lectures to talk about
+[48:48] the the whole thing and this time I try
+[48:50] to spend uh one or one half. Okay. So
+[48:54] combinational logic is a type of circuit
+[48:58] that we can design if we know everything
+[49:02] can everything can be decided ahead of
+[49:04] time. That means if we can write a truth
+[49:06] table no matter how long it is if it's a
+[49:08] very long it's still okay but if we can
+[49:11] define everything in the truth table we
+[49:13] say we write all the combination for
+[49:15] input values then we can manually
+[49:18] calculate the output. Then if we can
+[49:20] produce those tables then we can define
+[49:22] this logic in combination logic. Now
+[49:25] later on we're going to talk about
+[49:26] sequential logic. The difference between
+[49:28] combination logic and sequential logic
+[49:30] is combination logic can calculate the
+[49:32] result immediately.
+[49:34] Sequential logic needs some time to
+[49:37] calculate.
+[49:40] So what's a combination logic? So it's a
+[49:44] digital uh it's a digital circuit. Then
+[49:48] for digital circuit that means we only
+[49:49] consider zero and ones and different
+[49:51] type of gates. Okay. The output depends
+[49:54] only on input and it's we can say
+[49:58] correctly working combination logic the
+[50:00] result is deterministic. Okay. If it's
+[50:02] not deterministic there's likely
+[50:04] something wrong with it.
+[50:07] Um then there's no memory and there's no
+[50:11] feedback. No memory there's no feedback.
+[50:13] That means the result will not be stored
+[50:16] somewhere to go back to the combination
+[50:18] logic in the next cycle. We only have a
+[50:22] fixed number of input and fixed number
+[50:23] of output and it never goes back. the
+[50:26] instantaneous response that means we
+[50:29] consider it takes no time or at least at
+[50:32] architecture level we consider there's
+[50:34] no time but it's something very
+[50:37] practical concern that your combination
+[50:40] logic must calculate result within these
+[50:43] cycles you probably heard that our CPU
+[50:45] runs in one ghahz 2 gigahertz right so
+[50:49] one gigahertz means one ncond right one
+[50:52] ncond is a cycle so our whole thing has
+[50:54] to finish in one nancond
+[50:57] then but can this finish in one ncond
+[51:00] level? This is something to be
+[51:02] considered at the electrical engineering
+[51:04] or digital design domain. It's not
+[51:06] necessarily something that we really
+[51:08] have to consider uh in the computer
+[51:10] architecture domain. As long as you have
+[51:12] something in mind that you cannot do too
+[51:15] many things in one cycle, that's good
+[51:17] enough.
+[51:19] Okay. Then it implements boolean
+[51:21] expressions. If we can write down
+[51:22] something into a BL expression
+[51:27] the using the and not
+[51:30] and or
+[51:32] operators and we can if we can represent
+[51:35] in a BL expression then we can implement
+[51:37] in a combination logic.
+[51:41] So we start with gates then there's
+[51:44] gates representations then
+[51:47] uh let's start with the simple simple
+[51:50] one and gate is a round
+[51:53] it's round in the front then or gate is
+[51:56] there's angle in the front right
+[52:01] uh so not gate the three more the three
+[52:06] most important gate is and or and not so
+[52:10] not has a circle circle there. Then the
+[52:12] triangle means basically we don't do
+[52:14] anything.
+[52:15] Uh there's a buffer here. Buffer
+[52:17] basically means X is still X. Now why
+[52:20] this part is necessary? Um it's just
+[52:22] some delay. So if we have path one path
+[52:25] that has a lot of gate, then another
+[52:26] path has no gate and we probably add
+[52:28] some buffers to intentionally delay it.
+[52:31] But still in computer architecture, we
+[52:33] do not really consider this super lowle
+[52:35] like picoscond level differences. You
+[52:38] can basically ignore buffer there.
+[52:41] Then um you see there's a small circle
+[52:45] that means not. So none means we first
+[52:49] do an and operation then the result we
+[52:51] take a not operation. Okay. And for or
+[52:55] nor is the same thing. We first
+[52:57] calculate or operation then get a then
+[52:59] flip the result. XR we have talked about
+[53:02] that before is represented in the extra
+[53:04] line behind the or gate. Then X or X nor
+[53:12] is not then
+[53:15] flip the result of X or gate. Okay. So
+[53:20] when we draw circuit we're more likely
+[53:22] to draw and or not gate or sometimes not
+[53:26] gate can be simplified as a circle.
+[53:28] Sometimes we can even draw something
+[53:30] that we put a circle here to represent
+[53:33] to uh instead of
+[53:37] not gate okay we just put a circle form
+[53:39] on the input side that means we first
+[53:41] flip this value then we fit into an end
+[53:45] gate or or gate
+[53:48] in reality in chips only one type of
+[53:51] gate is used they only use nand gate
+[53:56] okay most Likely in simos design they
+[54:00] only use nand gate because none are
+[54:02] small. It requires the least number of
+[54:05] transistors then it's effic is effective
+[54:08] is equivalent as using other type of
+[54:11] gates by making some arrangement that
+[54:14] you can use the only ng gate to
+[54:16] represent all the operations.
+[54:21] Okay. So start with the buffer. Then how
+[54:24] we can represent a circuit or a gate? We
+[54:27] use a truth table and for the in if the
+[54:30] in is zero the output is zero. If the in
+[54:32] is one and the output is one.
+[54:36] The ng gate is special right.
+[54:42] So nand gate works in this way in one in
+[54:45] two it just and then but flip the
+[54:49] result.
+[54:51] So why nand gate is special? Remember
+[54:53] this representation. So I was saying
+[54:56] last two step I was saying leave this as
+[54:58] assignment for NAND gate we actually
+[55:01] simply simply need four transistors.
+[55:04] Then for endgate how we can implement it
+[55:07] is basically u nand
+[55:11] gate and a not gate concatenated
+[55:15] together.
+[55:17] Okay it's more complex.
+[55:21] This is rather easy to implement. is
+[55:24] hard to implement and if we only
+[55:26] optimize NAND gate it can really reduce
+[55:28] the size and if you consider other type
+[55:30] of gates then in fact gate is completed
+[55:33] by a nand gate and another and nand gate
+[55:38] so not there's really not no not gate in
+[55:41] your circuit there's only n and n
+[55:44] combine in different way so ng gate
+[55:48] requires four transistors just be
+[55:51] slightly aware care that how many
+[55:54] transistors it is required if we want to
+[55:56] implement something
+[56:01] okay so let's say if we want to
+[56:03] implement this logic
+[56:05] I don't want to read it you can see this
+[56:08] logic how I would draw this circuit I
+[56:11] just want to on one thing show you one
+[56:13] quick way to draw circuit that is always
+[56:16] um rather easy to understand that I
+[56:18] would simply put all the possible input
+[56:20] on top so just consider There are a lot
+[56:22] of wires going on the ceiling. Then
+[56:24] whenever I need someone some wire, I
+[56:27] just drag one down. Okay. Now I just put
+[56:30] all the wires on top. Then say A and B
+[56:33] first go through an orgate. This is A or
+[56:36] B. Right. Then A and C prime goes to
+[56:40] another or gate and these two are
+[56:43] connected with AND gate and
+[56:46] keep going up. Right? this part is
+[56:48] implemented in the same way and
+[56:50] eventually we or these two parts that we
+[56:53] get this f okay rather uh a rather
+[56:57] complex
+[56:59] um
+[57:01] implementation
+[57:03] but we don't want to implement in this
+[57:05] way we want to implement we actually we
+[57:07] need to consider do we really need this
+[57:09] number of gate gate are not free they're
+[57:12] d sizes and when they flip they consume
+[57:15] energy so we want to reduce energy
+[57:17] consumption and we want to reduce gates.
+[57:19] So we want to have the simplest form to
+[57:22] represent this result. So by doing lots
+[57:25] of calculation eventually we can
+[57:28] simplify it to A + B + D prime.
+[57:33] Okay.
+[57:36] Now we we we actually know
+[57:38] C doesn't even matter
+[57:41] here, right?
+[57:44] So
+[57:48] eventually we want to simplify into
+[57:52] these forms.
+[57:54] We can either simplify to sum of product
+[57:58] or product of sum.
+[58:01] Okay, let's go. So we can either do
+[58:04] something like ABC plus BCD
+[58:08] with prime somewhere, right? or
+[58:11] eventually we can represent in this form
+[58:13] then or gate is the end gate is the last
+[58:16] stage that's the sum of product uh
+[58:20] product of sum
+[58:22] I will show you examples later so but
+[58:27] eventually if we implement this circuit
+[58:29] in this way we only need two gates two
+[58:32] two or gates and there's a not gate it's
+[58:35] much much simpler saves a lot of dice
+[58:37] size and the boss will be very Okay.
+[58:42] So how we can simplify that?
+[58:45] Then the best way to simplify a logic is
+[58:48] to use truth table.
+[58:51] Okay. I can tell you how it works.
+[58:55] It's not really what if I have a truth
+[58:57] table is you want to have a truth table
+[58:59] and if you have a truth table it's
+[59:01] really easy to write the result out.
+[59:05] Okay. So let's start with this x orate.
+[59:07] Our goal is to use and or not gate to
+[59:10] represent the X or gate. Okay. So simple
+[59:12] example this X or if they're different
+[59:15] we or output is one. If they're the same
+[59:18] or output is zero. So we want to
+[59:20] generate a product sum product of sum.
+[59:22] That's the easiest way you consider this
+[59:25] one. We first look at the output.
+[59:28] For output we say here is a one, right?
+[59:33] Because eventually we want to have one
+[59:40] It's a or operation. It's either this or
+[59:43] this, right? It's either this or this.
+[59:46] So, we need to first need to get the
+[59:48] representation of this one and get a
+[59:50] representation of this one. So, we only
+[59:53] identify the rows where the output is
+[59:55] one.
+[59:57] Then we look at the input.
+[60:01] What will produce this one?
+[60:04] This input will produce this one. But
+[60:06] how this input can produce this one.
+[60:10] We want to write and end operation. So
+[60:12] we want both side to be one, right? So
+[60:14] one and one is one. How can we make it
+[60:17] both side one? Is to flip this one. So
+[60:20] if it's zero, we add a prime. If it's a
+[60:22] one, we just write it there.
+[60:32] It takes some time to realize what's
+[60:34] going on, but I can just tell you the
+[60:37] rule. Okay. And for this one, it's
+[60:39] another example. One, we just write x
+[60:43] there. No prime. Y is zero. Then we
+[60:45] write a prime.
+[60:48] And this the other cases will generate
+[60:50] zero. So in this case there's a or we
+[60:53] don't care about those zeros.
+[60:56] We just care about what cases that
+[60:58] eventually it will generate one
+[61:03] this case or this case right
+[61:07] this case or this case so we first write
+[61:09] oh when how I can generate this case
+[61:12] then this expression can generate this
+[61:14] case how we can generate this case then
+[61:16] this representation can generate this
+[61:19] case
+[61:24] okay
+[61:26] Later on you probably need some more
+[61:27] examples to feel comfortable about this.
+[61:30] At beginning I really don't feel
+[61:31] comfortable about this but just see more
+[61:34] examples then eventually will get
+[61:36] comfortable. Okay. So this is pretty
+[61:38] much very likely to be the simplified
+[61:42] equation.
+[61:44] Okay. Write down truth table. Identify
+[61:46] once
+[61:48] then identify once then write the the
+[61:53] the product form of each one represents
+[61:59] with proper prime prime sign symbols
+[62:03] then we can say okay it's this one
+[62:06] right so if we implement
+[62:09] uh x or gate with and or not gate this
+[62:13] is how we implement it
+[62:16] Other than the not gate we need two end
+[62:19] gate that means and end and two end
+[62:22] operation then eventually or these two
+[62:24] numbers together.
+[62:29] Okay
+[62:31] a more complex example kernel map. Shall
+[62:34] we
+[62:36] should I implement this kernel map?
+[62:39] Okay.
+[62:41] By the way this may not be the simplest
+[62:43] form. this there can be more chance to
+[62:45] make it simpler. Uh
+[62:53] so for example this one how we can if we
+[62:57] follow that way we will write ABCD plus
+[63:00] ABCD with some prime plus ABCD plus ABCD
+[63:03] right we'll write those cases we may
+[63:06] even have more cases but how we can
+[63:08] simplify into this form these days these
+[63:11] are pretty much implemented by
+[63:15] uh these days these are pretty much
+[63:17] imple implemented by a computer. So we
+[63:19] don't really calculate by hand. But the
+[63:21] car map is a way is an ancient way how
+[63:24] we calculate how we simplify this
+[63:26] representation with u visualization.
+[63:32] So look at this one.
+[63:34] It's a simple truth table. Three input
+[63:37] one output. Now how we can represent it?
+[63:40] How we can represent in the product of
+[63:42] sum or sum of product
+[63:45] method?
+[63:48] Now we can simply write it as
+[63:56] uh what's that is a prime b prime c
+[64:01] prime plus
+[64:03] a prime b prime c
+[64:07] and there's only two ones and this is
+[64:09] from the last slides this is how we're
+[64:11] going to implement it. Now if we hand
+[64:14] implement it, hand simplify it. Yes, we
+[64:17] can simply do this. A prime B prime C
+[64:20] prime plus C,
+[64:22] then we know C plus C prime plus C is
+[64:26] one, right? So then it's not important
+[64:29] anymore. Then the result is A prime B
+[64:32] prime. So we know it can be simplified
+[64:34] in this way. But uh can we guarantee
+[64:37] that how we can always simplify into the
+[64:39] simplest form? And this is a cardinal
+[64:42] map.
+[64:43] Uh I find that pretty much if you only
+[64:46] represent use hand simplification it's
+[64:50] not terribly hard. You can just
+[64:52] definitely do that with at most four
+[64:54] symbols. So this is how we draw this
+[64:56] kernel map. We first draw like eight
+[65:01] cells then put C here and A and B here.
+[65:04] So these are A Z B zero A Z B1 and so
+[65:08] on. Remember on adjacent cells we
+[65:11] consider it's only one bit to be
+[65:14] different.
+[65:16] Okay. So it's reversed here.
+[65:20] Then we put down these ones. We fill in
+[65:23] this ones here. So a z b 0 c 0 maps to
+[65:28] this cell. Then we put one here. Then a
+[65:31] ab 0 we put one here. Okay. Then the
+[65:35] rest is zero.
+[65:38] So what do we do next? Next is we
+[65:42] remember in this form this is what
+[65:44] exactly I write on the whiteboard right?
+[65:47] It represents just another way to write
+[65:49] the product with sum format
+[65:56] in kernel map. What we do is we know
+[65:59] when they're adjacent there will be
+[66:01] chances to take something out
+[66:06] right for example these two cells they
+[66:08] have C prime and C to be adjacent to
+[66:12] each other. So whenever when it's
+[66:14] adjacent we circle them together. That's
+[66:17] a single um product that's not two
+[66:21] product. Okay.
+[66:25] Then we represent each circle with a
+[66:27] product. What's this product? It's
+[66:30] basically by looking the value of a and
+[66:32] b and a and b are zero and zero. So it's
+[66:35] a prime and b prime.
+[66:41] Okay.
+[66:44] you you don't know how hard I feel when
+[66:46] I was undergraduate student learning
+[66:48] distance and this is something that I
+[66:50] know that my professor will
+[66:54] it will be part of exam that's it's the
+[66:57] best type of question to take in an exam
+[67:00] it's hard a little bit hard to remember
+[67:02] and there require some skills but you I
+[67:05] would say it's not very useful today
+[67:08] because we always use computer programs
+[67:10] to solve this
+[67:12] Okay. So the rule of circling is first
+[67:15] one we draw fewest circle as the fewest
+[67:18] circle necessary to cover all the ones.
+[67:20] We have to cover all the ones. Then all
+[67:23] the squared in each circle must be
+[67:25] contained once. That means um we cannot
+[67:28] put zeros there. Right? Then each circle
+[67:31] should span a rec rectangular block.
+[67:34] That means we cannot do these three
+[67:36] together. It cannot turn. So we can only
+[67:39] put these four. But this here is a zero.
+[67:42] So each circle should be as large as
+[67:44] possible. So here
+[67:47] um if this is a one then we should draw
+[67:49] this as a as one circle not two circles.
+[67:53] Now a circle may wrap around the edge of
+[67:55] a kap because this and this are
+[67:58] connected. So we just connect consider
+[68:00] it's a donut right? So we con connect
+[68:03] them together because only one bit is
+[68:07] changed. So there is a chance to reduce
+[68:09] one u parameter a one in the kap may be
+[68:15] circle multiple times it's okay. So in
+[68:18] this way how we circle them we first
+[68:21] circle this one as one circle right one
+[68:25] square and then there's an extra one.
+[68:28] Now we can
+[68:30] it should be draw as large as possible.
+[68:32] That's why we can we shouldn't really
+[68:35] put it here but we should draw in this
+[68:37] way but we cannot really wrap around
+[68:38] because there are only three. So it
+[68:40] either one two or four or eight of them
+[68:43] in one circle.
+[68:46] Okay. Then
+[68:49] eventually we want one circle to be one
+[68:54] product form. Right? In this way
+[68:57] this and we look at what is changed and
+[69:00] what is not changed within this circle.
+[69:02] We only keep the thing that is not
+[69:04] changed. In this case a is zero. A is
+[69:07] one and zero. So A changed. B is zero
+[69:10] and zero. B didn't change. So we keep B
+[69:12] prime here because B is zero. And C
+[69:14] changed from zero to one. So we remove
+[69:16] C.
+[69:20] When you get lost, just come back here.
+[69:23] C is changed. So we can remove C.
+[69:28] Okay, it always maps to how we simplify
+[69:32] this form by hand. Something changed.
+[69:35] That means we can take the common parts
+[69:37] out and remove C.
+[69:44] Okay. Then ac prime will be this part.
+[69:53] I I just want to let you know okay there
+[69:56] exist such method. I won't take I won't
+[69:58] put it in quiz. It's I don't think it's
+[70:00] useful. I just want to let you know it's
+[70:02] possible. Okay.
+[70:05] Some simple form like this you probably
+[70:07] need to know. You need to know but
+[70:09] kernel map I won't put in a quiz or
+[70:11] test.
+[70:14] Okay, an example.
+[70:18] So probably you have played this se
+[70:20] seven segment uh display decoder. So
+[70:24] this is a device that we can represent
+[70:27] the
+[70:29] a number there. There's a dot. So there
+[70:31] actually use a bite eight bit to feed in
+[70:36] the
+[70:37] uh
+[70:39] control signal.
+[70:42] Um you can see there are 10 pins in this
+[70:46] case right and actually we um there yeah
+[70:50] there are 10 pins then so there's a
+[70:52] power and there's a ground so that's why
+[70:55] there's 10 pins and each pin is
+[70:57] controlling one
+[71:00] each pin is controlling uh one segment
+[71:03] so if it's high that means it's turned
+[71:06] on if it's low then it's zero that means
+[71:08] it's turned off But if we know the
+[71:11] digit, we only need four digit to
+[71:15] represent 10 digits, right? Three digit
+[71:19] can represent eight, four can represent
+[71:22] 16. So we need four digit to represent
+[71:24] 10 numbers.
+[71:27] So this is a
+[71:29] truth table that we can draw, right? You
+[71:33] can see this is where is a b c this is
+[71:36] zero, right? Zero only have g that is
+[71:38] turned off, right? So that's how we
+[71:40] generate this type of uh truth table
+[71:44] four input
+[71:47] four input and eight
+[71:50] uh and seven output right so how we can
+[71:53] design this type of combinial logic and
+[71:56] the rule is do not consider
+[71:59] others when we design SA segment A we
+[72:04] only consider SA when we design SB we
+[72:07] only consider SB do not consider others.
+[72:10] Consider the output bit by bit. Okay. So
+[72:15] design logic for each output pin and
+[72:18] consider each output pin as individual
+[72:20] uh requirement.
+[72:23] So let's look at SA and OPO is SA and we
+[72:27] put D0 and one there, D3 and three and
+[72:31] two and three there. Then we put this
+[72:34] kernel map like this. fill in the car
+[72:37] map.
+[72:39] Okay.
+[72:45] So, for example, 0 0 0 is one. I will
+[72:48] put just put one there.
+[72:53] Okay. Then we circle them.
+[72:58] Then we just write down the equation.
+[73:03] This is the circuit that is required to
+[73:06] generate this
+[73:10] the once we have this expression we can
+[73:13] draw the circuit that is required to
+[73:15] implement this logic right the same way
+[73:18] then for some part since there's others
+[73:22] right so in this case we just do not
+[73:25] care those inputs then we can simply
+[73:28] draw them as x so if we draw them as x
+[73:32] so It can be either zero or one. We
+[73:34] don't care. We can consider them as one
+[73:37] if we want. In that case, then we can
+[73:39] draw this circle even larger.
+[73:42] If we can draw the the larger the
+[73:44] circle, the fewer the gates we have,
+[73:49] right? In this case, we have even
+[73:51] simpler representation of the output.
+[73:58] Okay? So at this stage I think the
+[74:02] takeaway is if I know the input output
+[74:08] we should be done with this lecture. So
+[74:11] the takeaway at this stage is if we know
+[74:13] the output input if we can write down as
+[74:16] a boolean expression
+[74:19] um or we can write down as a truth table
+[74:21] we can design a combination logic that
+[74:24] can achieve the result. Right? So next
+[74:26] lecture we're going to talk about
+[74:28] building blocks. So adders now we start
+[74:30] with this very simple logic then we're
+[74:33] going to more complex operation here
+[74:38] some common building blocks there okay
+[74:41] and we'll talk about this in the
+[74:44] this next
