@@ -1,0 +1,2 @@
+frame_0416.jpg  [06:55]  diff=0.0525
+frame_0557.jpg  [09:16]  diff=0.0156
