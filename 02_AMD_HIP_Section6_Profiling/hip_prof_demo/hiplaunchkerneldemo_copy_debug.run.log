@@ -1,0 +1,5 @@
+HIPRTC Kernel Launch Demo with Code and Bitcode Dumping
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+HIPRTC error at hiplaunchkerneldemo copy.cpp:79: 3
+Error string: HIPRTC_ERROR_INVALID_INPUT

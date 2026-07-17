@@ -1,0 +1,5 @@
+"Correlation_Id","Dispatch_Id","Agent_Id","Queue_Id","Process_Id","Thread_Id","Grid_Size","Kernel_Id","Kernel_Name","Workgroup_Size","LDS_Block_Size","Scratch_Size","VGPR_Count","Accum_VGPR_Count","SGPR_Count","Counter_Name","Counter_Value","Start_Timestamp","End_Timestamp"
+1,1,"Agent 1",1,2446204,2446204,512,9,"__amd_rocclr_copyBuffer",512,0,0,16,0,128,"SQ_WAVES",16.000000,1729029796538857,1729029796550897
+2,2,"Agent 1",1,2446204,2446204,512,9,"__amd_rocclr_copyBuffer",512,0,0,16,0,128,"SQ_WAVES",16.000000,1729029797502537,1729029797505817
+3,3,"Agent 1",2,2446204,2446204,1024,1,"vector_add",256,0,0,8,0,128,"SQ_WAVES",32.000000,1729029801036225,1729029801047105
+4,4,"Agent 1",1,2446204,2446204,512,9,"__amd_rocclr_copyBuffer",512,0,0,16,0,128,"SQ_WAVES",16.000000,1729029801132555,1729029801135955

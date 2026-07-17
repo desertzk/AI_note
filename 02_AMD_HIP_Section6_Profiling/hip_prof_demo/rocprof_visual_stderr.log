@@ -1,0 +1,35 @@
+W0716 16:45:45.193295 2484863 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002726 sec
+W0716 16:45:45.193427 2484863 simple_timer.cpp:55] [rocprofv3] './hiplaunchkerneldemo_copy_debug' ::     0.000000 sec
+W0716 16:45:45.193901 2484863 tool.cpp:2728] HIP (runtime) version 7.13.0 initialized (instance=0)
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+W0716 16:45:45.199215 2484863 tool.cpp:2728] HSA version 1.21.0 initialized (instance=0)
+W0716 16:45:45.239048 2484909 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002829 sec
+W0716 16:45:45.239169 2484909 simple_timer.cpp:55] [rocprofv3] 'sh -c -- /opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000000 sec
+W0716 16:45:45.265445 2484921 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002580 sec
+W0716 16:45:45.265550 2484921 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000000 sec
+W0716 16:45:45.266216 2484921 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000666 sec
+W0716 16:45:45.270121 2484921 simple_timer.cpp:55] [rocprofv3] output generation ::     0.003764 sec
+W0716 16:45:45.270144 2484921 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.003885 sec
+W0716 16:45:45.312964 2484933 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002741 sec
+W0716 16:45:45.313085 2484933 simple_timer.cpp:55] [rocprofv3] 'sh -c -- /opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.000000 sec
+W0716 16:45:45.336447 2484946 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002325 sec
+W0716 16:45:45.336579 2484946 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.000000 sec
+W0716 16:45:45.339440 2484946 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.002861 sec
+W0716 16:45:45.343342 2484946 simple_timer.cpp:55] [rocprofv3] output generation ::     0.003766 sec
+W0716 16:45:45.343366 2484946 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.003881 sec
+W0716 16:45:45.369802 2484958 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002465 sec
+W0716 16:45:45.369920 2484958 simple_timer.cpp:55] [rocprofv3] 'sh -c -- cat dump_kernel.ll' ::     0.000000 sec
+W0716 16:45:45.399803 2484971 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.006861 sec
+W0716 16:45:45.399922 2484971 simple_timer.cpp:55] [rocprofv3] 'cat dump_kernel.ll' ::     0.000000 sec
+W0716 16:45:45.399967 2484971 simple_timer.cpp:55] [rocprofv3] 'cat dump_kernel.ll' ::     0.000045 sec
+W0716 16:45:45.403927 2484971 simple_timer.cpp:55] [rocprofv3] output generation ::     0.003832 sec
+W0716 16:45:45.403954 2484971 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.003953 sec
+W0716 16:45:45.438927 2484863 simple_timer.cpp:55] [rocprofv3] './hiplaunchkerneldemo_copy_debug' ::     0.245499 sec
+E0716 16:45:45.462967 2484863 output_stream.cpp:111] Opened result file: rocprof_visual/hiplaunch_profile_results.json
+[668.273]       perfetto.cc:47314 Configured tracing session 1, #sources:1, duration:0 ms, #buffers:1, total buffer size:1048576 KB, total sessions:1, uid:0 session name: ""
+E0716 16:45:45.490369 2484863 output_stream.cpp:111] Opened result file: rocprof_visual/hiplaunch_profile_results.pftrace
+[668.286]       perfetto.cc:48889 Tracing session 1 ended, total sessions:0
+W0716 16:45:45.493275 2484863 simple_timer.cpp:55] [rocprofv3] output generation ::     0.053575 sec
+W0716 16:45:45.493306 2484863 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.053669 sec
+Warning: Resource leak detected by SharedSignalPool, 18 Signals leaked.

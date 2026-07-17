@@ -1,0 +1,39 @@
+W0716 15:11:46.257226 2446204 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.283726 2446204 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.105625 sec
+W0716 15:11:46.283901 2446204 simple_timer.cpp:55] [rocprofv3] './hiplaunchkerneldemo_copy_debug' ::     0.000000 sec
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+W0716 15:11:46.289957 2446204 tool.cpp:2728] HSA version 1.21.0 initialized (instance=0)
+W0716 15:11:46.385666 2446252 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.406646 2446252 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.082796 sec
+W0716 15:11:46.406820 2446252 simple_timer.cpp:55] [rocprofv3] 'sh -c -- /opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000000 sec
+W0716 15:11:46.488747 2446254 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.509662 2446254 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.081586 sec
+W0716 15:11:46.509838 2446254 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000000 sec
+W0716 15:11:46.510449 2446254 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000611 sec
+W0716 15:11:46.510945 2446254 simple_timer.cpp:55] [rocprofv3] output generation ::     0.000481 sec
+W0716 15:11:46.510965 2446254 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.000502 sec
+W0716 15:11:46.618768 2446262 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.639764 2446262 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.082579 sec
+W0716 15:11:46.639941 2446262 simple_timer.cpp:55] [rocprofv3] 'sh -c -- /opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.000000 sec
+W0716 15:11:46.721791 2446264 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.743198 2446264 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.082018 sec
+W0716 15:11:46.743399 2446264 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.000000 sec
+W0716 15:11:46.744610 2446264 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.001210 sec
+W0716 15:11:46.745099 2446264 simple_timer.cpp:55] [rocprofv3] output generation ::     0.000468 sec
+W0716 15:11:46.745120 2446264 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.000491 sec
+W0716 15:11:46.840397 2446278 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.861374 2446278 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.081457 sec
+W0716 15:11:46.861551 2446278 simple_timer.cpp:55] [rocprofv3] 'sh -c -- cat dump_kernel.ll' ::     0.000000 sec
+W0716 15:11:46.943718 2446280 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0716 15:11:46.964921 2446280 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.082305 sec
+W0716 15:11:46.965092 2446280 simple_timer.cpp:55] [rocprofv3] 'cat dump_kernel.ll' ::     0.000000 sec
+W0716 15:11:46.965142 2446280 simple_timer.cpp:55] [rocprofv3] 'cat dump_kernel.ll' ::     0.000050 sec
+W0716 15:11:46.965630 2446280 simple_timer.cpp:55] [rocprofv3] output generation ::     0.000478 sec
+W0716 15:11:46.965647 2446280 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.000496 sec
+W0716 15:11:47.006585 2446204 simple_timer.cpp:55] [rocprofv3] './hiplaunchkerneldemo_copy_debug' ::     0.722684 sec
+E0716 15:11:47.013221 2446204 output_stream.cpp:111] Opened result file: rocprof_counters/cse-cluster-2/2446204_counter_collection.csv
+E0716 15:11:47.015794 2446204 output_stream.cpp:111] Opened result file: rocprof_counters/cse-cluster-2/2446204_agent_info.csv
+W0716 15:11:47.016516 2446204 simple_timer.cpp:55] [rocprofv3] output generation ::     0.009195 sec
+W0716 15:11:47.016536 2446204 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.009216 sec
+Warning: Resource leak detected by SharedSignalPool, 19 Signals leaked.

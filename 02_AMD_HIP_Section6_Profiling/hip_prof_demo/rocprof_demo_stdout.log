@@ -1,0 +1,1376 @@
+HIPRTC Kernel Launch Demo with Code and Bitcode Dumping
+Compiled code size: 4968 bytes
+Dumping assembly:
+
+dump_kernel.co:	file format elf64-amdgpu
+
+Disassembly of section .text:
+
+0000000000001900 <vector_add>:
+	s_clause 0x1                                               // 000000001900: BF850001
+	s_load_b32 s2, s[0:1], 0x2c                                // 000000001904: F4000080 F800002C
+	s_load_b32 s3, s[0:1], 0x18                                // 00000000190C: F40000C0 F8000018
+	s_wait_kmcnt 0x0                                           // 000000001914: BFC70000
+	s_and_b32 s2, s2, 0xffff                                   // 000000001918: 8B02FF02 0000FFFF
+	s_delay_alu instid0(SALU_CYCLE_1)                          // 000000001920: BF870009
+	v_mad_co_u64_u32 v[0:1], null, ttmp9, s2, v[0:1]           // 000000001924: D6FE7C00 04000475
+	s_mov_b32 s2, exec_lo                                      // 00000000192C: BE82007E
+	v_cmpx_gt_i32_e64 s3, v0                                   // 000000001930: D4C4007E 02020003
+	s_cbranch_execz 34                                         // 000000001938: BFA50022 <vector_add+0xc4>
+	s_load_b128 s[4:7], s[0:1], 0x0                            // 00000000193C: F4004100 F8000000
+	v_ashrrev_i32_e32 v1, 31, v0                               // 000000001944: 3402009F
+	s_load_b64 s[0:1], s[0:1], 0x10                            // 000000001948: F4002000 F8000010
+	s_delay_alu instid0(VALU_DEP_1) | instskip(SKIP_1) | instid1(VALU_DEP_1)// 000000001950: BF8700A1
+	v_lshlrev_b64_e32 v[0:1], 2, v[0:1]                        // 000000001954: 3E000082
+	s_wait_kmcnt 0x0                                           // 000000001958: BFC70000
+	v_add_co_u32 v2, vcc_lo, s4, v0                            // 00000000195C: D7006A02 02020004
+	s_delay_alu instid0(VALU_DEP_1)                            // 000000001964: BF870001
+	v_add_co_ci_u32_e64 v3, null, s5, v1, vcc_lo               // 000000001968: D5207C03 01AA0205
+	v_add_co_u32 v4, vcc_lo, s6, v0                            // 000000001970: D7006A04 02020006
+	s_wait_alu depctr_va_vcc(0)                                // 000000001978: BF88FF9D
+	v_add_co_ci_u32_e64 v5, null, s7, v1, vcc_lo               // 00000000197C: D5207C05 01AA0207
+	global_load_b32 v2, v[2:3], off                            // 000000001984: EE05007C 00000002 00000002
+	global_load_b32 v3, v[4:5], off                            // 000000001990: EE05007C 00000003 00000004
+	v_add_co_u32 v0, vcc_lo, s0, v0                            // 00000000199C: D7006A00 02020000
+	s_wait_alu depctr_va_vcc(0)                                // 0000000019A4: BF88FF9D
+	v_add_co_ci_u32_e64 v1, null, s1, v1, vcc_lo               // 0000000019A8: D5207C01 01AA0201
+	s_wait_loadcnt 0x0                                         // 0000000019B0: BFC00000
+	v_add_f32_e32 v2, v2, v3                                   // 0000000019B4: 06040702
+	global_store_b32 v[0:1], v2, off                           // 0000000019B8: EE06807C 01000000 00000000
+	s_endpgm                                                   // 0000000019C4: BFB00000
+	s_code_end                                                 // 0000000019C8: BF9F0000
+	s_code_end                                                 // 0000000019CC: BF9F0000
+	s_code_end                                                 // 0000000019D0: BF9F0000
+	s_code_end                                                 // 0000000019D4: BF9F0000
+	s_code_end                                                 // 0000000019D8: BF9F0000
+	s_code_end                                                 // 0000000019DC: BF9F0000
+	s_code_end                                                 // 0000000019E0: BF9F0000
+	s_code_end                                                 // 0000000019E4: BF9F0000
+	s_code_end                                                 // 0000000019E8: BF9F0000
+	s_code_end                                                 // 0000000019EC: BF9F0000
+	s_code_end                                                 // 0000000019F0: BF9F0000
+	s_code_end                                                 // 0000000019F4: BF9F0000
+	s_code_end                                                 // 0000000019F8: BF9F0000
+	s_code_end                                                 // 0000000019FC: BF9F0000
+	s_code_end                                                 // 000000001A00: BF9F0000
+	s_code_end                                                 // 000000001A04: BF9F0000
+	s_code_end                                                 // 000000001A08: BF9F0000
+	s_code_end                                                 // 000000001A0C: BF9F0000
+	s_code_end                                                 // 000000001A10: BF9F0000
+	s_code_end                                                 // 000000001A14: BF9F0000
+	s_code_end                                                 // 000000001A18: BF9F0000
+	s_code_end                                                 // 000000001A1C: BF9F0000
+	s_code_end                                                 // 000000001A20: BF9F0000
+	s_code_end                                                 // 000000001A24: BF9F0000
+	s_code_end                                                 // 000000001A28: BF9F0000
+	s_code_end                                                 // 000000001A2C: BF9F0000
+	s_code_end                                                 // 000000001A30: BF9F0000
+	s_code_end                                                 // 000000001A34: BF9F0000
+	s_code_end                                                 // 000000001A38: BF9F0000
+	s_code_end                                                 // 000000001A3C: BF9F0000
+	s_code_end                                                 // 000000001A40: BF9F0000
+	s_code_end                                                 // 000000001A44: BF9F0000
+	s_code_end                                                 // 000000001A48: BF9F0000
+	s_code_end                                                 // 000000001A4C: BF9F0000
+	s_code_end                                                 // 000000001A50: BF9F0000
+	s_code_end                                                 // 000000001A54: BF9F0000
+	s_code_end                                                 // 000000001A58: BF9F0000
+	s_code_end                                                 // 000000001A5C: BF9F0000
+	s_code_end                                                 // 000000001A60: BF9F0000
+	s_code_end                                                 // 000000001A64: BF9F0000
+	s_code_end                                                 // 000000001A68: BF9F0000
+	s_code_end                                                 // 000000001A6C: BF9F0000
+	s_code_end                                                 // 000000001A70: BF9F0000
+	s_code_end                                                 // 000000001A74: BF9F0000
+	s_code_end                                                 // 000000001A78: BF9F0000
+	s_code_end                                                 // 000000001A7C: BF9F0000
+	s_code_end                                                 // 000000001A80: BF9F0000
+	s_code_end                                                 // 000000001A84: BF9F0000
+	s_code_end                                                 // 000000001A88: BF9F0000
+	s_code_end                                                 // 000000001A8C: BF9F0000
+	s_code_end                                                 // 000000001A90: BF9F0000
+	s_code_end                                                 // 000000001A94: BF9F0000
+	s_code_end                                                 // 000000001A98: BF9F0000
+	s_code_end                                                 // 000000001A9C: BF9F0000
+	s_code_end                                                 // 000000001AA0: BF9F0000
+	s_code_end                                                 // 000000001AA4: BF9F0000
+	s_code_end                                                 // 000000001AA8: BF9F0000
+	s_code_end                                                 // 000000001AAC: BF9F0000
+	s_code_end                                                 // 000000001AB0: BF9F0000
+	s_code_end                                                 // 000000001AB4: BF9F0000
+	s_code_end                                                 // 000000001AB8: BF9F0000
+	s_code_end                                                 // 000000001ABC: BF9F0000
+	s_code_end                                                 // 000000001AC0: BF9F0000
+	s_code_end                                                 // 000000001AC4: BF9F0000
+	s_code_end                                                 // 000000001AC8: BF9F0000
+	s_code_end                                                 // 000000001ACC: BF9F0000
+	s_code_end                                                 // 000000001AD0: BF9F0000
+	s_code_end                                                 // 000000001AD4: BF9F0000
+	s_code_end                                                 // 000000001AD8: BF9F0000
+	s_code_end                                                 // 000000001ADC: BF9F0000
+	s_code_end                                                 // 000000001AE0: BF9F0000
+	s_code_end                                                 // 000000001AE4: BF9F0000
+	s_code_end                                                 // 000000001AE8: BF9F0000
+	s_code_end                                                 // 000000001AEC: BF9F0000
+	s_code_end                                                 // 000000001AF0: BF9F0000
+	s_code_end                                                 // 000000001AF4: BF9F0000
+	s_code_end                                                 // 000000001AF8: BF9F0000
+	s_code_end                                                 // 000000001AFC: BF9F0000
+	s_code_end                                                 // 000000001B00: BF9F0000
+	s_code_end                                                 // 000000001B04: BF9F0000
+	s_code_end                                                 // 000000001B08: BF9F0000
+	s_code_end                                                 // 000000001B0C: BF9F0000
+	s_code_end                                                 // 000000001B10: BF9F0000
+	s_code_end                                                 // 000000001B14: BF9F0000
+	s_code_end                                                 // 000000001B18: BF9F0000
+	s_code_end                                                 // 000000001B1C: BF9F0000
+	s_code_end                                                 // 000000001B20: BF9F0000
+	s_code_end                                                 // 000000001B24: BF9F0000
+	s_code_end                                                 // 000000001B28: BF9F0000
+	s_code_end                                                 // 000000001B2C: BF9F0000
+	s_code_end                                                 // 000000001B30: BF9F0000
+	s_code_end                                                 // 000000001B34: BF9F0000
+	s_code_end                                                 // 000000001B38: BF9F0000
+	s_code_end                                                 // 000000001B3C: BF9F0000
+	s_code_end                                                 // 000000001B40: BF9F0000
+	s_code_end                                                 // 000000001B44: BF9F0000
+	s_code_end                                                 // 000000001B48: BF9F0000
+	s_code_end                                                 // 000000001B4C: BF9F0000
+	s_code_end                                                 // 000000001B50: BF9F0000
+	s_code_end                                                 // 000000001B54: BF9F0000
+	s_code_end                                                 // 000000001B58: BF9F0000
+	s_code_end                                                 // 000000001B5C: BF9F0000
+	s_code_end                                                 // 000000001B60: BF9F0000
+	s_code_end                                                 // 000000001B64: BF9F0000
+	s_code_end                                                 // 000000001B68: BF9F0000
+	s_code_end                                                 // 000000001B6C: BF9F0000
+	s_code_end                                                 // 000000001B70: BF9F0000
+	s_code_end                                                 // 000000001B74: BF9F0000
+	s_code_end                                                 // 000000001B78: BF9F0000
+	s_code_end                                                 // 000000001B7C: BF9F0000
+Bitcode size: 23744 bytes
+Dumping LLVM IR:
+; ModuleID = 'dump_kernel.bc'
+source_filename = "/tmp/comgr-3058600-0-6dad45/input/vector_add.cu"
+target datalayout = "e-m:e-p:64:64-p1:64:64-p2:32:32-p3:32:32-p4:64:64-p5:32:32-p6:32:32-p7:160:256:256:32-p8:128:128:128:48-p9:192:256:256:32-i64:64-v16:16-v24:32-v32:32-v48:64-v96:128-v192:256-v256:256-v512:512-v1024:1024-v2048:2048-n32:64-S32-A5-G1-ni:7:8:9"
+target triple = "amdgcn-amd-amdhsa"
+
+@__const.__assert_fail.fmt = private unnamed_addr addrspace(4) constant [47 x i8] c"%s:%u: %s: Device-side assertion `%s' failed.\0A\00", align 16
+@__hip_cuid_418bf3384e4e977 = addrspace(1) global i8 0
+@llvm.compiler.used = appending addrspace(1) global [1 x ptr] [ptr addrspacecast (ptr addrspace(1) @__hip_cuid_418bf3384e4e977 to ptr)], section "llvm.metadata"
+@__oclc_ISA_version = internal local_unnamed_addr addrspace(4) constant i32 12001, align 4
+@__oclc_ABI_version = internal local_unnamed_addr addrspace(4) constant i32 600, align 4
+
+; Function Attrs: mustprogress noreturn nounwind
+define weak void @__cxa_pure_virtual() local_unnamed_addr #0 {
+  tail call void @llvm.trap()
+  unreachable
+}
+
+; Function Attrs: cold noreturn nounwind memory(inaccessiblemem: write)
+declare void @llvm.trap() #1
+
+; Function Attrs: mustprogress noreturn nounwind
+define weak void @__cxa_deleted_virtual() local_unnamed_addr #0 {
+  tail call void @llvm.trap()
+  unreachable
+}
+
+; Function Attrs: convergent mustprogress noinline nounwind
+define weak hidden void @__assert_fail(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3) local_unnamed_addr #2 {
+  %5 = alloca [47 x i8], align 16, addrspace(5)
+  call void @llvm.lifetime.start.p5(ptr addrspace(5) %5) #21
+  call void @llvm.memcpy.p5.p4.i64(ptr addrspace(5) noundef align 16 dereferenceable(47) %5, ptr addrspace(4) noundef align 16 dereferenceable(47) @__const.__assert_fail.fmt, i64 47, i1 false)
+  %6 = tail call i64 @__ockl_fprintf_stderr_begin() #22
+  br label %7
+
+7:                                                ; preds = %7, %4
+  %8 = phi ptr addrspace(5) [ %5, %4 ], [ %9, %7 ]
+  %9 = getelementptr inbounds nuw i8, ptr addrspace(5) %8, i32 1
+  %10 = load i8, ptr addrspace(5) %8, align 1, !tbaa !13
+  %11 = icmp eq i8 %10, 0
+  br i1 %11, label %12, label %7, !llvm.loop !14
+
+12:                                               ; preds = %7
+  %13 = addrspacecast ptr addrspace(5) %5 to ptr
+  %14 = addrspacecast ptr addrspace(5) %9 to ptr
+  %15 = ptrtoint ptr %14 to i64
+  %16 = ptrtoint ptr %13 to i64
+  %17 = sub i64 %15, %16
+  %18 = shl i64 %17, 32
+  %19 = ashr exact i64 %18, 32
+  %20 = call i64 @__ockl_fprintf_append_string_n(i64 noundef %6, ptr noundef nonnull %13, i64 noundef %19, i32 noundef 0) #22
+  br label %21
+
+21:                                               ; preds = %21, %12
+  %22 = phi ptr [ %1, %12 ], [ %23, %21 ]
+  %23 = getelementptr inbounds nuw i8, ptr %22, i64 1
+  %24 = load i8, ptr %22, align 1, !tbaa !13
+  %25 = icmp eq i8 %24, 0
+  br i1 %25, label %26, label %21, !llvm.loop !16
+
+26:                                               ; preds = %21
+  %27 = ptrtoint ptr %23 to i64
+  %28 = ptrtoint ptr %1 to i64
+  %29 = sub i64 %27, %28
+  %30 = shl i64 %29, 32
+  %31 = ashr exact i64 %30, 32
+  %32 = call i64 @__ockl_fprintf_append_string_n(i64 noundef %20, ptr noundef %1, i64 noundef %31, i32 noundef 0) #22
+  %33 = zext i32 %2 to i64
+  %34 = call i64 @__ockl_fprintf_append_args(i64 noundef %32, i32 noundef 1, i64 noundef %33, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i32 noundef 0) #22
+  br label %35
+
+35:                                               ; preds = %35, %26
+  %36 = phi ptr [ %3, %26 ], [ %37, %35 ]
+  %37 = getelementptr inbounds nuw i8, ptr %36, i64 1
+  %38 = load i8, ptr %36, align 1, !tbaa !13
+  %39 = icmp eq i8 %38, 0
+  br i1 %39, label %40, label %35, !llvm.loop !17
+
+40:                                               ; preds = %35
+  %41 = ptrtoint ptr %37 to i64
+  %42 = ptrtoint ptr %3 to i64
+  %43 = sub i64 %41, %42
+  %44 = shl i64 %43, 32
+  %45 = ashr exact i64 %44, 32
+  %46 = call i64 @__ockl_fprintf_append_string_n(i64 noundef %34, ptr noundef %3, i64 noundef %45, i32 noundef 0) #22
+  br label %47
+
+47:                                               ; preds = %47, %40
+  %48 = phi ptr [ %0, %40 ], [ %49, %47 ]
+  %49 = getelementptr inbounds nuw i8, ptr %48, i64 1
+  %50 = load i8, ptr %48, align 1, !tbaa !13
+  %51 = icmp eq i8 %50, 0
+  br i1 %51, label %52, label %47, !llvm.loop !18
+
+52:                                               ; preds = %47
+  %53 = ptrtoint ptr %49 to i64
+  %54 = ptrtoint ptr %0 to i64
+  %55 = sub i64 %53, %54
+  %56 = shl i64 %55, 32
+  %57 = ashr exact i64 %56, 32
+  %58 = call i64 @__ockl_fprintf_append_string_n(i64 noundef %46, ptr noundef %0, i64 noundef %57, i32 noundef 1) #22
+  call void @llvm.trap()
+  unreachable
+}
+
+; Function Attrs: nocallback nofree nosync nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.lifetime.start.p5(ptr addrspace(5) captures(none)) #3
+
+; Function Attrs: mustprogress noinline nounwind
+define weak hidden void @__assertfail() local_unnamed_addr #4 {
+  tail call void @llvm.trap()
+  unreachable
+}
+
+; Function Attrs: mustprogress nofree norecurse nosync nounwind willreturn memory(none)
+define hidden void @_ZN18cooperative_groups12this_clusterEv() local_unnamed_addr #5 {
+  ret void
+}
+
+; Function Attrs: convergent mustprogress nofree norecurse nounwind willreturn memory(argmem: readwrite)
+define protected amdgpu_kernel void @vector_add(ptr addrspace(1) noundef readonly captures(none) %0, ptr addrspace(1) noundef readonly captures(none) %1, ptr addrspace(1) noundef writeonly captures(none) %2, i32 noundef %3) local_unnamed_addr #6 {
+  %5 = tail call i64 @__ockl_get_group_id(i32 noundef 0) #23
+  %6 = trunc i64 %5 to i32
+  %7 = tail call i64 @__ockl_get_local_size(i32 noundef 0) #23
+  %8 = trunc i64 %7 to i32
+  %9 = mul i32 %8, %6
+  %10 = tail call i64 @__ockl_get_local_id(i32 noundef 0) #23
+  %11 = trunc i64 %10 to i32
+  %12 = add i32 %9, %11
+  %13 = icmp slt i32 %12, %3
+  br i1 %13, label %14, label %22
+
+14:                                               ; preds = %4
+  %15 = sext i32 %12 to i64
+  %16 = getelementptr inbounds [4 x i8], ptr addrspace(1) %2, i64 %15
+  %17 = getelementptr inbounds [4 x i8], ptr addrspace(1) %1, i64 %15
+  %18 = getelementptr inbounds [4 x i8], ptr addrspace(1) %0, i64 %15
+  %19 = load float, ptr addrspace(1) %18, align 4, !tbaa !19
+  %20 = load float, ptr addrspace(1) %17, align 4, !tbaa !19
+  %21 = fadd contract float %19, %20
+  store float %21, ptr addrspace(1) %16, align 4, !tbaa !19
+  br label %22
+
+22:                                               ; preds = %14, %4
+  ret void
+}
+
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p5.p4.i64(ptr addrspace(5) noalias writeonly captures(none), ptr addrspace(4) noalias readonly captures(none), i64, i1 immarg) #7
+
+; Function Attrs: convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none)
+define internal range(i64 0, 1024) i64 @__ockl_get_local_id(i32 noundef %0) local_unnamed_addr #8 {
+  switch i32 %0, label %8 [
+    i32 0, label %2
+    i32 1, label %4
+    i32 2, label %6
+  ]
+
+2:                                                ; preds = %1
+  %3 = tail call i32 @llvm.amdgcn.workitem.id.x()
+  br label %8
+
+4:                                                ; preds = %1
+  %5 = tail call i32 @llvm.amdgcn.workitem.id.y()
+  br label %8
+
+6:                                                ; preds = %1
+  %7 = tail call i32 @llvm.amdgcn.workitem.id.z()
+  br label %8
+
+8:                                                ; preds = %6, %4, %2, %1
+  %9 = phi i32 [ %7, %6 ], [ %3, %2 ], [ %5, %4 ], [ 0, %1 ]
+  %10 = zext nneg i32 %9 to i64
+  ret i64 %10
+}
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.amdgcn.workitem.id.x() #9
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.amdgcn.workitem.id.y() #9
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.amdgcn.workitem.id.z() #9
+
+; Function Attrs: convergent norecurse nounwind
+define internal i64 @__ockl_fprintf_stderr_begin() local_unnamed_addr #10 {
+  %1 = tail call <2 x i64> @__ockl_hostcall_preview(i32 noundef 2, i64 noundef 33, i64 noundef 1, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0) #24
+  %2 = extractelement <2 x i64> %1, i64 0
+  ret i64 %2
+}
+
+; Function Attrs: cold convergent norecurse nounwind
+define internal <2 x i64> @__ockl_hostcall_preview(i32 noundef %0, i64 noundef %1, i64 noundef %2, i64 noundef %3, i64 noundef %4, i64 noundef %5, i64 noundef %6, i64 noundef %7, i64 noundef %8) local_unnamed_addr #11 {
+  %10 = load i32, ptr addrspace(4) @__oclc_ABI_version, align 4, !tbaa !8
+  %11 = icmp slt i32 %10, 500
+  %12 = tail call dereferenceable(256) ptr addrspace(4) @llvm.amdgcn.implicitarg.ptr()
+  %13 = select i1 %11, i64 24, i64 80
+  %14 = getelementptr inbounds nuw i8, ptr addrspace(4) %12, i64 %13
+  %15 = load i64, ptr addrspace(4) %14, align 8, !tbaa !21
+  %16 = inttoptr i64 %15 to ptr addrspace(1)
+  %17 = addrspacecast ptr addrspace(1) %16 to ptr
+  %18 = tail call <2 x i64> @__ockl_hostcall_internal(ptr noundef %17, i32 noundef %0, i64 noundef %1, i64 noundef %2, i64 noundef %3, i64 noundef %4, i64 noundef %5, i64 noundef %6, i64 noundef %7, i64 noundef %8) #25
+  ret <2 x i64> %18
+}
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef align 4 ptr addrspace(4) @llvm.amdgcn.implicitarg.ptr() #9
+
+; Function Attrs: convergent norecurse nounwind
+define internal <2 x i64> @__ockl_hostcall_internal(ptr noundef captures(none) %0, i32 noundef %1, i64 noundef %2, i64 noundef %3, i64 noundef %4, i64 noundef %5, i64 noundef %6, i64 noundef %7, i64 noundef %8, i64 noundef %9) local_unnamed_addr #10 {
+  %11 = tail call i32 @__ockl_lane_u32() #24
+  %12 = tail call i32 @llvm.amdgcn.readfirstlane.i32(i32 %11)
+  %13 = addrspacecast ptr %0 to ptr addrspace(1)
+  %14 = icmp eq i32 %11, %12
+  br i1 %14, label %15, label %37
+
+15:                                               ; preds = %10
+  %16 = getelementptr inbounds nuw i8, ptr addrspace(1) %13, i64 24
+  %17 = load atomic i64, ptr addrspace(1) %16 syncscope("one-as") acquire, align 8
+  %18 = getelementptr i8, ptr addrspace(1) %13, i64 40
+  %19 = load ptr addrspace(1), ptr addrspace(1) %13, align 8, !tbaa !23
+  %20 = load i64, ptr addrspace(1) %18, align 8, !tbaa !27
+  %21 = and i64 %20, %17
+  %22 = getelementptr inbounds nuw [24 x i8], ptr addrspace(1) %19, i64 %21
+  %23 = load atomic i64, ptr addrspace(1) %22 syncscope("one-as") monotonic, align 8
+  %24 = cmpxchg ptr addrspace(1) %16, i64 %17, i64 %23 syncscope("one-as") acquire monotonic, align 8
+  %25 = extractvalue { i64, i1 } %24, 1
+  %26 = extractvalue { i64, i1 } %24, 0
+  br i1 %25, label %37, label %27
+
+27:                                               ; preds = %27, %15
+  %28 = phi i64 [ %36, %27 ], [ %26, %15 ]
+  tail call void @llvm.amdgcn.s.sleep(i32 1)
+  %29 = load ptr addrspace(1), ptr addrspace(1) %13, align 8, !tbaa !23
+  %30 = load i64, ptr addrspace(1) %18, align 8, !tbaa !27
+  %31 = and i64 %30, %28
+  %32 = getelementptr inbounds nuw [24 x i8], ptr addrspace(1) %29, i64 %31
+  %33 = load atomic i64, ptr addrspace(1) %32 syncscope("one-as") monotonic, align 8
+  %34 = cmpxchg ptr addrspace(1) %16, i64 %28, i64 %33 syncscope("one-as") acquire monotonic, align 8
+  %35 = extractvalue { i64, i1 } %34, 1
+  %36 = extractvalue { i64, i1 } %34, 0
+  br i1 %35, label %37, label %27
+
+37:                                               ; preds = %27, %15, %10
+  %38 = phi i64 [ 0, %10 ], [ %26, %15 ], [ %36, %27 ]
+  %39 = tail call i64 @llvm.amdgcn.readfirstlane.i64(i64 %38)
+  %40 = load ptr addrspace(1), ptr addrspace(1) %13, align 8, !tbaa !23
+  %41 = getelementptr i8, ptr addrspace(1) %13, i64 40
+  %42 = load i64, ptr addrspace(1) %41, align 8, !tbaa !27
+  %43 = and i64 %42, %39
+  %44 = getelementptr inbounds nuw [24 x i8], ptr addrspace(1) %40, i64 %43
+  %45 = getelementptr i8, ptr addrspace(1) %13, i64 8
+  %46 = load ptr addrspace(1), ptr addrspace(1) %45, align 8, !tbaa !28
+  %47 = getelementptr inbounds nuw [4096 x i8], ptr addrspace(1) %46, i64 %43
+  %48 = tail call i64 @llvm.amdgcn.ballot.i64(i1 true)
+  br i1 %14, label %49, label %53
+
+49:                                               ; preds = %37
+  %50 = getelementptr inbounds nuw i8, ptr addrspace(1) %44, i64 16
+  %51 = getelementptr inbounds nuw i8, ptr addrspace(1) %44, i64 8
+  %52 = getelementptr inbounds nuw i8, ptr addrspace(1) %44, i64 20
+  store i32 %1, ptr addrspace(1) %50, align 8, !tbaa !29
+  store i64 %48, ptr addrspace(1) %51, align 8, !tbaa !31
+  store i32 1, ptr addrspace(1) %52, align 4, !tbaa !32
+  br label %53
+
+53:                                               ; preds = %49, %37
+  %54 = zext i32 %11 to i64
+  %55 = getelementptr inbounds nuw [64 x i8], ptr addrspace(1) %47, i64 %54
+  store i64 %2, ptr addrspace(1) %55, align 8, !tbaa !21
+  %56 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 8
+  store i64 %3, ptr addrspace(1) %56, align 8, !tbaa !21
+  %57 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 16
+  store i64 %4, ptr addrspace(1) %57, align 8, !tbaa !21
+  %58 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 24
+  store i64 %5, ptr addrspace(1) %58, align 8, !tbaa !21
+  %59 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 32
+  store i64 %6, ptr addrspace(1) %59, align 8, !tbaa !21
+  %60 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 40
+  store i64 %7, ptr addrspace(1) %60, align 8, !tbaa !21
+  %61 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 48
+  store i64 %8, ptr addrspace(1) %61, align 8, !tbaa !21
+  %62 = getelementptr inbounds nuw i8, ptr addrspace(1) %55, i64 56
+  store i64 %9, ptr addrspace(1) %62, align 8, !tbaa !21
+  br i1 %14, label %63, label %79
+
+63:                                               ; preds = %53
+  %64 = getelementptr inbounds nuw i8, ptr addrspace(1) %13, i64 32
+  %65 = load atomic i64, ptr addrspace(1) %64 syncscope("one-as") monotonic, align 8
+  %66 = load i64, ptr addrspace(1) %41, align 8, !tbaa !27
+  %67 = and i64 %66, %39
+  %68 = getelementptr inbounds nuw [24 x i8], ptr addrspace(1) %40, i64 %67
+  store i64 %65, ptr addrspace(1) %68, align 8, !tbaa !33
+  %69 = cmpxchg ptr addrspace(1) %64, i64 %65, i64 %39 syncscope("one-as") release monotonic, align 8
+  %70 = extractvalue { i64, i1 } %69, 1
+  br i1 %70, label %76, label %71
+
+71:                                               ; preds = %71, %63
+  %72 = phi { i64, i1 } [ %74, %71 ], [ %69, %63 ]
+  %73 = extractvalue { i64, i1 } %72, 0
+  tail call void @llvm.amdgcn.s.sleep(i32 1)
+  store i64 %73, ptr addrspace(1) %68, align 8, !tbaa !33
+  %74 = cmpxchg ptr addrspace(1) %64, i64 %73, i64 %39 syncscope("one-as") release monotonic, align 8
+  %75 = extractvalue { i64, i1 } %74, 1
+  br i1 %75, label %76, label %71
+
+76:                                               ; preds = %71, %63
+  %77 = getelementptr inbounds nuw i8, ptr addrspace(1) %13, i64 16
+  %78 = load i64, ptr addrspace(1) %77, align 8
+  tail call void @__ockl_hsa_signal_add(i64 %78, i64 noundef 1, i32 noundef 3) #24
+  br label %79
+
+79:                                               ; preds = %76, %53
+  %80 = getelementptr inbounds nuw i8, ptr addrspace(1) %44, i64 20
+  br label %81
+
+81:                                               ; preds = %89, %79
+  br i1 %14, label %82, label %85
+
+82:                                               ; preds = %81
+  %83 = load atomic i32, ptr addrspace(1) %80 syncscope("one-as") acquire, align 4
+  %84 = and i32 %83, 1
+  br label %85
+
+85:                                               ; preds = %82, %81
+  %86 = phi i32 [ %84, %82 ], [ 1, %81 ]
+  %87 = tail call i32 @llvm.amdgcn.readfirstlane.i32(i32 %86)
+  %88 = icmp eq i32 %87, 0
+  br i1 %88, label %90, label %89
+
+89:                                               ; preds = %85
+  tail call void @llvm.amdgcn.s.sleep(i32 1)
+  br label %81
+
+90:                                               ; preds = %85
+  %91 = load i64, ptr addrspace(1) %55, align 8, !tbaa !21
+  %92 = load i64, ptr addrspace(1) %56, align 8, !tbaa !21
+  br i1 %14, label %93, label %111
+
+93:                                               ; preds = %90
+  %94 = load i64, ptr addrspace(1) %41, align 8, !tbaa !27
+  %95 = add i64 %94, 1
+  %96 = add i64 %95, %39
+  %97 = icmp eq i64 %96, 0
+  %98 = select i1 %97, i64 %95, i64 %96
+  %99 = getelementptr inbounds nuw i8, ptr addrspace(1) %13, i64 24
+  %100 = load atomic i64, ptr addrspace(1) %99 syncscope("one-as") monotonic, align 8
+  %101 = load ptr addrspace(1), ptr addrspace(1) %13, align 8, !tbaa !23
+  %102 = and i64 %98, %94
+  %103 = getelementptr inbounds nuw [24 x i8], ptr addrspace(1) %101, i64 %102
+  store i64 %100, ptr addrspace(1) %103, align 8, !tbaa !33
+  %104 = cmpxchg ptr addrspace(1) %99, i64 %100, i64 %98 syncscope("one-as") release monotonic, align 8
+  %105 = extractvalue { i64, i1 } %104, 1
+  br i1 %105, label %111, label %106
+
+106:                                              ; preds = %106, %93
+  %107 = phi { i64, i1 } [ %109, %106 ], [ %104, %93 ]
+  %108 = extractvalue { i64, i1 } %107, 0
+  tail call void @llvm.amdgcn.s.sleep(i32 1)
+  store i64 %108, ptr addrspace(1) %103, align 8, !tbaa !33
+  %109 = cmpxchg ptr addrspace(1) %99, i64 %108, i64 %98 syncscope("one-as") release monotonic, align 8
+  %110 = extractvalue { i64, i1 } %109, 1
+  br i1 %110, label %111, label %106
+
+111:                                              ; preds = %106, %93, %90
+  %112 = insertelement <2 x i64> poison, i64 %91, i64 0
+  %113 = insertelement <2 x i64> %112, i64 %92, i64 1
+  ret <2 x i64> %113
+}
+
+; Function Attrs: alwaysinline convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none)
+define internal noundef i32 @__ockl_lane_u32() local_unnamed_addr #12 {
+  %1 = tail call i32 @llvm.amdgcn.mbcnt.lo(i32 -1, i32 0)
+  %2 = tail call i32 @llvm.amdgcn.mbcnt.hi(i32 -1, i32 %1)
+  ret i32 %2
+}
+
+; Function Attrs: convergent nocallback nocreateundeforpoison nofree nounwind willreturn memory(none)
+declare i32 @llvm.amdgcn.readfirstlane.i32(i32) #13
+
+; Function Attrs: nocallback nofree nosync nounwind willreturn
+declare void @llvm.amdgcn.s.sleep(i32 immarg) #14
+
+; Function Attrs: convergent nocallback nocreateundeforpoison nofree nounwind willreturn memory(none)
+declare i64 @llvm.amdgcn.readfirstlane.i64(i64) #13
+
+; Function Attrs: convergent nocallback nocreateundeforpoison nofree nounwind willreturn memory(none)
+declare i64 @llvm.amdgcn.ballot.i64(i1) #13
+
+; Function Attrs: convergent mustprogress norecurse nounwind willreturn
+define internal void @__ockl_hsa_signal_add(i64 %0, i64 noundef %1, i32 noundef %2) local_unnamed_addr #15 {
+  %4 = inttoptr i64 %0 to ptr addrspace(1)
+  %5 = getelementptr inbounds nuw i8, ptr addrspace(1) %4, i64 8
+  switch i32 %2, label %6 [
+    i32 1, label %8
+    i32 2, label %8
+    i32 3, label %10
+    i32 4, label %12
+    i32 5, label %14
+  ]
+
+6:                                                ; preds = %3
+  %7 = atomicrmw add ptr addrspace(1) %5, i64 %1 syncscope("one-as") monotonic, align 8, !amdgpu.no.fine.grained.memory !34, !amdgpu.no.remote.memory !34
+  br label %16
+
+8:                                                ; preds = %3, %3
+  %9 = atomicrmw add ptr addrspace(1) %5, i64 %1 syncscope("one-as") acquire, align 8, !amdgpu.no.fine.grained.memory !34, !amdgpu.no.remote.memory !34
+  br label %16
+
+10:                                               ; preds = %3
+  %11 = atomicrmw add ptr addrspace(1) %5, i64 %1 syncscope("one-as") release, align 8, !amdgpu.no.fine.grained.memory !34, !amdgpu.no.remote.memory !34
+  br label %16
+
+12:                                               ; preds = %3
+  %13 = atomicrmw add ptr addrspace(1) %5, i64 %1 syncscope("one-as") acq_rel, align 8, !amdgpu.no.fine.grained.memory !34, !amdgpu.no.remote.memory !34
+  br label %16
+
+14:                                               ; preds = %3
+  %15 = atomicrmw add ptr addrspace(1) %5, i64 %1 seq_cst, align 8, !amdgpu.no.fine.grained.memory !34, !amdgpu.no.remote.memory !34
+  br label %16
+
+16:                                               ; preds = %14, %12, %10, %8, %6
+  %17 = getelementptr inbounds nuw i8, ptr addrspace(1) %4, i64 16
+  %18 = load i64, ptr addrspace(1) %17, align 16, !tbaa !35
+  %19 = icmp eq i64 %18, 0
+  br i1 %19, label %33, label %20
+
+20:                                               ; preds = %16
+  %21 = inttoptr i64 %18 to ptr addrspace(1)
+  %22 = getelementptr inbounds nuw i8, ptr addrspace(1) %4, i64 24
+  %23 = load i32, ptr addrspace(1) %22, align 8, !tbaa !37
+  %24 = zext i32 %23 to i64
+  store atomic i64 %24, ptr addrspace(1) %21 syncscope("one-as") release, align 8
+  %25 = load i32, ptr addrspace(4) @__oclc_ISA_version, align 4, !tbaa !8
+  %26 = icmp slt i32 %25, 9000
+  %27 = add i32 %25, -11000
+  %28 = icmp ult i32 %27, -1000
+  %29 = select i1 %28, i32 16777215, i32 8388607
+  %30 = select i1 %26, i32 255, i32 %29
+  %31 = and i32 %30, %23
+  %32 = tail call i32 @llvm.amdgcn.readfirstlane.i32(i32 %31)
+  tail call void @llvm.amdgcn.s.sendmsg(i32 1, i32 %32)
+  br label %33
+
+33:                                               ; preds = %20, %16
+  ret void
+}
+
+; Function Attrs: nocallback nounwind willreturn
+declare void @llvm.amdgcn.s.sendmsg(i32 immarg, i32) #16
+
+; Function Attrs: nocallback nocreateundeforpoison nofree nosync nounwind willreturn memory(none)
+declare i32 @llvm.amdgcn.mbcnt.lo(i32, i32) #17
+
+; Function Attrs: nocallback nocreateundeforpoison nofree nosync nounwind willreturn memory(none)
+declare i32 @llvm.amdgcn.mbcnt.hi(i32, i32) #17
+
+; Function Attrs: convergent norecurse nounwind
+define internal i64 @__ockl_fprintf_append_args(i64 noundef %0, i32 noundef %1, i64 noundef %2, i64 noundef %3, i64 noundef %4, i64 noundef %5, i64 noundef %6, i64 noundef %7, i64 noundef %8, i32 noundef %9) local_unnamed_addr #10 {
+  %11 = icmp eq i32 %9, 0
+  %12 = or i64 %0, 2
+  %13 = select i1 %11, i64 %0, i64 %12
+  %14 = and i64 %13, -225
+  %15 = zext i32 %1 to i64
+  %16 = shl nuw nsw i64 %15, 5
+  %17 = or i64 %14, %16
+  %18 = tail call <2 x i64> @__ockl_hostcall_preview(i32 noundef 2, i64 noundef %17, i64 noundef %2, i64 noundef %3, i64 noundef %4, i64 noundef %5, i64 noundef %6, i64 noundef %7, i64 noundef %8) #24
+  %19 = extractelement <2 x i64> %18, i64 0
+  ret i64 %19
+}
+
+; Function Attrs: convergent norecurse nounwind
+define internal i64 @__ockl_fprintf_append_string_n(i64 noundef %0, ptr noundef readonly %1, i64 noundef %2, i32 noundef %3) local_unnamed_addr #10 {
+  %5 = icmp eq i32 %3, 0
+  %6 = or i64 %0, 2
+  %7 = select i1 %5, i64 %0, i64 %6
+  %8 = icmp eq ptr %1, null
+  br i1 %8, label %9, label %13
+
+9:                                                ; preds = %4
+  %10 = and i64 %7, -225
+  %11 = or disjoint i64 %10, 32
+  %12 = tail call <2 x i64> @__ockl_hostcall_preview(i32 noundef 2, i64 noundef %11, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0) #24
+  br label %452
+
+13:                                               ; preds = %4
+  %14 = and i64 %7, 2
+  %15 = and i64 %7, -3
+  %16 = insertelement <2 x i64> <i64 poison, i64 0>, i64 %15, i64 0
+  br label %17
+
+17:                                               ; preds = %440, %13
+  %18 = phi i64 [ %2, %13 ], [ %449, %440 ]
+  %19 = phi ptr [ %1, %13 ], [ %450, %440 ]
+  %20 = phi <2 x i64> [ %16, %13 ], [ %448, %440 ]
+  %21 = icmp ugt i64 %18, 56
+  %22 = extractelement <2 x i64> %20, i64 0
+  %23 = tail call i64 @llvm.umin.i64(i64 %18, i64 56)
+  %24 = trunc nuw nsw i64 %23 to i32
+  %25 = select i1 %21, i64 0, i64 %14
+  %26 = icmp ugt i64 %18, 7
+  br i1 %26, label %29, label %27
+
+27:                                               ; preds = %17
+  %28 = icmp eq i64 %18, 0
+  br i1 %28, label %82, label %69
+
+29:                                               ; preds = %17
+  %30 = load i8, ptr %19, align 1, !tbaa !38
+  %31 = zext i8 %30 to i64
+  %32 = getelementptr inbounds nuw i8, ptr %19, i64 1
+  %33 = load i8, ptr %32, align 1, !tbaa !38
+  %34 = zext i8 %33 to i64
+  %35 = shl nuw nsw i64 %34, 8
+  %36 = or disjoint i64 %35, %31
+  %37 = getelementptr inbounds nuw i8, ptr %19, i64 2
+  %38 = load i8, ptr %37, align 1, !tbaa !38
+  %39 = zext i8 %38 to i64
+  %40 = shl nuw nsw i64 %39, 16
+  %41 = or disjoint i64 %36, %40
+  %42 = getelementptr inbounds nuw i8, ptr %19, i64 3
+  %43 = load i8, ptr %42, align 1, !tbaa !38
+  %44 = zext i8 %43 to i64
+  %45 = shl nuw nsw i64 %44, 24
+  %46 = or disjoint i64 %41, %45
+  %47 = getelementptr inbounds nuw i8, ptr %19, i64 4
+  %48 = load i8, ptr %47, align 1, !tbaa !38
+  %49 = zext i8 %48 to i64
+  %50 = shl nuw nsw i64 %49, 32
+  %51 = or disjoint i64 %46, %50
+  %52 = getelementptr inbounds nuw i8, ptr %19, i64 5
+  %53 = load i8, ptr %52, align 1, !tbaa !38
+  %54 = zext i8 %53 to i64
+  %55 = shl nuw nsw i64 %54, 40
+  %56 = or i64 %51, %55
+  %57 = getelementptr inbounds nuw i8, ptr %19, i64 6
+  %58 = load i8, ptr %57, align 1, !tbaa !38
+  %59 = zext i8 %58 to i64
+  %60 = shl nuw nsw i64 %59, 48
+  %61 = or i64 %56, %60
+  %62 = getelementptr inbounds nuw i8, ptr %19, i64 7
+  %63 = load i8, ptr %62, align 1, !tbaa !38
+  %64 = zext i8 %63 to i64
+  %65 = shl nuw i64 %64, 56
+  %66 = or i64 %61, %65
+  %67 = add nsw i32 %24, -8
+  %68 = getelementptr inbounds nuw i8, ptr %19, i64 8
+  br label %82
+
+69:                                               ; preds = %69, %27
+  %70 = phi i32 [ %80, %69 ], [ 0, %27 ]
+  %71 = phi i64 [ %79, %69 ], [ 0, %27 ]
+  %72 = zext nneg i32 %70 to i64
+  %73 = getelementptr inbounds nuw i8, ptr %19, i64 %72
+  %74 = load i8, ptr %73, align 1, !tbaa !38
+  %75 = zext i8 %74 to i64
+  %76 = shl i32 %70, 3
+  %77 = zext nneg i32 %76 to i64
+  %78 = shl nuw i64 %75, %77
+  %79 = or i64 %78, %71
+  %80 = add nuw nsw i32 %70, 1
+  %81 = icmp eq i32 %80, %24
+  br i1 %81, label %82, label %69
+
+82:                                               ; preds = %69, %29, %27
+  %83 = phi ptr [ %68, %29 ], [ %19, %27 ], [ %19, %69 ]
+  %84 = phi i32 [ %67, %29 ], [ 0, %27 ], [ 0, %69 ]
+  %85 = phi i64 [ %66, %29 ], [ 0, %27 ], [ %79, %69 ]
+  %86 = icmp ugt i32 %84, 7
+  br i1 %86, label %89, label %87
+
+87:                                               ; preds = %82
+  %88 = icmp eq i32 %84, 0
+  br i1 %88, label %142, label %129
+
+89:                                               ; preds = %82
+  %90 = load i8, ptr %83, align 1, !tbaa !38
+  %91 = zext i8 %90 to i64
+  %92 = getelementptr inbounds nuw i8, ptr %83, i64 1
+  %93 = load i8, ptr %92, align 1, !tbaa !38
+  %94 = zext i8 %93 to i64
+  %95 = shl nuw nsw i64 %94, 8
+  %96 = or disjoint i64 %95, %91
+  %97 = getelementptr inbounds nuw i8, ptr %83, i64 2
+  %98 = load i8, ptr %97, align 1, !tbaa !38
+  %99 = zext i8 %98 to i64
+  %100 = shl nuw nsw i64 %99, 16
+  %101 = or disjoint i64 %96, %100
+  %102 = getelementptr inbounds nuw i8, ptr %83, i64 3
+  %103 = load i8, ptr %102, align 1, !tbaa !38
+  %104 = zext i8 %103 to i64
+  %105 = shl nuw nsw i64 %104, 24
+  %106 = or disjoint i64 %101, %105
+  %107 = getelementptr inbounds nuw i8, ptr %83, i64 4
+  %108 = load i8, ptr %107, align 1, !tbaa !38
+  %109 = zext i8 %108 to i64
+  %110 = shl nuw nsw i64 %109, 32
+  %111 = or disjoint i64 %106, %110
+  %112 = getelementptr inbounds nuw i8, ptr %83, i64 5
+  %113 = load i8, ptr %112, align 1, !tbaa !38
+  %114 = zext i8 %113 to i64
+  %115 = shl nuw nsw i64 %114, 40
+  %116 = or i64 %111, %115
+  %117 = getelementptr inbounds nuw i8, ptr %83, i64 6
+  %118 = load i8, ptr %117, align 1, !tbaa !38
+  %119 = zext i8 %118 to i64
+  %120 = shl nuw nsw i64 %119, 48
+  %121 = or i64 %116, %120
+  %122 = getelementptr inbounds nuw i8, ptr %83, i64 7
+  %123 = load i8, ptr %122, align 1, !tbaa !38
+  %124 = zext i8 %123 to i64
+  %125 = shl nuw i64 %124, 56
+  %126 = or i64 %121, %125
+  %127 = add nsw i32 %84, -8
+  %128 = getelementptr inbounds nuw i8, ptr %83, i64 8
+  br label %142
+
+129:                                              ; preds = %129, %87
+  %130 = phi i32 [ %140, %129 ], [ 0, %87 ]
+  %131 = phi i64 [ %139, %129 ], [ 0, %87 ]
+  %132 = zext nneg i32 %130 to i64
+  %133 = getelementptr inbounds nuw i8, ptr %83, i64 %132
+  %134 = load i8, ptr %133, align 1, !tbaa !38
+  %135 = zext i8 %134 to i64
+  %136 = shl i32 %130, 3
+  %137 = zext nneg i32 %136 to i64
+  %138 = shl nuw i64 %135, %137
+  %139 = or i64 %138, %131
+  %140 = add nuw nsw i32 %130, 1
+  %141 = icmp eq i32 %140, %84
+  br i1 %141, label %142, label %129
+
+142:                                              ; preds = %129, %89, %87
+  %143 = phi ptr [ %128, %89 ], [ %83, %87 ], [ %83, %129 ]
+  %144 = phi i32 [ %127, %89 ], [ 0, %87 ], [ 0, %129 ]
+  %145 = phi i64 [ %126, %89 ], [ 0, %87 ], [ %139, %129 ]
+  %146 = icmp ugt i32 %144, 7
+  br i1 %146, label %149, label %147
+
+147:                                              ; preds = %142
+  %148 = icmp eq i32 %144, 0
+  br i1 %148, label %202, label %189
+
+149:                                              ; preds = %142
+  %150 = load i8, ptr %143, align 1, !tbaa !38
+  %151 = zext i8 %150 to i64
+  %152 = getelementptr inbounds nuw i8, ptr %143, i64 1
+  %153 = load i8, ptr %152, align 1, !tbaa !38
+  %154 = zext i8 %153 to i64
+  %155 = shl nuw nsw i64 %154, 8
+  %156 = or disjoint i64 %155, %151
+  %157 = getelementptr inbounds nuw i8, ptr %143, i64 2
+  %158 = load i8, ptr %157, align 1, !tbaa !38
+  %159 = zext i8 %158 to i64
+  %160 = shl nuw nsw i64 %159, 16
+  %161 = or disjoint i64 %156, %160
+  %162 = getelementptr inbounds nuw i8, ptr %143, i64 3
+  %163 = load i8, ptr %162, align 1, !tbaa !38
+  %164 = zext i8 %163 to i64
+  %165 = shl nuw nsw i64 %164, 24
+  %166 = or disjoint i64 %161, %165
+  %167 = getelementptr inbounds nuw i8, ptr %143, i64 4
+  %168 = load i8, ptr %167, align 1, !tbaa !38
+  %169 = zext i8 %168 to i64
+  %170 = shl nuw nsw i64 %169, 32
+  %171 = or disjoint i64 %166, %170
+  %172 = getelementptr inbounds nuw i8, ptr %143, i64 5
+  %173 = load i8, ptr %172, align 1, !tbaa !38
+  %174 = zext i8 %173 to i64
+  %175 = shl nuw nsw i64 %174, 40
+  %176 = or i64 %171, %175
+  %177 = getelementptr inbounds nuw i8, ptr %143, i64 6
+  %178 = load i8, ptr %177, align 1, !tbaa !38
+  %179 = zext i8 %178 to i64
+  %180 = shl nuw nsw i64 %179, 48
+  %181 = or i64 %176, %180
+  %182 = getelementptr inbounds nuw i8, ptr %143, i64 7
+  %183 = load i8, ptr %182, align 1, !tbaa !38
+  %184 = zext i8 %183 to i64
+  %185 = shl nuw i64 %184, 56
+  %186 = or i64 %181, %185
+  %187 = add nsw i32 %144, -8
+  %188 = getelementptr inbounds nuw i8, ptr %143, i64 8
+  br label %202
+
+189:                                              ; preds = %189, %147
+  %190 = phi i32 [ %200, %189 ], [ 0, %147 ]
+  %191 = phi i64 [ %199, %189 ], [ 0, %147 ]
+  %192 = zext nneg i32 %190 to i64
+  %193 = getelementptr inbounds nuw i8, ptr %143, i64 %192
+  %194 = load i8, ptr %193, align 1, !tbaa !38
+  %195 = zext i8 %194 to i64
+  %196 = shl i32 %190, 3
+  %197 = zext nneg i32 %196 to i64
+  %198 = shl nuw i64 %195, %197
+  %199 = or i64 %198, %191
+  %200 = add nuw nsw i32 %190, 1
+  %201 = icmp eq i32 %200, %144
+  br i1 %201, label %202, label %189
+
+202:                                              ; preds = %189, %149, %147
+  %203 = phi ptr [ %188, %149 ], [ %143, %147 ], [ %143, %189 ]
+  %204 = phi i32 [ %187, %149 ], [ 0, %147 ], [ 0, %189 ]
+  %205 = phi i64 [ %186, %149 ], [ 0, %147 ], [ %199, %189 ]
+  %206 = icmp ugt i32 %204, 7
+  br i1 %206, label %209, label %207
+
+207:                                              ; preds = %202
+  %208 = icmp eq i32 %204, 0
+  br i1 %208, label %262, label %249
+
+209:                                              ; preds = %202
+  %210 = load i8, ptr %203, align 1, !tbaa !38
+  %211 = zext i8 %210 to i64
+  %212 = getelementptr inbounds nuw i8, ptr %203, i64 1
+  %213 = load i8, ptr %212, align 1, !tbaa !38
+  %214 = zext i8 %213 to i64
+  %215 = shl nuw nsw i64 %214, 8
+  %216 = or disjoint i64 %215, %211
+  %217 = getelementptr inbounds nuw i8, ptr %203, i64 2
+  %218 = load i8, ptr %217, align 1, !tbaa !38
+  %219 = zext i8 %218 to i64
+  %220 = shl nuw nsw i64 %219, 16
+  %221 = or disjoint i64 %216, %220
+  %222 = getelementptr inbounds nuw i8, ptr %203, i64 3
+  %223 = load i8, ptr %222, align 1, !tbaa !38
+  %224 = zext i8 %223 to i64
+  %225 = shl nuw nsw i64 %224, 24
+  %226 = or disjoint i64 %221, %225
+  %227 = getelementptr inbounds nuw i8, ptr %203, i64 4
+  %228 = load i8, ptr %227, align 1, !tbaa !38
+  %229 = zext i8 %228 to i64
+  %230 = shl nuw nsw i64 %229, 32
+  %231 = or disjoint i64 %226, %230
+  %232 = getelementptr inbounds nuw i8, ptr %203, i64 5
+  %233 = load i8, ptr %232, align 1, !tbaa !38
+  %234 = zext i8 %233 to i64
+  %235 = shl nuw nsw i64 %234, 40
+  %236 = or i64 %231, %235
+  %237 = getelementptr inbounds nuw i8, ptr %203, i64 6
+  %238 = load i8, ptr %237, align 1, !tbaa !38
+  %239 = zext i8 %238 to i64
+  %240 = shl nuw nsw i64 %239, 48
+  %241 = or i64 %236, %240
+  %242 = getelementptr inbounds nuw i8, ptr %203, i64 7
+  %243 = load i8, ptr %242, align 1, !tbaa !38
+  %244 = zext i8 %243 to i64
+  %245 = shl nuw i64 %244, 56
+  %246 = or i64 %241, %245
+  %247 = add nsw i32 %204, -8
+  %248 = getelementptr inbounds nuw i8, ptr %203, i64 8
+  br label %262
+
+249:                                              ; preds = %249, %207
+  %250 = phi i32 [ %260, %249 ], [ 0, %207 ]
+  %251 = phi i64 [ %259, %249 ], [ 0, %207 ]
+  %252 = zext nneg i32 %250 to i64
+  %253 = getelementptr inbounds nuw i8, ptr %203, i64 %252
+  %254 = load i8, ptr %253, align 1, !tbaa !38
+  %255 = zext i8 %254 to i64
+  %256 = shl i32 %250, 3
+  %257 = zext nneg i32 %256 to i64
+  %258 = shl nuw i64 %255, %257
+  %259 = or i64 %258, %251
+  %260 = add nuw nsw i32 %250, 1
+  %261 = icmp eq i32 %260, %204
+  br i1 %261, label %262, label %249
+
+262:                                              ; preds = %249, %209, %207
+  %263 = phi ptr [ %248, %209 ], [ %203, %207 ], [ %203, %249 ]
+  %264 = phi i32 [ %247, %209 ], [ 0, %207 ], [ 0, %249 ]
+  %265 = phi i64 [ %246, %209 ], [ 0, %207 ], [ %259, %249 ]
+  %266 = icmp ugt i32 %264, 7
+  br i1 %266, label %269, label %267
+
+267:                                              ; preds = %262
+  %268 = icmp eq i32 %264, 0
+  br i1 %268, label %322, label %309
+
+269:                                              ; preds = %262
+  %270 = load i8, ptr %263, align 1, !tbaa !38
+  %271 = zext i8 %270 to i64
+  %272 = getelementptr inbounds nuw i8, ptr %263, i64 1
+  %273 = load i8, ptr %272, align 1, !tbaa !38
+  %274 = zext i8 %273 to i64
+  %275 = shl nuw nsw i64 %274, 8
+  %276 = or disjoint i64 %275, %271
+  %277 = getelementptr inbounds nuw i8, ptr %263, i64 2
+  %278 = load i8, ptr %277, align 1, !tbaa !38
+  %279 = zext i8 %278 to i64
+  %280 = shl nuw nsw i64 %279, 16
+  %281 = or disjoint i64 %276, %280
+  %282 = getelementptr inbounds nuw i8, ptr %263, i64 3
+  %283 = load i8, ptr %282, align 1, !tbaa !38
+  %284 = zext i8 %283 to i64
+  %285 = shl nuw nsw i64 %284, 24
+  %286 = or disjoint i64 %281, %285
+  %287 = getelementptr inbounds nuw i8, ptr %263, i64 4
+  %288 = load i8, ptr %287, align 1, !tbaa !38
+  %289 = zext i8 %288 to i64
+  %290 = shl nuw nsw i64 %289, 32
+  %291 = or disjoint i64 %286, %290
+  %292 = getelementptr inbounds nuw i8, ptr %263, i64 5
+  %293 = load i8, ptr %292, align 1, !tbaa !38
+  %294 = zext i8 %293 to i64
+  %295 = shl nuw nsw i64 %294, 40
+  %296 = or i64 %291, %295
+  %297 = getelementptr inbounds nuw i8, ptr %263, i64 6
+  %298 = load i8, ptr %297, align 1, !tbaa !38
+  %299 = zext i8 %298 to i64
+  %300 = shl nuw nsw i64 %299, 48
+  %301 = or i64 %296, %300
+  %302 = getelementptr inbounds nuw i8, ptr %263, i64 7
+  %303 = load i8, ptr %302, align 1, !tbaa !38
+  %304 = zext i8 %303 to i64
+  %305 = shl nuw i64 %304, 56
+  %306 = or i64 %301, %305
+  %307 = add nsw i32 %264, -8
+  %308 = getelementptr inbounds nuw i8, ptr %263, i64 8
+  br label %322
+
+309:                                              ; preds = %309, %267
+  %310 = phi i32 [ %320, %309 ], [ 0, %267 ]
+  %311 = phi i64 [ %319, %309 ], [ 0, %267 ]
+  %312 = zext nneg i32 %310 to i64
+  %313 = getelementptr inbounds nuw i8, ptr %263, i64 %312
+  %314 = load i8, ptr %313, align 1, !tbaa !38
+  %315 = zext i8 %314 to i64
+  %316 = shl i32 %310, 3
+  %317 = zext nneg i32 %316 to i64
+  %318 = shl nuw i64 %315, %317
+  %319 = or i64 %318, %311
+  %320 = add nuw nsw i32 %310, 1
+  %321 = icmp eq i32 %320, %264
+  br i1 %321, label %322, label %309
+
+322:                                              ; preds = %309, %269, %267
+  %323 = phi ptr [ %308, %269 ], [ %263, %267 ], [ %263, %309 ]
+  %324 = phi i32 [ %307, %269 ], [ 0, %267 ], [ 0, %309 ]
+  %325 = phi i64 [ %306, %269 ], [ 0, %267 ], [ %319, %309 ]
+  %326 = icmp ugt i32 %324, 7
+  br i1 %326, label %329, label %327
+
+327:                                              ; preds = %322
+  %328 = icmp eq i32 %324, 0
+  br i1 %328, label %382, label %369
+
+329:                                              ; preds = %322
+  %330 = load i8, ptr %323, align 1, !tbaa !38
+  %331 = zext i8 %330 to i64
+  %332 = getelementptr inbounds nuw i8, ptr %323, i64 1
+  %333 = load i8, ptr %332, align 1, !tbaa !38
+  %334 = zext i8 %333 to i64
+  %335 = shl nuw nsw i64 %334, 8
+  %336 = or disjoint i64 %335, %331
+  %337 = getelementptr inbounds nuw i8, ptr %323, i64 2
+  %338 = load i8, ptr %337, align 1, !tbaa !38
+  %339 = zext i8 %338 to i64
+  %340 = shl nuw nsw i64 %339, 16
+  %341 = or disjoint i64 %336, %340
+  %342 = getelementptr inbounds nuw i8, ptr %323, i64 3
+  %343 = load i8, ptr %342, align 1, !tbaa !38
+  %344 = zext i8 %343 to i64
+  %345 = shl nuw nsw i64 %344, 24
+  %346 = or disjoint i64 %341, %345
+  %347 = getelementptr inbounds nuw i8, ptr %323, i64 4
+  %348 = load i8, ptr %347, align 1, !tbaa !38
+  %349 = zext i8 %348 to i64
+  %350 = shl nuw nsw i64 %349, 32
+  %351 = or disjoint i64 %346, %350
+  %352 = getelementptr inbounds nuw i8, ptr %323, i64 5
+  %353 = load i8, ptr %352, align 1, !tbaa !38
+  %354 = zext i8 %353 to i64
+  %355 = shl nuw nsw i64 %354, 40
+  %356 = or i64 %351, %355
+  %357 = getelementptr inbounds nuw i8, ptr %323, i64 6
+  %358 = load i8, ptr %357, align 1, !tbaa !38
+  %359 = zext i8 %358 to i64
+  %360 = shl nuw nsw i64 %359, 48
+  %361 = or i64 %356, %360
+  %362 = getelementptr inbounds nuw i8, ptr %323, i64 7
+  %363 = load i8, ptr %362, align 1, !tbaa !38
+  %364 = zext i8 %363 to i64
+  %365 = shl nuw i64 %364, 56
+  %366 = or i64 %361, %365
+  %367 = add nsw i32 %324, -8
+  %368 = getelementptr inbounds nuw i8, ptr %323, i64 8
+  br label %382
+
+369:                                              ; preds = %369, %327
+  %370 = phi i32 [ %380, %369 ], [ 0, %327 ]
+  %371 = phi i64 [ %379, %369 ], [ 0, %327 ]
+  %372 = zext nneg i32 %370 to i64
+  %373 = getelementptr inbounds nuw i8, ptr %323, i64 %372
+  %374 = load i8, ptr %373, align 1, !tbaa !38
+  %375 = zext i8 %374 to i64
+  %376 = shl i32 %370, 3
+  %377 = zext nneg i32 %376 to i64
+  %378 = shl nuw i64 %375, %377
+  %379 = or i64 %378, %371
+  %380 = add nuw nsw i32 %370, 1
+  %381 = icmp eq i32 %380, %324
+  br i1 %381, label %382, label %369
+
+382:                                              ; preds = %369, %329, %327
+  %383 = phi ptr [ %368, %329 ], [ %323, %327 ], [ %323, %369 ]
+  %384 = phi i32 [ %367, %329 ], [ 0, %327 ], [ 0, %369 ]
+  %385 = phi i64 [ %366, %329 ], [ 0, %327 ], [ %379, %369 ]
+  %386 = icmp ugt i32 %384, 7
+  br i1 %386, label %389, label %387
+
+387:                                              ; preds = %382
+  %388 = icmp eq i32 %384, 0
+  br i1 %388, label %440, label %427
+
+389:                                              ; preds = %382
+  %390 = load i8, ptr %383, align 1, !tbaa !38
+  %391 = zext i8 %390 to i64
+  %392 = getelementptr inbounds nuw i8, ptr %383, i64 1
+  %393 = load i8, ptr %392, align 1, !tbaa !38
+  %394 = zext i8 %393 to i64
+  %395 = shl nuw nsw i64 %394, 8
+  %396 = or disjoint i64 %395, %391
+  %397 = getelementptr inbounds nuw i8, ptr %383, i64 2
+  %398 = load i8, ptr %397, align 1, !tbaa !38
+  %399 = zext i8 %398 to i64
+  %400 = shl nuw nsw i64 %399, 16
+  %401 = or disjoint i64 %396, %400
+  %402 = getelementptr inbounds nuw i8, ptr %383, i64 3
+  %403 = load i8, ptr %402, align 1, !tbaa !38
+  %404 = zext i8 %403 to i64
+  %405 = shl nuw nsw i64 %404, 24
+  %406 = or disjoint i64 %401, %405
+  %407 = getelementptr inbounds nuw i8, ptr %383, i64 4
+  %408 = load i8, ptr %407, align 1, !tbaa !38
+  %409 = zext i8 %408 to i64
+  %410 = shl nuw nsw i64 %409, 32
+  %411 = or disjoint i64 %406, %410
+  %412 = getelementptr inbounds nuw i8, ptr %383, i64 5
+  %413 = load i8, ptr %412, align 1, !tbaa !38
+  %414 = zext i8 %413 to i64
+  %415 = shl nuw nsw i64 %414, 40
+  %416 = or i64 %411, %415
+  %417 = getelementptr inbounds nuw i8, ptr %383, i64 6
+  %418 = load i8, ptr %417, align 1, !tbaa !38
+  %419 = zext i8 %418 to i64
+  %420 = shl nuw nsw i64 %419, 48
+  %421 = or i64 %416, %420
+  %422 = getelementptr inbounds nuw i8, ptr %383, i64 7
+  %423 = load i8, ptr %422, align 1, !tbaa !38
+  %424 = zext i8 %423 to i64
+  %425 = shl nuw i64 %424, 56
+  %426 = or i64 %421, %425
+  br label %440
+
+427:                                              ; preds = %427, %387
+  %428 = phi i32 [ %438, %427 ], [ 0, %387 ]
+  %429 = phi i64 [ %437, %427 ], [ 0, %387 ]
+  %430 = zext nneg i32 %428 to i64
+  %431 = getelementptr inbounds nuw i8, ptr %383, i64 %430
+  %432 = load i8, ptr %431, align 1, !tbaa !38
+  %433 = zext i8 %432 to i64
+  %434 = shl i32 %428, 3
+  %435 = zext nneg i32 %434 to i64
+  %436 = shl nuw i64 %433, %435
+  %437 = or i64 %436, %429
+  %438 = add nuw nsw i32 %428, 1
+  %439 = icmp eq i32 %438, %384
+  br i1 %439, label %440, label %427
+
+440:                                              ; preds = %427, %389, %387
+  %441 = phi i64 [ %426, %389 ], [ 0, %387 ], [ %437, %427 ]
+  %442 = shl nuw nsw i64 %23, 2
+  %443 = add nuw nsw i64 %442, 28
+  %444 = and i64 %443, 480
+  %445 = and i64 %22, -225
+  %446 = or i64 %445, %25
+  %447 = or i64 %446, %444
+  %448 = tail call <2 x i64> @__ockl_hostcall_preview(i32 noundef 2, i64 noundef %447, i64 noundef %85, i64 noundef %145, i64 noundef %205, i64 noundef %265, i64 noundef %325, i64 noundef %385, i64 noundef %441) #24
+  %449 = sub i64 %18, %23
+  %450 = getelementptr inbounds nuw i8, ptr %19, i64 %23
+  %451 = icmp eq i64 %449, 0
+  br i1 %451, label %452, label %17
+
+452:                                              ; preds = %440, %9
+  %453 = phi <2 x i64> [ %12, %9 ], [ %448, %440 ]
+  %454 = extractelement <2 x i64> %453, i64 0
+  ret i64 %454
+}
+
+; Function Attrs: nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none)
+declare i64 @llvm.umin.i64(i64, i64) #18
+
+; Function Attrs: convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none)
+define internal range(i64 0, 65536) i64 @__ockl_get_local_size(i32 noundef %0) local_unnamed_addr #19 {
+  switch i32 %0, label %85 [
+    i32 0, label %2
+    i32 1, label %29
+    i32 2, label %57
+  ]
+
+2:                                                ; preds = %1
+  %3 = load i32, ptr addrspace(4) @__oclc_ABI_version, align 4, !tbaa !8
+  %4 = icmp slt i32 %3, 500
+  br i1 %4, label %5, label %20
+
+5:                                                ; preds = %2
+  %6 = tail call align 4 dereferenceable(64) ptr addrspace(4) @llvm.amdgcn.dispatch.ptr()
+  %7 = tail call i32 @llvm.amdgcn.workgroup.id.x()
+  %8 = getelementptr inbounds nuw i8, ptr addrspace(4) %6, i64 4
+  %9 = load i16, ptr addrspace(4) %8, align 4, !range !39, !invariant.load !34, !noundef !34
+  %10 = zext nneg i16 %9 to i32
+  %11 = getelementptr inbounds nuw i8, ptr addrspace(4) %6, i64 12
+  %12 = load i32, ptr addrspace(4) %11, align 4, !invariant.load !34
+  %13 = mul i32 %7, %10
+  %14 = sub i32 %12, %13
+  %15 = tail call i32 @llvm.umin.i32(i32 %14, i32 %10)
+  %16 = mul i32 %15, %7
+  %17 = sub i32 %12, %16
+  %18 = tail call i32 @llvm.umin.i32(i32 %17, i32 %15)
+  %19 = zext nneg i32 %18 to i64
+  br label %85
+
+20:                                               ; preds = %2
+  %21 = tail call i32 @llvm.amdgcn.workgroup.id.x()
+  %22 = tail call dereferenceable(256) ptr addrspace(4) @llvm.amdgcn.implicitarg.ptr()
+  %23 = load i32, ptr addrspace(4) %22, align 4, !tbaa !8
+  %24 = icmp ult i32 %21, %23
+  %25 = select i1 %24, i64 12, i64 18
+  %26 = getelementptr inbounds nuw i8, ptr addrspace(4) %22, i64 %25
+  %27 = load i16, ptr addrspace(4) %26, align 2, !tbaa !40
+  %28 = zext i16 %27 to i64
+  br label %85
+
+29:                                               ; preds = %1
+  %30 = load i32, ptr addrspace(4) @__oclc_ABI_version, align 4, !tbaa !8
+  %31 = icmp slt i32 %30, 500
+  br i1 %31, label %32, label %47
+
+32:                                               ; preds = %29
+  %33 = tail call align 4 dereferenceable(64) ptr addrspace(4) @llvm.amdgcn.dispatch.ptr()
+  %34 = tail call i32 @llvm.amdgcn.workgroup.id.y()
+  %35 = getelementptr inbounds nuw i8, ptr addrspace(4) %33, i64 6
+  %36 = load i16, ptr addrspace(4) %35, align 2, !range !39, !invariant.load !34, !noundef !34
+  %37 = zext nneg i16 %36 to i32
+  %38 = getelementptr inbounds nuw i8, ptr addrspace(4) %33, i64 16
+  %39 = load i32, ptr addrspace(4) %38, align 4, !invariant.load !34
+  %40 = mul i32 %34, %37
+  %41 = sub i32 %39, %40
+  %42 = tail call i32 @llvm.umin.i32(i32 %41, i32 %37)
+  %43 = mul i32 %42, %34
+  %44 = sub i32 %39, %43
+  %45 = tail call i32 @llvm.umin.i32(i32 %44, i32 %42)
+  %46 = zext nneg i32 %45 to i64
+  br label %85
+
+47:                                               ; preds = %29
+  %48 = tail call i32 @llvm.amdgcn.workgroup.id.y()
+  %49 = tail call dereferenceable(256) ptr addrspace(4) @llvm.amdgcn.implicitarg.ptr()
+  %50 = getelementptr inbounds nuw i8, ptr addrspace(4) %49, i64 4
+  %51 = load i32, ptr addrspace(4) %50, align 4, !tbaa !8
+  %52 = icmp ult i32 %48, %51
+  %53 = select i1 %52, i64 14, i64 20
+  %54 = getelementptr inbounds nuw i8, ptr addrspace(4) %49, i64 %53
+  %55 = load i16, ptr addrspace(4) %54, align 2, !tbaa !40
+  %56 = zext i16 %55 to i64
+  br label %85
+
+57:                                               ; preds = %1
+  %58 = load i32, ptr addrspace(4) @__oclc_ABI_version, align 4, !tbaa !8
+  %59 = icmp slt i32 %58, 500
+  br i1 %59, label %60, label %75
+
+60:                                               ; preds = %57
+  %61 = tail call align 4 dereferenceable(64) ptr addrspace(4) @llvm.amdgcn.dispatch.ptr()
+  %62 = tail call i32 @llvm.amdgcn.workgroup.id.z()
+  %63 = getelementptr inbounds nuw i8, ptr addrspace(4) %61, i64 8
+  %64 = load i16, ptr addrspace(4) %63, align 4, !range !39, !invariant.load !34, !noundef !34
+  %65 = zext nneg i16 %64 to i32
+  %66 = getelementptr inbounds nuw i8, ptr addrspace(4) %61, i64 20
+  %67 = load i32, ptr addrspace(4) %66, align 4, !invariant.load !34
+  %68 = mul i32 %62, %65
+  %69 = sub i32 %67, %68
+  %70 = tail call i32 @llvm.umin.i32(i32 %69, i32 %65)
+  %71 = mul i32 %70, %62
+  %72 = sub i32 %67, %71
+  %73 = tail call i32 @llvm.umin.i32(i32 %72, i32 %70)
+  %74 = zext nneg i32 %73 to i64
+  br label %85
+
+75:                                               ; preds = %57
+  %76 = tail call i32 @llvm.amdgcn.workgroup.id.z()
+  %77 = tail call dereferenceable(256) ptr addrspace(4) @llvm.amdgcn.implicitarg.ptr()
+  %78 = getelementptr inbounds nuw i8, ptr addrspace(4) %77, i64 8
+  %79 = load i32, ptr addrspace(4) %78, align 4, !tbaa !8
+  %80 = icmp ult i32 %76, %79
+  %81 = select i1 %80, i64 16, i64 22
+  %82 = getelementptr inbounds nuw i8, ptr addrspace(4) %77, i64 %81
+  %83 = load i16, ptr addrspace(4) %82, align 2, !tbaa !40
+  %84 = zext i16 %83 to i64
+  br label %85
+
+85:                                               ; preds = %75, %60, %47, %32, %20, %5, %1
+  %86 = phi i64 [ %56, %47 ], [ 1, %1 ], [ %28, %20 ], [ %19, %5 ], [ %46, %32 ], [ %74, %60 ], [ %84, %75 ]
+  ret i64 %86
+}
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef nonnull align 4 ptr addrspace(4) @llvm.amdgcn.dispatch.ptr() #9
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef i32 @llvm.amdgcn.workgroup.id.x() #9
+
+; Function Attrs: nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none)
+declare i32 @llvm.umin.i32(i32, i32) #18
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef i32 @llvm.amdgcn.workgroup.id.y() #9
+
+; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef i32 @llvm.amdgcn.workgroup.id.z() #9
+
+; Function Attrs: convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none)
+define internal range(i64 0, 4294967296) i64 @__ockl_get_group_id(i32 noundef %0) local_unnamed_addr #20 {
+  switch i32 %0, label %8 [
+    i32 0, label %2
+    i32 1, label %4
+    i32 2, label %6
+  ]
+
+2:                                                ; preds = %1
+  %3 = tail call i32 @llvm.amdgcn.workgroup.id.x()
+  br label %8
+
+4:                                                ; preds = %1
+  %5 = tail call i32 @llvm.amdgcn.workgroup.id.y()
+  br label %8
+
+6:                                                ; preds = %1
+  %7 = tail call i32 @llvm.amdgcn.workgroup.id.z()
+  br label %8
+
+8:                                                ; preds = %6, %4, %2, %1
+  %9 = phi i32 [ %7, %6 ], [ %3, %2 ], [ %5, %4 ], [ 0, %1 ]
+  %10 = zext i32 %9 to i64
+  ret i64 %10
+}
+
+attributes #0 = { mustprogress noreturn nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "uniform-work-group-size" }
+attributes #1 = { cold noreturn nounwind memory(inaccessiblemem: write) }
+attributes #2 = { convergent mustprogress noinline nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "uniform-work-group-size" }
+attributes #3 = { nocallback nofree nosync nounwind willreturn memory(argmem: readwrite) }
+attributes #4 = { mustprogress noinline nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "uniform-work-group-size" }
+attributes #5 = { mustprogress nofree norecurse nosync nounwind willreturn memory(none) "amdgpu-no-cluster-id-x" "amdgpu-no-cluster-id-y" "amdgpu-no-cluster-id-z" "amdgpu-no-completion-action" "amdgpu-no-default-queue" "amdgpu-no-dispatch-id" "amdgpu-no-dispatch-ptr" "amdgpu-no-flat-scratch-init" "amdgpu-no-heap-ptr" "amdgpu-no-hostcall-ptr" "amdgpu-no-implicitarg-ptr" "amdgpu-no-lds-kernel-id" "amdgpu-no-multigrid-sync-arg" "amdgpu-no-queue-ptr" "amdgpu-no-workgroup-id-x" "amdgpu-no-workgroup-id-y" "amdgpu-no-workgroup-id-z" "amdgpu-no-workitem-id-x" "amdgpu-no-workitem-id-y" "amdgpu-no-workitem-id-z" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "uniform-work-group-size" }
+attributes #6 = { convergent mustprogress nofree norecurse nounwind willreturn memory(argmem: readwrite) "amdgpu-flat-work-group-size"="1,1024" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "uniform-work-group-size" }
+attributes #7 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #8 = { convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none) "amdgpu-no-cluster-id-x" "amdgpu-no-cluster-id-y" "amdgpu-no-cluster-id-z" "amdgpu-no-completion-action" "amdgpu-no-default-queue" "amdgpu-no-dispatch-id" "amdgpu-no-dispatch-ptr" "amdgpu-no-flat-scratch-init" "amdgpu-no-heap-ptr" "amdgpu-no-hostcall-ptr" "amdgpu-no-implicitarg-ptr" "amdgpu-no-lds-kernel-id" "amdgpu-no-multigrid-sync-arg" "amdgpu-no-queue-ptr" "amdgpu-no-workgroup-id-x" "amdgpu-no-workgroup-id-y" "amdgpu-no-workgroup-id-z" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #9 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #10 = { convergent norecurse nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #11 = { cold convergent norecurse nounwind "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #12 = { alwaysinline convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none) "amdgpu-no-cluster-id-x" "amdgpu-no-cluster-id-y" "amdgpu-no-cluster-id-z" "amdgpu-no-completion-action" "amdgpu-no-default-queue" "amdgpu-no-dispatch-id" "amdgpu-no-dispatch-ptr" "amdgpu-no-flat-scratch-init" "amdgpu-no-heap-ptr" "amdgpu-no-hostcall-ptr" "amdgpu-no-implicitarg-ptr" "amdgpu-no-lds-kernel-id" "amdgpu-no-multigrid-sync-arg" "amdgpu-no-queue-ptr" "amdgpu-no-workgroup-id-x" "amdgpu-no-workgroup-id-y" "amdgpu-no-workgroup-id-z" "amdgpu-no-workitem-id-x" "amdgpu-no-workitem-id-y" "amdgpu-no-workitem-id-z" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #13 = { convergent nocallback nocreateundeforpoison nofree nounwind willreturn memory(none) }
+attributes #14 = { nocallback nofree nosync nounwind willreturn }
+attributes #15 = { convergent mustprogress norecurse nounwind willreturn "amdgpu-no-cluster-id-x" "amdgpu-no-cluster-id-y" "amdgpu-no-cluster-id-z" "amdgpu-no-completion-action" "amdgpu-no-default-queue" "amdgpu-no-dispatch-id" "amdgpu-no-dispatch-ptr" "amdgpu-no-flat-scratch-init" "amdgpu-no-heap-ptr" "amdgpu-no-hostcall-ptr" "amdgpu-no-implicitarg-ptr" "amdgpu-no-lds-kernel-id" "amdgpu-no-multigrid-sync-arg" "amdgpu-no-queue-ptr" "amdgpu-no-workgroup-id-x" "amdgpu-no-workgroup-id-y" "amdgpu-no-workgroup-id-z" "amdgpu-no-workitem-id-x" "amdgpu-no-workitem-id-y" "amdgpu-no-workitem-id-z" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #16 = { nocallback nounwind willreturn }
+attributes #17 = { nocallback nocreateundeforpoison nofree nosync nounwind willreturn memory(none) }
+attributes #18 = { nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #19 = { convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none) "amdgpu-no-cluster-id-x" "amdgpu-no-cluster-id-y" "amdgpu-no-cluster-id-z" "amdgpu-no-completion-action" "amdgpu-no-default-queue" "amdgpu-no-dispatch-id" "amdgpu-no-flat-scratch-init" "amdgpu-no-heap-ptr" "amdgpu-no-hostcall-ptr" "amdgpu-no-lds-kernel-id" "amdgpu-no-multigrid-sync-arg" "amdgpu-no-queue-ptr" "amdgpu-no-workitem-id-x" "amdgpu-no-workitem-id-y" "amdgpu-no-workitem-id-z" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #20 = { convergent mustprogress nofree norecurse nosync nounwind willreturn memory(none) "amdgpu-no-cluster-id-x" "amdgpu-no-cluster-id-y" "amdgpu-no-cluster-id-z" "amdgpu-no-completion-action" "amdgpu-no-default-queue" "amdgpu-no-dispatch-id" "amdgpu-no-dispatch-ptr" "amdgpu-no-flat-scratch-init" "amdgpu-no-heap-ptr" "amdgpu-no-hostcall-ptr" "amdgpu-no-implicitarg-ptr" "amdgpu-no-lds-kernel-id" "amdgpu-no-multigrid-sync-arg" "amdgpu-no-queue-ptr" "amdgpu-no-workitem-id-x" "amdgpu-no-workitem-id-y" "amdgpu-no-workitem-id-z" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="gfx1201" "target-features"="+16-bit-insts,+atomic-buffer-global-pk-add-f16-insts,+atomic-buffer-pk-add-bf16-inst,+atomic-ds-pk-add-16-insts,+atomic-fadd-rtn-insts,+atomic-flat-pk-add-16-insts,+atomic-fmin-fmax-global-f32,+atomic-global-pk-add-bf16-inst,+ci-insts,+cube-insts,+cvt-pknorm-vop2-insts,+dl-insts,+dot10-insts,+dot11-insts,+dot12-insts,+dot7-insts,+dot8-insts,+dot9-insts,+dpp,+fp8-conversion-insts,+gfx10-3-insts,+gfx10-insts,+gfx11-insts,+gfx12-insts,+gfx8-insts,+gfx9-insts,+image-insts,+lerp-inst,+qsad-insts,+sad-insts,+wavefrontsize32,+wmma-128b-insts" }
+attributes #21 = { nounwind }
+attributes #22 = { convergent nounwind "uniform-work-group-size" }
+attributes #23 = { convergent nounwind willreturn memory(none) "uniform-work-group-size" }
+attributes #24 = { convergent nounwind }
+attributes #25 = { cold convergent nounwind }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
+!llvm.errno.tbaa = !{!4, !8}
+!opencl.ocl.version = !{!12}
+
+!0 = !{i32 1, !"amdhsa_code_object_version", i32 600}
+!1 = !{i32 1, !"amdgpu_printf_kind", !"hostcall"}
+!2 = !{i32 8, !"PIC Level", i32 2}
+!3 = !{!"AMD clang version 23.0.0git (https://github.com/ROCm/llvm-project.git 43215c73116c407735c85a180d174f718798c328+PATCHED:2506c552d8428e2cc1778bef048b20f818e06bb3)"}
+!4 = !{!5, !5, i64 0}
+!5 = !{!"int", !6, i64 0}
+!6 = !{!"omnipotent char", !7, i64 0}
+!7 = !{!"Simple C++ TBAA"}
+!8 = !{!9, !9, i64 0}
+!9 = !{!"int", !10, i64 0}
+!10 = !{!"omnipotent char", !11, i64 0}
+!11 = !{!"Simple C/C++ TBAA"}
+!12 = !{i32 2, i32 0}
+!13 = !{!6, !6, i64 0}
+!14 = distinct !{!14, !15}
+!15 = !{!"llvm.loop.mustprogress"}
+!16 = distinct !{!16, !15}
+!17 = distinct !{!17, !15}
+!18 = distinct !{!18, !15}
+!19 = !{!20, !20, i64 0}
+!20 = !{!"float", !6, i64 0}
+!21 = !{!22, !22, i64 0}
+!22 = !{!"long", !10, i64 0}
+!23 = !{!24, !25, i64 0}
+!24 = !{!"", !25, i64 0, !25, i64 8, !26, i64 16, !22, i64 24, !22, i64 32, !22, i64 40}
+!25 = !{!"any pointer", !10, i64 0}
+!26 = !{!"hsa_signal_s", !22, i64 0}
+!27 = !{!24, !22, i64 40}
+!28 = !{!24, !25, i64 8}
+!29 = !{!30, !9, i64 16}
+!30 = !{!"", !22, i64 0, !22, i64 8, !9, i64 16, !9, i64 20}
+!31 = !{!30, !22, i64 8}
+!32 = !{!30, !9, i64 20}
+!33 = !{!30, !22, i64 0}
+!34 = !{}
+!35 = !{!36, !22, i64 16}
+!36 = !{!"amd_signal_s", !22, i64 0, !10, i64 8, !22, i64 16, !9, i64 24, !9, i64 28, !22, i64 32, !22, i64 40, !10, i64 48, !10, i64 56}
+!37 = !{!36, !9, i64 24}
+!38 = !{!10, !10, i64 0}
+!39 = !{i16 1, i16 1025}
+!40 = !{!41, !41, i64 0}
+!41 = !{!"short", !10, i64 0}
+Vector addition completed successfully!
+First 10 results: 0 3 6 9 12 15 18 21 24 27 

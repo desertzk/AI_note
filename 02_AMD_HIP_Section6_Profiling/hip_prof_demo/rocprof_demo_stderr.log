@@ -1,0 +1,39 @@
+W0716 15:10:58.109321 2445039 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.003276 sec
+W0716 15:10:58.109457 2445039 simple_timer.cpp:55] [rocprofv3] './hiplaunchkerneldemo_copy_debug' ::     0.000000 sec
+W0716 15:10:58.111120 2445039 tool.cpp:2728] HIP (runtime) version 7.13.0 initialized (instance=0)
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+W0716 15:10:58.122166 2445039 tool.cpp:2728] HSA version 1.21.0 initialized (instance=0)
+W0716 15:10:58.320733 2445085 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.003323 sec
+W0716 15:10:58.320856 2445085 simple_timer.cpp:55] [rocprofv3] 'sh -c -- /opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000000 sec
+W0716 15:10:58.349267 2445097 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002519 sec
+W0716 15:10:58.349384 2445097 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.000000 sec
+W0716 15:10:58.351732 2445097 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-objdump -d dump_kernel.co' ::     0.002348 sec
+W0716 15:10:58.355918 2445097 simple_timer.cpp:55] [rocprofv3] output generation ::     0.003992 sec
+W0716 15:10:58.355942 2445097 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.004146 sec
+W0716 15:10:58.403361 2445109 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002514 sec
+W0716 15:10:58.403475 2445109 simple_timer.cpp:55] [rocprofv3] 'sh -c -- /opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.000000 sec
+W0716 15:10:58.430130 2445122 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002427 sec
+W0716 15:10:58.430235 2445122 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.000000 sec
+W0716 15:10:58.431335 2445122 simple_timer.cpp:55] [rocprofv3] '/opt/rocm/llvm/bin/llvm-dis dump_kernel.bc' ::     0.001100 sec
+W0716 15:10:58.435293 2445122 simple_timer.cpp:55] [rocprofv3] output generation ::     0.003820 sec
+W0716 15:10:58.435316 2445122 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.003941 sec
+W0716 15:10:58.465991 2445134 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002599 sec
+W0716 15:10:58.466094 2445134 simple_timer.cpp:55] [rocprofv3] 'sh -c -- cat dump_kernel.ll' ::     0.000000 sec
+W0716 15:10:58.490378 2445146 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002788 sec
+W0716 15:10:58.490474 2445146 simple_timer.cpp:55] [rocprofv3] 'cat dump_kernel.ll' ::     0.000000 sec
+W0716 15:10:58.490537 2445146 simple_timer.cpp:55] [rocprofv3] 'cat dump_kernel.ll' ::     0.000062 sec
+W0716 15:10:58.494537 2445146 simple_timer.cpp:55] [rocprofv3] output generation ::     0.003861 sec
+W0716 15:10:58.494562 2445146 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.003994 sec
+W0716 15:10:58.530175 2445039 simple_timer.cpp:55] [rocprofv3] './hiplaunchkerneldemo_copy_debug' ::     0.420718 sec
+E0716 15:10:58.538616 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_kernel_stats.csv
+E0716 15:10:58.538744 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_kernel_trace.csv
+E0716 15:10:58.547900 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_hip_api_stats.csv
+E0716 15:10:58.548028 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_hip_api_trace.csv
+E0716 15:10:58.553633 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_memory_allocation_stats.csv
+E0716 15:10:58.553739 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_memory_allocation_trace.csv
+E0716 15:10:58.559161 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_agent_info.csv
+E0716 15:10:58.559266 2445039 output_stream.cpp:111] Opened result file: rocprof_results/cse-cluster-2/2445039_domain_stats.csv
+W0716 15:10:58.561470 2445039 simple_timer.cpp:55] [rocprofv3] output generation ::     0.030361 sec
+W0716 15:10:58.561499 2445039 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.030456 sec
+Warning: Resource leak detected by SharedSignalPool, 18 Signals leaked.
