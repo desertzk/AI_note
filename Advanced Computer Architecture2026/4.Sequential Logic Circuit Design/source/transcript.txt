@@ -1,0 +1,1409 @@
+[00:00:01] So last time we
+[00:00:04] last time we talked about the building
+[00:00:05] blocks for sequential logic. Um now
+[00:00:09] especially we talked about SRE reg D uh
+[00:00:12] D flip-flop which is actually the
+[00:00:14] register right those are the concept we
+[00:00:17] talked last time. So this time we're
+[00:00:18] starting to really talk about how to
+[00:00:20] design a sequential logic. Then for your
+[00:00:23] the chips that you are using every day
+[00:00:26] pretty much every chip you use is
+[00:00:27] sequential logic. None of them are
+[00:00:29] really simple combination logic. For
+[00:00:32] very very early days those uh very
+[00:00:35] simple chips that can be combination
+[00:00:38] logic on its own. But today if you use
+[00:00:40] something like a computer or something
+[00:00:42] really have some control logic in it.
+[00:00:44] It's all sequential logic. Okay. So
+[00:00:47] what's the uh definition for sequential
+[00:00:50] logic and especially what's the
+[00:00:51] difference between sequential logic and
+[00:00:53] combination logic. So for sequential
+[00:00:55] logic it's still digital circuit. So we
+[00:00:58] care about zeros and ones. There's no
+[00:01:00] other value. Then the output previously
+[00:01:03] the output depends only on the input.
+[00:01:05] This time the the output depends on the
+[00:01:08] prior state. So there's a internal state
+[00:01:10] then we change the state then the state
+[00:01:13] can keep updating keep updating until
+[00:01:15] eventually we get the final result. Then
+[00:01:19] some the state update um can come from
+[00:01:25] the state update can come from the
+[00:01:27] output of the previous state. Right? The
+[00:01:30] so the next state is calculated by the
+[00:01:33] previous state. So then we know where to
+[00:01:35] go for the next state.
+[00:01:38] Okay. Then we typically have a feedback
+[00:01:40] signal. The feedback signal forms a loop
+[00:01:43] so that it becomes the next state value.
+[00:01:46] And we have a clock signal. Uh the clock
+[00:01:49] signal determines when we need to update
+[00:01:51] and how fast we can update the state.
+[00:01:55] Okay. So last time we talked about the
+[00:01:57] building blocks including SR latches. Um
+[00:02:01] so it has two signals. So one is set
+[00:02:03] signal and one is reset signal. For set
+[00:02:05] signal whenever is one Q immediately
+[00:02:08] becomes one. And for reset signal
+[00:02:10] whenever that one become when reset is
+[00:02:13] one the Q becomes zero and Q prime
+[00:02:15] becomes one. But if S and zero are zero
+[00:02:20] S and R are zero then the Q will
+[00:02:23] maintain the previous state. Then no
+[00:02:25] matter
+[00:02:27] um the Q will maintain its original
+[00:02:29] state. It will not change.
+[00:02:32] Then uh as a update we have D latches.
+[00:02:36] This is still SR latches but D latches
+[00:02:38] works in a way that uh if the set signal
+[00:02:42] is zero then no matter what how D
+[00:02:45] changes Q will give its previous state
+[00:02:49] right so when the set zero is one Q
+[00:02:52] follows this value almost immediately
+[00:02:55] this is D latch so D latch has two mode
+[00:02:58] one is the hold mode one is the follow
+[00:03:00] mode right or the latch mode the latch
+[00:03:03] mode will keep the original value the
+[00:03:06] follow mode will just make Q equals to
+[00:03:09] D. The next we talk about B flip-flop.
+[00:03:14] Now by connecting two D latches
+[00:03:17] together. So one holds the up when clock
+[00:03:20] equals to one and the other one holds
+[00:03:22] when clock equals zero and makes the Q
+[00:03:25] only changes only follows this value at
+[00:03:29] the clock boundary when we have a rising
+[00:03:32] edge or a down edge. It depends on the
+[00:03:35] setup depends on where you is either
+[00:03:37] going which one is the
+[00:03:41] uh which one. So if your clock set clock
+[00:03:45] is directly input to the first one then
+[00:03:47] the not gate goes this way then it goes
+[00:03:50] um the down edge then otherwise it goes
+[00:03:53] the up edge it only triggers at up edge
+[00:03:57] then it holds both when clock equals one
+[00:03:59] and zero and Q only change once per
+[00:04:02] cycle.
+[00:04:04] And then the flip-flop is nothing
+[00:04:06] special uh but a register. And the
+[00:04:09] register is something that we can store
+[00:04:11] one bit of data, right? Because what's
+[00:04:14] the data we're actually storing is the
+[00:04:16] this value this value at the previous
+[00:04:19] clock boundary.
+[00:04:21] Okay, that's the data that we stored in
+[00:04:24] that moment.
+[00:04:27] So one register stores one bit of data.
+[00:04:30] And if you consider say you want to
+[00:04:33] store two million bytes of data that's
+[00:04:35] basically 16 million registers the
+[00:04:38] registers are very very small. Um so on
+[00:04:42] normal chip it have millions of
+[00:04:45] registers is very common but still it's
+[00:04:48] a scarce resources. It should not be
+[00:04:50] wasted. It should be carefully budgeted
+[00:04:53] and to decide to what data that you
+[00:04:56] really need to record there.
+[00:04:58] So then we're talking about synchronous
+[00:05:00] logic design and uh this is the type of
+[00:05:03] uh combin sequential logic that we're
+[00:05:05] talking about. So um we have a register
+[00:05:09] then a combination logic and this
+[00:05:11] combination logic can process data and
+[00:05:14] feed into another group of register.
+[00:05:16] This group of register holds the data
+[00:05:18] and the next group of combination logic
+[00:05:20] can process it and can pass it forward.
+[00:05:23] Okay, already here you can see some sort
+[00:05:25] of pipeline structure there and then
+[00:05:28] later on we're going to really talk
+[00:05:29] about the pipeline in uh CPU course.
+[00:05:34] Then
+[00:05:38] um we also talk about sequential logic
+[00:05:41] design with a feedback loop and the
+[00:05:43] clock signals. So we we assume all the
+[00:05:46] registers update at the same time,
+[00:05:49] right? So the whole calculation you can
+[00:05:52] consider it like synchronized that
+[00:05:56] update update update then they never
+[00:05:58] update at another time they always
+[00:06:00] calculate new result at cycle cycle
+[00:06:03] boundary so that makes simulation
+[00:06:05] actually pretty easy that you don't
+[00:06:07] really need to consider what change in
+[00:06:09] between you only need to say oh I'm
+[00:06:11] modeling this I'm replicating the
+[00:06:15] behavior of this sequential logic this
+[00:06:16] combinial logic and this combination
+[00:06:18] logic and We use the previous state to
+[00:06:21] calculate next state. Then when we get
+[00:06:24] the next state, we just write into the
+[00:06:26] register at the same time for simulation
+[00:06:28] purposes. Right? So it's a uh it's
+[00:06:31] naturally a discrete event driven
+[00:06:34] simulation. So that we only simulate at
+[00:06:36] those clock boundaries, right? We don't
+[00:06:38] even need to consider oh if this is
+[00:06:41] clock boundary or not. We just call it
+[00:06:42] cycles. At cycle one something happened,
+[00:06:44] cycle two something happened, right? So
+[00:06:47] basically we just cycle cycle zero cycle
+[00:06:50] one then we update all the combination
+[00:06:52] logic cycle one cycle two we update all
+[00:06:54] the combination logic on and on then we
+[00:06:57] can simulate a digital circuit rather
+[00:06:59] easy. So then just just by the way what
+[00:07:04] is asynchronous logic design? So
+[00:07:07] asynchronic logic design uh also exist
+[00:07:11] and it's actually quite common. It's
+[00:07:13] more common than you think. So consider
+[00:07:16] or chip right or CPU chip you may
+[00:07:18] probably hear something like or CPU
+[00:07:20] works at a frequency or GPU works at
+[00:07:22] another frequency then or memory works
+[00:07:25] at another frequency
+[00:07:28] right so they can still communicate with
+[00:07:30] each other so actually your if you
+[00:07:32] consider whole system as a digital
+[00:07:34] circuit it's not synchronous logic
+[00:07:36] design it's asynchronous but then that
+[00:07:38] requires some like synchronization to
+[00:07:41] guarantee that the data can pass through
+[00:07:44] then can there's no conflict there's no
+[00:07:46] overriding it's a little bit complex and
+[00:07:48] it's not the main goal of this uh this
+[00:07:51] lecture but I just want to let you know
+[00:07:53] that there exist such system and
+[00:07:55] especially in your CPU GPU and memory
+[00:07:59] sometimes your CPU is very busy but it
+[00:08:02] doesn't really need a lot of data so
+[00:08:03] increase the CPU frequency but keep the
+[00:08:05] memory frequency low to save energy it's
+[00:08:08] a very common u practice for modern
+[00:08:11] chips
+[00:08:14] Okay. Then so the main goal of today's
+[00:08:16] lecture is talk about how the
+[00:08:20] sequential logic are designed and the
+[00:08:22] key technique we use is state machine.
+[00:08:24] So is the method to design sequential
+[00:08:26] logic circuits and we start with an
+[00:08:29] example. The example is a traffic light.
+[00:08:33] A traffic light light on the on
+[00:08:36] university roads. Okay. We have several
+[00:08:41] things. We have lights. Now we consider
+[00:08:44] light B, LB and LA, right? There are two
+[00:08:47] LA because they can share the same
+[00:08:49] signal. If they're red, they're always
+[00:08:51] red together. So we can just have one
+[00:08:54] signal that duplicate and use two wires
+[00:08:56] to send to two different lights. Then LB
+[00:09:00] are another set of signal. Then we also
+[00:09:03] have TA and TB.
+[00:09:06] Okay. So TA and TB what's TA and TB is a
+[00:09:09] sensor to detect if there are cars or
+[00:09:11] not. Okay. So our rule is um
+[00:09:17] if let's say in the case we have L a A
+[00:09:21] is green and B is red. Now when we
+[00:09:25] detect there's no car on the a side then
+[00:09:28] we switch we give a yellow light first
+[00:09:32] then later on switch to green here and
+[00:09:36] the red here okay we just detect if
+[00:09:38] there's car or not just a simple example
+[00:09:42] I explain it with states
+[00:09:46] okay so
+[00:09:48] whenever we design a system the first
+[00:09:51] thing no matter it's a software system
+[00:09:53] hardware system. The first thing you
+[00:09:54] need to ask is what's the input and what
+[00:09:57] is output. Then you evaluate this type
+[00:09:59] of system if it's possible by intuition
+[00:10:02] that if this input can determine the
+[00:10:05] output, right? At least in a simple way
+[00:10:08] that like maybe the not the best way to
+[00:10:11] determine the output but at least the
+[00:10:13] input provides sufficient information
+[00:10:15] for the output to to be generated.
+[00:10:18] Right? So you first need to clear what
+[00:10:20] is the input and what is the output and
+[00:10:22] the TA and TBR sensors LA and LB are
+[00:10:26] lights. You draw this type of block
+[00:10:28] diagram to clear what is um the input
+[00:10:31] and output.
+[00:10:33] Here we consider TA to be a single bit
+[00:10:37] signal right car there or car not there
+[00:10:40] right TB also single bit signal L needs
+[00:10:44] to be a bus. So how many bet are there?
+[00:10:50] Two, right? Because there are three
+[00:10:52] different possible cases. Red, green,
+[00:10:55] yellow. And if you want to encode it, if
+[00:10:58] it's
+[00:11:00] if it's more than two and lower than
+[00:11:03] four, then we have two bits, right? If
+[00:11:06] it's there are four state, then we start
+[00:11:08] to need three bit.
+[00:11:11] Four state can also have two bits. There
+[00:11:12] are five bit. Five state, then we need
+[00:11:14] three bit.
+[00:11:16] Okay. So we consider what's the possible
+[00:11:19] cases. It's not we cannot have both red
+[00:11:23] and we cannot have both green. Right? In
+[00:11:25] that case we set we say LA is red, LB is
+[00:11:29] green. L red, LB yellow. LB red, LA
+[00:11:33] green, LB red. Those are all the
+[00:11:35] possible states. No other cases. Only
+[00:11:38] four possible states. Then we draw these
+[00:11:41] possible states to represent as state as
+[00:11:44] as states.
+[00:11:46] The state zero is LA green LB red. State
+[00:11:51] one is LA yellow lb red.
+[00:11:56] Then it's symmetrical. On this side is L
+[00:11:59] red, LB green. On this side we have
+[00:12:02] yellow, L red, and LB yellow. Okay, four
+[00:12:06] different cases and four different
+[00:12:08] states. So we use a simple style of
+[00:12:10] encoding.
+[00:12:12] Then consider the the all the possible
+[00:12:14] states to represent
+[00:12:17] the
+[00:12:19] pos all the possible combination of
+[00:12:21] or output
+[00:12:23] states. I'm reusing this word state. So
+[00:12:27] we're encoding all the possible states.
+[00:12:29] Then we consider how these states
+[00:12:30] transit. Then um so for digital circuit
+[00:12:35] pretty much everything that you can be
+[00:12:36] can be considered as a state. Then uh
+[00:12:40] and typically there are not a lot of
+[00:12:42] states in one unit and in one unit if
+[00:12:45] there are too many states then you
+[00:12:47] probably need to consider to break it
+[00:12:48] down into multiple components otherwise
+[00:12:51] it's just becoming too complex.
+[00:12:56] Right? Okay, then let's go this way.
+[00:13:01] We may have a state transition from S0
+[00:13:04] to S1. And this state transition has a
+[00:13:07] requirement. What's the requirement? Is
+[00:13:11] TA prime. I call it TA prime. That means
+[00:13:13] there's TA is not sensing any car there,
+[00:13:17] right? There's no more car passing
+[00:13:19] through the traffic light A.
+[00:13:22] If that is true or TA is zero then we
+[00:13:26] consider that we transit from that state
+[00:13:29] to the next state.
+[00:13:32] Now on the second case we need to
+[00:13:34] consider we probably need to maintain
+[00:13:37] green state. So the state arrow can
+[00:13:39] point back. So this state transition can
+[00:13:41] point to itself and if there's car
+[00:13:43] passing through we want to stay in the
+[00:13:45] green state.
+[00:13:48] Okay. Now we keep going. So this case
+[00:13:52] when it's yellow we consider it stays
+[00:13:55] there at for one cycle. Okay, just simp
+[00:13:58] simplification. It stays there for one
+[00:14:00] cycle. Then we unconditionally move to
+[00:14:04] this state. LA turns green, red and LB
+[00:14:07] turns green.
+[00:14:09] Then it becomes symmetrical. Then when
+[00:14:12] there's no car for light B, we switch to
+[00:14:17] state three. And when there's car still
+[00:14:19] going out, then we switch to
+[00:14:23] uh we stay at S2. Similarly, if we hit
+[00:14:27] S3, we stay there for one cycle, then we
+[00:14:29] move on to S0
+[00:14:32] and it forms a cycle.
+[00:14:35] Okay, this is a simple logic or of our
+[00:14:38] input. Then this is a analysis process
+[00:14:40] that you first need to consider how your
+[00:14:43] system works. Now what are the states
+[00:14:45] possible?
+[00:14:49] Then just think about traffic light or
+[00:14:52] something like supply chain. It's
+[00:14:53] actually something rather common for
+[00:14:57] um common ways to understand how
+[00:15:01] computer system works. For example,
+[00:15:03] traffic lights, right? Then you have
+[00:15:06] something like a bus. This is a bus in
+[00:15:09] the term of network, right? It's not a
+[00:15:11] bus of multiple bits like LA and LB. So
+[00:15:15] a bus is a a group of wires that are
+[00:15:20] shared by multiple input. then or
+[00:15:24] sometimes multiple outputs right so if
+[00:15:27] just let's make it simple multiple
+[00:15:28] inputs and when there are multiple
+[00:15:30] inputs and all of them want to send to
+[00:15:33] data to the signal to the destination
+[00:15:35] then we need an abiter to decide who can
+[00:15:38] send right that this abiter can do the
+[00:15:41] arbitration to decide who have the right
+[00:15:43] of the way and in this case it's
+[00:15:46] actually very similar to this type of
+[00:15:48] green light red light type of control
+[00:15:50] it's just probably there are more
+[00:15:51] intersection sections that you can only
+[00:15:53] select the one to go, right? There may
+[00:15:55] be probably even gaps between this
+[00:15:57] sending process so that you can like
+[00:16:00] safeguard so that two control signal
+[00:16:03] never collide with each other.
+[00:16:07] Also another common um ways to
+[00:16:11] understand computer architecture is to
+[00:16:14] to compare things to the supply chain.
+[00:16:17] Say one supplier, one retailer buys
+[00:16:20] something from a um manufacturer, right?
+[00:16:23] So your core is a retailer really needs
+[00:16:27] data. Your your memory is a manufacturer
+[00:16:31] can really provide the data. So how
+[00:16:34] what's your bandwidth? How fast that you
+[00:16:36] can provide the data to the destination
+[00:16:38] is something that you really need to
+[00:16:40] consider. So that's why we studied these
+[00:16:42] type of examples.
+[00:16:45] Okay. Let's say
+[00:16:49] we once we have this type of state
+[00:16:52] machine right what we can do is we can
+[00:16:54] draw we can connect the inputs with
+[00:16:58] current state and next state to form
+[00:17:00] another sort of truth table right and
+[00:17:03] the truth table have many axis that
+[00:17:05] means the cases that we don't care so
+[00:17:09] for example there's a one special case
+[00:17:12] Um
+[00:17:17] so S3 to S0 right S3 to S0 for both
+[00:17:21] cases we don't care we don't care what's
+[00:17:22] the input that's something that
+[00:17:24] transition must happen there are some
+[00:17:26] also interest that are not in this table
+[00:17:29] for example S0 to S sub2 because S0
+[00:17:34] never directly transit to L2 those are
+[00:17:36] cases that we don't need to consider we
+[00:17:38] only need to consider when there's a
+[00:17:40] real arrows transition arrows. So there
+[00:17:43] are six arrows then we have six entries.
+[00:17:48] Then next thing is we need to encode the
+[00:17:51] state. How to encode a state? It's very
+[00:17:54] simple. We just put zero and once. So we
+[00:17:57] say we need two bits to encode a state.
+[00:17:59] We just decide say S0 is 0 0 s1 0 1 s2
+[00:18:03] is 1 z s3 is 1 one just 0 1 2 3 to
+[00:18:07] represent their encoding. Okay. This is
+[00:18:10] current state and the next state. I
+[00:18:12] think it's um pretty clear about what's
+[00:18:16] going on, right? And it maps back to
+[00:18:19] what's the
+[00:18:22] output, right? We also need to encode
+[00:18:24] the output. And I say L 0 is green, 01
+[00:18:28] is yellow, and one Z is red. And those
+[00:18:30] are the input. And this is another set
+[00:18:33] of more complex truth table to say oh if
+[00:18:36] this is our current state and this is
+[00:18:38] our input the next state will become
+[00:18:40] this value the output will become this
+[00:18:42] set of values.
+[00:18:45] Okay there are different ways to
+[00:18:47] represent that state.
+[00:18:51] Okay. So once we understand the whole
+[00:18:55] process we can start to design
+[00:18:58] circuit.
+[00:19:00] Then what we'll talk about sequential
+[00:19:02] logic. Sequential logic have two
+[00:19:05] main components. One is the state or the
+[00:19:09] register. The register stores which
+[00:19:12] state we were on and we will be and the
+[00:19:16] combination logic will do the processing
+[00:19:19] and do the calculation.
+[00:19:21] Right? So here we have this state.
+[00:19:24] Right? The current state the current
+[00:19:26] state it's a register. So just consider
+[00:19:28] there's two registers. These two
+[00:19:30] register one stores as zero and one
+[00:19:32] stores as one. Their output their Q will
+[00:19:35] stay there so that the CL will process
+[00:19:39] this data for the whole cycle. Okay, it
+[00:19:42] will have a lot a long time to process
+[00:19:44] this data. Then once it calculates the
+[00:19:47] data it will output as n as next zero as
+[00:19:52] next one as input as the d signal to the
+[00:19:56] register.
+[00:19:59] Okay.
+[00:20:01] So those are the d signal. Then when the
+[00:20:05] clock signal arrives when the clock
+[00:20:07] right rising edge arrives
+[00:20:10] S0
+[00:20:11] becomes SN0 S1 becomes SN1 then the
+[00:20:15] combination logic will have a little bit
+[00:20:16] time to calculate the new result then
+[00:20:18] becomes the next state.
+[00:20:22] Okay, it's a loop.
+[00:20:26] Any questions?
+[00:20:33] So there's a this the register is a
+[00:20:36] separation, right? So the all the so so
+[00:20:40] let's say if your cycle is 1 second,
+[00:20:46] right? If your cycle is 1 second then
+[00:20:49] very likely at the beginning your output
+[00:20:52] let's say SN will jitter for a little
+[00:20:56] time
+[00:20:57] will jitter for a little time then it
+[00:21:00] will eventually arrive at the value that
+[00:21:03] you want to have right so this is
+[00:21:08] s n0
+[00:21:11] okay now what about
+[00:21:16] what about S0.
+[00:21:19] Now S0 then assuming it starts from here
+[00:21:21] right from zero then it will only change
+[00:21:25] at this moment because S0 s N0 is one at
+[00:21:29] this moment it will rise at one at the
+[00:21:32] clock boundary.
+[00:21:35] Okay then at this point there will be
+[00:21:37] some jitter again but this one will stay
+[00:21:40] there.
+[00:21:41] It will stay there. This one will jitter
+[00:21:43] again will drop to zero.
+[00:21:46] Okay. Then at two second or the second
+[00:21:52] clock signal then this one becomes zero
+[00:21:56] and getting stable.
+[00:21:58] Okay. Just trying to help you review the
+[00:22:01] how the register works at this stage. So
+[00:22:04] the register isolates the input and the
+[00:22:07] output and keep the output of this
+[00:22:09] register stable for the whole cycle. Now
+[00:22:12] we call this we memorize the previous
+[00:22:16] states.
+[00:22:18] This process is we memorize
+[00:22:22] this previous state. We just keep this
+[00:22:25] state and log this state for there.
+[00:22:30] Okay.
+[00:22:33] So now we have the true stable. Now once
+[00:22:36] you have a true stable is getting into
+[00:22:38] your comfort zone. You know a truce
+[00:22:40] table can be easily converted to a
+[00:22:42] combination logic right. So then this
+[00:22:45] time that we do the conversion that you
+[00:22:47] should be very comfortable with this
+[00:22:49] whole process that you can either use
+[00:22:51] boolean expressions or deriving the
+[00:22:53] equation or use the kernel map to do the
+[00:22:56] simplification. Then we can get this
+[00:23:00] result as s1
+[00:23:03] x or zero right
+[00:23:06] s0. And this one probably we just have
+[00:23:08] no way to simplify right then we just
+[00:23:11] need a complex
+[00:23:15] equation there needs many gates there.
+[00:23:20] Okay. Then the other thing is we can
+[00:23:23] calcul previous previously this thing
+[00:23:26] this equations can calculate the next
+[00:23:30] state
+[00:23:31] but we also need some processing to
+[00:23:34] convert the current state to the output.
+[00:23:39] So here I'm hiding something that shall
+[00:23:41] we use the current state as the input or
+[00:23:44] shall we use the next state as the input
+[00:23:48] or shall we use the current state and
+[00:23:49] input as the input to the out for the
+[00:23:53] output. Let's just make it simple for
+[00:23:56] now. Let's use the current state as the
+[00:23:58] input to calculate output. Next state is
+[00:24:01] not
+[00:24:03] it's not probably not very good. Right?
+[00:24:05] We can either use the current state or
+[00:24:07] the current state plus input.
+[00:24:12] Okay. So
+[00:24:14] output combination logic. Now just
+[00:24:16] drawing this as two different
+[00:24:18] componential logic.
+[00:24:21] This were the original
+[00:24:24] combination logic for calculating the
+[00:24:26] next state goes back.
+[00:24:29] This is the output calculating
+[00:24:31] combination logic.
+[00:24:33] Now we take the S1 and S0 then calculate
+[00:24:37] L1 at L A and LB. So just consider this
+[00:24:42] as a system
+[00:24:43] itself. What's the input? Input is S0
+[00:24:47] and S1, right? What's the output is LA
+[00:24:50] and LB. So the question that you need to
+[00:24:52] ask at this moment is is it
+[00:24:55] deterministic or not? Or can we decide
+[00:24:57] LB
+[00:24:59] from S0 and S1?
+[00:25:02] Then the quick answer is yes, we can
+[00:25:05] right because we have this true stable
+[00:25:07] written there. We have all the possible
+[00:25:09] combination written there. So by the
+[00:25:12] way, L and LB are two buses. So there
+[00:25:15] are basically four output here. Two
+[00:25:17] input, four output.
+[00:25:20] Okay, so remember last time
+[00:25:24] if there are two input then we only need
+[00:25:26] one gate to calculate one output. So at
+[00:25:29] the most we need four gates there. So if
+[00:25:31] we do not consider not gate as a gate.
+[00:25:36] Okay. So what's the output logic? I'm
+[00:25:38] simply write it down. It's pretty
+[00:25:40] straightforward.
+[00:25:45] Okay.
+[00:25:47] So we write down everything all the
+[00:25:50] equations. Now we have
+[00:25:55] four input. Four input as S1, S0 and TA
+[00:26:00] and TB. Four input.
+[00:26:02] Six output. SN1, SN0, L A1, L A Z, LB1,
+[00:26:07] LB0.
+[00:26:09] Four input, six output. That's our
+[00:26:12] calculation. Then we can draw this
+[00:26:14] circuit in a very simple way like this.
+[00:26:17] So then we start to simplify a register
+[00:26:21] or a group of register in this type of
+[00:26:24] symbol is controlled by clock.
+[00:26:31] Okay.
+[00:26:33] So then we draw the
+[00:26:36] the type of circuit that calculates next
+[00:26:39] state on this part. The next state
+[00:26:41] combination logic on this part. the
+[00:26:43] output combination logic of this part.
+[00:26:50] Okay, comfortable with the whole
+[00:26:51] process.
+[00:26:54] Probably take some time for you to
+[00:26:56] memorize and for you to become skillful.
+[00:27:00] Now I will have more examples, more
+[00:27:02] complex examples.
+[00:27:04] We just want to let you understand the
+[00:27:06] whole process. Let's remember from the
+[00:27:09] problem to a system diagram input
+[00:27:12] output. Now we can summarize what are
+[00:27:15] the state and start to draw this state
+[00:27:17] transition diagram. We have this stage
+[00:27:20] transition diagram. We convert into this
+[00:27:22] states transition truth table
+[00:27:25] that there's a hidden process that's
+[00:27:27] encoding the current state next state or
+[00:27:30] encoding the states and encoding the
+[00:27:32] output. With this truth table, it
+[00:27:35] becomes a combination logic design. We
+[00:27:38] just need to specify what is the in
+[00:27:40] exact input and what is the exact
+[00:27:42] output. But the worst the case is just
+[00:27:46] treat this four as input and treat this
+[00:27:48] six as output and design one combination
+[00:27:50] logic. That's okay,
+[00:27:53] right? Then
+[00:27:56] that's okay. Yeah. Then we can move on
+[00:28:00] to
+[00:28:02] simplify the equations. Write the
+[00:28:04] equation. Write the equation. Make the
+[00:28:06] simplest form. Then eventually it
+[00:28:08] converts into a
+[00:28:12] circuit that we can draw.
+[00:28:16] Okay. Quick summary. I already done a
+[00:28:19] quick summary. Just go through these
+[00:28:20] steps again. Designing a sequential
+[00:28:23] logic. The step list the possible
+[00:28:26] output. List the possible state broad
+[00:28:29] state transition diagram. Encode state
+[00:28:32] and out state and output and list the
+[00:28:35] state transition state as a truth table
+[00:28:37] and use state transition table to
+[00:28:40] generate and simplify the blind
+[00:28:42] expression and finally draw the circuit.
+[00:28:45] Okay, that's the whole process of how
+[00:28:47] you can design a sequential logic.
+[00:28:51] Think about host. Yeah,
+[00:29:03] the combination logic itself is not very
+[00:29:05] useful. But as you see a big part is
+[00:29:09] combination logic here. So that's why we
+[00:29:11] have to introduce combination logic
+[00:29:12] first. Then we can introduce sequential
+[00:29:14] logic.
+[00:29:17] Everything works in cycles. almost
+[00:29:19] there's no way that you can directly
+[00:29:21] figure out to the result.
+[00:29:25] Okay,
+[00:29:27] just consider that if you know what
+[00:29:30] exactly each cycle can happen is a user
+[00:29:33] press a button and this button goes into
+[00:29:36] the CPU goes into some memory then goes
+[00:29:38] to uh the GPU then render then goes back
+[00:29:43] to the screen. The whole process is a
+[00:29:46] group of sequential logic. Okay. So just
+[00:29:52] want to want you to the most important
+[00:29:54] at this stage is feel comfortable that
+[00:29:57] these type of things can be designed and
+[00:30:00] can be break down into pieces and
+[00:30:02] eventually these pieces combined
+[00:30:03] together can build something super
+[00:30:05] complex.
+[00:30:07] Okay.
+[00:30:10] So if you have unlimited budget and
+[00:30:12] unlimited time for now you can already
+[00:30:14] build a CPU and there are a lot of more
+[00:30:17] things to do.
+[00:30:20] Let's talk how about this we I I
+[00:30:23] intentionally separate these two
+[00:30:25] combination logic but if you combine
+[00:30:27] into one is it okay then in term of
+[00:30:31] drawing this diagram it's definitely no
+[00:30:33] big problem right um they're equivalent
+[00:30:37] but there are special
+[00:30:40] ways to understand this there are
+[00:30:42] special terms so the left side is called
+[00:30:45] a more machine and the right side is
+[00:30:48] called millius machine is basically the
+[00:30:51] people who
+[00:30:53] created this type of machine and name
+[00:30:55] this type of things.
+[00:30:57] Okay. So what is Morris machine? Morris
+[00:31:00] machine is a state machine where the
+[00:31:03] output only depends on the input.
+[00:31:09] Sorry.
+[00:31:10] Morse machine is where the output only
+[00:31:13] depends on the state. It doesn't depends
+[00:31:15] on the input.
+[00:31:18] Okay, Millie machine is a machine that
+[00:31:21] the output depends on both the input and
+[00:31:24] the state.
+[00:31:30] So we know in this this case
+[00:31:33] the T and TB changes won't actually
+[00:31:36] immediately trigger LA and LB. It will
+[00:31:39] take effect. The earliest time is the
+[00:31:42] next cycle.
+[00:31:45] Okay, on this side it will immediately
+[00:31:47] change the LA and LB the output.
+[00:31:52] Okay, so I want to want you to imagine
+[00:31:56] what's the advantage and the
+[00:31:57] disadvantage of these two different
+[00:31:59] machines.
+[00:32:10] Probably already said one.
+[00:32:35] milling machine will change output
+[00:32:38] immediately even without waiting for the
+[00:32:40] next cycle. Right?
+[00:32:42] So that make that means mill machine has
+[00:32:45] the advantage of faster response lower
+[00:32:48] latency.
+[00:32:50] Okay.
+[00:32:52] Morse machine has longer latency.
+[00:32:55] Also as this combination logic is more
+[00:32:58] capable in many cases when we have four
+[00:33:03] bit or five bit or even more bit we
+[00:33:05] typically need fewer state to represent
+[00:33:09] the state machine.
+[00:33:11] Okay. We need fewer states. That means
+[00:33:13] we need we have fewer bits. Now we have
+[00:33:16] fewer bits. Then we have fewer steps of
+[00:33:19] the transition table.
+[00:33:22] Okay. Then we can have faster response,
+[00:33:27] faster latency here. So mini machine has
+[00:33:31] fewer registers because it requires
+[00:33:33] fewer state. It's more concise and has
+[00:33:36] lower latency because it can respondse
+[00:33:38] faster. Lower latency comes from two
+[00:33:40] sides. One is it can immediate response
+[00:33:43] from the input. The other side is
+[00:33:45] because there are fewer register, fewer
+[00:33:47] states, the transition table is simpler.
+[00:33:49] So we need fewer steps to arrive at the
+[00:33:53] the stage that we can get the result.
+[00:33:56] Okay,
+[00:33:59] the morse machine is simpler because we
+[00:34:01] separate these two
+[00:34:04] combination logic. that each combination
+[00:34:06] logic is simpler because the register
+[00:34:08] there are not a lot of design that we
+[00:34:10] can do with the register or mainly
+[00:34:12] design their combination logic. So
+[00:34:14] design and debugging are much simpler
+[00:34:16] for Morris motion,
+[00:34:20] right? And also the output only changes
+[00:34:22] at the clock edges. That means
+[00:34:26] if your TA and TB are not controlled by
+[00:34:28] a register, sometimes we consider those
+[00:34:32] as glitches or jitters that can just go
+[00:34:36] up and down. That is not intentional.
+[00:34:40] Okay. So more slow is simpler, more
+[00:34:42] stable. The milling machines take is
+[00:34:45] more uh saves more resources, more
+[00:34:48] energy and provides faster uh response.
+[00:34:52] So in reality both are being used and
+[00:34:58] they are equivalent. So there are method
+[00:35:00] that you have one system that you can
+[00:35:02] convert into another system. Sometimes
+[00:35:05] for a simple system like traffic light
+[00:35:08] control system there's probably no
+[00:35:10] difference but with a more complex
+[00:35:12] system it can have difference. Um and
+[00:35:14] they're both used that for different
+[00:35:16] situation.
+[00:35:18] Okay. So I would say mill machine is
+[00:35:20] probably more optimized. If you care
+[00:35:22] about extreme performance then use mill
+[00:35:24] machine. Then if you don't care about
+[00:35:26] the extreme performance you just like
+[00:35:28] this your first version of design use
+[00:35:30] more machine.
+[00:35:40] I can I don't have concrete examples
+[00:35:43] then if you need concrete example we can
+[00:35:45] talk about concrete examples
+[00:35:48] uh but here
+[00:35:51] because this combination logic is more
+[00:35:53] capable
+[00:35:55] right so it's just an intuitive
+[00:35:58] understanding of why this need require
+[00:36:00] fewer fewer
+[00:36:02] registers. So we can have fewer
+[00:36:04] information provided on this side and
+[00:36:06] more information provided on that side
+[00:36:08] that eventually we can also determine
+[00:36:10] the output.
+[00:36:14] Okay. Uh our textbook has examples uh
+[00:36:18] for how to convert a more machine to
+[00:36:20] mill machine and why mill machine has
+[00:36:22] fewer bits. Just example and you can
+[00:36:28] you can go with you can just check that
+[00:36:30] one. Okay, check the textbook for
+[00:36:33] examples.
+[00:36:37] Okay,
+[00:36:39] I think we should have enough enough
+[00:36:41] time to finish today's content.
+[00:36:44] Okay, so let's consider another example,
+[00:36:48] more complex example.
+[00:36:50] uh unlock the door with four numbers. We
+[00:36:53] know the four numbers, right? So, we
+[00:36:57] need these four numbers, four correct
+[00:36:59] numbers. Let's say make it simple 1 2 3
+[00:37:01] 4 to be typed in the right order. If we
+[00:37:05] type 1, two, five, then immediately it's
+[00:37:09] going to the wrong look, it's wrong,
+[00:37:11] right? Then we just we need to type 1 2
+[00:37:14] 3 4 again to unlock.
+[00:37:18] Okay, so we need these four four digits
+[00:37:20] to be consecutive so that we can unlock
+[00:37:23] the door. So how we can design this type
+[00:37:25] of digit circuit and still a simplified
+[00:37:29] implementation of this type of system
+[00:37:31] but just a demo. So we unlock door with
+[00:37:34] four uh
+[00:37:39] we unlock the door with four numbers
+[00:37:41] then
+[00:37:43] probably eventually I didn't design this
+[00:37:45] wrong number and X button handling I uh
+[00:37:48] did I
+[00:37:51] okay not a big problem let's look at
+[00:37:53] this state machine so this is a more
+[00:37:56] realistic state machine that we
+[00:38:00] typically start with idle state two.
+[00:38:03] Then uh the probably the first thing
+[00:38:06] when you define a state machine is to
+[00:38:08] consider those cases those states that
+[00:38:10] are impossible.
+[00:38:12] Now what are impossible cases? So just
+[00:38:15] consider there are a lot of impossible
+[00:38:17] states. Then so sometimes just your
+[00:38:20] system may just go crazy and go to some
+[00:38:23] wrong state. So what we do is for every
+[00:38:26] state every other state that we're now
+[00:38:28] drawing here we just point back to the
+[00:38:30] idle so that we can restart from the um
+[00:38:34] the process. So every this type of
+[00:38:38] system of state machine typically have
+[00:38:40] this reset signal that whenever
+[00:38:42] something happen always go back to the
+[00:38:44] idle state. Okay let's look at this idle
+[00:38:48] state. If nothing happens we stay at
+[00:38:51] idle
+[00:38:52] right. But if
+[00:38:56] the right number is the correct number
+[00:38:58] is pressed, we go to C1. If the wrong
+[00:39:00] number is pressed, we go to E1.
+[00:39:06] Okay. Then from any point we have two
+[00:39:10] different ways to go. If it's correct,
+[00:39:12] we go to C2. For if wrong, we go to E2.
+[00:39:16] The correct we go to C3. The wrong we go
+[00:39:18] to E3. And for C3, we have two different
+[00:39:21] cases. describe we go to unlock. Unlock
+[00:39:25] is a transient state. A transient state
+[00:39:27] that means it's a hidden state that a
+[00:39:30] user may not really need to know about
+[00:39:32] this state. But we use this state to
+[00:39:34] trigger output signal. Okay. Then if you
+[00:39:38] consider a milling machine, a milling
+[00:39:39] machine can skip this signal, right?
+[00:39:42] Because the input and the state and C3
+[00:39:45] C3 state with the pre the next correct
+[00:39:48] input can already trigger the analog
+[00:39:50] signal.
+[00:39:52] But here let's consider Morris machine
+[00:39:55] more machine in Morris machine we need
+[00:39:57] this analog state because we need this
+[00:40:00] particular state to trigger that output
+[00:40:02] signal. Still correct we go to unlock if
+[00:40:04] it's wrong we go to idle. Okay then
+[00:40:07] after unlocking go back to idle. So
+[00:40:11] still a simplified design. And this this
+[00:40:13] type of algorithm is not only used for
+[00:40:15] hardware design and for something like
+[00:40:17] uh typing a password without input box
+[00:40:21] without enter key and this is typically
+[00:40:23] commonly used in software design that we
+[00:40:26] consider a state machine that we just
+[00:40:28] require user to type this particular um
+[00:40:34] particular string in in a sequence. Even
+[00:40:36] for some sequence matching then we use
+[00:40:39] this type of state machine to represent
+[00:40:41] which one that we matched until this
+[00:40:44] point.
+[00:40:46] Okay. Then we go back to this digital
+[00:40:51] design process and we start to do state
+[00:40:54] encoding. Okay. So this type this time
+[00:40:57] we almost almost never h we don't even
+[00:41:00] have output. We only have one output
+[00:41:02] that is the unlock signal. Right? And
+[00:41:05] the unlock signal is so simple that it's
+[00:41:07] triggered in this state. Then for other
+[00:41:10] state or unlock signal is
+[00:41:14] or unlock signal is um
+[00:41:18] or unlock signal is zero. So we don't
+[00:41:20] unlock.
+[00:41:22] Okay.
+[00:41:24] So then we start to draw this state
+[00:41:27] transition table. So from every state
+[00:41:31] now I also put the state name and the
+[00:41:33] encoding.
+[00:41:35] Okay. And for the input that's the input
+[00:41:38] that I'm writing there. Just a simple
+[00:41:40] simple
+[00:41:42] uh simple way to represent input. There
+[00:41:45] are many many many cases that is
+[00:41:48] collapsed in this other group station.
+[00:41:51] Anything else that is type is going to
+[00:41:53] other this state. Now we have encoding
+[00:41:58] just a very very complex state table a
+[00:42:01] truth table
+[00:42:04] then write down equation not a lot of
+[00:42:08] chance to simplify
+[00:42:10] and
+[00:42:21] this part.
+[00:42:23] So then we can
+[00:42:26] draw this type of
+[00:42:29] we can write down this type of equation.
+[00:42:30] Then we can type every state output
+[00:42:33] right every output state next state
+[00:42:35] every bit and we can write down
+[00:42:37] equation. Then we know uh
+[00:42:41] how we can draw the circuit how we can
+[00:42:43] design this circuit.
+[00:42:45] I I'll skip this part. Okay. Another
+[00:42:49] thing you need to do is to derive the
+[00:42:51] finite state machine from circuit.
+[00:42:55] Then this part is actually simpler than
+[00:42:57] for example we have this type of circuit
+[00:43:00] then we have a clock and we have a
+[00:43:01] reset. Then so it's first time you see a
+[00:43:04] reset
+[00:43:06] it's very common for a register to have
+[00:43:10] reset or I should say it's more common
+[00:43:13] to have a reset than not to have a
+[00:43:15] reset.
+[00:43:17] So for reset is typically if something
+[00:43:20] goes wrong we need to go back to the
+[00:43:22] default state. In the previous case is
+[00:43:24] the idle state. For most of group of
+[00:43:26] registers there's always a set of uh
+[00:43:30] default state. Then this is the circuit.
+[00:43:36] Okay.
+[00:43:38] Then what we can do the analog signal
+[00:43:42] is S1 right? It's directly connected to
+[00:43:45] S1. So very similar to the previous
+[00:43:48] example
+[00:43:50] the N1 we can write down the equation
+[00:43:53] because we know the gates we can read
+[00:43:55] the gates and write down the expression
+[00:44:01] we also have a zero there. So the next
+[00:44:05] task is simply write the truth table the
+[00:44:07] other way around. We just how we write
+[00:44:11] it. We say s1, s0, a1, a z are input,
+[00:44:15] right? Then as n n n n n n n n n n n n n
+[00:44:18] n n n n n n n n n n n n n n n n n n n n
+[00:44:18] n n n n n n n n one and n zero are
+[00:44:19] output
+[00:44:21] and we just put down all the possible
+[00:44:23] cases just for systematic way we write
+[00:44:26] consider this includes a number there's
+[00:44:28] 0 1 2 3 4 all the way to 15 just write
+[00:44:33] down these numbers this way now we just
+[00:44:36] manually calculate every step then put
+[00:44:39] down this output there okay then
+[00:44:44] we Say
+[00:44:46] we decode the state. For example, S0 s1
+[00:44:52] s0 is a state 0 0. We just simply write
+[00:44:55] as state zero 0 as state zero. Say one
+[00:44:59] state two state two. And it's actually
+[00:45:03] very interesting that there's no state
+[00:45:05] three for output.
+[00:45:09] Right? There's no state three for
+[00:45:10] output. That means it's this state
+[00:45:12] machine is actually a three-state state
+[00:45:14] machine. There's no state three. Okay,
+[00:45:18] there's no state three. So we write down
+[00:45:21] this expression. Then we can draw this
+[00:45:24] table here.
+[00:45:28] S0.
+[00:45:29] When a not equal to three, we go back.
+[00:45:34] When a equals 3, we go to s1. And when a
+[00:45:38] not equal to s a a when a doesn't equal
+[00:45:41] to one we go back. When a equals to one
+[00:45:44] we go here. Now when we arrive s2 s2
+[00:45:47] becomes one. It's you remember the
+[00:45:50] unlock signal.
+[00:45:52] This this is state two right for state
+[00:45:55] two the higher bit has number one. The
+[00:45:58] high whenever the higher bit has number
+[00:46:00] one we directly unlock.
+[00:46:03] Okay. a
+[00:46:05] twodigit passcode.
+[00:46:09] This much smaller example. Two
+[00:46:13] twodigit passcode and we know the what's
+[00:46:17] the digit is three and one.
+[00:46:22] Okay. Then we go back to say zero. Then
+[00:46:25] you can see
+[00:46:27] for state three something that we don't
+[00:46:30] really care. It can go back to other
+[00:46:33] states. That's okay.
+[00:46:39] Okay.
+[00:46:41] So,
+[00:46:42] now we start with building blocks. Now,
+[00:46:46] I'm only going to talk about one
+[00:46:48] building block today. Counter. Counter
+[00:46:51] is just so commonly used that can be
+[00:46:53] converted into forms that you can almost
+[00:46:55] never cannot ever you probably cannot
+[00:46:59] recognize. Okay, now we start to have
+[00:47:02] more symbols and I just trying to trying
+[00:47:05] to help you understand these symbols.
+[00:47:08] These symbols is easy to understand.
+[00:47:10] This is a register
+[00:47:13] and we know the input is n bit and
+[00:47:15] output is n bit. That means this is the
+[00:47:17] n bit register.
+[00:47:19] We don't specify mbit. Now here this
+[00:47:23] plus sign which is a plus sign with this
+[00:47:26] this symbol. This symbol typically
+[00:47:29] represents ALU. This arithmetic logic
+[00:47:33] unit.
+[00:47:34] Okay. Now we'll talk about alou a lot in
+[00:47:36] the CPU design. This is a alou. Whenever
+[00:47:39] you see this symbol is a group of
+[00:47:42] combination logic that can do the
+[00:47:44] calculation.
+[00:47:46] Sometimes it can also represent com
+[00:47:48] sequential logic. It requires multiple
+[00:47:50] steps when we draw a diagram at a very
+[00:47:53] high level. But anyway here this is a
+[00:47:57] combination logic that can that can sum
+[00:47:59] numbers out. So here we only put number
+[00:48:02] one as input here.
+[00:48:08] Uh in this particular example yes and it
+[00:48:11] can only do plus operation.
+[00:48:15] In
+[00:48:17] particular case it's just simplified
+[00:48:19] understanding actually you see we here
+[00:48:22] has a n there right that actually we
+[00:48:25] don't even need this input right we
+[00:48:28] don't even need this in clock signal is
+[00:48:29] good enough for this input so it's just
+[00:48:31] a block diagram
+[00:48:35] okay
+[00:48:40] so here we really need then just plus
+[00:48:44] one plus And it's it's actually much
+[00:48:46] simpler than a real adder
+[00:48:49] now. Okay. And there's a reset. Whenever
+[00:48:52] we press the reset, it becomes zero.
+[00:48:57] Okay. So you can also understand this as
+[00:48:59] a finite state machine. It's just a very
+[00:49:01] complex finite state machine. So it has
+[00:49:04] 2 to the^ of n minus one state. Start
+[00:49:07] from state zero. There are many many
+[00:49:09] states, right? And the transition is
+[00:49:12] also very simple. it can just simply go
+[00:49:14] up. If you consider reset, then all of
+[00:49:17] them can go back to zero. But if you
+[00:49:19] don't consider reset, then all of them
+[00:49:21] can go back to uh you just it's just a
+[00:49:25] circle. It's a big loop. Okay. So, mbit
+[00:49:29] uh mbit counter if you are interested,
+[00:49:32] you can also try to derive the equation
+[00:49:35] and draw the combination logic there.
+[00:49:38] But I just wanted you to take a counter
+[00:49:40] as a mature block that we can use for
+[00:49:44] some other cases.
+[00:49:47] Okay. So what are the other cases?
+[00:49:52] So one use case is this thing called
+[00:49:54] frequency divider.
+[00:49:58] Uh for example we have a clock signal
+[00:50:01] that works at one megahertz.
+[00:50:06] Uh now our LED flashes at about 05
+[00:50:10] seconds and 05 seconds 05 seconds on and
+[00:50:14] 05 seconds off. Then we can use a 20 bit
+[00:50:18] counter. It's a little bit hard to
+[00:50:20] calculate.
+[00:50:22] This is really hard to calculate.
+[00:50:25] By the way, let me ask you this thing.
+[00:50:30] This is a few numbers that you need to
+[00:50:32] remember.
+[00:50:34] 2 to the power of 10, 2 to the^ of 20, 2
+[00:50:39] to the^ of 30. What are those values?
+[00:50:48] It's 1024, right? Or we simply write as
+[00:50:52] 1K.
+[00:50:54] So then you may guess this one,
+[00:50:57] this one is one mega, right?
+[00:51:02] I can't remember this one. I can never
+[00:51:04] remember this one. This is one giga. 2
+[00:51:07] to the^ 40 is one terra by 50 is one pa
+[00:51:15] and so on. Right? So just simple way to
+[00:51:18] represent this
+[00:51:20] relationship. That's why we know each
+[00:51:23] phase runs at one MHz then 20 bit
+[00:51:26] counter is good enough. Okay. Then
+[00:51:31] remember the previous example here we
+[00:51:34] use the highest bit to control
+[00:51:38] the light or the the lock the unlock
+[00:51:41] signal. Here we can simply do the same
+[00:51:44] thing
+[00:51:46] for half of the time we have highest bit
+[00:51:50] equals one. For half the time have
+[00:51:52] highest bit equals to zero.
+[00:51:56] cover with witness.
+[00:51:59] Okay. So with half of time that is one
+[00:52:03] half time is zero. Then we can
+[00:52:08] exactly control half and half time.
+[00:52:12] Okay. This is one of the simplest
+[00:52:15] representation.
+[00:52:17] Then there's a way that we can calculate
+[00:52:20] number of bits to use and um
+[00:52:25] uh the frequency that we can get
+[00:52:32] that. So basically using this method you
+[00:52:35] can use
+[00:52:37] um you can get any frequency you can
+[00:52:41] start with any frequency and get any
+[00:52:43] other frequency as long as your
+[00:52:45] frequency is lower than the original
+[00:52:47] value. You cannot rise the frequency but
+[00:52:49] you can you can reduce the frequency.
+[00:52:52] The one thing that you may know is
+[00:52:56] um
+[00:52:57] remember those type of toy watches.
+[00:53:01] Those toy watches are actually quite
+[00:53:03] accurate. But right there's a piece of
+[00:53:06] crystal that crystal runs at a actually
+[00:53:09] very very high frequency at a very high
+[00:53:12] frequency. Then this frequency can drive
+[00:53:16] some type of circuit. And how we can
+[00:53:18] convert this high frequency into the
+[00:53:21] second sign that grows second by second
+[00:53:24] and basically we use this type of
+[00:53:26] counter so that we can reduce the
+[00:53:28] frequency and to get the value that we
+[00:53:31] want. It only require a few registers.
+[00:53:34] So even for one MHz reduced to one hertz
+[00:53:37] we only need 20 something registers. Not
+[00:53:39] a lot of registers.
+[00:53:43] Okay, another thing of the direct
+[00:53:48] uh
+[00:53:50] extension of the frequency tuner is this
+[00:53:54] PWM
+[00:53:55] or pulse width modulation signal
+[00:53:58] generator.
+[00:54:00] Can you give me an example how this is
+[00:54:03] used? In what case this is used?
+[00:54:12] Yeah. Um
+[00:54:22] what's that
+[00:54:23] sense?
+[00:54:31] What the senses?
+[00:54:38] This sound
+[00:54:43] can speak it louder.
+[00:54:48] Great sound.
+[00:54:53] Yeah. So it it can be used to control
+[00:54:56] the volume of a sound.
+[00:55:00] um
+[00:55:01] synthesizer. I guess that's something
+[00:55:03] that you want to say is to
+[00:55:07] say t tune the pitches of a sound and
+[00:55:11] actually not really because the
+[00:55:13] frequency will not change in this case.
+[00:55:16] The frequency is fixed. If you look at
+[00:55:18] the upper edge or the down edge, up edge
+[00:55:22] and down edge, the the gap is the same.
+[00:55:26] We're not changing. We're only changing
+[00:55:27] the duty cycle.
+[00:55:29] So one use case is our phone and
+[00:55:33] computer for most of the time to tune
+[00:55:36] the brightness of the screen. It's
+[00:55:38] actually done by this way.
+[00:55:42] Okay, you just turn how long time is
+[00:55:44] turned on and how long time is turned
+[00:55:46] off. That's why some people if they're
+[00:55:49] super sensitive, they can feel it's
+[00:55:50] actually blinking. For many people they
+[00:55:53] cannot feel. Then another example I can
+[00:55:57] give you is robotics.
+[00:55:59] In robotics how we can control let's say
+[00:56:02] robotic arm. This is a motor here.
+[00:56:04] Right? So what angle that we want it to
+[00:56:06] go is done by this type of things. So
+[00:56:10] they have a say 50 duty duty cycle is
+[00:56:13] the neutral position. Then 25 is
+[00:56:16] probably 90 degree this way. 25 75 is 90
+[00:56:20] degree that way. Okay. So that this
+[00:56:25] controls motors.
+[00:56:31] Some examples of how these type of
+[00:56:33] signals are used. So how this is done
+[00:56:37] is done by adding a combination logic
+[00:56:39] that I simply write a greater than sign.
+[00:56:42] So greater than sign is when when it's
+[00:56:44] greater than certain value. Say if this
+[00:56:47] counter can count up to 1 million then
+[00:56:50] if it's greater than half a million then
+[00:56:53] it's a 50% duty cycle and if it's
+[00:56:56] greater than 75% of the a million then
+[00:57:00] 75% duty cycle okay but this threshold
+[00:57:04] is an input that can be controlled then
+[00:57:06] we can generate this type of um
+[00:57:10] this type of PWF signals this requires
+[00:57:13] our counters to really have a high value
+[00:57:15] the high the high
+[00:57:18] the clock to be really fast have a high
+[00:57:21] frequency clock. The higher the
+[00:57:23] frequency the finer granularity that we
+[00:57:25] can tune this PWM signal there.
+[00:57:30] Okay, one example. Another example is a
+[00:57:34] counter
+[00:57:36] sorry not a counter a button press
+[00:57:39] detection.
+[00:57:41] So what is a button press detection?
+[00:57:43] Then if you have try to use a breadboard
+[00:57:47] to have a button then to turn on a light
+[00:57:51] or to have a to control
+[00:57:55] another counter say press
+[00:57:58] add one press add one
+[00:58:01] it's actually very very hard I really
+[00:58:04] tried myself when I was undergraduate
+[00:58:06] student just directly connect a button
+[00:58:09] to a counter
+[00:58:12] one price can go up to 10 hundreds of
+[00:58:16] thousands. Why? Because you think it's
+[00:58:20] just two piece of metal that touches
+[00:58:22] together, right? But internally it's
+[00:58:26] this voltage go up and down, go up and
+[00:58:28] down many many times and every time it
+[00:58:30] goes to goes up it's considered as being
+[00:58:33] triggered and it adds value by one.
+[00:58:36] Every time it's triggered then we add
+[00:58:37] this value by one.
+[00:58:40] So what we can do with it?
+[00:58:44] We can do what we can do is we only want
+[00:58:48] to say when user press it for a longer
+[00:58:51] enough time and this longer enough time
+[00:58:53] is probably only one millisecond and
+[00:58:55] even 1 millisecond consider if it's a
+[00:58:59] one megahertz clock signal then that
+[00:59:01] that means we need to count until
+[00:59:04] a certain threshold then we can consider
+[00:59:06] this is really being pressed right. So
+[00:59:09] that means for if it stays on for a
+[00:59:13] certain amount of time, if it stays on
+[00:59:17] for a certain amount of time, we really
+[00:59:19] consider that this user pressed on this
+[00:59:21] button. So how can we can know that it
+[00:59:24] stays as on for this long time is by a
+[00:59:27] counter.
+[00:59:29] So we put a clock signal here and we put
+[00:59:33] a enable signal here. So we call this is
+[00:59:35] enable. This is actually the input,
+[00:59:38] right? What this enable is doing is
+[00:59:41] actually the clock signal is the input
+[00:59:42] this time. So
+[00:59:45] we we say it's on. So it's keep counting
+[00:59:48] counting the clock signal. Whenever it
+[00:59:49] goes up, then it's considered to be
+[00:59:53] pressed. Then it goes count by one. On
+[00:59:56] the other side, we also connect the
+[00:59:58] button with a not sign to the reset
+[01:00:01] signal. A not gate to the reset signal.
+[01:00:05] This can be a not gate. But for many
+[01:00:07] digital circuit to represent this this
+[01:00:10] is zero reset. Whenever this is zero it
+[01:00:13] will reset. Okay. So zero reset
+[01:00:18] that means when is released then we
+[01:00:22] immediate reset it go backs to zero then
+[01:00:24] until next time we press it then we
+[01:00:26] start to count. Okay. So when it's going
+[01:00:29] jitter whenever it goes back to this
+[01:00:32] point for example then we consider it's
+[01:00:34] a zero then we reset everything then we
+[01:00:36] restart to count the time okay so this
+[01:00:39] jitter time takes about say just for
+[01:00:42] example one millisecond it's actually
+[01:00:45] shorter probably shorter than that this
+[01:00:47] takes one millisecond then we start to
+[01:00:49] count at this moment then when user
+[01:00:51] press it for one more millisecond then
+[01:00:54] we consider this is
+[01:00:57] this button is really pressed. Okay. So
+[01:01:01] here we simply use a counter to create a
+[01:01:05] delay effect, create a latency so that
+[01:01:08] we know when this button is really
+[01:01:11] uh being pressed.
+[01:01:15] Okay. So pretty much this type of
+[01:01:18] counter behind every button is required.
+[01:01:20] Every key on your keyboard is required.
+[01:01:23] Otherwise you just your computer never
+[01:01:26] know how many times to press the button.
+[01:01:30] Okay. So I'm just using counter as one
+[01:01:32] particular example to talk about uh a
+[01:01:36] building block of sequential logic that
+[01:01:38] as you can see there are many building
+[01:01:40] blocks of sequential logic that we
+[01:01:42] already talked about. They say a greater
+[01:01:45] than comparison. And if you this is a
+[01:01:48] combination logic. Then alou this
+[01:01:52] there's another combination logic. Okay.
+[01:01:54] So we have a counter here. This is one
+[01:01:58] uh building block. Then one passcode
+[01:02:02] matcher or string matcher. That is
+[01:02:04] another building block. Right? Then
+[01:02:07] those are building blocks later on that
+[01:02:08] we will talk about for building a CPU
+[01:02:12] core and a GPU core. Okay. As a summary,
+[01:02:15] at this point I pretty much pretty much
+[01:02:18] done with the key element of a digital
+[01:02:22] design course for undergraduate level.
+[01:02:26] Okay, for undergrad level this whole two
+[01:02:28] weeks probably is
+[01:02:31] should spend like eight weeks or
+[01:02:34] something to talk about whole thing and
+[01:02:36] even computational audio probably will
+[01:02:38] last four weeks or something and there
+[01:02:40] are many many different type of building
+[01:02:41] blocks that you can keep giving examples
+[01:02:44] and say how to build a mill machine out
+[01:02:47] of a moral machine how to convert back
+[01:02:49] and forth between mill machine and moral
+[01:02:50] machine those things can take a very
+[01:02:52] long time in digital design but as a
+[01:02:54] computer architecture you just know oh
+[01:02:57] this thing can happen it's good enough
+[01:02:58] right especially when AI is available
+[01:03:01] it's always more important to know
+[01:03:03] something is possible than know how
+[01:03:05] exactly something is done
+[01:03:08] uh so with this type of basic I think
+[01:03:11] we're ready to go with the core design
+[01:03:14] part of the CPU core and GPU core design
+[01:03:17] um then
+[01:03:20] I'm going to take a different route as
+[01:03:22] last year last year I start to talk
+[01:03:25] about the risk five ISA then computer
+[01:03:30] architecture simulation how to write
+[01:03:33] simulators I spend two weeks on that
+[01:03:36] then I talk then I start to talk about
+[01:03:38] core design that's after the spring
+[01:03:41] break so I think that's too late I'm
+[01:03:43] going to change this way that I'm going
+[01:03:46] to bring GPU architecture first now
+[01:03:48] actually GPU architecture is simpler is
+[01:03:50] complex in some way it's simpler in some
+[01:03:53] other ways so I'm I'm actually bring the
+[01:03:55] GPU architecture to to earlier time and
+[01:03:58] the CPU architecture to a later time. So
+[01:04:02] next lecture I'm going to talk about
+[01:04:05] the basics of GPU programming and how to
+[01:04:08] write a GPU program how to in principle
+[01:04:12] how GPU program works okay no advanced
+[01:04:15] topic just basic GPU programming don't
+[01:04:18] expect you can learn everything about
+[01:04:20] GPU programming in one course in one
+[01:04:22] lecture then we're going to spend two
+[01:04:26] lectures to talk about the GPU
+[01:04:30] architecture the GPU core design and the
+[01:04:32] GPU memory system. Okay, to give you a
+[01:04:35] very quick preview about how a computing
+[01:04:37] system works um how a vanoyman
+[01:04:41] architecture system works. So GPU is
+[01:04:43] still a vanoyman system. We talk about
+[01:04:46] vanoyman system give you a quick review
+[01:04:50] overview with the GPU architecture then
+[01:04:52] we move to a CPU architecture. You can
+[01:04:54] see how fancy CPU can do these days and
+[01:04:57] there are many many corner cases many
+[01:05:00] many optimization methods but GPU is
+[01:05:03] rather simple
+[01:05:05] okay then uh so that's the thing that we
+[01:05:11] talk today mainly we talk about finite
+[01:05:13] state machine and we can use finite
+[01:05:15] state machine it's a powerful tool or
+[01:05:17] powerful way to think about a system
+[01:05:20] okay uh by the way one more thing that I
+[01:05:23] have to say is when we talk about state
+[01:05:25] machine it's a way that
+[01:05:29] uh
+[01:05:32] that you consider this system when you
+[01:05:34] are simulating a computer architecture
+[01:05:37] you're actually simulating the
+[01:05:38] combination logic right so to you when
+[01:05:42] you write when you think about how a
+[01:05:44] system works so say a cache how a cache
+[01:05:49] works you think in a way that oh I
+[01:05:51] receive a signal Then uh I detect it's a
+[01:05:54] miss then I send to a memory wait a
+[01:05:56] little time then I come back then I send
+[01:05:59] to the top and I return the data right
+[01:06:01] this is how typically you think about a
+[01:06:03] cache works but this works in a way that
+[01:06:06] you are bringing your personality in the
+[01:06:08] cache that how you consider a human
+[01:06:11] system how a human society works is I
+[01:06:14] first do this I will do that I'll take
+[01:06:16] this course and they will take that that
+[01:06:18] you you have a continuous time way to
+[01:06:21] understand continuous way to understand
+[01:06:23] time. You have context, right? So for
+[01:06:27] combination logic, one principle here is
+[01:06:29] it has no context. All the context is
+[01:06:32] the register provides you.
+[01:06:35] Okay. So it's just imagine that
+[01:06:40] in one cycle you
+[01:06:43] um just think you you lose your memory.
+[01:06:45] Your brain is not working properly and
+[01:06:47] you can only remember a uh one day
+[01:06:51] thing. So in the evening you write down
+[01:06:54] a diary. Do you know oh I did this thing
+[01:06:56] today. In the morning you're a new
+[01:06:59] person. You can only read your diary to
+[01:07:02] see oh this is what I done I I did
+[01:07:05] yesterday. So I need to do these things
+[01:07:07] the next day. In the evening you write
+[01:07:09] down your your journal again. So the
+[01:07:11] next day you can pick it up. So
+[01:07:12] combination logic and also
+[01:07:16] uh computer architecture simulation
+[01:07:18] works in this type of state list. I I
+[01:07:21] don't I shouldn't call it stately. I
+[01:07:23] should call it contact to list way. So
+[01:07:26] every day every cycle is a new cycle.
+[01:07:29] Yeah. The only thing I know is what I
+[01:07:31] have written in my journal. The journal
+[01:07:33] is the register. I know my register. I
+[01:07:35] know the register provides this data. I
+[01:07:37] provide output
+[01:07:39] and this output becomes the journal of
+[01:07:42] next day.
+[01:07:44] Okay. Just a way to think about finite
+[01:07:46] state machine. It help you rethink many
+[01:07:49] system how it works. Okay.
+[01:07:53] Then uh state state transition diagram
+[01:07:56] and from state to next state state to
+[01:07:58] output we use combination logic design
+[01:08:00] which is true stable boolean logic
+[01:08:03] circuit something you are familiar with.
+[01:08:06] Okay that's everything that we need to
+[01:08:08] talk today. So, let's talk again next

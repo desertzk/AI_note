@@ -1,0 +1,1545 @@
+[00:00:00] Now we're going to start with GPU
+[00:00:01] architecture one. Now I intentionally
+[00:00:04] selected GPU architecture because in
+[00:00:06] some sense GPU architectures are easier
+[00:00:10] um than there the the optimization that
+[00:00:12] GPU applies are more intuitive. So we're
+[00:00:16] going to talk about GPU architecture.
+[00:00:18] Now I'm going to mainly take three
+[00:00:20] lectures to for GPU architecture. Then
+[00:00:23] uh although the second and the third
+[00:00:26] will probably give you some preview for
+[00:00:29] what's going on in the rest of the
+[00:00:30] semester that some details will be
+[00:00:32] discussed in the rest of the semester.
+[00:00:34] Uh but there are only previews there are
+[00:00:37] rather relatively easy concepts there.
+[00:00:41] Okay, I will explain those in the second
+[00:00:43] and third lecture. Then later on when we
+[00:00:45] talk of CPU we will see how a comp more
+[00:00:48] complex version is implemented in CPU.
+[00:00:52] So let's give a quick review and talk
+[00:00:54] about parallelism. So last time we
+[00:00:57] talked about sequential logic, right? So
+[00:00:59] in sequential logic every circuit
+[00:01:00] element is either a register or
+[00:01:02] combination logic. Then um at least the
+[00:01:06] one circuit element is a register. So
+[00:01:08] there are registers and all registers
+[00:01:10] receive the same clock signal. There is
+[00:01:12] the cyclic path contains at least one
+[00:01:16] register. So that's a simple very simple
+[00:01:19] uh sequential logic. Now if we use a
+[00:01:22] state map what we're basically designing
+[00:01:24] is what is shown at here one group or
+[00:01:28] register a few bits a combination logic
+[00:01:30] right. So since we are saying with
+[00:01:33] kernel map we probably can only do like
+[00:01:36] four variable
+[00:01:38] uh four pin four wires optimization. or
+[00:01:42] register can only have four um values.
+[00:01:46] That's the limitation that we can do
+[00:01:49] hand simp uh der derivation. But in
+[00:01:53] reality things are much more complex and
+[00:01:56] in real hardware there are just a ton of
+[00:02:00] combination logic, a ton of registers.
+[00:02:02] then
+[00:02:06] it's just not as simple as one
+[00:02:09] register and one combination logic since
+[00:02:11] there are so many combination logic and
+[00:02:13] if you consider this if there's a clock
+[00:02:16] signal if the register updates its data
+[00:02:21] all this combination logic will
+[00:02:22] automatically trigger no automatically
+[00:02:24] calculate the result for next cycle
+[00:02:27] so there creates a intrinsic conflict
+[00:02:32] Then for human understanding then this
+[00:02:34] is a code that we write. There's a if
+[00:02:36] statement. There's a for loop that we do
+[00:02:39] first thing then we do second thing then
+[00:02:41] we do one after another. Right? This is
+[00:02:44] human understand the word by sequential
+[00:02:47] like we do this first and then do next
+[00:02:49] do do next thing. But
+[00:02:52] so human has a zero thinking or
+[00:02:55] sequential thinking. Now but digital
+[00:02:58] circuit has parallel execution. There
+[00:03:00] are so many combination logic and those
+[00:03:02] same combination logic can do
+[00:03:03] calculation and to do logic operations
+[00:03:06] at the same time. So if we only do one
+[00:03:09] instruction at a time, say there's a add
+[00:03:12] operation for example. If there's a add
+[00:03:14] operation,
+[00:03:17] then we're only using one combination
+[00:03:19] logic, we're wasting all the combination
+[00:03:22] logic and the registers in our whole
+[00:03:24] chip, right? So then
+[00:03:29] pretty much for the whole rest of this
+[00:03:31] course is about addressing this
+[00:03:34] conflict. It's about how we can
+[00:03:38] write a serial program at least a
+[00:03:40] program that human can understand then
+[00:03:43] use something use some either
+[00:03:47] programmer aware techniques like GPU
+[00:03:50] programming or some programmer
+[00:03:54] transparent methods like how CPU is
+[00:03:57] optimizing the code to achieve parallel
+[00:04:00] execution.
+[00:04:02] Okay. So there are different method to
+[00:04:04] support parallel execution for a serial
+[00:04:07] program. Now we call this parallelism.
+[00:04:09] Different type of parallelisms for
+[00:04:11] example it's just different ways to use
+[00:04:13] hardware parallel hardware. We have task
+[00:04:16] parallelism
+[00:04:18] um that may do like this more easy to
+[00:04:22] understand right one program is a
+[00:04:25] browser one program is a word processor.
+[00:04:27] They're doing different task and they
+[00:04:28] can run in parallel. That's okay. Then
+[00:04:30] we have data level parism, thread level
+[00:04:32] parism and instruction level
+[00:04:34] parallelism. So for GPUs we're going to
+[00:04:36] talk about data parallelism, data level
+[00:04:39] parism, thread level parallelism. And
+[00:04:41] for CPUs we're mainly going to talk
+[00:04:43] about instruction level parism. It
+[00:04:44] doesn't mean GPU doesn't use instruction
+[00:04:46] level parism. We'll talk about how GPU
+[00:04:49] use par instruction parallelism in
+[00:04:51] Thursday's class. But mainly GPU takes
+[00:04:54] care mainly GPU uses data level par and
+[00:04:58] thread level parism. And also if you
+[00:05:00] consider CPU early days prior to 2000
+[00:05:04] right by that time everyone thinking oh
+[00:05:07] we just increase frequency increase
+[00:05:08] frequency then we can get the really
+[00:05:11] really fast G CPUs then what happened is
+[00:05:15] when the frequency is just getting too
+[00:05:17] high they just realize it generates too
+[00:05:19] much heat then there's no way just to
+[00:05:22] continue the performance scaling there's
+[00:05:24] no way to continue improve the CPU
+[00:05:27] performance by increasing frequency. So
+[00:05:30] what they are doing is just in
+[00:05:32] introduced the multi-core CPU, right? So
+[00:05:34] what paralism is multi-core CPU is
+[00:05:37] utilizing is pretty much data
+[00:05:40] task parallelism and thread parism,
+[00:05:43] thread level parism, right? And also you
+[00:05:46] can also say there's data level parism
+[00:05:48] in those cases if the pro the program is
+[00:05:51] suitable. Okay, so CPU and GPU utilizing
+[00:05:55] this this type of parism in different
+[00:05:58] ways in different levels.
+[00:06:00] GPU cares more about data parism and
+[00:06:02] thread level parism. CPU cares more on
+[00:06:05] instruction level parism. And I
+[00:06:07] intentionally didn't write data parism.
+[00:06:10] So data level parism and data parism
+[00:06:12] typically there are two words in
+[00:06:14] different scope. Data parism is a
+[00:06:17] machine learning training terminology
+[00:06:19] that we use multiple GPUs to do
+[00:06:21] training. Then the data is aggregated
+[00:06:23] together. And when we talk about data
+[00:06:25] level parism is more like micro
+[00:06:27] architecture concept that we talk about
+[00:06:31] uh how the internal threads and the data
+[00:06:35] organized.
+[00:06:36] Okay. So we understand the paralisms
+[00:06:39] showing a very simple example that's a
+[00:06:41] vector add example. It's element wise
+[00:06:45] vector add. So we add each element
+[00:06:47] together to get a result. And if you
+[00:06:51] write a C program, I think you should be
+[00:06:53] rather familiar with this type of
+[00:06:55] program. Even if you have never written
+[00:06:57] a C program before, you should probably
+[00:06:59] can understand this syntax. Even if you
+[00:07:02] have write Python only write Python
+[00:07:04] before, it just syntax is slightly
+[00:07:06] different. But there's a for loop start
+[00:07:09] they say okay n equals to a just eight
+[00:07:12] elements. Then floating point arrays a,
+[00:07:15] b, and c. Then we do a element wise
+[00:07:19] vector operation C= A + B. Then uh
+[00:07:24] from i= to zero i smaller than n i ++
+[00:07:28] then we add each numbers together then
+[00:07:31] at the end we use the result we print
+[00:07:33] the result then we free up the data that
+[00:07:36] we allocated this a very traditional C
+[00:07:38] program right then the core part is this
+[00:07:41] for loop that we repeatedly doing one
+[00:07:43] thing now what's the characteristics of
+[00:07:46] this
+[00:07:48] uh for loop the most important part is
+[00:07:52] the calculation of each data point is
+[00:07:55] independent. It doesn't matter which one
+[00:07:56] we calculate first. We can always
+[00:07:58] calculate the first one and the second
+[00:08:00] one. So they're independent. If they're
+[00:08:02] independent, we call this is a
+[00:08:05] particular pattern
+[00:08:07] that is called embarrassingly parallel
+[00:08:09] program. So what is in paral
+[00:08:12] embarrassingly parallel? That means it's
+[00:08:15] just so easy to parallel par paralyze
+[00:08:17] this program because every element is
+[00:08:22] independent from each other right so
+[00:08:25] this is called embarrassingly parallel
+[00:08:27] program then if we see this pile program
+[00:08:29] we're pretty much sure if the data size
+[00:08:31] is good enough then we can use a GPU to
+[00:08:34] improve the performance and for most of
+[00:08:36] the case the our program are not
+[00:08:38] embarrassingly parallel then that will
+[00:08:40] require some techniques to make the
+[00:08:43] program parallel but actually in our
+[00:08:46] real world lots of programs are
+[00:08:48] embarrassingly parallel.
+[00:08:51] So let's see how we can parallelize this
+[00:08:53] program in um C. Then in C we basically
+[00:08:59] use this library or this technique
+[00:09:03] called P threads. Then we can start
+[00:09:05] multiple threads to write a program.
+[00:09:08] Right? So how we started the beginning
+[00:09:10] is exactly the same. And we start n
+[00:09:13] threat
+[00:09:14] here. We only describe we only
+[00:09:19] uh declare these threads at this moment
+[00:09:22] and in a for loop we create the threads
+[00:09:26] right we create these threads and which
+[00:09:29] thread it is and what's the function and
+[00:09:31] this a function pointer and what are the
+[00:09:33] arguments that points to that pass to
+[00:09:36] the thread
+[00:09:39] then so here is launch one thread per
+[00:09:42] data element and here is the thread
+[00:09:46] program. So if you look at this thread
+[00:09:48] program,
+[00:09:50] it describes the behavior of one thread,
+[00:09:53] right? It describes the behavior of one
+[00:09:56] thread. So we first get argument, then
+[00:09:58] we get t arrow i, t do i. So we get
+[00:10:03] which particular element it is. So the
+[00:10:05] thread need to have some self awareness
+[00:10:08] so that it needs to know which thread it
+[00:10:10] is, which data needs to process. Then we
+[00:10:14] do CI equals AI plus BI and we return.
+[00:10:17] Now we're good to go. Okay, good to
+[00:10:20] return.
+[00:10:22] So
+[00:10:27] at the end we need to join so that we
+[00:10:29] guarantee that all these programs are
+[00:10:31] completed because the main thread is
+[00:10:33] keeps going and if we don't synchronize
+[00:10:35] at this point we may just fall through
+[00:10:37] then when we use the result the result
+[00:10:39] may not be ready. Then we can get some
+[00:10:41] garbage data. Okay. So, uh
+[00:10:46] on piece of paper this is a good design
+[00:10:49] because we can paralyze execution of
+[00:10:52] every element and in reality this is a
+[00:10:55] terrible design.
+[00:10:57] Why? What's the problem with this
+[00:10:59] program?
+[00:11:00] >> Yeah. Well, it's ultimately going to be
+[00:11:01] slower because the task that each thread
+[00:11:03] is doing is simpler than all of the
+[00:11:06] tasks you're doing just to create that
+[00:11:07] thread. Yeah.
+[00:11:08] >> Right. It's just one array like one
+[00:11:10] element of one vector. So it's uh if you
+[00:11:14] wanted to parallelize the smarter you
+[00:11:15] could say okay each thread does like
+[00:11:17] some number of elements of a very long
+[00:11:19] array like it does 4,96 or something
+[00:11:22] intelligence.
+[00:11:24] >> That's right. So there are too many
+[00:11:26] threads then allocating one thread takes
+[00:11:29] there's some overhead. There's some
+[00:11:31] calculation instruction level overhead.
+[00:11:33] There's also some memory overhead. If we
+[00:11:35] have a really large array
+[00:11:37] the number of thread may just explode
+[00:11:40] your memory. So don't do this. Then
+[00:11:42] think about how many cores you have.
+[00:11:44] Then allocate basically roughly the same
+[00:11:47] number of threads as the number of cores
+[00:11:49] you have. Definitely no more than two
+[00:11:52] times of the uh your the number of your
+[00:11:55] cores in your system. Then allocate a
+[00:11:58] group of them and run them together
+[00:11:59] there. Okay. So but I'm just want to
+[00:12:03] show you this is the typical way that
+[00:12:05] how we think about a parallel program.
+[00:12:09] So what's the key point here is
+[00:12:11] basically we need to find the
+[00:12:13] embarrassingly parallel patterns or find
+[00:12:15] the independence then no matter if it's
+[00:12:17] CPU or DPU we want to find output take
+[00:12:20] the output then we want one we consider
+[00:12:23] one task is to calculate one piece of
+[00:12:26] output then we can paralyze the
+[00:12:28] computation of each output element
+[00:12:32] okay
+[00:12:34] then let's talk about the need of
+[00:12:36] parallel programming And
+[00:12:39] when we talk about parallel programming,
+[00:12:41] we have to talk about matrix
+[00:12:42] modification.
+[00:12:44] So why matrix multiplication is so
+[00:12:46] important
+[00:12:48] is because machine learning, right? So
+[00:12:51] we all know machine learning in machine
+[00:12:53] learning program
+[00:12:55] this this is my personal brief
+[00:12:58] estimation. Okay, I would say 70 or 90%
+[00:13:01] of calculations in machine learning
+[00:13:02] workloads are pretty much matrix
+[00:13:04] modification or similar operations.
+[00:13:08] Think about a fully connected layer like
+[00:13:10] neuronet network. A fully connect layer
+[00:13:12] is a matrix modification. Then a
+[00:13:15] convolutional layer even a convolutional
+[00:13:17] layer they convert doing some operation
+[00:13:20] called image to call they to convert a
+[00:13:22] image into a matrix so that they can use
+[00:13:24] matrix to perform the operation. Why
+[00:13:27] they just don't do convolution directly
+[00:13:30] with a loop? Because our devices are so
+[00:13:33] optimized for matrix modification. So
+[00:13:36] doing the extra step to do the
+[00:13:38] conversion is actually worth the time.
+[00:13:40] The overall performance will even be
+[00:13:41] higher. So convolution then transformer
+[00:13:44] you probably haven't heard of
+[00:13:45] transformer. Transformers
+[00:13:48] a major part of transformers are fully
+[00:13:51] connected layers. the feed forward
+[00:13:53] network FFN right FFN are matrix
+[00:13:56] modification because it's pretty much
+[00:13:59] basic neuronet networks so it's matrix
+[00:14:02] modification again now if you look at
+[00:14:03] matrix modification how we get this
+[00:14:05] point how we get this point
+[00:14:11] we have this where's the point it's on
+[00:14:13] the other side
+[00:14:16] goes with the mouse point so how do we
+[00:14:19] calculate this one you have Use the
+[00:14:22] column from the or the first column
+[00:14:25] choose.
+[00:14:25] >> Yeah. Or the first
+[00:14:30] it is the
+[00:14:33] row here and the column here. Right. So
+[00:14:36] then okay
+[00:14:39] then the question is does the
+[00:14:41] calculation of the second point really
+[00:14:44] matters from the first one? No. Right.
+[00:14:47] It's totally independent.
+[00:14:49] So we can just calculate the first one
+[00:14:52] and the second one together at the same
+[00:14:54] time.
+[00:14:56] And so can we say this is an
+[00:14:59] embarrassingly parallel program? Uh
+[00:15:02] pretty much at this stage yes. Then if
+[00:15:05] we dive deep into GPU programming almost
+[00:15:08] we never want to write in that way
+[00:15:10] because we want some extra performance
+[00:15:12] optimization because if we calculate the
+[00:15:15] first one we're loading the whole row.
+[00:15:18] Now, if we're calculating the second
+[00:15:19] one, we're still loading the whole row.
+[00:15:21] If you just consider they're totally
+[00:15:23] independent, we're loading this row
+[00:15:25] multiple times, which is something that
+[00:15:27] we don't want. But at this stage, don't
+[00:15:29] think about that level or don't think
+[00:15:31] about automization. Like if you just
+[00:15:33] want to write a GPU program, just one
+[00:15:35] right to calculate one cell. Okay, then
+[00:15:39] that's good enough. So if you consider
+[00:15:41] the output matrix can be very large for
+[00:15:46] machine learning algorithms that there
+[00:15:48] are a lot of opportunities to do this
+[00:15:50] parallel execution. Right? So
+[00:15:55] today if you do some GPU research
+[00:15:58] you should always verify if the GPU
+[00:16:00] architecture improvement can improve
+[00:16:03] matrix modification performance. If your
+[00:16:06] design can improve matrix modification
+[00:16:08] performance by 10% but slow down
+[00:16:11] everything else by 5% you're very good.
+[00:16:14] If you improve the performance by 10% of
+[00:16:16] everything else but slow down matrix
+[00:16:19] modification nobody will accept that
+[00:16:20] one. Okay. So matrix modification is
+[00:16:23] just that important for GPU.
+[00:16:29] Okay then let's talk about GPUs. GPUs
+[00:16:31] are originally designed for graphics,
+[00:16:34] right? So how graphics works? Graphics
+[00:16:37] works in this way. So user when user
+[00:16:41] write a GPU program, let's just say it's
+[00:16:43] a 3D game, right? How they define
+[00:16:45] something? They define, okay, here's a
+[00:16:47] body, here's a car or something, right?
+[00:16:52] An object. Object is organized in a mesh
+[00:16:56] of triangles.
+[00:17:00] Just triangles, right? lots of vertices
+[00:17:03] then connected with triangles. So we use
+[00:17:06] a process called vertex shading. When we
+[00:17:09] talk about shading or shader, shader is
+[00:17:11] basically a something. I just call it
+[00:17:14] something because if you talk about
+[00:17:15] software is a piece of software that can
+[00:17:18] compute. Now if we talk about hardware
+[00:17:20] is a piece of hardware that can compute.
+[00:17:22] So I'm just saying it's something
+[00:17:24] something that computes the color or
+[00:17:26] other properties. Say where it is the
+[00:17:28] lightning lightning strength or how far
+[00:17:31] away from the camera this element is of
+[00:17:34] something. What is this something? This
+[00:17:36] can be a vertex or a pixel. Okay. So so
+[00:17:41] we calculate the
+[00:17:44] color of everything,
+[00:17:47] right? Then we do a rasterization.
+[00:17:49] Basically we convert into pixels. Then
+[00:17:50] we do a pixel shading. We calculate
+[00:17:53] number of p the colors of each pixel.
+[00:17:55] and we combine them together and we
+[00:17:57] render the final output.
+[00:18:00] Okay, so if you consider how many
+[00:18:02] vertices are there, it really depends on
+[00:18:04] the game. If it's a Minecraft game is
+[00:18:06] probably not a lot of uh vertices, uh if
+[00:18:09] it's a like a really high-end 3D games,
+[00:18:13] really resource demanding, it can go up
+[00:18:15] to 10 million or even more vertices.
+[00:18:18] Now, about the number of pixels, that's
+[00:18:20] a relatively fixed number for at least
+[00:18:23] for this stage output, right? Even for
+[00:18:25] this stage output, there may be wasted
+[00:18:27] pixels because it's hiding behind. But
+[00:18:29] for the final output, it depends on if
+[00:18:31] you want to render like 1080p or 4K um
+[00:18:35] gaming quality. In this case is a few
+[00:18:38] millions.
+[00:18:40] Then we in recent years if we're talking
+[00:18:43] about rendering have to talk about
+[00:18:45] retracing and how retracing works is
+[00:18:47] basically we have the object or a group
+[00:18:49] of a lot of objects in the scene and we
+[00:18:53] have a camera. What we're doing is we
+[00:18:55] cast the rays out out of this camera
+[00:18:58] then we calculate the refraction and
+[00:19:00] reflection on the objects right we
+[00:19:02] calculate say it first go through a
+[00:19:05] pixel in this needs to go through this
+[00:19:07] pixel then it goes here then probably
+[00:19:10] reflects to a light or it probably
+[00:19:12] reflects not to a to a to a point that
+[00:19:16] is not a light right so we just scan the
+[00:19:21] whole thing by generating
+[00:19:25] many many rays then to calculate let's
+[00:19:28] say eventually how many rays can you
+[00:19:31] land on a light source and how strong
+[00:19:33] the light source is right then
+[00:19:35] eventually we can infer how bright a
+[00:19:39] pixel is right so other than the super
+[00:19:42] large number of vertices there and
+[00:19:44] triangles there we have 10 to 100 rays
+[00:19:48] per pixel per frame right so one frame
+[00:19:52] if you consider Consider if you want to
+[00:19:53] play a game at 60 Hz at 60 frames per
+[00:19:56] second. So you need a large number of
+[00:19:58] rays per pixel so that this pixel can be
+[00:20:01] realistic. Then so that's a few million
+[00:20:05] rays and just consider every ray you go
+[00:20:07] there you probably need to consider oh
+[00:20:09] is it
+[00:20:11] contacting this surface is it contacting
+[00:20:13] that triangle. So you need lots of
+[00:20:15] calculation. So lots of calculations and
+[00:20:18] if you consider this type of calculation
+[00:20:20] every calculation on the vertices and on
+[00:20:22] the pixels are independent from each
+[00:20:24] other right and every ray here in this
+[00:20:27] case are independent from each other. So
+[00:20:30] rendering is intrinsically
+[00:20:34] embarrassingly parallel program. So GPUs
+[00:20:36] are originally designed for
+[00:20:37] embarrassingly parallel program. it can
+[00:20:40] just calculate these things
+[00:20:43] many many times with much larger
+[00:20:45] throughput with much larger computing
+[00:20:48] capability. So then it was machine
+[00:20:51] learning people that they really really
+[00:20:53] need matrix modification and high
+[00:20:55] computing power and they realized their
+[00:20:57] programs are highly repetitive. So they
+[00:21:00] just starting from around 10 around 2010
+[00:21:05] then they start to use GPUs to run
+[00:21:08] programs. Then at the early days there's
+[00:21:10] no compute program. There's no
+[00:21:14] programming framework that is just
+[00:21:16] designed for computing purposes. They
+[00:21:18] just use these type of shaders as if
+[00:21:20] they're calculating colors.
+[00:21:23] Then later on they really by that time
+[00:21:27] they use OpenGL to calculate machine
+[00:21:28] learning programs. Then it's really
+[00:21:31] awkward by that time. Then CUDA comes
+[00:21:33] out, open CL comes out, G computing
+[00:21:36] frameworks come out. It's just more
+[00:21:38] natural today to use GPUs to write
+[00:21:41] general purpose computing cap
+[00:21:43] applications. So everything that we talk
+[00:21:46] about GPU are general purpose computing
+[00:21:48] in this course.
+[00:21:50] We're done with rendering.
+[00:21:53] Okay, let's talk about GPU programming.
+[00:21:56] Still many things before we can really
+[00:21:59] talk about GPU programming.
+[00:22:02] Uh so first thing is we need to talk
+[00:22:05] about this concept called host and
+[00:22:07] device. So what is a host program? A
+[00:22:11] post program is a pro piece of program
+[00:22:13] that runs on the CPU. Just consider the
+[00:22:15] Pthread program. It's the main function
+[00:22:18] is the host program is it's what
+[00:22:21] bootstraps the whole program initialize
+[00:22:23] the data and eventually consumes the
+[00:22:25] data. Now on the other side we have the
+[00:22:28] device program. It's a program that runs
+[00:22:30] on the GPU side. Okay. So why we need a
+[00:22:34] hostel program and a device program. So
+[00:22:37] GPUs although they are very powerful
+[00:22:40] they are really limited
+[00:22:43] right they cannot really access hardware
+[00:22:46] um network hard drive they cannot
+[00:22:49] respond to or take in user input and the
+[00:22:51] generated user input to anything else
+[00:22:54] other than the screen. Okay, they need
+[00:22:58] CPU to tell what to do. The CPU needs to
+[00:23:01] coordinate and the GPU is super slow in
+[00:23:04] single pro single thread program. So
+[00:23:06] sometimes your program really have no
+[00:23:08] single thread parts. So you still want
+[00:23:10] to move those parts to the CPU side and
+[00:23:12] CPU today is actually very powerful.
+[00:23:14] Wasting the CPU resources is a waste. So
+[00:23:18] TPU
+[00:23:22] CPUs are only accelerator.
+[00:23:25] Okay. So don't think they are powerful
+[00:23:27] devices that they can do anything.
+[00:23:30] They're actuators. What are
+[00:23:31] accelerators? That means a CPU offload
+[00:23:34] part of the program that is really
+[00:23:37] computer intensive. Then the CPU can
+[00:23:39] still do it. It's just not fast enough.
+[00:23:42] Then the CPU offload that part of
+[00:23:44] program to the GPU side. So the GPU can
+[00:23:47] run it faster. Okay. So there's
+[00:23:49] offloading process. GPU is only
+[00:23:52] accurator.
+[00:23:55] So
+[00:23:57] how we can program host and devices?
+[00:23:59] Like we said before, there are a few
+[00:24:02] programming frameworks. There are even
+[00:24:04] more things these days. CUDA is Nvidia
+[00:24:07] only. Nvidia started CUDA and CUDA is
+[00:24:10] the most important resources for Nvidia
+[00:24:12] today. Um
+[00:24:16] people use Nvidia devices mainly because
+[00:24:19] of CUDA. It's a very very mature easy to
+[00:24:22] use. still not very easy to use but
+[00:24:25] better than other things uh in ecosystem
+[00:24:29] there are profilers debuggers and many
+[00:24:32] many other tools
+[00:24:34] um so the host is pretty much a regular
+[00:24:36] C or C++ and the device can be CUDA C is
+[00:24:40] a C like code then just don't think CUDA
+[00:24:44] is only about C C and C++ kuda can only
+[00:24:47] can also support for
+[00:24:50] you may think why for Okay,
+[00:24:54] then you probably underestimate how many
+[00:24:56] people are still writing Fortune. Then
+[00:24:58] lots of my collaborators and friends
+[00:25:01] like especially people from NASA write
+[00:25:04] like the weather forecast programs um
+[00:25:08] high performance computing applications
+[00:25:10] they still use for and they really use
+[00:25:12] like for so
+[00:25:15] for can paralyze for programs.
+[00:25:20] Um then open CL open CL comes out pretty
+[00:25:24] much around the same time when KOD is
+[00:25:26] out like around 2010 2011 2012 in that
+[00:25:31] uh that erum it's an open start standard
+[00:25:34] then a lot of companies support it uh
+[00:25:38] mainly it's supported by AMD but it's
+[00:25:40] interesting that open sale trademark is
+[00:25:42] owned by Apple but Apple
+[00:25:47] Apple somehow supports open sale but Not
+[00:25:50] never very well. Okay. M Apple, what's
+[00:25:53] the program framework for metal?
+[00:25:57] I I said it.
+[00:25:59] So metal is the programming framework
+[00:26:02] for Apple, right? So Apple has their own
+[00:26:05] programming framework other than open
+[00:26:07] sale and is tightly integrated with
+[00:26:09] their ecosystem. And if you have program
+[00:26:12] open, I I learned the GPU programming
+[00:26:13] with open sale. Now I know CUDA. I never
+[00:26:16] want to go back to Open Cell anymore.
+[00:26:18] It's very verbose, very annoying.
+[00:26:22] Then AMD deprecated open sale and start
+[00:26:26] to write something called heap. They I
+[00:26:29] guess they really wanted to use kuda
+[00:26:32] directly. But because it's owned the the
+[00:26:34] the intellectual probably owned by
+[00:26:36] another company, they just cannot use
+[00:26:38] kuda again. So they
+[00:26:43] started something called heap. So heap
+[00:26:46] is very very similar to kuda
+[00:26:49] that if you know how to write kuda
+[00:26:51] program pretty much you know how to
+[00:26:53] write hip program it's just a search and
+[00:26:56] replace thing and actually
+[00:26:59] provides a program called hippify it can
+[00:27:02] automatically convert koda program to
+[00:27:04] heap then these days with generi
+[00:27:07] probably you don't need hippify anymore
+[00:27:09] then generi can do converting even
+[00:27:11] better
+[00:27:13] okay so three main programs program
+[00:27:16] framework here but there's something
+[00:27:18] more
+[00:27:24] have you heard of Triton
+[00:27:27] so Triton is a programming framework for
+[00:27:31] uh developed by Meta
+[00:27:34] then it's a programming framework
+[00:27:36] intentionally designed for machine
+[00:27:37] learning algorithms like matrix
+[00:27:40] multiplication style programs and in
+[00:27:44] Python
+[00:27:45] So in Python that means it's much easier
+[00:27:47] to program and it's called a tile based
+[00:27:50] programming language. Okay. So if you're
+[00:27:53] writing something for machine learning
+[00:27:54] that if you want to write a kernel on
+[00:27:56] your own I highly recommend you learn
+[00:28:01] Triton. Okay check Triton see if it's a
+[00:28:04] better choice. Then it has many useful
+[00:28:07] features like uh performance automatic
+[00:28:10] performance optimization. it will test
+[00:28:13] the different styles um of how these
+[00:28:16] kernels are compiled to a GPU program on
+[00:28:18] this particular GPU then select the best
+[00:28:21] one to run there. Okay, these features
+[00:28:24] are impossible for CUDA. Um but we're
+[00:28:27] not going to talk about Trident. We're
+[00:28:29] going to focus on CUDA for this course.
+[00:28:31] Um but if you write a GPU program today,
+[00:28:35] definitely consider Triton. Okay. And
+[00:28:37] even if you know Triton, you probably
+[00:28:39] need to understand some basic things
+[00:28:41] from CUDA. The basic concepts from CUDA.
+[00:28:46] Okay. Then talking about memory model
+[00:28:48] then how memory works. So for CPU, if
+[00:28:53] you have built a computer before, if you
+[00:28:56] have a CPU, you need to buy
+[00:28:59] memory on your own, right?
+[00:29:03] So memory you buy
+[00:29:05] on your own are called DIM M
+[00:29:12] um
+[00:29:14] I really want to call it direct insert
+[00:29:16] memory module but it's still
+[00:29:21] I I don't remember what's the I there
+[00:29:23] the deal here means the pins are on the
+[00:29:26] two side of the bottom on the PC bus
+[00:29:30] here so the pins are on two side
+[00:29:32] previously is Sim M that means it's on
+[00:29:36] only on one side
+[00:29:38] then DDR don't get confused with DDR and
+[00:29:42] DIM DDR stands for double data rate
+[00:29:49] okay
+[00:29:51] RAM is read access memory so what is
+[00:29:54] double data rate that means it can
+[00:29:56] perform read and write
+[00:29:59] can per perform read and right operation
+[00:30:02] on both the rising edge of the clock and
+[00:30:04] the down edge of the clock. So you can
+[00:30:07] do two actions per clock cycle.
+[00:30:10] Okay, this is DDR. Then DDR are
+[00:30:14] typically used for CPUs.
+[00:30:17] Then for GPU, then the story is a little
+[00:30:20] bit more complex. Then if we take a G
+[00:30:24] GTX 1590 GPU and we take the shell off,
+[00:30:30] what do you call this?
+[00:30:34] This is a PCB, right? Printed circuit
+[00:30:37] board. Although you probably cannot see
+[00:30:39] the board anymore because it's full of
+[00:30:41] devices, but this is the PCB. Then the
+[00:30:44] GPU is very clear. It's the biggest
+[00:30:47] part.
+[00:30:49] So, by the way, what's the difference
+[00:30:51] between this one and this one?
+[00:31:00] They're both GTX 1590.
+[00:31:07] Yeah.
+[00:31:10] Cooling. Yes. Uh cooling is different.
+[00:31:13] This this one if you cannot you cannot
+[00:31:16] see from outside there are two fans this
+[00:31:18] one had three fans but most importantly
+[00:31:21] this is produced by Nvidia
+[00:31:24] okay this is produced by Asus so it's
+[00:31:26] just a different manufacturer so Asus
+[00:31:29] basically buy this thing the chip there
+[00:31:32] it buys the chip from Nvidia and produce
+[00:31:36] they have their own PCB they have their
+[00:31:38] own shell they have their own cooling
+[00:31:40] solution so the chip are pretty much the
+[00:31:43] But the external solutions are
+[00:31:45] different. So they may have different
+[00:31:47] performance, slightly different
+[00:31:49] performance due to probably more
+[00:31:52] powerful cooling and slightly different
+[00:31:54] frequency setup, but they're essentially
+[00:31:56] the same chip, same very similar
+[00:31:58] product. So they may sell at different
+[00:32:00] prices.
+[00:32:02] So
+[00:32:04] this is the chip, right? And where's the
+[00:32:07] memory?
+[00:32:11] Yeah. Those
+[00:32:16] are the chips surrounding the main
+[00:32:18] memory, the the main chip, right? Those
+[00:32:21] are a lot of chips. So why there are so
+[00:32:23] many? Because they wanted to run in
+[00:32:25] parallel, right? Read data and write
+[00:32:27] data in parallel so that they can
+[00:32:28] provide the throughput.
+[00:32:32] So what's the technology here is still
+[00:32:34] basically double rate run double data
+[00:32:36] rate run
+[00:32:38] but GDDR is optimized for GPU or
+[00:32:42] graphics.
+[00:32:43] This is GDDR memory. GDDR memory are
+[00:32:46] separate chips that also even this is
+[00:32:49] produced by Nvidia. A media buy from
+[00:32:52] other vendors.
+[00:32:55] Okay.
+[00:32:59] So this is H100.
+[00:33:05] Where's the memory?
+[00:33:10] How many memory modules are there?
+[00:33:25] So who say these are memories?
+[00:33:32] Now who say these are memories
+[00:33:36] six piece of memories.
+[00:33:42] Okay. One two two versus one. Okay. The
+[00:33:45] correct answers are the correct answer
+[00:33:47] is the six units are memories.
+[00:33:51] Okay. So I don't have this but this is a
+[00:33:54] rather advanced packaging
+[00:33:58] solution.
+[00:33:59] Now how this packaging works is
+[00:34:03] you can say this is a chiplet
+[00:34:04] technology. What is a chip light?
+[00:34:06] Chiplet is basically in one product we
+[00:34:09] have multiple chips. Now multiple chips
+[00:34:12] in this particular case there's only one
+[00:34:14] GPU chip but there are six memory chips.
+[00:34:18] And so how does chiplet technology works
+[00:34:22] is on the bottom this is called a
+[00:34:26] substrate or interpos
+[00:34:29] substrate is the base of the
+[00:34:32] semiconductor right is in the
+[00:34:34] manufacturing they just call it
+[00:34:36] substrate sometimes there's a separate
+[00:34:38] interposer layer but I will just write
+[00:34:41] this as substrate or interposer
+[00:34:47] interposer
+[00:34:48] Okay. So they put chips on top of it.
+[00:34:52] But at the bottom of chip there are
+[00:34:54] pins.
+[00:34:57] Okay. Then these are HBM memories.
+[00:35:05] Now HBM memories are very special
+[00:35:07] because HBM memories are stacked. Unb
+[00:35:11] high bandwidth memories are stacked.
+[00:35:18] Okay.
+[00:35:22] So
+[00:35:24] why H100 use HPM but GTX 5090 use GDDR?
+[00:35:31] As the name suggest this one has higher
+[00:35:34] bandwidth
+[00:35:36] but two cost two cost in two different
+[00:35:40] aspects. First thing is the latency for
+[00:35:43] high bind with memory is higher. So it
+[00:35:46] takes longer time for the data to
+[00:35:48] return. It's nerve just need to go up
+[00:35:51] and get the data and return. Okay. And
+[00:35:53] the protocol are slightly different. So
+[00:35:55] the latency for HBM are are
+[00:36:00] higher. The second cost is HBM is super
+[00:36:04] expensive.
+[00:36:06] So they can only afford it in the the
+[00:36:08] most high-end compute oriented GPUs. For
+[00:36:12] GDDR,
+[00:36:14] it's have some balance in the compute in
+[00:36:18] the latency and the throughput. So it's
+[00:36:21] optimized for graphics. In graphics, you
+[00:36:23] really need to consider latency, right?
+[00:36:26] Because if you really want to see that
+[00:36:27] frame in one over 60 um hertz, right?
+[00:36:32] You really want to see that frame on
+[00:36:33] time. If it's not rendered on time, then
+[00:36:35] it's not useful and at all. So here are
+[00:36:40] the memory unit. Okay, but the main
+[00:36:43] story is the CPU memory and GPU memory
+[00:36:47] are totally different things and they're
+[00:36:49] not together. If they're not together,
+[00:36:53] we just simply write GPU memory. That
+[00:36:55] means we need to do a memory copy. we
+[00:36:58] need to the CPU will prepare the data
+[00:37:02] copy that memory to the GPU side GPU
+[00:37:05] perform the calculation and once it's
+[00:37:08] done then put the memory back to the CPU
+[00:37:10] side and for a machine learning
+[00:37:12] algorithm if you think the most of the
+[00:37:15] data are the uh the the weight or the
+[00:37:20] parameters of a model right so the at
+[00:37:23] the beginning you can copy the data to
+[00:37:24] the GPU site and then stay there then it
+[00:37:27] just Let's say LM right the parameters
+[00:37:30] of the model are there then you just fit
+[00:37:32] in the user input and it will perform
+[00:37:35] one calculation then the final um the
+[00:37:38] final output can come out from the
+[00:37:40] memory copy okay
+[00:37:44] and as we said before there's one
+[00:37:46] problem
+[00:37:50] DDR are cheaper
+[00:37:53] HPM if you really want the high
+[00:37:55] bandwidth are very expensive. So don't
+[00:37:59] expect GPU to have super high memory,
+[00:38:01] super large memory. So what's the
+[00:38:03] largest memory for GPU today?
+[00:38:07] How large is the largest GPU memory?
+[00:38:13] Uh 64 is close. The correct answer
+[00:38:16] should be 80 GB
+[00:38:19] for H100 GPU. So the the range
+[00:38:23] estimation is pretty good.
+[00:38:26] So 80 GB of memory. Then if you consider
+[00:38:31] some models have 700 billion parameters,
+[00:38:36] right? That means pretty much we have no
+[00:38:39] way to put those models in one GPU. What
+[00:38:42] do we do? We have to use multiple GPUs.
+[00:38:46] So today one server may have four GPUs
+[00:38:48] or even eight GPUs. Then it's not really
+[00:38:52] sometimes it's really not because we
+[00:38:54] need a lot of computing power. is really
+[00:38:55] because we need the memory capacity
+[00:38:58] before LM era that's hard to imagine
+[00:39:02] because by that time GPU memory is not
+[00:39:04] the limiting factor. Uh in 2015 I was
+[00:39:08] using high-end GPUs with 4 GB of memory.
+[00:39:12] Today 80 GB is not good enough.
+[00:39:17] Okay. So this is how GPU works and TPU
+[00:39:20] memory. to solve this memory problem.
+[00:39:24] Then this window start to create unified
+[00:39:27] memory system. Then GH200 is one of the
+[00:39:33] GH200 is Grace Hopper. The immediate
+[00:39:36] name is Grace Hopper because the CPU
+[00:39:38] die. The CPU chip is called Grace chip.
+[00:39:42] Then the GPU is the hopper chip. Right?
+[00:39:45] So the gracehopper then you can see the
+[00:39:48] CPU may have some memory on the side but
+[00:39:51] the GPU may have the memory here. So
+[00:39:54] it's not a pure CPU and GPU unified
+[00:39:56] memory system but their addressing
+[00:39:58] system are unified. So the GPU can
+[00:40:01] theoretically accessing the CPU memory
+[00:40:04] directly but probably at a higher cost.
+[00:40:07] Then AMD MI300A is another GPU that you
+[00:40:11] can see this is a more fundamental
+[00:40:13] chiplet technology. So what is chiplet
+[00:40:16] technology? AMD is very good at GB chip
+[00:40:19] chiplet technology. Even today Nvidia is
+[00:40:22] not really using chiplet technology.
+[00:40:24] Right? So AMD is having six CDs. They
+[00:40:29] they don't call it GPUs. They call it
+[00:40:30] the accelerator compute accelerated
+[00:40:34] compute die and CCD is
+[00:40:37] core chiplet die. So basically those
+[00:40:40] this red part is the CPU and the blue
+[00:40:44] part are the GPUs.
+[00:40:47] Okay. And where's the memory? It's
+[00:40:49] basically here on the side. Okay. So AMD
+[00:40:52] has a more fundamentally unified system
+[00:40:56] than although there are still some numa
+[00:41:00] effect. What is numa effect? Numa stands
+[00:41:02] for non-unifor
+[00:41:10] memory
+[00:41:13] access
+[00:41:22] non-uniform memory access is actually a
+[00:41:24] very very interesting
+[00:41:27] research topic and it's always a
+[00:41:28] research hot topic that say this CPU
+[00:41:32] dice may access this part of memory
+[00:41:35] faster because it's physically closer
+[00:41:37] right so if this part of this GPU wants
+[00:41:40] to access the data here then it takes
+[00:41:43] longer time then there's always a
+[00:41:45] problem that where you put your compute
+[00:41:47] then where you put your data and it's
+[00:41:49] always research questions
+[00:41:52] okay then if we talk about unified
+[00:41:54] memory we also have to talk about Apple
+[00:41:57] so this is Apple M3 Ultra
+[00:42:00] And it's just a little bit hard to tell
+[00:42:02] which part is the CPU and which part is
+[00:42:04] GPU. I guess the top part is the CPU and
+[00:42:07] bottom part is the GPU. Then the the
+[00:42:12] memory are not integrated and they're
+[00:42:14] not HBM. They're not DDR. They are a
+[00:42:18] Apple adaptation of low power LP DDR but
+[00:42:23] Apple just change it totally change it.
+[00:42:25] So it's not a standard. Then they produc
+[00:42:28] in one package.
+[00:42:33] They they're also not using something
+[00:42:35] like a interpolter. They just use thing
+[00:42:37] connections wire connections across the
+[00:42:39] it's not even on a PCB but it's not also
+[00:42:44] not on these type of things. So Apple is
+[00:42:46] always doing Apple things. Then
+[00:42:50] this is also a pure uniform
+[00:42:54] memory system. Right? So CPU and GPUs
+[00:42:57] are all together.
+[00:42:59] So what's the another advantage of
+[00:43:01] unified memory system is that we don't
+[00:43:03] really need to specify oh this GPU this
+[00:43:06] part of data wants to allocate on GPU
+[00:43:07] side. This part of data on the CPU side
+[00:43:10] and we also don't need data movement. We
+[00:43:12] don't need memory copy. We just do a
+[00:43:14] maloc
+[00:43:16] regular CPU maloc then we can use it on
+[00:43:18] the GPU side. Okay.
+[00:43:22] So then let's see.
+[00:43:52] Okay, for unified memory, we can talk a
+[00:43:54] little bit more on unified memory. So
+[00:43:56] there are different type of unified
+[00:43:58] memory. So even today just regular
+[00:44:01] Nvidia GPUs, they support unified
+[00:44:04] memory.
+[00:44:06] Uh
+[00:44:07] even regular Nvidia could support
+[00:44:10] unified memory when their unified memory
+[00:44:12] is managed behind the scene. So what's
+[00:44:14] happening is let's say the GPU right the
+[00:44:17] GPU wants to access a piece of data then
+[00:44:20] they're doing a address translation
+[00:44:22] process we'll talk about translate
+[00:44:23] address translation later then they
+[00:44:26] realize okay the data is not here right
+[00:44:29] the page is not here what they do is
+[00:44:32] they can allow two different things to
+[00:44:34] happen they can just say oh here's you
+[00:44:36] want this data let's just give it to you
+[00:44:38] then this is happens at the granularity
+[00:44:40] of a cach line so typically 64 byt or
+[00:44:43] 128 byt Right? A very small granularity.
+[00:44:46] But if you consider PCIe
+[00:44:49] latency, that's thousands of cycles just
+[00:44:52] to get one piece of data. Thousand of
+[00:44:54] cycles. Another way is even more
+[00:44:56] drastic. They say, "Oh,
+[00:44:59] this GPU really wants this data again."
+[00:45:02] So moving providing this data from
+[00:45:04] remote again and again, it's not very
+[00:45:07] efficient. We should move the whole pole
+[00:45:10] data to the destination, right? to to
+[00:45:13] the GPU side. So it's a page migration.
+[00:45:15] So we migrate a page. Typically page are
+[00:45:19] CPUs are used four kilobytes on GPUs it
+[00:45:22] can be 16 kilobytes or even larger. Then
+[00:45:25] they migrate whole page to the GPU size.
+[00:45:28] But if you consider migration, migration
+[00:45:30] is actually very complex. Then lot of
+[00:45:32] things need to be paused and reset. Then
+[00:45:35] the data copy takes even longer time. So
+[00:45:37] it's a higher cost. So the eventually
+[00:45:40] the driver and hardware decide if they
+[00:45:43] it worth the effort to really do the
+[00:45:45] data copy the page migration to the GPU
+[00:45:48] side. So if you say there's real page
+[00:45:53] migration, there's real data copying
+[00:45:55] happens. I would say a more precise way
+[00:45:58] to say is page migration or data
+[00:46:00] migration.
+[00:46:02] Okay. I don't see in product devices
+[00:46:05] that they really allow something like
+[00:46:07] duplication. When you say copy, it's a
+[00:46:09] duplication. So this piece of data
+[00:46:11] resides in two different locations. No
+[00:46:14] duplication, just data is moved. So it's
+[00:46:16] destroyed on the on the source side.
+[00:46:20] So on GH200 probably is more likely to
+[00:46:23] take the first way because they think oh
+[00:46:26] the bandwidth and the link between the
+[00:46:28] CPU and GPU are so good that we can just
+[00:46:32] just access the data. But I guess
+[00:46:35] there's still migration happening in
+[00:46:37] GH200 because you can see there are
+[00:46:39] still different technologies for the
+[00:46:41] memory, right? But for Apple and for
+[00:46:44] AMD, it's more likely to be really
+[00:46:47] accessing the destination directly. Um
+[00:46:51] they say just no page migration
+[00:46:53] happening. They say if this core if this
+[00:46:56] GPU core needs to access data here, they
+[00:46:59] just access just go through this memory
+[00:47:01] interface on the side that the memory
+[00:47:04] interface on the side at this point and
+[00:47:07] directly access memory. So the CPU and
+[00:47:09] GPU just share the bandwidth. there's
+[00:47:11] really no difference between the CPU
+[00:47:12] memory and GPU memory.
+[00:47:15] Okay, so different product may have
+[00:47:17] different solutions to address unified
+[00:47:19] memory. Then from discrete a media GPUs
+[00:47:23] to GH200, Mi300A and IPO 3 Ultra is on a
+[00:47:28] spectrum from the most dis disagregated
+[00:47:30] way and the most aggregated way to
+[00:47:35] manage unified memory.
+[00:47:38] Still today if you write something like
+[00:47:41] uh today if you have a device like
+[00:47:44] there's a few two high-end CPUs and
+[00:47:47] eight high-end GPU 8 H100 for example,
+[00:47:50] you probably never want to use unified
+[00:47:52] memory because the performance is still
+[00:47:54] terrible. For Apple M3 Ultra, you
+[00:47:58] probably should use unified memory
+[00:48:01] because there's no performance
+[00:48:02] difference. And if you do memory copy,
+[00:48:04] there's a duplicated data. So it waste
+[00:48:06] waste the memory. Okay. So Mi3 Ultra is
+[00:48:10] actually quite interesting. MI300 MI3
+[00:48:13] Ultra has the largest one has 512 GB of
+[00:48:16] memory which is much much higher than
+[00:48:19] what we talk about the 80 gigabytes of
+[00:48:21] H100, right? And also Mi M3 Ultra Max
+[00:48:25] Studio is about half the price of H100.
+[00:48:30] So it depends on what you want to do. So
+[00:48:33] for memory intensive workload and
+[00:48:37] if you really require a lot of memory
+[00:48:39] capacity but memory bandwidth is not
+[00:48:41] that important buying M3 ultra to do
+[00:48:45] like inference for you something like
+[00:48:47] deep six uh 60 661
+[00:48:51] billion parameter model doing inference
+[00:48:54] the M M3 Ultra is probably a good choice
+[00:48:57] if you want to do training still go with
+[00:48:59] AMIA or AMD GPUs.
+[00:49:02] because training probably needs more
+[00:49:05] memory bandwidth.
+[00:49:07] Okay.
+[00:49:13] Let's talk about vector at in not
+[00:49:16] something exciting but just program.
+[00:49:18] Okay. I put P thread on the left and the
+[00:49:22] CUDA program on the right. And we can
+[00:49:24] see they're very similar. At the
+[00:49:26] beginning we include so in P thread we
+[00:49:29] include P thread and it al should also
+[00:49:31] includes the standard standard IO and
+[00:49:34] here it includes CUDA runtime which
+[00:49:36] replaces the P thread. And let's see how
+[00:49:40] we write the
+[00:49:43] kernel code. I call it the thread code
+[00:49:45] or the kernel code.
+[00:49:48] It's vector add right? This is a vector
+[00:49:50] add thread and then here we just call it
+[00:49:52] a vector add. Then there's a modifier or
+[00:49:55] descriptor of this function name
+[00:49:57] underscore underscore global
+[00:50:00] whenever you see two underscore before
+[00:50:02] and two underscore after that's a kuda
+[00:50:04] preserved
+[00:50:06] keyword
+[00:50:08] global means it can either run on a
+[00:50:10] device or can run on a CPU okay and can
+[00:50:13] be launched as a kernel
+[00:50:16] then okay then we have parameter list
+[00:50:20] and pthread is much more annoying it can
+[00:50:23] only accept the one argument thread. Uh
+[00:50:25] CUDA is more smart that we can accept
+[00:50:27] the A B C and there's actually N the
+[00:50:31] total size of the array
+[00:50:37] but the screen is not wide enough so
+[00:50:38] it's not included.
+[00:50:41] Now on this side
+[00:50:43] we need to build a self awareness which
+[00:50:46] what is the ID thread ID right who am I
+[00:50:50] on this side we also need a thread ID T
+[00:50:53] ID we'll talk about this calculation
+[00:50:55] later but here basically this T equ is
+[00:50:59] equivalent to the I on the other side
+[00:51:02] okay now we do a boundary check we'll
+[00:51:05] talk about why boundary check is
+[00:51:07] necessary here then they say there maybe
+[00:51:11] more threats than n right? So extra
+[00:51:14] thread simply do not do anything but it
+[00:51:17] will perform CT ID equals AT ID plus BT
+[00:51:21] then it will uh
+[00:51:25] externally
+[00:51:31] okay it's a cool program is rather
+[00:51:34] straightforward at this stage
+[00:51:37] on the CPU side at the beginning there's
+[00:51:39] nothing special we have a data we we
+[00:51:42] have the data have pointers arrays but
+[00:51:45] remember we're doing memory copy right
+[00:51:47] so we have need to have multiple data
+[00:51:50] pointers so for ABC sometimes you can
+[00:51:53] see uh pointer start with H that stands
+[00:51:55] for host right so but here we just name
+[00:51:58] it at ABC as a convention if a pointer
+[00:52:00] start with D that means these pointers
+[00:52:03] are supposed to be allocated on the
+[00:52:05] device side then we use regular maloc to
+[00:52:08] allocate the data and initialize the
+[00:52:10] data okay now Here this is something
+[00:52:13] that only exists on the CP on the GPU
+[00:52:16] side on CUDA side that we have CUDA. So
+[00:52:19] when you if we use CUDA this data will
+[00:52:22] be allocated on the GPU side not on the
+[00:52:24] CPU side.
+[00:52:26] Then we do CUDA memory copy
+[00:52:29] CUDA memory copy.
+[00:52:33] Um so there are a few parameters right
+[00:52:36] those are the first one is the
+[00:52:38] destination da is the destination then a
+[00:52:41] is the source then
+[00:52:44] how how many bytes that we want to move
+[00:52:47] and multiply by size of float float is
+[00:52:50] single point four byte or 32 bit numbers
+[00:52:55] at the end we need to specify what's the
+[00:52:58] direction this case is called memory
+[00:53:00] copy host to device later Turn around.
+[00:53:03] You can see is device to host. It's
+[00:53:04] copying data back.
+[00:53:15] >> Yeah.
+[00:53:17] Um
+[00:53:20] very likely if you directly write into
+[00:53:22] DIBDC you will get a second.
+[00:53:28] Okay. Then we launch the kernel. which
+[00:53:31] started thrice.
+[00:53:34] Here we have a special syntax that use
+[00:53:38] this three triangle bracket.
+[00:53:41] Okay, so it requires two extra
+[00:53:44] parameters. One is called the number of
+[00:53:47] blocks or I I just call it kernel size
+[00:53:49] and the RSM is the block size. We'll
+[00:53:52] talk about that later. But when they
+[00:53:54] multiply together, they just equals to
+[00:53:57] the total number of threads that we want
+[00:53:59] to launch.
+[00:54:01] Okay,
+[00:54:04] block using the design of block is
+[00:54:07] something that GPU is constrained by the
+[00:54:10] hardware capability that they have to
+[00:54:12] introduce this awkward concept called
+[00:54:15] block. I guess they really don't want to
+[00:54:17] introduce this concept block concept
+[00:54:20] because it's add one extra layer of
+[00:54:22] complexity, right? But they just have to
+[00:54:25] let user to define what's the block
+[00:54:27] size. We'll talk about why blocks are
+[00:54:29] used next time on on Thursday. The BABDC
+[00:54:35] and N right
+[00:54:37] arguments nothing special. So once we
+[00:54:40] call it it will start running then it
+[00:54:42] will automatically spawn so many threads
+[00:54:45] can be millions billions of threads and
+[00:54:46] there's unlimited number of threads that
+[00:54:48] we can launch per kernel and they will
+[00:54:50] just run until the result comes out.
+[00:54:54] Okay, the result will write in the GPU
+[00:54:57] side. So here there's a equivalence that
+[00:55:02] on the CPU side we're doing a
+[00:55:03] synchronization here. So there's still
+[00:55:06] the main thread, right? The main thread
+[00:55:08] will keep going without waiting for the
+[00:55:12] uh sub threads to finish. So we have to
+[00:55:15] use the join method to synchronize. On
+[00:55:18] this side you can use code and memory
+[00:55:20] copy as a asynchronous synchronized
+[00:55:23] version that means this the calculation
+[00:55:26] before this point has to complete then
+[00:55:28] we can start to copy the data back. So
+[00:55:30] this is a synchronization then we can
+[00:55:32] copy the data back from DC to C.
+[00:55:38] Then we use the result in C. The extra
+[00:55:40] step for GPU is to free up the memory.
+[00:55:43] Free up the GPU memory. Now of course we
+[00:55:45] also need to free up the CPU memory.
+[00:55:49] Okay, so it's rather straightforward. I
+[00:55:51] think the only thing that I didn't
+[00:55:52] explain is the block size and the block
+[00:55:56] size and the kernel size and the um
+[00:55:59] kernel dimension stuff, right?
+[00:56:03] Any questions with this code?
+[00:56:08] Then let's talk about kernels, blocks,
+[00:56:10] and threads.
+[00:56:12] So this is a vector, the vector add
+[00:56:14] kernel. Then the first line is a very
+[00:56:17] important line that in many many GPU
+[00:56:20] programs you will see something like
+[00:56:21] this.
+[00:56:23] So a kernel is a piece of program that
+[00:56:25] describes the behavior of many many
+[00:56:27] threads and for GPUs the number of
+[00:56:29] threads can be very large and I would
+[00:56:32] say typically it's rather reasonable
+[00:56:36] at least much much more reasonable to
+[00:56:38] write this type of GPU program to
+[00:56:40] calculate one piece of data per thread.
+[00:56:44] Still as we discussed on the CPU side,
+[00:56:46] one thread has extra overhead. At least
+[00:56:49] this calculation is not free. If you do
+[00:56:51] this calculation only do this
+[00:56:52] calculation and if condition is also not
+[00:56:55] free. If you only do one calculation but
+[00:56:58] add extra calculation here, there's
+[00:57:00] still overhead. So it's still more
+[00:57:02] reasonable to at least allocate some
+[00:57:05] number of work piece of result on the
+[00:57:08] GPU side. So not only calculating one
+[00:57:11] piece of data but calculating a chunk of
+[00:57:13] data
+[00:57:15] okay but just for simp for for
+[00:57:17] simplicity let's just see this type of
+[00:57:19] GPU kernels now what is a thread a
+[00:57:22] thread is an independent program that
+[00:57:25] ths that runs in parallel right so that
+[00:57:29] means uh T right T in thread one and T
+[00:57:33] in thread two must be different so the
+[00:57:36] numbers in the variables that may have
+[00:57:39] the same name but they have different
+[00:57:41] values.
+[00:57:42] Now how we can launch a kernel is launch
+[00:57:45] a kernel? We we have this specific word
+[00:57:48] called launch a kernel not call a
+[00:57:51] function or some invoke a function is
+[00:57:53] launch a kernel. Launch a kernel
+[00:57:54] function is basically calling a GPU
+[00:57:56] program or calling a GPU function from
+[00:57:58] the host using this syntax.
+[00:58:02] Okay. So we need to decide how many
+[00:58:05] threads that we need to have. That's the
+[00:58:07] first thing we need to consider and
+[00:58:08] typically that's your the number of
+[00:58:10] output element but sometimes we also
+[00:58:13] typically write in a way or fix the
+[00:58:15] number of threads let's say if your GPU
+[00:58:17] can run 4,000 thread at a time you know
+[00:58:20] we just just have 4,000 threads then let
+[00:58:23] each thread to do more things that's
+[00:58:24] also very common way and in my previous
+[00:58:27] profiling fix the thread implementation
+[00:58:29] can be a few times faster than the
+[00:58:31] number of um than just to have the
+[00:58:35] necessary number of thread
+[00:58:37] as your output element. It really
+[00:58:38] depends on what how large is your real
+[00:58:41] calculation part, right? So this has
+[00:58:42] some this calculation has some overhead
+[00:58:46] and starting one thread has a little bit
+[00:58:48] overhead. Then if only do one thing
+[00:58:50] that's probably a waste of thread but if
+[00:58:52] the calculation is already very complex
+[00:58:54] then the overhead can be negligible then
+[00:58:57] it's not that important.
+[00:59:00] So what is a block? A block is a group
+[00:59:02] of thread that can synchronize and
+[00:59:04] communicate.
+[00:59:06] So that means
+[00:59:08] this hints that threads outside one
+[00:59:12] block cannot synchronize and cannot
+[00:59:15] communicate. That means in GPU you not
+[00:59:18] always never write this type of program.
+[00:59:21] What type of program?
+[00:59:24] Uh in one you write while
+[00:59:29] a
+[00:59:31] equals to zero. Wait
+[00:59:36] then do something.
+[00:59:42] Then on another thread you write a
+[00:59:44] program here. Say
+[00:59:49] do something
+[00:59:52] do B and this is do A then A equ= to 1
+[00:59:59] then do C.
+[01:00:01] Okay in CPU this is rather common right?
+[01:00:04] We just say oh we have to finish one
+[01:00:06] task then set a flag then decide read a
+[01:00:10] flag then we continue going right we
+[01:00:13] have to wait the result comes out so
+[01:00:14] that we can keep doing calculation in
+[01:00:16] CPU this is rather common in GPU this is
+[01:00:21] this can only happen within one block
+[01:00:25] okay so don't expect one thread can tell
+[01:00:30] another thread something now if you
+[01:00:33] really need to do this what do you do?
+[01:00:36] Stop the kernel and start a new one. So
+[01:00:38] global synchronization can only be
+[01:00:40] completed
+[01:00:41] at the kernel boundary. There's no way
+[01:00:43] that one thread can wait for another
+[01:00:45] thread. We'll talk about there's it's
+[01:00:47] because of some hardware constraint that
+[01:00:50] this has to be implemented.
+[01:00:52] This has to be prevented. Okay. So
+[01:00:57] communication can only happens within
+[01:00:59] one block. Then the typical block size
+[01:01:02] is 32 64 1024 and we'll talk about this
+[01:01:06] later. So number of blocks is basically
+[01:01:10] the ceiling of threads divided by block
+[01:01:13] size. So if you need 1 million thread
+[01:01:15] and divided by 1024 then that means you
+[01:01:18] need 1024 blocks.
+[01:01:22] Okay.
+[01:01:25] So because in Nvidia in CUDA you can
+[01:01:29] only launch the number of threads that
+[01:01:31] as a multiple of block your block size.
+[01:01:34] So block all the blocks are full blocks
+[01:01:36] in CUDA that that means you have to have
+[01:01:39] this boundary check you have to do this
+[01:01:42] condition there so that you don't access
+[01:01:46] out of the boundary.
+[01:01:48] Okay.
+[01:01:52] Then indices where the indices are here.
+[01:01:56] There are three indices that we used at
+[01:01:58] this point. Thread index is the index
+[01:02:02] within the block. So it can be maximum
+[01:02:06] 1024.
+[01:02:09] Uh
+[01:02:11] block dimension is what's how large is
+[01:02:14] each block.
+[01:02:16] It can be 32 64 and 1024. It can
+[01:02:19] actually be any number smaller than the
+[01:02:21] 24 but it doesn't make much sense if you
+[01:02:23] select other numbers.
+[01:02:26] Then block index is which block it is
+[01:02:29] first block, second block and third
+[01:02:31] block and so on.
+[01:02:33] So block index multiply by block
+[01:02:35] dimension. That's the
+[01:02:39] total number of threads before your
+[01:02:41] current block plus a thread offset and
+[01:02:45] gets a unique global ID of your thread.
+[01:02:50] Okay, that's how you calculate this T
+[01:02:51] ID.
+[01:02:54] So I think that explains all the details
+[01:02:56] of this vector add kernel. Okay,
+[01:03:02] then we're going down to hardware. So I
+[01:03:07] think I basically explained how a GPU
+[01:03:09] program is written and you see another
+[01:03:11] GPU programming course. You should learn
+[01:03:14] advanced GPU programming techniques in
+[01:03:16] other courses but then we're soon going
+[01:03:18] to the hardware the implementation how
+[01:03:22] the hardware can support this type of
+[01:03:23] program. So there's a terminology called
+[01:03:26] SIMD, single instruction, multiple data
+[01:03:29] or sometimes called SIM T. Let's talk
+[01:03:31] about this um classification of
+[01:03:34] hardware.
+[01:03:36] The first the most simple type of
+[01:03:38] hardware is single instruction single
+[01:03:39] data. Then if we fill this um
+[01:03:44] coordinates
+[01:03:46] or classification, we have single
+[01:03:48] instruction, multiple data. Then on the
+[01:03:50] other side, we have multiple
+[01:03:52] instruction, single data. And finally we
+[01:03:54] have multiple instruction multiple data.
+[01:03:57] What does that mean? So let's see
+[01:03:58] examples. A CPU single core is basically
+[01:04:02] what we say a single instruction single
+[01:04:04] data right we have add instruction then
+[01:04:06] we have we add just simply add two
+[01:04:09] numbers together and get one result. So
+[01:04:12] one instruction to process one piece of
+[01:04:13] data.
+[01:04:15] When you think of instruction multiple
+[01:04:17] data that means we do an add operation.
+[01:04:20] an add operation is actually adding
+[01:04:22] multiple numbers together but we only
+[01:04:25] say oh there's only one add instruction
+[01:04:29] multiple instruction single data is
+[01:04:31] pretty much only in the theory I don't
+[01:04:33] know any real hardware that implements
+[01:04:35] this multiple instruction multiple data
+[01:04:37] is typically multiore CPUs or just
+[01:04:40] multiple devices they're just running to
+[01:04:42] different things okay
+[01:04:47] So
+[01:04:50] let's say let's see how it works. Let's
+[01:04:52] say add instruction for CPU. Then we
+[01:04:55] have this instruction called add R5, R
+[01:04:58] six, R seven. R5, R six, R seven are
+[01:05:01] registers are
+[01:05:04] flip-flops that storing the data. The
+[01:05:06] CPU when say R5 in CPU that means it's
+[01:05:11] only one register.
+[01:05:14] There's only one piece of only one
+[01:05:17] value. Two values add the third value
+[01:05:20] when on GPU what we're doing is we say
+[01:05:23] do add always add in
+[01:05:28] array of them. So every calculation is
+[01:05:31] in an array that means this is R5 right
+[01:05:36] in this thread R5 may have value one
+[01:05:38] then R5 may have value two and so on.
+[01:05:40] Then this R six may have different
+[01:05:42] values. then the result may be different
+[01:05:44] values.
+[01:05:46] Okay.
+[01:05:48] Then the advantage is for GPU is it's
+[01:05:52] more efficient in terms of comput
+[01:05:55] computing because you think this issuing
+[01:05:57] process issuing decides which
+[01:05:59] instruction to run right issuing is
+[01:06:02] actually quite complex because we need
+[01:06:04] to load this instruction from the
+[01:06:05] memory. Then we need to decode it and
+[01:06:08] decide which to run. It's a complex
+[01:06:10] process. Now if we have this whole
+[01:06:12] process that only calculate one piece of
+[01:06:14] data is a waste of resources right so
+[01:06:19] similarly to the concept of like having
+[01:06:21] fewer threads but to do more calculation
+[01:06:24] GPU cares about calculation so GPU wants
+[01:06:27] to maximize the utilization of the ALUS
+[01:06:29] the AL user or arithmetic logic unit are
+[01:06:32] the combination logic can really
+[01:06:34] calculate the data question.
+[01:06:42] >> Yeah. Yeah. I'll talk about that later.
+[01:06:46] Let's consider CPU the CPU here in a
+[01:06:49] traditional CPU way.
+[01:06:52] So,
+[01:06:55] uh issue has overhead. So, it's better
+[01:06:57] utilization of the calculation the ALOU.
+[01:07:00] So, the design philosophy is CPU is
+[01:07:03] optimized for latency. So we want to
+[01:07:06] calculate one result as fast as possible
+[01:07:08] but GPU is optimized for throughput. I
+[01:07:10] can wait for one piece of data to come
+[01:07:12] out but I want to have a lot of data to
+[01:07:16] be processed in a set the same amount of
+[01:07:19] time.
+[01:07:21] Okay then talk about this then you need
+[01:07:23] to consider that means if I'm executing
+[01:07:26] one add operation there are multiple
+[01:07:28] threads there right? So in this case
+[01:07:30] there are six thread that this six
+[01:07:33] thread must all do add operation. They
+[01:07:36] cannot do different operations different
+[01:07:38] instructions at the same time. So what's
+[01:07:41] that concept? That concept is called a
+[01:07:44] warp.
+[01:07:47] Okay. In a media terminology is called a
+[01:07:50] warp. In AMD terminology is called a
+[01:07:52] wavefront.
+[01:07:56] I guess I'm going to use a media
+[01:07:58] terminology today. then use AMD
+[01:08:01] terminology on Thursday. That's it. So
+[01:08:05] that you get familiar with both. Yeah,
+[01:08:07] it's it's because mainly I'm more
+[01:08:09] familiar with GPU programming, CUDA
+[01:08:11] program, but more familiar with AMD uh
+[01:08:15] architecture. So a warp is a group of
+[01:08:17] threader that runs in lock step. What
+[01:08:19] does mean in lock step? That means if
+[01:08:22] they move forward one foot, they have to
+[01:08:25] move forward the same foot. Means if
+[01:08:28] they do add operation all these 32
+[01:08:30] threads have to do the same add
+[01:08:33] instruction.
+[01:08:35] Okay. Lock step means they just do the
+[01:08:38] same instruction. So I only decode one
+[01:08:40] instruction. I decode it. I issue it. I
+[01:08:42] run that. Then 32 operations are
+[01:08:45] performed. Okay. So really low overhead
+[01:08:47] on the issue side and really high power
+[01:08:49] on the computer side. Then the number of
+[01:08:52] warps are means different things. Then
+[01:08:54] this 32 thread on Nvidia, 64 thread on
+[01:08:57] AMD GCN and CDN GPUs and on newer AMD RN
+[01:09:02] GPU they could also go back to 32
+[01:09:03] thread. Okay, there's some design
+[01:09:06] philosophy between behind 32 or 64 where
+[01:09:09] sometimes we can even propose 128 but
+[01:09:12] there's always a trade-off
+[01:09:15] talk about that later. So just do some
+[01:09:17] calculation. So how many words are there
+[01:09:19] in a block? So if a block
+[01:09:23] so levels right kernel block warp thread
+[01:09:28] four levels kernel block warp thread
+[01:09:33] okay
+[01:09:35] one thread 32 thread forms a warp.
+[01:09:40] Okay 32 thread forms a warp.
+[01:09:45] Then in this case if one block is 32
+[01:09:48] thread then there's one warp per block.
+[01:09:51] In the largest case
+[01:09:56] 32 warp per block if there are 10 24
+[01:10:01] threads.
+[01:10:03] Okay simple multiplications just
+[01:10:05] multiply this number by 32 you get the
+[01:10:07] number blocks. Worp is a programmer
+[01:10:10] transparent concept. A programmer
+[01:10:12] doesn't really know the existence of
+[01:10:14] warps. That's why I explained at the
+[01:10:17] architecture side of the teaching of the
+[01:10:20] lecture from when we write a program
+[01:10:22] only care about blocks. We don't care
+[01:10:24] about warps.
+[01:10:25] Okay. But when you decide the warp sizes
+[01:10:29] or block sizes, why you started with 32?
+[01:10:32] You never want to have two thread per
+[01:10:34] block. That means you still need one
+[01:10:36] warp. In that case, only two threads are
+[01:10:39] running. The other threads are wasted.
+[01:10:41] So there's no point to have smaller
+[01:10:43] blocks. So a typical block is like 256
+[01:10:47] that level.
+[01:10:50] Okay. So but at least never go down with
+[01:10:53] 32 and always be a multiply of 32
+[01:10:56] threats per block. That's why that's
+[01:10:58] because the warp is limiting the
+[01:11:01] granularity there.
+[01:11:05] Okay.
+[01:11:06] So th and one word are bundled together.
+[01:11:09] they always execute the same instruction
+[01:11:13] and talk about SIMD or SIMD. It's two
+[01:11:15] terminology. If you say GPU is SIMD,
+[01:11:17] nobody will really argue with you too
+[01:11:20] much. But if you want to be more
+[01:11:22] precise, people also call it SIMT.
+[01:11:24] What's the difference between CIMD and
+[01:11:26] SIMT then suggested like a CPU also have
+[01:11:31] vectorzed instructions, right? So, but
+[01:11:33] CPU works more like in this way. It has
+[01:11:35] some in most of instructions are not
+[01:11:37] vectorzed only some specific calculation
+[01:11:40] are vectorized. So vector vectorzation
+[01:11:43] happens sparsely
+[01:11:46] right. So in this case we call this
+[01:11:49] instruction or cmd instruction
+[01:11:52] in GPU is slightly different. GPU works
+[01:11:55] in this way. Every instruction is
+[01:11:57] paralyzed
+[01:11:59] at least the most of instructions are
+[01:12:00] paralyzed. In this case we call this sim
+[01:12:03] T. So single instruction multi thread
+[01:12:06] model. Okay. Although for most of time
+[01:12:09] this is we don't really need to
+[01:12:11] differentiate these two concept that
+[01:12:14] much.

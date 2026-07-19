@@ -1,0 +1,10535 @@
+1
+00:00:00,000 --> 00:00:02,790
+
+now 7 so starting from this episode
+
+2
+00:00:02,790 --> 00:00:02,800
+now 7 so starting from this episode
+ 
+
+3
+00:00:02,800 --> 00:00:05,269
+now 7 so starting from this episode
+we're going to do a two episode series
+
+4
+00:00:05,269 --> 00:00:05,279
+we're going to do a two episode series
+ 
+
+5
+00:00:05,279 --> 00:00:06,150
+we're going to do a two episode series
+about
+
+6
+00:00:06,150 --> 00:00:06,160
+about
+ 
+
+7
+00:00:06,160 --> 00:00:08,710
+about
+gpu and howard acceleration
+
+8
+00:00:08,710 --> 00:00:08,720
+gpu and howard acceleration
+ 
+
+9
+00:00:08,720 --> 00:00:10,150
+gpu and howard acceleration
+and
+
+10
+00:00:10,150 --> 00:00:10,160
+and
+ 
+
+11
+00:00:10,160 --> 00:00:12,070
+and
+so one note is that
+
+12
+00:00:12,070 --> 00:00:12,080
+so one note is that
+ 
+
+13
+00:00:12,080 --> 00:00:13,749
+so one note is that
+this particular
+
+14
+00:00:13,749 --> 00:00:13,759
+this particular
+ 
+
+15
+00:00:13,759 --> 00:00:15,350
+this particular
+notebook and next one is going to
+
+16
+00:00:15,350 --> 00:00:15,360
+notebook and next one is going to
+ 
+
+17
+00:00:15,360 --> 00:00:18,390
+notebook and next one is going to
+require cuda dependency so you will need
+
+18
+00:00:18,390 --> 00:00:18,400
+require cuda dependency so you will need
+ 
+
+19
+00:00:18,400 --> 00:00:21,349
+require cuda dependency so you will need
+to run the relevant part on a kuda 11
+
+20
+00:00:21,349 --> 00:00:21,359
+to run the relevant part on a kuda 11
+ 
+
+21
+00:00:21,359 --> 00:00:22,870
+to run the relevant part on a kuda 11
+environment
+
+22
+00:00:22,870 --> 00:00:22,880
+environment
+ 
+
+23
+00:00:22,880 --> 00:00:25,269
+environment
+if you don't have such an environment
+
+24
+00:00:25,269 --> 00:00:25,279
+if you don't have such an environment
+ 
+
+25
+00:00:25,279 --> 00:00:27,589
+if you don't have such an environment
+it's also fine as you can go and follow
+
+26
+00:00:27,589 --> 00:00:27,599
+it's also fine as you can go and follow
+ 
+
+27
+00:00:27,599 --> 00:00:28,550
+it's also fine as you can go and follow
+along
+
+28
+00:00:28,550 --> 00:00:28,560
+along
+ 
+
+29
+00:00:28,560 --> 00:00:29,669
+along
+and
+
+30
+00:00:29,669 --> 00:00:29,679
+and
+ 
+
+31
+00:00:29,679 --> 00:00:31,910
+and
+actually the particular uh sum of code
+
+32
+00:00:31,910 --> 00:00:31,920
+actually the particular uh sum of code
+ 
+
+33
+00:00:31,920 --> 00:00:34,150
+actually the particular uh sum of code
+generation called also generalized to
+
+34
+00:00:34,150 --> 00:00:34,160
+generation called also generalized to
+ 
+
+35
+00:00:34,160 --> 00:00:36,310
+generation called also generalized to
+non-cooldown content that we will also
+
+36
+00:00:36,310 --> 00:00:36,320
+non-cooldown content that we will also
+ 
+
+37
+00:00:36,320 --> 00:00:39,670
+non-cooldown content that we will also
+mention later so this is part one of gpu
+
+38
+00:00:39,670 --> 00:00:39,680
+mention later so this is part one of gpu
+ 
+
+39
+00:00:39,680 --> 00:00:41,190
+mention later so this is part one of gpu
+acceleration
+
+40
+00:00:41,190 --> 00:00:41,200
+acceleration
+ 
+
+41
+00:00:41,200 --> 00:00:43,750
+acceleration
+so i'm still using this collab
+
+42
+00:00:43,750 --> 00:00:43,760
+so i'm still using this collab
+ 
+
+43
+00:00:43,760 --> 00:00:46,150
+so i'm still using this collab
+environment except that you know i'm i'm
+
+44
+00:00:46,150 --> 00:00:46,160
+environment except that you know i'm i'm
+ 
+
+45
+00:00:46,160 --> 00:00:49,350
+environment except that you know i'm i'm
+using the gpu enabled so right now if we
+
+46
+00:00:49,350 --> 00:00:49,360
+using the gpu enabled so right now if we
+ 
+
+47
+00:00:49,360 --> 00:00:52,069
+using the gpu enabled so right now if we
+take a look there's a tesla 300 gpu ring
+
+48
+00:00:52,069 --> 00:00:52,079
+take a look there's a tesla 300 gpu ring
+ 
+
+49
+00:00:52,079 --> 00:00:54,470
+take a look there's a tesla 300 gpu ring
+here that i'm going to use today
+
+50
+00:00:54,470 --> 00:00:54,480
+here that i'm going to use today
+ 
+
+51
+00:00:54,480 --> 00:00:56,830
+here that i'm going to use today
+to demonstrate some of the today's
+
+52
+00:00:56,830 --> 00:00:56,840
+to demonstrate some of the today's
+ 
+
+53
+00:00:56,840 --> 00:01:00,310
+to demonstrate some of the today's
+process uh to begin with um we're still
+
+54
+00:01:00,310 --> 00:01:00,320
+process uh to begin with um we're still
+ 
+
+55
+00:01:00,320 --> 00:01:02,150
+process uh to begin with um we're still
+going to import some of the necessary
+
+56
+00:01:02,150 --> 00:01:02,160
+going to import some of the necessary
+ 
+
+57
+00:01:02,160 --> 00:01:03,590
+going to import some of the necessary
+dependencies
+
+58
+00:01:03,590 --> 00:01:03,600
+dependencies
+ 
+
+59
+00:01:03,600 --> 00:01:04,310
+dependencies
+so
+
+60
+00:01:04,310 --> 00:01:04,320
+so
+ 
+
+61
+00:01:04,320 --> 00:01:06,390
+so
+gpu is kind of an exciting topic you
+
+62
+00:01:06,390 --> 00:01:06,400
+gpu is kind of an exciting topic you
+ 
+
+63
+00:01:06,400 --> 00:01:08,550
+gpu is kind of an exciting topic you
+know says that i still remember when i
+
+64
+00:01:08,550 --> 00:01:08,560
+know says that i still remember when i
+ 
+
+65
+00:01:08,560 --> 00:01:10,469
+know says that i still remember when i
+started working on
+
+66
+00:01:10,469 --> 00:01:10,479
+started working on
+ 
+
+67
+00:01:10,479 --> 00:01:11,910
+started working on
+deep learning and building machine
+
+68
+00:01:11,910 --> 00:01:11,920
+deep learning and building machine
+ 
+
+69
+00:01:11,920 --> 00:01:13,990
+deep learning and building machine
+learning systems uh the first thing i
+
+70
+00:01:13,990 --> 00:01:14,000
+learning systems uh the first thing i
+ 
+
+71
+00:01:14,000 --> 00:01:16,950
+learning systems uh the first thing i
+did was you know pack a a very old gpu
+
+72
+00:01:16,950 --> 00:01:16,960
+did was you know pack a a very old gpu
+ 
+
+73
+00:01:16,960 --> 00:01:19,429
+did was you know pack a a very old gpu
+card and bringing in deep learning
+
+74
+00:01:19,429 --> 00:01:19,439
+card and bringing in deep learning
+ 
+
+75
+00:01:19,439 --> 00:01:22,230
+card and bringing in deep learning
+models onto those devices
+
+76
+00:01:22,230 --> 00:01:22,240
+models onto those devices
+ 
+
+77
+00:01:22,240 --> 00:01:25,109
+models onto those devices
+one main difference between a gpu and a
+
+78
+00:01:25,109 --> 00:01:25,119
+one main difference between a gpu and a
+ 
+
+79
+00:01:25,119 --> 00:01:28,310
+one main difference between a gpu and a
+typical uh central cpu processor that
+
+80
+00:01:28,310 --> 00:01:28,320
+typical uh central cpu processor that
+ 
+
+81
+00:01:28,320 --> 00:01:30,710
+typical uh central cpu processor that
+you might see in your mobile phones or
+
+82
+00:01:30,710 --> 00:01:30,720
+you might see in your mobile phones or
+ 
+
+83
+00:01:30,720 --> 00:01:31,749
+you might see in your mobile phones or
+on your
+
+84
+00:01:31,749 --> 00:01:31,759
+on your
+ 
+
+85
+00:01:31,759 --> 00:01:34,310
+on your
+laptop is that gpu themselves are
+
+86
+00:01:34,310 --> 00:01:34,320
+laptop is that gpu themselves are
+ 
+
+87
+00:01:34,320 --> 00:01:35,990
+laptop is that gpu themselves are
+massively parallel
+
+88
+00:01:35,990 --> 00:01:36,000
+massively parallel
+ 
+
+89
+00:01:36,000 --> 00:01:37,830
+massively parallel
+so and this is kind of like an
+
+90
+00:01:37,830 --> 00:01:37,840
+so and this is kind of like an
+ 
+
+91
+00:01:37,840 --> 00:01:40,630
+so and this is kind of like an
+illustrative diagram of what a gpu
+
+92
+00:01:40,630 --> 00:01:40,640
+illustrative diagram of what a gpu
+ 
+
+93
+00:01:40,640 --> 00:01:43,590
+illustrative diagram of what a gpu
+architecture looks like so normally uh
+
+94
+00:01:43,590 --> 00:01:43,600
+architecture looks like so normally uh
+ 
+
+95
+00:01:43,600 --> 00:01:45,350
+architecture looks like so normally uh
+you will have a global memory so on your
+
+96
+00:01:45,350 --> 00:01:45,360
+you will have a global memory so on your
+ 
+
+97
+00:01:45,360 --> 00:01:47,429
+you will have a global memory so on your
+bio gpu it says you know you have 24
+
+98
+00:01:47,429 --> 00:01:47,439
+bio gpu it says you know you have 24
+ 
+
+99
+00:01:47,439 --> 00:01:50,069
+bio gpu it says you know you have 24
+gigabytes of dram or hbm this is a
+
+100
+00:01:50,069 --> 00:01:50,079
+gigabytes of dram or hbm this is a
+ 
+
+101
+00:01:50,079 --> 00:01:51,749
+gigabytes of dram or hbm this is a
+global memory part
+
+102
+00:01:51,749 --> 00:01:51,759
+global memory part
+ 
+
+103
+00:01:51,759 --> 00:01:54,550
+global memory part
+and then within global memory
+
+104
+00:01:54,550 --> 00:01:54,560
+and then within global memory
+ 
+
+105
+00:01:54,560 --> 00:01:56,550
+and then within global memory
+within the gpu there are multiple
+
+106
+00:01:56,550 --> 00:01:56,560
+within the gpu there are multiple
+ 
+
+107
+00:01:56,560 --> 00:01:58,870
+within the gpu there are multiple
+overpower stream multiple processors so
+
+108
+00:01:58,870 --> 00:01:58,880
+overpower stream multiple processors so
+ 
+
+109
+00:01:58,880 --> 00:02:00,950
+overpower stream multiple processors so
+so if this is a gpu
+
+110
+00:02:00,950 --> 00:02:00,960
+so if this is a gpu
+ 
+
+111
+00:02:00,960 --> 00:02:03,670
+so if this is a gpu
+actually we'll have multiple of those
+
+112
+00:02:03,670 --> 00:02:03,680
+actually we'll have multiple of those
+ 
+
+113
+00:02:03,680 --> 00:02:06,149
+actually we'll have multiple of those
+stream multiple processors that stream
+
+114
+00:02:06,149 --> 00:02:06,159
+stream multiple processors that stream
+ 
+
+115
+00:02:06,159 --> 00:02:09,190
+stream multiple processors that stream
+multiprocessors that sits on a cpu card
+
+116
+00:02:09,190 --> 00:02:09,200
+multiprocessors that sits on a cpu card
+ 
+
+117
+00:02:09,200 --> 00:02:10,869
+multiprocessors that sits on a cpu card
+each of the stream microprocessor
+
+118
+00:02:10,869 --> 00:02:10,879
+each of the stream microprocessor
+ 
+
+119
+00:02:10,879 --> 00:02:13,990
+each of the stream microprocessor
+contains a group of compute cores in
+
+120
+00:02:13,990 --> 00:02:14,000
+contains a group of compute cores in
+ 
+
+121
+00:02:14,000 --> 00:02:16,630
+contains a group of compute cores in
+cuda they call it cuda cost that's that
+
+122
+00:02:16,630 --> 00:02:16,640
+cuda they call it cuda cost that's that
+ 
+
+123
+00:02:16,640 --> 00:02:18,309
+cuda they call it cuda cost that's that
+can be viewed as an independent
+
+124
+00:02:18,309 --> 00:02:18,319
+can be viewed as an independent
+ 
+
+125
+00:02:18,319 --> 00:02:20,949
+can be viewed as an independent
+extrusion unit that allows us to execute
+
+126
+00:02:20,949 --> 00:02:20,959
+extrusion unit that allows us to execute
+ 
+
+127
+00:02:20,959 --> 00:02:24,309
+extrusion unit that allows us to execute
+some related computations on the on the
+
+128
+00:02:24,309 --> 00:02:24,319
+some related computations on the on the
+ 
+
+129
+00:02:24,319 --> 00:02:26,390
+some related computations on the on the
+respective course
+
+130
+00:02:26,390 --> 00:02:26,400
+respective course
+ 
+
+131
+00:02:26,400 --> 00:02:28,790
+respective course
+and effectively each of the stream
+
+132
+00:02:28,790 --> 00:02:28,800
+and effectively each of the stream
+ 
+
+133
+00:02:28,800 --> 00:02:31,030
+and effectively each of the stream
+microprocessor kind of corresponds to
+
+134
+00:02:31,030 --> 00:02:31,040
+microprocessor kind of corresponds to
+ 
+
+135
+00:02:31,040 --> 00:02:34,550
+microprocessor kind of corresponds to
+this kind of this kind of global unit
+
+136
+00:02:34,550 --> 00:02:34,560
+this kind of this kind of global unit
+ 
+
+137
+00:02:34,560 --> 00:02:36,869
+this kind of this kind of global unit
+and another interesting thing about gpu
+
+138
+00:02:36,869 --> 00:02:36,879
+and another interesting thing about gpu
+ 
+
+139
+00:02:36,879 --> 00:02:38,869
+and another interesting thing about gpu
+is that um you know within each of the
+
+140
+00:02:38,869 --> 00:02:38,879
+is that um you know within each of the
+ 
+
+141
+00:02:38,879 --> 00:02:40,710
+is that um you know within each of the
+stream mining processors that have
+
+142
+00:02:40,710 --> 00:02:40,720
+stream mining processors that have
+ 
+
+143
+00:02:40,720 --> 00:02:42,550
+stream mining processors that have
+explicitly managed what we call shared
+
+144
+00:02:42,550 --> 00:02:42,560
+explicitly managed what we call shared
+ 
+
+145
+00:02:42,560 --> 00:02:43,509
+explicitly managed what we call shared
+memory
+
+146
+00:02:43,509 --> 00:02:43,519
+memory
+ 
+
+147
+00:02:43,519 --> 00:02:46,229
+memory
+um that can be accessed by all those
+
+148
+00:02:46,229 --> 00:02:46,239
+um that can be accessed by all those
+ 
+
+149
+00:02:46,239 --> 00:02:48,309
+um that can be accessed by all those
+calls so this is not
+
+150
+00:02:48,309 --> 00:02:48,319
+calls so this is not
+ 
+
+151
+00:02:48,319 --> 00:02:50,070
+calls so this is not
+uh this is the typical you know nvidia
+
+152
+00:02:50,070 --> 00:02:50,080
+uh this is the typical you know nvidia
+ 
+
+153
+00:02:50,080 --> 00:02:53,110
+uh this is the typical you know nvidia
+gpu or amdgp architecture uh if you look
+
+154
+00:02:53,110 --> 00:02:53,120
+gpu or amdgp architecture uh if you look
+ 
+
+155
+00:02:53,120 --> 00:02:54,710
+gpu or amdgp architecture uh if you look
+at some of the gp architecture some of
+
+156
+00:02:54,710 --> 00:02:54,720
+at some of the gp architecture some of
+ 
+
+157
+00:02:54,720 --> 00:02:56,630
+at some of the gp architecture some of
+them may not have shared memory or have
+
+158
+00:02:56,630 --> 00:02:56,640
+them may not have shared memory or have
+ 
+
+159
+00:02:56,640 --> 00:02:59,030
+them may not have shared memory or have
+other special things but normally you
+
+160
+00:02:59,030 --> 00:02:59,040
+other special things but normally you
+ 
+
+161
+00:02:59,040 --> 00:03:00,790
+other special things but normally you
+know you can view it as a this kind of
+
+162
+00:03:00,790 --> 00:03:00,800
+know you can view it as a this kind of
+ 
+
+163
+00:03:00,800 --> 00:03:01,910
+know you can view it as a this kind of
+two level
+
+164
+00:03:01,910 --> 00:03:01,920
+two level
+ 
+
+165
+00:03:01,920 --> 00:03:04,630
+two level
+uh two level structure where you have
+
+166
+00:03:04,630 --> 00:03:04,640
+uh two level structure where you have
+ 
+
+167
+00:03:04,640 --> 00:03:06,309
+uh two level structure where you have
+global memory you have streamlined
+
+168
+00:03:06,309 --> 00:03:06,319
+global memory you have streamlined
+ 
+
+169
+00:03:06,319 --> 00:03:08,790
+global memory you have streamlined
+processors and you have uh each of a
+
+170
+00:03:08,790 --> 00:03:08,800
+processors and you have uh each of a
+ 
+
+171
+00:03:08,800 --> 00:03:11,190
+processors and you have uh each of a
+call that can execute the code in a
+
+172
+00:03:11,190 --> 00:03:11,200
+call that can execute the code in a
+ 
+
+173
+00:03:11,200 --> 00:03:13,589
+call that can execute the code in a
+reasonably independent fashion
+
+174
+00:03:13,589 --> 00:03:13,599
+reasonably independent fashion
+ 
+
+175
+00:03:13,599 --> 00:03:16,070
+reasonably independent fashion
+so normally on a gpu you have multiple
+
+176
+00:03:16,070 --> 00:03:16,080
+so normally on a gpu you have multiple
+ 
+
+177
+00:03:16,080 --> 00:03:18,869
+so normally on a gpu you have multiple
+of those three microprocessors
+
+178
+00:03:18,869 --> 00:03:18,879
+of those three microprocessors
+ 
+
+179
+00:03:18,879 --> 00:03:19,750
+of those three microprocessors
+and
+
+180
+00:03:19,750 --> 00:03:19,760
+and
+ 
+
+181
+00:03:19,760 --> 00:03:22,229
+and
+as a one of the key interesting thing
+
+182
+00:03:22,229 --> 00:03:22,239
+as a one of the key interesting thing
+ 
+
+183
+00:03:22,239 --> 00:03:24,789
+as a one of the key interesting thing
+about gpu is it's massively parallel if
+
+184
+00:03:24,789 --> 00:03:24,799
+about gpu is it's massively parallel if
+ 
+
+185
+00:03:24,799 --> 00:03:26,789
+about gpu is it's massively parallel if
+you look at a
+
+186
+00:03:26,789 --> 00:03:26,799
+you look at a
+ 
+
+187
+00:03:26,799 --> 00:03:28,869
+you look at a
+typical video gpu it can contain more
+
+188
+00:03:28,869 --> 00:03:28,879
+typical video gpu it can contain more
+ 
+
+189
+00:03:28,879 --> 00:03:30,630
+typical video gpu it can contain more
+than thousands or sometimes tens of
+
+190
+00:03:30,630 --> 00:03:30,640
+than thousands or sometimes tens of
+ 
+
+191
+00:03:30,640 --> 00:03:32,309
+than thousands or sometimes tens of
+thousands
+
+192
+00:03:32,309 --> 00:03:32,319
+thousands
+ 
+
+193
+00:03:32,319 --> 00:03:34,229
+thousands
+that means that effectively you can exit
+
+194
+00:03:34,229 --> 00:03:34,239
+that means that effectively you can exit
+ 
+
+195
+00:03:34,239 --> 00:03:36,630
+that means that effectively you can exit
+so many things together right comparing
+
+196
+00:03:36,630 --> 00:03:36,640
+so many things together right comparing
+ 
+
+197
+00:03:36,640 --> 00:03:39,030
+so many things together right comparing
+to a typical cpu gap you can get
+
+198
+00:03:39,030 --> 00:03:39,040
+to a typical cpu gap you can get
+ 
+
+199
+00:03:39,040 --> 00:03:41,670
+to a typical cpu gap you can get
+normally you can get up to 64
+
+200
+00:03:41,670 --> 00:03:41,680
+normally you can get up to 64
+ 
+
+201
+00:03:41,680 --> 00:03:43,910
+normally you can get up to 64
+cores at most if it's a you know server
+
+202
+00:03:43,910 --> 00:03:43,920
+cores at most if it's a you know server
+ 
+
+203
+00:03:43,920 --> 00:03:45,270
+cores at most if it's a you know server
+class cpu
+
+204
+00:03:45,270 --> 00:03:45,280
+class cpu
+ 
+
+205
+00:03:45,280 --> 00:03:47,190
+class cpu
+so so that's a huge amount of difference
+
+206
+00:03:47,190 --> 00:03:47,200
+so so that's a huge amount of difference
+ 
+
+207
+00:03:47,200 --> 00:03:48,390
+so so that's a huge amount of difference
+on the other hand
+
+208
+00:03:48,390 --> 00:03:48,400
+on the other hand
+ 
+
+209
+00:03:48,400 --> 00:03:50,949
+on the other hand
+the type of operation that gpu cost can
+
+210
+00:03:50,949 --> 00:03:50,959
+the type of operation that gpu cost can
+ 
+
+211
+00:03:50,959 --> 00:03:53,910
+the type of operation that gpu cost can
+perform is also somewhat limited also
+
+212
+00:03:53,910 --> 00:03:53,920
+perform is also somewhat limited also
+ 
+
+213
+00:03:53,920 --> 00:03:55,429
+perform is also somewhat limited also
+um you know
+
+214
+00:03:55,429 --> 00:03:55,439
+um you know
+ 
+
+215
+00:03:55,439 --> 00:03:57,589
+um you know
+it can actually serves most of our
+
+216
+00:03:57,589 --> 00:03:57,599
+it can actually serves most of our
+ 
+
+217
+00:03:57,599 --> 00:03:59,750
+it can actually serves most of our
+machine learning workloads
+
+218
+00:03:59,750 --> 00:03:59,760
+machine learning workloads
+ 
+
+219
+00:03:59,760 --> 00:04:01,990
+machine learning workloads
+so now we've introduced this a generic
+
+220
+00:04:01,990 --> 00:04:02,000
+so now we've introduced this a generic
+ 
+
+221
+00:04:02,000 --> 00:04:04,470
+so now we've introduced this a generic
+overall architectural view of the
+
+222
+00:04:04,470 --> 00:04:04,480
+overall architectural view of the
+ 
+
+223
+00:04:04,480 --> 00:04:06,470
+overall architectural view of the
+streaming mining processes let's come
+
+224
+00:04:06,470 --> 00:04:06,480
+streaming mining processes let's come
+ 
+
+225
+00:04:06,480 --> 00:04:07,509
+streaming mining processes let's come
+back and
+
+226
+00:04:07,509 --> 00:04:07,519
+back and
+ 
+
+227
+00:04:07,519 --> 00:04:09,589
+back and
+talk about you know how we normally
+
+228
+00:04:09,589 --> 00:04:09,599
+talk about you know how we normally
+ 
+
+229
+00:04:09,599 --> 00:04:11,270
+talk about you know how we normally
+program a gpu
+
+230
+00:04:11,270 --> 00:04:11,280
+program a gpu
+ 
+
+231
+00:04:11,280 --> 00:04:13,670
+program a gpu
+so conceptually
+
+232
+00:04:13,670 --> 00:04:13,680
+so conceptually
+ 
+
+233
+00:04:13,680 --> 00:04:16,390
+so conceptually
+when we have a gpu and hand what we do
+
+234
+00:04:16,390 --> 00:04:16,400
+when we have a gpu and hand what we do
+ 
+
+235
+00:04:16,400 --> 00:04:19,349
+when we have a gpu and hand what we do
+is we try to map the computations onto a
+
+236
+00:04:19,349 --> 00:04:19,359
+is we try to map the computations onto a
+ 
+
+237
+00:04:19,359 --> 00:04:21,990
+is we try to map the computations onto a
+group of threads so so so in this case
+
+238
+00:04:21,990 --> 00:04:22,000
+group of threads so so so in this case
+ 
+
+239
+00:04:22,000 --> 00:04:24,310
+group of threads so so so in this case
+now we have one thread a program that
+
+240
+00:04:24,310 --> 00:04:24,320
+now we have one thread a program that
+ 
+
+241
+00:04:24,320 --> 00:04:26,950
+now we have one thread a program that
+describes one thread that get maxed on
+
+242
+00:04:26,950 --> 00:04:26,960
+describes one thread that get maxed on
+ 
+
+243
+00:04:26,960 --> 00:04:31,270
+describes one thread that get maxed on
+to a lot of the other uh chords in here
+
+244
+00:04:31,270 --> 00:04:31,280
+to a lot of the other uh chords in here
+ 
+
+245
+00:04:31,280 --> 00:04:32,550
+to a lot of the other uh chords in here
+and then
+
+246
+00:04:32,550 --> 00:04:32,560
+and then
+ 
+
+247
+00:04:32,560 --> 00:04:34,310
+and then
+multiple threads can be grouped together
+
+248
+00:04:34,310 --> 00:04:34,320
+multiple threads can be grouped together
+ 
+
+249
+00:04:34,320 --> 00:04:36,310
+multiple threads can be grouped together
+and each of the these multiple tracks
+
+250
+00:04:36,310 --> 00:04:36,320
+and each of the these multiple tracks
+ 
+
+251
+00:04:36,320 --> 00:04:38,469
+and each of the these multiple tracks
+can form what we call thread block
+
+252
+00:04:38,469 --> 00:04:38,479
+can form what we call thread block
+ 
+
+253
+00:04:38,479 --> 00:04:40,550
+can form what we call thread block
+and during extrusion time this ram block
+
+254
+00:04:40,550 --> 00:04:40,560
+and during extrusion time this ram block
+ 
+
+255
+00:04:40,560 --> 00:04:43,430
+and during extrusion time this ram block
+get mapped on to you know a stream
+
+256
+00:04:43,430 --> 00:04:43,440
+get mapped on to you know a stream
+ 
+
+257
+00:04:43,440 --> 00:04:46,870
+get mapped on to you know a stream
+multiprocessor effectively onto here
+
+258
+00:04:46,870 --> 00:04:46,880
+multiprocessor effectively onto here
+ 
+
+259
+00:04:46,880 --> 00:04:49,350
+multiprocessor effectively onto here
+and then finally we can launch multiple
+
+260
+00:04:49,350 --> 00:04:49,360
+and then finally we can launch multiple
+ 
+
+261
+00:04:49,360 --> 00:04:52,310
+and then finally we can launch multiple
+blocks that can get mapped to either the
+
+262
+00:04:52,310 --> 00:04:52,320
+blocks that can get mapped to either the
+ 
+
+263
+00:04:52,320 --> 00:04:54,070
+blocks that can get mapped to either the
+same stream other processor or different
+
+264
+00:04:54,070 --> 00:04:54,080
+same stream other processor or different
+ 
+
+265
+00:04:54,080 --> 00:04:55,670
+same stream other processor or different
+microprocessors so
+
+266
+00:04:55,670 --> 00:04:55,680
+microprocessors so
+ 
+
+267
+00:04:55,680 --> 00:04:59,030
+microprocessors so
+effectively uh in here
+
+268
+00:04:59,030 --> 00:04:59,040
+effectively uh in here
+ 
+
+269
+00:04:59,040 --> 00:05:01,590
+effectively uh in here
+each of the block in here kind of can
+
+270
+00:05:01,590 --> 00:05:01,600
+each of the block in here kind of can
+ 
+
+271
+00:05:01,600 --> 00:05:04,950
+each of the block in here kind of can
+expand onto a list of threads and
+
+272
+00:05:04,950 --> 00:05:04,960
+expand onto a list of threads and
+ 
+
+273
+00:05:04,960 --> 00:05:08,230
+expand onto a list of threads and
+another blocking here can also expand to
+
+274
+00:05:08,230 --> 00:05:08,240
+another blocking here can also expand to
+ 
+
+275
+00:05:08,240 --> 00:05:13,510
+another blocking here can also expand to
+another uh another list of strategy okay
+
+276
+00:05:13,510 --> 00:05:13,520
+another uh another list of strategy okay
+ 
+
+277
+00:05:13,520 --> 00:05:16,070
+another uh another list of strategy okay
+and this is conceptually you know how we
+
+278
+00:05:16,070 --> 00:05:16,080
+and this is conceptually you know how we
+ 
+
+279
+00:05:16,080 --> 00:05:17,590
+and this is conceptually you know how we
+can program this
+
+280
+00:05:17,590 --> 00:05:17,600
+can program this
+ 
+
+281
+00:05:17,600 --> 00:05:18,550
+can program this
+and
+
+282
+00:05:18,550 --> 00:05:18,560
+and
+ 
+
+283
+00:05:18,560 --> 00:05:20,469
+and
+now let's try to
+
+284
+00:05:20,469 --> 00:05:20,479
+now let's try to
+ 
+
+285
+00:05:20,479 --> 00:05:22,710
+now let's try to
+start to see a concrete example how we
+
+286
+00:05:22,710 --> 00:05:22,720
+start to see a concrete example how we
+ 
+
+287
+00:05:22,720 --> 00:05:26,230
+start to see a concrete example how we
+can use tens ir and some of the things
+
+288
+00:05:26,230 --> 00:05:26,240
+can use tens ir and some of the things
+ 
+
+289
+00:05:26,240 --> 00:05:28,790
+can use tens ir and some of the things
+we learned in the past lectures to also
+
+290
+00:05:28,790 --> 00:05:28,800
+we learned in the past lectures to also
+ 
+
+291
+00:05:28,800 --> 00:05:33,110
+we learned in the past lectures to also
+perform some of the gpu optimization on
+
+292
+00:05:33,110 --> 00:05:33,120
+perform some of the gpu optimization on
+ 
+
+293
+00:05:33,120 --> 00:05:35,990
+perform some of the gpu optimization on
+on the gpu that we have on this notebook
+
+294
+00:05:35,990 --> 00:05:36,000
+on the gpu that we have on this notebook
+ 
+
+295
+00:05:36,000 --> 00:05:38,870
+on the gpu that we have on this notebook
+so first of all we do is we can define
+
+296
+00:05:38,870 --> 00:05:38,880
+so first of all we do is we can define
+ 
+
+297
+00:05:38,880 --> 00:05:39,990
+so first of all we do is we can define
+a
+
+298
+00:05:39,990 --> 00:05:40,000
+a
+ 
+
+299
+00:05:40,000 --> 00:05:42,550
+a
+vector add operation program so in this
+
+300
+00:05:42,550 --> 00:05:42,560
+vector add operation program so in this
+ 
+
+301
+00:05:42,560 --> 00:05:44,230
+vector add operation program so in this
+case this uh
+
+302
+00:05:44,230 --> 00:05:44,240
+case this uh
+ 
+
+303
+00:05:44,240 --> 00:05:46,150
+case this uh
+tensile program recall that we have
+
+304
+00:05:46,150 --> 00:05:46,160
+tensile program recall that we have
+ 
+
+305
+00:05:46,160 --> 00:05:47,189
+tensile program recall that we have
+buffers
+
+306
+00:05:47,189 --> 00:05:47,199
+buffers
+ 
+
+307
+00:05:47,199 --> 00:05:49,430
+buffers
+uh these
+
+308
+00:05:49,430 --> 00:05:49,440
+uh these
+ 
+
+309
+00:05:49,440 --> 00:05:51,909
+uh these
+loops and the particular operation so in
+
+310
+00:05:51,909 --> 00:05:51,919
+loops and the particular operation so in
+ 
+
+311
+00:05:51,919 --> 00:05:53,350
+loops and the particular operation so in
+this case we are simply taking two
+
+312
+00:05:53,350 --> 00:05:53,360
+this case we are simply taking two
+ 
+
+313
+00:05:53,360 --> 00:05:55,749
+this case we are simply taking two
+vectors and try to add them together
+
+314
+00:05:55,749 --> 00:05:55,759
+vectors and try to add them together
+ 
+
+315
+00:05:55,759 --> 00:05:57,830
+vectors and try to add them together
+in order to map the auto gpus remember
+
+316
+00:05:57,830 --> 00:05:57,840
+in order to map the auto gpus remember
+ 
+
+317
+00:05:57,840 --> 00:06:00,150
+in order to map the auto gpus remember
+that we have the
+
+318
+00:06:00,150 --> 00:06:00,160
+that we have the
+ 
+
+319
+00:06:00,160 --> 00:06:02,790
+that we have the
+gpu contains many threads right so ideas
+
+320
+00:06:02,790 --> 00:06:02,800
+gpu contains many threads right so ideas
+ 
+
+321
+00:06:02,800 --> 00:06:04,309
+gpu contains many threads right so ideas
+that we want to try to map them on to
+
+322
+00:06:04,309 --> 00:06:04,319
+that we want to try to map them on to
+ 
+
+323
+00:06:04,319 --> 00:06:06,550
+that we want to try to map them on to
+the strap blocks and threads
+
+324
+00:06:06,550 --> 00:06:06,560
+the strap blocks and threads
+ 
+
+325
+00:06:06,560 --> 00:06:08,870
+the strap blocks and threads
+so so you want to do that let's first go
+
+326
+00:06:08,870 --> 00:06:08,880
+so so you want to do that let's first go
+ 
+
+327
+00:06:08,880 --> 00:06:10,710
+so so you want to do that let's first go
+and split the loop
+
+328
+00:06:10,710 --> 00:06:10,720
+and split the loop
+ 
+
+329
+00:06:10,720 --> 00:06:13,749
+and split the loop
+eyes right now we have only one loop and
+
+330
+00:06:13,749 --> 00:06:13,759
+eyes right now we have only one loop and
+ 
+
+331
+00:06:13,759 --> 00:06:15,749
+eyes right now we have only one loop and
+in the next case i'm going to split it
+
+332
+00:06:15,749 --> 00:06:15,759
+in the next case i'm going to split it
+ 
+
+333
+00:06:15,759 --> 00:06:16,710
+in the next case i'm going to split it
+onto
+
+334
+00:06:16,710 --> 00:06:16,720
+onto
+ 
+
+335
+00:06:16,720 --> 00:06:18,950
+onto
+two components like the internet outer
+
+336
+00:06:18,950 --> 00:06:18,960
+two components like the internet outer
+ 
+
+337
+00:06:18,960 --> 00:06:20,550
+two components like the internet outer
+loop in here
+
+338
+00:06:20,550 --> 00:06:20,560
+loop in here
+ 
+
+339
+00:06:20,560 --> 00:06:21,830
+loop in here
+and then what i'm going to do is i'm
+
+340
+00:06:21,830 --> 00:06:21,840
+and then what i'm going to do is i'm
+ 
+
+341
+00:06:21,840 --> 00:06:24,390
+and then what i'm going to do is i'm
+going to map it on to the thread in the
+
+342
+00:06:24,390 --> 00:06:24,400
+going to map it on to the thread in the
+ 
+
+343
+00:06:24,400 --> 00:06:27,029
+going to map it on to the thread in the
+indices of a gpu
+
+344
+00:06:27,029 --> 00:06:27,039
+indices of a gpu
+ 
+
+345
+00:06:27,039 --> 00:06:28,070
+indices of a gpu
+so
+
+346
+00:06:28,070 --> 00:06:28,080
+so
+ 
+
+347
+00:06:28,080 --> 00:06:30,790
+so
+normally a gpu program
+
+348
+00:06:30,790 --> 00:06:30,800
+normally a gpu program
+ 
+
+349
+00:06:30,800 --> 00:06:32,070
+normally a gpu program
+for each of a thread it can be
+
+350
+00:06:32,070 --> 00:06:32,080
+for each of a thread it can be
+ 
+
+351
+00:06:32,080 --> 00:06:34,950
+for each of a thread it can be
+identified by two indices i'm using cuda
+
+352
+00:06:34,950 --> 00:06:34,960
+identified by two indices i'm using cuda
+ 
+
+353
+00:06:34,960 --> 00:06:37,430
+identified by two indices i'm using cuda
+terminology here but you know if you are
+
+354
+00:06:37,430 --> 00:06:37,440
+terminology here but you know if you are
+ 
+
+355
+00:06:37,440 --> 00:06:39,270
+terminology here but you know if you are
+familiar with other gpu terminology like
+
+356
+00:06:39,270 --> 00:06:39,280
+familiar with other gpu terminology like
+ 
+
+357
+00:06:39,280 --> 00:06:41,350
+familiar with other gpu terminology like
+openmp opencl
+
+358
+00:06:41,350 --> 00:06:41,360
+openmp opencl
+ 
+
+359
+00:06:41,360 --> 00:06:44,629
+openmp opencl
+or you know sycl or
+
+360
+00:06:44,629 --> 00:06:44,639
+or you know sycl or
+ 
+
+361
+00:06:44,639 --> 00:06:46,469
+or you know sycl or
+or metal you know that can be a slightly
+
+362
+00:06:46,469 --> 00:06:46,479
+or metal you know that can be a slightly
+ 
+
+363
+00:06:46,479 --> 00:06:48,070
+or metal you know that can be a slightly
+different terminologies but usually you
+
+364
+00:06:48,070 --> 00:06:48,080
+different terminologies but usually you
+ 
+
+365
+00:06:48,080 --> 00:06:50,550
+different terminologies but usually you
+know they translate to each other
+
+366
+00:06:50,550 --> 00:06:50,560
+know they translate to each other
+ 
+
+367
+00:06:50,560 --> 00:06:53,029
+know they translate to each other
+the threat indices refers to the offset
+
+368
+00:06:53,029 --> 00:06:53,039
+the threat indices refers to the offset
+ 
+
+369
+00:06:53,039 --> 00:06:54,629
+the threat indices refers to the offset
+of the threat from home in this
+
+370
+00:06:54,629 --> 00:06:54,639
+of the threat from home in this
+ 
+
+371
+00:06:54,639 --> 00:06:57,110
+of the threat from home in this
+particular case within a swear block the
+
+372
+00:06:57,110 --> 00:06:57,120
+particular case within a swear block the
+ 
+
+373
+00:06:57,120 --> 00:07:00,070
+particular case within a swear block the
+first threat is 0 1 2
+
+374
+00:07:00,070 --> 00:07:00,080
+first threat is 0 1 2
+ 
+
+375
+00:07:00,080 --> 00:07:02,870
+first threat is 0 1 2
+and so on so so these are like thread
+
+376
+00:07:02,870 --> 00:07:02,880
+and so on so so these are like thread
+ 
+
+377
+00:07:02,880 --> 00:07:05,189
+and so on so so these are like thread
+indices and then the blocking this is
+
+378
+00:07:05,189 --> 00:07:05,199
+indices and then the blocking this is
+ 
+
+379
+00:07:05,199 --> 00:07:07,270
+indices and then the blocking this is
+refers to the offset
+
+380
+00:07:07,270 --> 00:07:07,280
+refers to the offset
+ 
+
+381
+00:07:07,280 --> 00:07:10,309
+refers to the offset
+of each of the strap so one so
+
+382
+00:07:10,309 --> 00:07:10,319
+of each of the strap so one so
+ 
+
+383
+00:07:10,319 --> 00:07:12,870
+of each of the strap so one so
+effectively uh threading the thread
+
+384
+00:07:12,870 --> 00:07:12,880
+effectively uh threading the thread
+ 
+
+385
+00:07:12,880 --> 00:07:14,629
+effectively uh threading the thread
+index and the block next help us
+
+386
+00:07:14,629 --> 00:07:14,639
+index and the block next help us
+ 
+
+387
+00:07:14,639 --> 00:07:16,390
+index and the block next help us
+uniquely identify
+
+388
+00:07:16,390 --> 00:07:16,400
+uniquely identify
+ 
+
+389
+00:07:16,400 --> 00:07:19,110
+uniquely identify
+a threat within that
+
+390
+00:07:19,110 --> 00:07:19,120
+a threat within that
+ 
+
+391
+00:07:19,120 --> 00:07:21,749
+a threat within that
+within the kernel that we launched
+
+392
+00:07:21,749 --> 00:07:21,759
+within the kernel that we launched
+ 
+
+393
+00:07:21,759 --> 00:07:23,270
+within the kernel that we launched
+all can do here is we're going to try to
+
+394
+00:07:23,270 --> 00:07:23,280
+all can do here is we're going to try to
+ 
+
+395
+00:07:23,280 --> 00:07:26,469
+all can do here is we're going to try to
+bind the iterators onto block index and
+
+396
+00:07:26,469 --> 00:07:26,479
+bind the iterators onto block index and
+ 
+
+397
+00:07:26,479 --> 00:07:30,870
+bind the iterators onto block index and
+strategies here so if we do that and
+
+398
+00:07:30,870 --> 00:07:30,880
+strategies here so if we do that and
+ 
+
+399
+00:07:30,880 --> 00:07:33,110
+strategies here so if we do that and
+you'll find that in this particular case
+
+400
+00:07:33,110 --> 00:07:33,120
+you'll find that in this particular case
+ 
+
+401
+00:07:33,120 --> 00:07:34,790
+you'll find that in this particular case
+the for loops contains what we call
+
+402
+00:07:34,790 --> 00:07:34,800
+the for loops contains what we call
+ 
+
+403
+00:07:34,800 --> 00:07:36,950
+the for loops contains what we call
+thread mining construct that indicates
+
+404
+00:07:36,950 --> 00:07:36,960
+thread mining construct that indicates
+ 
+
+405
+00:07:36,960 --> 00:07:38,790
+thread mining construct that indicates
+that hey this particular loop is going
+
+406
+00:07:38,790 --> 00:07:38,800
+that hey this particular loop is going
+ 
+
+407
+00:07:38,800 --> 00:07:40,390
+that hey this particular loop is going
+to be binded to
+
+408
+00:07:40,390 --> 00:07:40,400
+to be binded to
+ 
+
+409
+00:07:40,400 --> 00:07:41,990
+to be binded to
+a gpu
+
+410
+00:07:41,990 --> 00:07:42,000
+a gpu
+ 
+
+411
+00:07:42,000 --> 00:07:45,029
+a gpu
+strap and so so effectively when we
+
+412
+00:07:45,029 --> 00:07:45,039
+strap and so so effectively when we
+ 
+
+413
+00:07:45,039 --> 00:07:47,270
+strap and so so effectively when we
+launch this we are not executing these
+
+414
+00:07:47,270 --> 00:07:47,280
+launch this we are not executing these
+ 
+
+415
+00:07:47,280 --> 00:07:49,430
+launch this we are not executing these
+two followers so these two follow-ups is
+
+416
+00:07:49,430 --> 00:07:49,440
+two followers so these two follow-ups is
+ 
+
+417
+00:07:49,440 --> 00:07:52,469
+two followers so these two follow-ups is
+going to be uh it simply maps on to the
+
+418
+00:07:52,469 --> 00:07:52,479
+going to be uh it simply maps on to the
+ 
+
+419
+00:07:52,479 --> 00:07:55,510
+going to be uh it simply maps on to the
+environment gpu indices that's available
+
+420
+00:07:55,510 --> 00:07:55,520
+environment gpu indices that's available
+ 
+
+421
+00:07:55,520 --> 00:07:57,510
+environment gpu indices that's available
+on that particular strip
+
+422
+00:07:57,510 --> 00:07:57,520
+on that particular strip
+ 
+
+423
+00:07:57,520 --> 00:07:58,790
+on that particular strip
+and one interesting thing is that you
+
+424
+00:07:58,790 --> 00:07:58,800
+and one interesting thing is that you
+ 
+
+425
+00:07:58,800 --> 00:08:01,350
+and one interesting thing is that you
+can find that all the thread actually is
+
+426
+00:08:01,350 --> 00:08:01,360
+can find that all the thread actually is
+ 
+
+427
+00:08:01,360 --> 00:08:03,589
+can find that all the thread actually is
+running the same program with the only
+
+428
+00:08:03,589 --> 00:08:03,599
+running the same program with the only
+ 
+
+429
+00:08:03,599 --> 00:08:06,150
+running the same program with the only
+difference come from
+
+430
+00:08:06,150 --> 00:08:06,160
+difference come from
+ 
+
+431
+00:08:06,160 --> 00:08:08,150
+difference come from
+the the the
+
+432
+00:08:08,150 --> 00:08:08,160
+the the the
+ 
+
+433
+00:08:08,160 --> 00:08:10,790
+the the the
+indices that that that you you have on
+
+434
+00:08:10,790 --> 00:08:10,800
+indices that that that you you have on
+ 
+
+435
+00:08:10,800 --> 00:08:12,950
+indices that that that you you have on
+that on that particular thread for the
+
+436
+00:08:12,950 --> 00:08:12,960
+that on that particular thread for the
+ 
+
+437
+00:08:12,960 --> 00:08:15,029
+that on that particular thread for the
+block index and thread threading next
+
+438
+00:08:15,029 --> 00:08:15,039
+block index and thread threading next
+ 
+
+439
+00:08:15,039 --> 00:08:16,150
+block index and thread threading next
+offset
+
+440
+00:08:16,150 --> 00:08:16,160
+offset
+ 
+
+441
+00:08:16,160 --> 00:08:17,270
+offset
+that
+
+442
+00:08:17,270 --> 00:08:17,280
+that
+ 
+
+443
+00:08:17,280 --> 00:08:19,350
+that
+uh on that particular
+
+444
+00:08:19,350 --> 00:08:19,360
+uh on that particular
+ 
+
+445
+00:08:19,360 --> 00:08:22,150
+uh on that particular
+on on that particular strap that that
+
+446
+00:08:22,150 --> 00:08:22,160
+on on that particular strap that that
+ 
+
+447
+00:08:22,160 --> 00:08:25,510
+on on that particular strap that that
+all
+
+448
+00:08:25,510 --> 00:08:25,520
+
+ 
+
+449
+00:08:25,520 --> 00:08:28,550
+
+so now that we have this um
+
+450
+00:08:28,550 --> 00:08:28,560
+so now that we have this um
+ 
+
+451
+00:08:28,560 --> 00:08:31,670
+so now that we have this um
+now that we have this you know
+
+452
+00:08:31,670 --> 00:08:31,680
+now that we have this you know
+ 
+
+453
+00:08:31,680 --> 00:08:33,990
+now that we have this you know
+program that bonded those iterators onto
+
+454
+00:08:33,990 --> 00:08:34,000
+program that bonded those iterators onto
+ 
+
+455
+00:08:34,000 --> 00:08:36,070
+program that bonded those iterators onto
+gpu threads
+
+456
+00:08:36,070 --> 00:08:36,080
+gpu threads
+ 
+
+457
+00:08:36,080 --> 00:08:39,509
+gpu threads
+moving next what we can do is we can and
+
+458
+00:08:39,509 --> 00:08:39,519
+moving next what we can do is we can and
+ 
+
+459
+00:08:39,519 --> 00:08:41,350
+moving next what we can do is we can and
+go and build and test out the resulting
+
+460
+00:08:41,350 --> 00:08:41,360
+go and build and test out the resulting
+ 
+
+461
+00:08:41,360 --> 00:08:44,630
+go and build and test out the resulting
+function on gpu so so in this case we
+
+462
+00:08:44,630 --> 00:08:44,640
+function on gpu so so in this case we
+ 
+
+463
+00:08:44,640 --> 00:08:47,110
+function on gpu so so in this case we
+are running a similar procedure with
+
+464
+00:08:47,110 --> 00:08:47,120
+are running a similar procedure with
+ 
+
+465
+00:08:47,120 --> 00:08:48,389
+are running a similar procedure with
+only differences that we are trying to
+
+466
+00:08:48,389 --> 00:08:48,399
+only differences that we are trying to
+ 
+
+467
+00:08:48,399 --> 00:08:51,990
+only differences that we are trying to
+set the targeting here as cuda so that
+
+468
+00:08:51,990 --> 00:08:52,000
+set the targeting here as cuda so that
+ 
+
+469
+00:08:52,000 --> 00:08:55,110
+set the targeting here as cuda so that
+we will be able to build the particular
+
+470
+00:08:55,110 --> 00:08:55,120
+we will be able to build the particular
+ 
+
+471
+00:08:55,120 --> 00:08:57,590
+we will be able to build the particular
+um the particular module on the cuda
+
+472
+00:08:57,590 --> 00:08:57,600
+um the particular module on the cuda
+ 
+
+473
+00:08:57,600 --> 00:08:59,829
+um the particular module on the cuda
+environment
+
+474
+00:08:59,829 --> 00:08:59,839
+environment
+ 
+
+475
+00:08:59,839 --> 00:09:00,630
+environment
+and
+
+476
+00:09:00,630 --> 00:09:00,640
+and
+ 
+
+477
+00:09:00,640 --> 00:09:01,590
+and
+um
+
+478
+00:09:01,590 --> 00:09:01,600
+um
+ 
+
+479
+00:09:01,600 --> 00:09:03,590
+um
+we are also creating you know uh the
+
+480
+00:09:03,590 --> 00:09:03,600
+we are also creating you know uh the
+ 
+
+481
+00:09:03,600 --> 00:09:04,790
+we are also creating you know uh the
+input
+
+482
+00:09:04,790 --> 00:09:04,800
+input
+ 
+
+483
+00:09:04,800 --> 00:09:05,509
+input
+uh
+
+484
+00:09:05,509 --> 00:09:05,519
+uh
+ 
+
+485
+00:09:05,519 --> 00:09:08,389
+uh
+ran ring random vector in here and where
+
+486
+00:09:08,389 --> 00:09:08,399
+ran ring random vector in here and where
+ 
+
+487
+00:09:08,399 --> 00:09:11,590
+ran ring random vector in here and where
+we are copying onto in this case through
+
+488
+00:09:11,590 --> 00:09:11,600
+we are copying onto in this case through
+ 
+
+489
+00:09:11,600 --> 00:09:13,269
+we are copying onto in this case through
+two and the arrays on the cooldown
+
+490
+00:09:13,269 --> 00:09:13,279
+two and the arrays on the cooldown
+ 
+
+491
+00:09:13,279 --> 00:09:15,509
+two and the arrays on the cooldown
+environment and we're also allocating
+
+492
+00:09:15,509 --> 00:09:15,519
+environment and we're also allocating
+ 
+
+493
+00:09:15,519 --> 00:09:18,790
+environment and we're also allocating
+our output and the array here okay
+
+494
+00:09:18,790 --> 00:09:18,800
+our output and the array here okay
+ 
+
+495
+00:09:18,800 --> 00:09:21,350
+our output and the array here okay
+and running next the the way we invoke
+
+496
+00:09:21,350 --> 00:09:21,360
+and running next the the way we invoke
+ 
+
+497
+00:09:21,360 --> 00:09:24,630
+and running next the the way we invoke
+this uh generated gpu kernel is the same
+
+498
+00:09:24,630 --> 00:09:24,640
+this uh generated gpu kernel is the same
+ 
+
+499
+00:09:24,640 --> 00:09:27,110
+this uh generated gpu kernel is the same
+it's the same way we invoke the original
+
+500
+00:09:27,110 --> 00:09:27,120
+it's the same way we invoke the original
+ 
+
+501
+00:09:27,120 --> 00:09:29,190
+it's the same way we invoke the original
+uh previous tensor functions that we had
+
+502
+00:09:29,190 --> 00:09:29,200
+uh previous tensor functions that we had
+ 
+
+503
+00:09:29,200 --> 00:09:30,949
+uh previous tensor functions that we had
+in the past lectures so all you need to
+
+504
+00:09:30,949 --> 00:09:30,959
+in the past lectures so all you need to
+ 
+
+505
+00:09:30,959 --> 00:09:33,910
+in the past lectures so all you need to
+do is to passing three and the arrays
+
+506
+00:09:33,910 --> 00:09:33,920
+do is to passing three and the arrays
+ 
+
+507
+00:09:33,920 --> 00:09:36,070
+do is to passing three and the arrays
+with the only difference that we are we
+
+508
+00:09:36,070 --> 00:09:36,080
+with the only difference that we are we
+ 
+
+509
+00:09:36,080 --> 00:09:39,269
+with the only difference that we are we
+are going to pass in the uh cuda device
+
+510
+00:09:39,269 --> 00:09:39,279
+are going to pass in the uh cuda device
+ 
+
+511
+00:09:39,279 --> 00:09:43,190
+are going to pass in the uh cuda device
+context in here instead of the normal um
+
+512
+00:09:43,190 --> 00:09:43,200
+context in here instead of the normal um
+ 
+
+513
+00:09:43,200 --> 00:09:45,590
+context in here instead of the normal um
+instead of instead of a normal cpu
+
+514
+00:09:45,590 --> 00:09:45,600
+instead of instead of a normal cpu
+ 
+
+515
+00:09:45,600 --> 00:09:49,190
+instead of instead of a normal cpu
+context we had in the past lectures
+
+516
+00:09:49,190 --> 00:09:49,200
+context we had in the past lectures
+ 
+
+517
+00:09:49,200 --> 00:09:51,750
+context we had in the past lectures
+we can print out to say that actually
+
+518
+00:09:51,750 --> 00:09:51,760
+we can print out to say that actually
+ 
+
+519
+00:09:51,760 --> 00:09:53,670
+we can print out to say that actually
+you'll find that the corresponding
+
+520
+00:09:53,670 --> 00:09:53,680
+you'll find that the corresponding
+ 
+
+521
+00:09:53,680 --> 00:09:56,070
+you'll find that the corresponding
+elements did add up together and we can
+
+522
+00:09:56,070 --> 00:09:56,080
+elements did add up together and we can
+ 
+
+523
+00:09:56,080 --> 00:09:59,590
+elements did add up together and we can
+also go and use the numpy answer or
+
+524
+00:09:59,590 --> 00:09:59,600
+also go and use the numpy answer or
+ 
+
+525
+00:09:59,600 --> 00:10:03,509
+also go and use the numpy answer or
+close to to to confirm that actually all
+
+526
+00:10:03,509 --> 00:10:03,519
+close to to to confirm that actually all
+ 
+
+527
+00:10:03,519 --> 00:10:05,509
+close to to to confirm that actually all
+these all the results match up
+
+528
+00:10:05,509 --> 00:10:05,519
+these all the results match up
+ 
+
+529
+00:10:05,519 --> 00:10:07,750
+these all the results match up
+okay so far so good so that's a
+
+530
+00:10:07,750 --> 00:10:07,760
+okay so far so good so that's a
+ 
+
+531
+00:10:07,760 --> 00:10:11,350
+okay so far so good so that's a
+gpu example 101 that help us to you know
+
+532
+00:10:11,350 --> 00:10:11,360
+gpu example 101 that help us to you know
+ 
+
+533
+00:10:11,360 --> 00:10:14,550
+gpu example 101 that help us to you know
+go and try out one running example of
+
+534
+00:10:14,550 --> 00:10:14,560
+go and try out one running example of
+ 
+
+535
+00:10:14,560 --> 00:10:16,949
+go and try out one running example of
+adding two vectors together
+
+536
+00:10:16,949 --> 00:10:16,959
+adding two vectors together
+ 
+
+537
+00:10:16,959 --> 00:10:19,430
+adding two vectors together
+okay moving next let's move towards
+
+538
+00:10:19,430 --> 00:10:19,440
+okay moving next let's move towards
+ 
+
+539
+00:10:19,440 --> 00:10:21,190
+okay moving next let's move towards
+another example that's slightly more
+
+540
+00:10:21,190 --> 00:10:21,200
+another example that's slightly more
+ 
+
+541
+00:10:21,200 --> 00:10:23,430
+another example that's slightly more
+complicated so in this case what we're
+
+542
+00:10:23,430 --> 00:10:23,440
+complicated so in this case what we're
+ 
+
+543
+00:10:23,440 --> 00:10:25,430
+complicated so in this case what we're
+interested in is we are interested in
+
+544
+00:10:25,430 --> 00:10:25,440
+interested in is we are interested in
+ 
+
+545
+00:10:25,440 --> 00:10:27,509
+interested in is we are interested in
+taking this input array
+
+546
+00:10:27,509 --> 00:10:27,519
+taking this input array
+ 
+
+547
+00:10:27,519 --> 00:10:29,670
+taking this input array
+and trying to do a windows sum so the
+
+548
+00:10:29,670 --> 00:10:29,680
+and trying to do a windows sum so the
+ 
+
+549
+00:10:29,680 --> 00:10:31,829
+and trying to do a windows sum so the
+idea is that for each of the elements
+
+550
+00:10:31,829 --> 00:10:31,839
+idea is that for each of the elements
+ 
+
+551
+00:10:31,839 --> 00:10:34,550
+idea is that for each of the elements
+i'm going to look at a window of size
+
+552
+00:10:34,550 --> 00:10:34,560
+i'm going to look at a window of size
+ 
+
+553
+00:10:34,560 --> 00:10:36,710
+i'm going to look at a window of size
+three and add those three elements
+
+554
+00:10:36,710 --> 00:10:36,720
+three and add those three elements
+ 
+
+555
+00:10:36,720 --> 00:10:39,670
+three and add those three elements
+together for example if it's one two
+
+556
+00:10:39,670 --> 00:10:39,680
+together for example if it's one two
+ 
+
+557
+00:10:39,680 --> 00:10:42,470
+together for example if it's one two
+four and the result is going to be seven
+
+558
+00:10:42,470 --> 00:10:42,480
+four and the result is going to be seven
+ 
+
+559
+00:10:42,480 --> 00:10:45,990
+four and the result is going to be seven
+or on this particular element
+
+560
+00:10:45,990 --> 00:10:46,000
+or on this particular element
+ 
+
+561
+00:10:46,000 --> 00:10:48,230
+or on this particular element
+so so it's kind of like a tiny version
+
+562
+00:10:48,230 --> 00:10:48,240
+so so it's kind of like a tiny version
+ 
+
+563
+00:10:48,240 --> 00:10:50,389
+so so it's kind of like a tiny version
+of convolution with uh with the weight
+
+564
+00:10:50,389 --> 00:10:50,399
+of convolution with uh with the weight
+ 
+
+565
+00:10:50,399 --> 00:10:53,670
+of convolution with uh with the weight
+of with with all the weights equals one
+
+566
+00:10:53,670 --> 00:10:53,680
+of with with all the weights equals one
+ 
+
+567
+00:10:53,680 --> 00:10:54,550
+of with with all the weights equals one
+okay
+
+568
+00:10:54,550 --> 00:10:54,560
+okay
+ 
+
+569
+00:10:54,560 --> 00:10:57,670
+okay
+so um here is our
+
+570
+00:10:57,670 --> 00:10:57,680
+so um here is our
+ 
+
+571
+00:10:57,680 --> 00:11:00,230
+so um here is our
+window sum program that we can write out
+
+572
+00:11:00,230 --> 00:11:00,240
+window sum program that we can write out
+ 
+
+573
+00:11:00,240 --> 00:11:03,110
+window sum program that we can write out
+in terms ir with a simple loop that that
+
+574
+00:11:03,110 --> 00:11:03,120
+in terms ir with a simple loop that that
+ 
+
+575
+00:11:03,120 --> 00:11:05,110
+in terms ir with a simple loop that that
+looks over the output space and we are
+
+576
+00:11:05,110 --> 00:11:05,120
+looks over the output space and we are
+ 
+
+577
+00:11:05,120 --> 00:11:07,590
+looks over the output space and we are
+going to try to add three consecutive
+
+578
+00:11:07,590 --> 00:11:07,600
+going to try to add three consecutive
+ 
+
+579
+00:11:07,600 --> 00:11:09,509
+going to try to add three consecutive
+elements together
+
+580
+00:11:09,509 --> 00:11:09,519
+elements together
+ 
+
+581
+00:11:09,519 --> 00:11:12,069
+elements together
+um to run this we know some on gpus
+
+582
+00:11:12,069 --> 00:11:12,079
+um to run this we know some on gpus
+ 
+
+583
+00:11:12,079 --> 00:11:14,870
+um to run this we know some on gpus
+again we can try to do the thread
+
+584
+00:11:14,870 --> 00:11:14,880
+again we can try to do the thread
+ 
+
+585
+00:11:14,880 --> 00:11:17,670
+again we can try to do the thread
+splitting and try to go and bind
+
+586
+00:11:17,670 --> 00:11:17,680
+splitting and try to go and bind
+ 
+
+587
+00:11:17,680 --> 00:11:20,710
+splitting and try to go and bind
+the corresponding elements onto
+
+588
+00:11:20,710 --> 00:11:20,720
+the corresponding elements onto
+ 
+
+589
+00:11:20,720 --> 00:11:22,470
+the corresponding elements onto
+the the threading next and block
+
+590
+00:11:22,470 --> 00:11:22,480
+the the threading next and block
+ 
+
+591
+00:11:22,480 --> 00:11:25,670
+the the threading next and block
+indexing here
+
+592
+00:11:25,670 --> 00:11:25,680
+
+ 
+
+593
+00:11:25,680 --> 00:11:29,030
+
+one of the things we noticed uh is that
+
+594
+00:11:29,030 --> 00:11:29,040
+one of the things we noticed uh is that
+ 
+
+595
+00:11:29,040 --> 00:11:31,750
+one of the things we noticed uh is that
+actually you know in order to
+
+596
+00:11:31,750 --> 00:11:31,760
+actually you know in order to
+ 
+
+597
+00:11:31,760 --> 00:11:34,069
+actually you know in order to
+optimize this program one thing that we
+
+598
+00:11:34,069 --> 00:11:34,079
+optimize this program one thing that we
+ 
+
+599
+00:11:34,079 --> 00:11:36,069
+optimize this program one thing that we
+want to notice that you know
+
+600
+00:11:36,069 --> 00:11:36,079
+want to notice that you know
+ 
+
+601
+00:11:36,079 --> 00:11:38,710
+want to notice that you know
+if you look at the gpu overall gpu
+
+602
+00:11:38,710 --> 00:11:38,720
+if you look at the gpu overall gpu
+ 
+
+603
+00:11:38,720 --> 00:11:41,590
+if you look at the gpu overall gpu
+memory hierarchy here you can find that
+
+604
+00:11:41,590 --> 00:11:41,600
+memory hierarchy here you can find that
+ 
+
+605
+00:11:41,600 --> 00:11:44,069
+memory hierarchy here you can find that
+each of us threads have a shared memory
+
+606
+00:11:44,069 --> 00:11:44,079
+each of us threads have a shared memory
+ 
+
+607
+00:11:44,079 --> 00:11:46,150
+each of us threads have a shared memory
+that we can leverage
+
+608
+00:11:46,150 --> 00:11:46,160
+that we can leverage
+ 
+
+609
+00:11:46,160 --> 00:11:48,389
+that we can leverage
+when we are trying to go and run this
+
+610
+00:11:48,389 --> 00:11:48,399
+when we are trying to go and run this
+ 
+
+611
+00:11:48,399 --> 00:11:50,710
+when we are trying to go and run this
+particular program naively right you
+
+612
+00:11:50,710 --> 00:11:50,720
+particular program naively right you
+ 
+
+613
+00:11:50,720 --> 00:11:53,030
+particular program naively right you
+have each of us thread go and read three
+
+614
+00:11:53,030 --> 00:11:53,040
+have each of us thread go and read three
+ 
+
+615
+00:11:53,040 --> 00:11:55,269
+have each of us thread go and read three
+elements in here and this neighboring
+
+616
+00:11:55,269 --> 00:11:55,279
+elements in here and this neighboring
+ 
+
+617
+00:11:55,279 --> 00:11:57,110
+elements in here and this neighboring
+strat is going to read the other three
+
+618
+00:11:57,110 --> 00:11:57,120
+strat is going to read the other three
+ 
+
+619
+00:11:57,120 --> 00:11:58,870
+strat is going to read the other three
+elements the neighboring stride is going
+
+620
+00:11:58,870 --> 00:11:58,880
+elements the neighboring stride is going
+ 
+
+621
+00:11:58,880 --> 00:12:00,790
+elements the neighboring stride is going
+to read another three element
+
+622
+00:12:00,790 --> 00:12:00,800
+to read another three element
+ 
+
+623
+00:12:00,800 --> 00:12:02,230
+to read another three element
+and you'll find that actually there are
+
+624
+00:12:02,230 --> 00:12:02,240
+and you'll find that actually there are
+ 
+
+625
+00:12:02,240 --> 00:12:04,389
+and you'll find that actually there are
+quite a lot of overlaps right
+
+626
+00:12:04,389 --> 00:12:04,399
+quite a lot of overlaps right
+ 
+
+627
+00:12:04,399 --> 00:12:07,110
+quite a lot of overlaps right
+of on of each other element that
+
+628
+00:12:07,110 --> 00:12:07,120
+of on of each other element that
+ 
+
+629
+00:12:07,120 --> 00:12:08,710
+of on of each other element that
+that i've been reading here so for
+
+630
+00:12:08,710 --> 00:12:08,720
+that i've been reading here so for
+ 
+
+631
+00:12:08,720 --> 00:12:11,269
+that i've been reading here so for
+example if i'm going to read
+
+632
+00:12:11,269 --> 00:12:11,279
+example if i'm going to read
+ 
+
+633
+00:12:11,279 --> 00:12:13,509
+example if i'm going to read
+this because this is going to read these
+
+634
+00:12:13,509 --> 00:12:13,519
+this because this is going to read these
+ 
+
+635
+00:12:13,519 --> 00:12:15,590
+this because this is going to read these
+three elements this thread is going to
+
+636
+00:12:15,590 --> 00:12:15,600
+three elements this thread is going to
+ 
+
+637
+00:12:15,600 --> 00:12:17,590
+three elements this thread is going to
+read these three elements and this this
+
+638
+00:12:17,590 --> 00:12:17,600
+read these three elements and this this
+ 
+
+639
+00:12:17,600 --> 00:12:20,710
+read these three elements and this this
+shadow area are the areas that are that
+
+640
+00:12:20,710 --> 00:12:20,720
+shadow area are the areas that are that
+ 
+
+641
+00:12:20,720 --> 00:12:22,150
+shadow area are the areas that are that
+are overlapped
+
+642
+00:12:22,150 --> 00:12:22,160
+are overlapped
+ 
+
+643
+00:12:22,160 --> 00:12:24,870
+are overlapped
+between the reading region between
+
+644
+00:12:24,870 --> 00:12:24,880
+between the reading region between
+ 
+
+645
+00:12:24,880 --> 00:12:27,750
+between the reading region between
+uh these two elements
+
+646
+00:12:27,750 --> 00:12:27,760
+uh these two elements
+ 
+
+647
+00:12:27,760 --> 00:12:28,790
+uh these two elements
+okay
+
+648
+00:12:28,790 --> 00:12:28,800
+okay
+ 
+
+649
+00:12:28,800 --> 00:12:30,550
+okay
+so so
+
+650
+00:12:30,550 --> 00:12:30,560
+so so
+ 
+
+651
+00:12:30,560 --> 00:12:32,790
+so so
+how can we go and further optimize it so
+
+652
+00:12:32,790 --> 00:12:32,800
+how can we go and further optimize it so
+ 
+
+653
+00:12:32,800 --> 00:12:34,949
+how can we go and further optimize it so
+one more thing that we can do is we can
+
+654
+00:12:34,949 --> 00:12:34,959
+one more thing that we can do is we can
+ 
+
+655
+00:12:34,959 --> 00:12:37,829
+one more thing that we can do is we can
+try to leverage the shared memory here
+
+656
+00:12:37,829 --> 00:12:37,839
+try to leverage the shared memory here
+ 
+
+657
+00:12:37,839 --> 00:12:39,509
+try to leverage the shared memory here
+that's being ensured across multiple
+
+658
+00:12:39,509 --> 00:12:39,519
+that's being ensured across multiple
+ 
+
+659
+00:12:39,519 --> 00:12:40,949
+that's being ensured across multiple
+threads
+
+660
+00:12:40,949 --> 00:12:40,959
+threads
+ 
+
+661
+00:12:40,959 --> 00:12:44,230
+threads
+and the idea is that instead of trying
+
+662
+00:12:44,230 --> 00:12:44,240
+and the idea is that instead of trying
+ 
+
+663
+00:12:44,240 --> 00:12:45,190
+and the idea is that instead of trying
+to
+
+664
+00:12:45,190 --> 00:12:45,200
+to
+ 
+
+665
+00:12:45,200 --> 00:12:47,110
+to
+have each of us rather go and directly
+
+666
+00:12:47,110 --> 00:12:47,120
+have each of us rather go and directly
+ 
+
+667
+00:12:47,120 --> 00:12:48,790
+have each of us rather go and directly
+read from an input
+
+668
+00:12:48,790 --> 00:12:48,800
+read from an input
+ 
+
+669
+00:12:48,800 --> 00:12:50,829
+read from an input
+let's try to try to
+
+670
+00:12:50,829 --> 00:12:50,839
+let's try to try to
+ 
+
+671
+00:12:50,839 --> 00:12:53,430
+let's try to try to
+collectively get all the threads to read
+
+672
+00:12:53,430 --> 00:12:53,440
+collectively get all the threads to read
+ 
+
+673
+00:12:53,440 --> 00:12:55,910
+collectively get all the threads to read
+the input together assuming that i have
+
+674
+00:12:55,910 --> 00:12:55,920
+the input together assuming that i have
+ 
+
+675
+00:12:55,920 --> 00:12:58,389
+the input together assuming that i have
+four thread in my group in here
+
+676
+00:12:58,389 --> 00:12:58,399
+four thread in my group in here
+ 
+
+677
+00:12:58,399 --> 00:13:00,629
+four thread in my group in here
+and you'll find that actually i only
+
+678
+00:13:00,629 --> 00:13:00,639
+and you'll find that actually i only
+ 
+
+679
+00:13:00,639 --> 00:13:02,310
+and you'll find that actually i only
+need to read this
+
+680
+00:13:02,310 --> 00:13:02,320
+need to read this
+ 
+
+681
+00:13:02,320 --> 00:13:04,949
+need to read this
+amount of elements and if i'm going to
+
+682
+00:13:04,949 --> 00:13:04,959
+amount of elements and if i'm going to
+ 
+
+683
+00:13:04,959 --> 00:13:07,430
+amount of elements and if i'm going to
+go and read it individually i will have
+
+684
+00:13:07,430 --> 00:13:07,440
+go and read it individually i will have
+ 
+
+685
+00:13:07,440 --> 00:13:10,790
+go and read it individually i will have
+to read 4 times 3 terms
+
+686
+00:13:10,790 --> 00:13:10,800
+to read 4 times 3 terms
+ 
+
+687
+00:13:10,800 --> 00:13:13,509
+to read 4 times 3 terms
+from the from a global memory but if i
+
+688
+00:13:13,509 --> 00:13:13,519
+from the from a global memory but if i
+ 
+
+689
+00:13:13,519 --> 00:13:17,110
+from the from a global memory but if i
+try to directly read this region in this
+
+690
+00:13:17,110 --> 00:13:17,120
+try to directly read this region in this
+ 
+
+691
+00:13:17,120 --> 00:13:18,790
+try to directly read this region in this
+this region that by considering the
+
+692
+00:13:18,790 --> 00:13:18,800
+this region that by considering the
+ 
+
+693
+00:13:18,800 --> 00:13:21,829
+this region that by considering the
+possible overlaps i only have to read
+
+694
+00:13:21,829 --> 00:13:21,839
+possible overlaps i only have to read
+ 
+
+695
+00:13:21,839 --> 00:13:23,750
+possible overlaps i only have to read
+four plus
+
+696
+00:13:23,750 --> 00:13:23,760
+four plus
+ 
+
+697
+00:13:23,760 --> 00:13:26,310
+four plus
+i guess is four plus two elements right
+
+698
+00:13:26,310 --> 00:13:26,320
+i guess is four plus two elements right
+ 
+
+699
+00:13:26,320 --> 00:13:29,670
+i guess is four plus two elements right
+so this equals 12 that equals six so i
+
+700
+00:13:29,670 --> 00:13:29,680
+so this equals 12 that equals six so i
+ 
+
+701
+00:13:29,680 --> 00:13:32,629
+so this equals 12 that equals six so i
+almost get a half reduction in terms of
+
+702
+00:13:32,629 --> 00:13:32,639
+almost get a half reduction in terms of
+ 
+
+703
+00:13:32,639 --> 00:13:35,750
+almost get a half reduction in terms of
+reading the data from google
+
+704
+00:13:35,750 --> 00:13:35,760
+reading the data from google
+ 
+
+705
+00:13:35,760 --> 00:13:37,350
+reading the data from google
+and another thing that i forgot to note
+
+706
+00:13:37,350 --> 00:13:37,360
+and another thing that i forgot to note
+ 
+
+707
+00:13:37,360 --> 00:13:38,310
+and another thing that i forgot to note
+is that
+
+708
+00:13:38,310 --> 00:13:38,320
+is that
+ 
+
+709
+00:13:38,320 --> 00:13:40,470
+is that
+the cost of data loading just like when
+
+710
+00:13:40,470 --> 00:13:40,480
+the cost of data loading just like when
+ 
+
+711
+00:13:40,480 --> 00:13:43,189
+the cost of data loading just like when
+we introduce the cpu optimizations
+
+712
+00:13:43,189 --> 00:13:43,199
+we introduce the cpu optimizations
+ 
+
+713
+00:13:43,199 --> 00:13:45,269
+we introduce the cpu optimizations
+there's always the memory latency and
+
+714
+00:13:45,269 --> 00:13:45,279
+there's always the memory latency and
+ 
+
+715
+00:13:45,279 --> 00:13:48,550
+there's always the memory latency and
+throughput cost of from the
+
+716
+00:13:48,550 --> 00:13:48,560
+throughput cost of from the
+ 
+
+717
+00:13:48,560 --> 00:13:50,949
+throughput cost of from the
+the lower layer of memory hierarchy
+
+718
+00:13:50,949 --> 00:13:50,959
+the lower layer of memory hierarchy
+ 
+
+719
+00:13:50,959 --> 00:13:52,150
+the lower layer of memory hierarchy
+similarly
+
+720
+00:13:52,150 --> 00:13:52,160
+similarly
+ 
+
+721
+00:13:52,160 --> 00:13:54,150
+similarly
+the cost of loading from global memory
+
+722
+00:13:54,150 --> 00:13:54,160
+the cost of loading from global memory
+ 
+
+723
+00:13:54,160 --> 00:13:56,629
+the cost of loading from global memory
+to shirt and should memory through the
+
+724
+00:13:56,629 --> 00:13:56,639
+to shirt and should memory through the
+ 
+
+725
+00:13:56,639 --> 00:13:59,269
+to shirt and should memory through the
+to the registers are very different
+
+726
+00:13:59,269 --> 00:13:59,279
+to the registers are very different
+ 
+
+727
+00:13:59,279 --> 00:14:01,030
+to the registers are very different
+the cost of loading from global memory
+
+728
+00:14:01,030 --> 00:14:01,040
+the cost of loading from global memory
+ 
+
+729
+00:14:01,040 --> 00:14:04,389
+the cost of loading from global memory
+to shoot is much larger usually than the
+
+730
+00:14:04,389 --> 00:14:04,399
+to shoot is much larger usually than the
+ 
+
+731
+00:14:04,399 --> 00:14:06,870
+to shoot is much larger usually than the
+cost of loading from shield memory to
+
+732
+00:14:06,870 --> 00:14:06,880
+cost of loading from shield memory to
+ 
+
+733
+00:14:06,880 --> 00:14:09,509
+cost of loading from shield memory to
+the to each of the threads
+
+734
+00:14:09,509 --> 00:14:09,519
+the to each of the threads
+ 
+
+735
+00:14:09,519 --> 00:14:11,670
+the to each of the threads
+so as a result usually we do want to be
+
+736
+00:14:11,670 --> 00:14:11,680
+so as a result usually we do want to be
+ 
+
+737
+00:14:11,680 --> 00:14:14,550
+so as a result usually we do want to be
+able to fetch the data first onto the
+
+738
+00:14:14,550 --> 00:14:14,560
+able to fetch the data first onto the
+ 
+
+739
+00:14:14,560 --> 00:14:17,509
+able to fetch the data first onto the
+shared memory then try to
+
+740
+00:14:17,509 --> 00:14:17,519
+shared memory then try to
+ 
+
+741
+00:14:17,519 --> 00:14:19,509
+shared memory then try to
+run computation there of course one of
+
+742
+00:14:19,509 --> 00:14:19,519
+run computation there of course one of
+ 
+
+743
+00:14:19,519 --> 00:14:21,430
+run computation there of course one of
+the trade-off here is that each of the
+
+744
+00:14:21,430 --> 00:14:21,440
+the trade-off here is that each of the
+ 
+
+745
+00:14:21,440 --> 00:14:23,430
+the trade-off here is that each of the
+gpus have limited amount of shared
+
+746
+00:14:23,430 --> 00:14:23,440
+gpus have limited amount of shared
+ 
+
+747
+00:14:23,440 --> 00:14:25,750
+gpus have limited amount of shared
+memory so we kind of need to plan to use
+
+748
+00:14:25,750 --> 00:14:25,760
+memory so we kind of need to plan to use
+ 
+
+749
+00:14:25,760 --> 00:14:27,590
+memory so we kind of need to plan to use
+that a bit wisely
+
+750
+00:14:27,590 --> 00:14:27,600
+that a bit wisely
+ 
+
+751
+00:14:27,600 --> 00:14:29,509
+that a bit wisely
+okay so in order to do that in our
+
+752
+00:14:29,509 --> 00:14:29,519
+okay so in order to do that in our
+ 
+
+753
+00:14:29,519 --> 00:14:31,509
+okay so in order to do that in our
+tensile program what we can do is we can
+
+754
+00:14:31,509 --> 00:14:31,519
+tensile program what we can do is we can
+ 
+
+755
+00:14:31,519 --> 00:14:34,710
+tensile program what we can do is we can
+try to create a scope called shared
+
+756
+00:14:34,710 --> 00:14:34,720
+try to create a scope called shared
+ 
+
+757
+00:14:34,720 --> 00:14:37,590
+try to create a scope called shared
+in this case um we are using this cache
+
+758
+00:14:37,590 --> 00:14:37,600
+in this case um we are using this cache
+ 
+
+759
+00:14:37,600 --> 00:14:39,990
+in this case um we are using this cache
+read construct effectively what i try to
+
+760
+00:14:39,990 --> 00:14:40,000
+read construct effectively what i try to
+ 
+
+761
+00:14:40,000 --> 00:14:42,069
+read construct effectively what i try to
+do is create try to create another stage
+
+762
+00:14:42,069 --> 00:14:42,079
+do is create try to create another stage
+ 
+
+763
+00:14:42,079 --> 00:14:44,310
+do is create try to create another stage
+so if you look at the original program
+
+764
+00:14:44,310 --> 00:14:44,320
+so if you look at the original program
+ 
+
+765
+00:14:44,320 --> 00:14:47,189
+so if you look at the original program
+the producer consumer graph looks like
+
+766
+00:14:47,189 --> 00:14:47,199
+the producer consumer graph looks like
+ 
+
+767
+00:14:47,199 --> 00:14:49,189
+the producer consumer graph looks like
+if you are reading from a and you are
+
+768
+00:14:49,189 --> 00:14:49,199
+if you are reading from a and you are
+ 
+
+769
+00:14:49,199 --> 00:14:51,829
+if you are reading from a and you are
+trying to run computations on the b and
+
+770
+00:14:51,829 --> 00:14:51,839
+trying to run computations on the b and
+ 
+
+771
+00:14:51,839 --> 00:14:53,269
+trying to run computations on the b and
+effectively
+
+772
+00:14:53,269 --> 00:14:53,279
+effectively
+ 
+
+773
+00:14:53,279 --> 00:14:55,189
+effectively
+in here i'm trying to
+
+774
+00:14:55,189 --> 00:14:55,199
+in here i'm trying to
+ 
+
+775
+00:14:55,199 --> 00:14:56,949
+in here i'm trying to
+create what we call
+
+776
+00:14:56,949 --> 00:14:56,959
+create what we call
+ 
+
+777
+00:14:56,959 --> 00:14:59,110
+create what we call
+a shirt program
+
+778
+00:14:59,110 --> 00:14:59,120
+a shirt program
+ 
+
+779
+00:14:59,120 --> 00:15:03,110
+a shirt program
+and then going to read that onto onto b
+
+780
+00:15:03,110 --> 00:15:03,120
+and then going to read that onto onto b
+ 
+
+781
+00:15:03,120 --> 00:15:05,910
+and then going to read that onto onto b
+okay
+
+782
+00:15:05,910 --> 00:15:05,920
+
+ 
+
+783
+00:15:05,920 --> 00:15:06,790
+
+and
+
+784
+00:15:06,790 --> 00:15:06,800
+and
+ 
+
+785
+00:15:06,800 --> 00:15:09,030
+and
+and another thing that that we do here
+
+786
+00:15:09,030 --> 00:15:09,040
+and another thing that that we do here
+ 
+
+787
+00:15:09,040 --> 00:15:10,949
+and another thing that that we do here
+is we are also trying to put the shield
+
+788
+00:15:10,949 --> 00:15:10,959
+is we are also trying to put the shield
+ 
+
+789
+00:15:10,959 --> 00:15:12,949
+is we are also trying to put the shield
+memory loading at a particular region in
+
+790
+00:15:12,949 --> 00:15:12,959
+memory loading at a particular region in
+ 
+
+791
+00:15:12,959 --> 00:15:14,710
+memory loading at a particular region in
+this case i'm putting that
+
+792
+00:15:14,710 --> 00:15:14,720
+this case i'm putting that
+ 
+
+793
+00:15:14,720 --> 00:15:18,069
+this case i'm putting that
+on the the under the block index
+
+794
+00:15:18,069 --> 00:15:18,079
+on the the under the block index
+ 
+
+795
+00:15:18,079 --> 00:15:19,670
+on the the under the block index
+here so that
+
+796
+00:15:19,670 --> 00:15:19,680
+here so that
+ 
+
+797
+00:15:19,680 --> 00:15:20,870
+here so that
+um
+
+798
+00:15:20,870 --> 00:15:20,880
+um
+ 
+
+799
+00:15:20,880 --> 00:15:22,389
+um
+in other cases you know we might want to
+
+800
+00:15:22,389 --> 00:15:22,399
+in other cases you know we might want to
+ 
+
+801
+00:15:22,399 --> 00:15:24,150
+in other cases you know we might want to
+put them on the on the thread index
+
+802
+00:15:24,150 --> 00:15:24,160
+put them on the on the thread index
+ 
+
+803
+00:15:24,160 --> 00:15:25,829
+put them on the on the thread index
+actually actually in this particular
+
+804
+00:15:25,829 --> 00:15:25,839
+actually actually in this particular
+ 
+
+805
+00:15:25,839 --> 00:15:27,509
+actually actually in this particular
+case you know putting it on this redness
+
+806
+00:15:27,509 --> 00:15:27,519
+case you know putting it on this redness
+ 
+
+807
+00:15:27,519 --> 00:15:28,949
+case you know putting it on this redness
+is also fine
+
+808
+00:15:28,949 --> 00:15:28,959
+is also fine
+ 
+
+809
+00:15:28,959 --> 00:15:29,990
+is also fine
+uh
+
+810
+00:15:29,990 --> 00:15:30,000
+uh
+ 
+
+811
+00:15:30,000 --> 00:15:33,990
+uh
+let's try to see if that's the case
+
+812
+00:15:33,990 --> 00:15:34,000
+let's try to see if that's the case
+ 
+
+813
+00:15:34,000 --> 00:15:36,550
+let's try to see if that's the case
+so i'm putting it on the threading next
+
+814
+00:15:36,550 --> 00:15:36,560
+so i'm putting it on the threading next
+ 
+
+815
+00:15:36,560 --> 00:15:38,829
+so i'm putting it on the threading next
+it's also okay
+
+816
+00:15:38,829 --> 00:15:38,839
+it's also okay
+ 
+
+817
+00:15:38,839 --> 00:15:42,069
+it's also okay
+okay one thing that we want to
+
+818
+00:15:42,069 --> 00:15:42,079
+okay one thing that we want to
+ 
+
+819
+00:15:42,079 --> 00:15:42,400
+okay one thing that we want to
+um
+
+820
+00:15:42,400 --> 00:15:42,410
+um
+ 
+
+821
+00:15:42,410 --> 00:15:43,509
+um
+[Music]
+
+822
+00:15:43,509 --> 00:15:43,519
+[Music]
+ 
+
+823
+00:15:43,519 --> 00:15:46,389
+[Music]
+one thing that we do want to note though
+
+824
+00:15:46,389 --> 00:15:46,399
+one thing that we do want to note though
+ 
+
+825
+00:15:46,399 --> 00:15:48,949
+one thing that we do want to note though
+is that
+
+826
+00:15:48,949 --> 00:15:48,959
+is that
+ 
+
+827
+00:15:48,959 --> 00:15:51,110
+is that
+you know because it's a shield memory
+
+828
+00:15:51,110 --> 00:15:51,120
+you know because it's a shield memory
+ 
+
+829
+00:15:51,120 --> 00:15:52,310
+you know because it's a shield memory
+right and
+
+830
+00:15:52,310 --> 00:15:52,320
+right and
+ 
+
+831
+00:15:52,320 --> 00:15:57,189
+right and
+as a result we still need to re-specify
+
+832
+00:15:57,189 --> 00:15:57,199
+as a result we still need to re-specify
+ 
+
+833
+00:15:57,199 --> 00:15:59,910
+as a result we still need to re-specify
+how we are going to how each of thread
+
+834
+00:15:59,910 --> 00:15:59,920
+how we are going to how each of thread
+ 
+
+835
+00:15:59,920 --> 00:16:02,150
+how we are going to how each of thread
+is going to read which element of the
+
+836
+00:16:02,150 --> 00:16:02,160
+is going to read which element of the
+ 
+
+837
+00:16:02,160 --> 00:16:04,310
+is going to read which element of the
+shared memory if you if you look at this
+
+838
+00:16:04,310 --> 00:16:04,320
+shared memory if you if you look at this
+ 
+
+839
+00:16:04,320 --> 00:16:07,590
+shared memory if you if you look at this
+program you can find that now we do have
+
+840
+00:16:07,590 --> 00:16:07,600
+program you can find that now we do have
+ 
+
+841
+00:16:07,600 --> 00:16:08,550
+program you can find that now we do have
+whoa
+
+842
+00:16:08,550 --> 00:16:08,560
+whoa
+ 
+
+843
+00:16:08,560 --> 00:16:10,389
+whoa
+this is the sugar shape so
+
+844
+00:16:10,389 --> 00:16:10,399
+this is the sugar shape so
+ 
+
+845
+00:16:10,399 --> 00:16:12,629
+this is the sugar shape so
+we might need to because it's imperative
+
+846
+00:16:12,629 --> 00:16:12,639
+we might need to because it's imperative
+ 
+
+847
+00:16:12,639 --> 00:16:15,829
+we might need to because it's imperative
+we need to write over again
+
+848
+00:16:15,829 --> 00:16:15,839
+we need to write over again
+ 
+
+849
+00:16:15,839 --> 00:16:17,110
+we need to write over again
+try
+
+850
+00:16:17,110 --> 00:16:17,120
+try
+ 
+
+851
+00:16:17,120 --> 00:16:19,749
+try
+yeah so so in this case
+
+852
+00:16:19,749 --> 00:16:19,759
+yeah so so in this case
+ 
+
+853
+00:16:19,759 --> 00:16:22,310
+yeah so so in this case
+because this is a shared memory although
+
+854
+00:16:22,310 --> 00:16:22,320
+because this is a shared memory although
+ 
+
+855
+00:16:22,320 --> 00:16:26,710
+because this is a shared memory although
+it's already in the thread index regions
+
+856
+00:16:26,710 --> 00:16:26,720
+it's already in the thread index regions
+ 
+
+857
+00:16:26,720 --> 00:16:28,710
+it's already in the thread index regions
+we still need to re-specify how we're
+
+858
+00:16:28,710 --> 00:16:28,720
+we still need to re-specify how we're
+ 
+
+859
+00:16:28,720 --> 00:16:31,910
+we still need to re-specify how we're
+going to read each element
+
+860
+00:16:31,910 --> 00:16:31,920
+going to read each element
+ 
+
+861
+00:16:31,920 --> 00:16:33,509
+going to read each element
+of the shared memory because you know
+
+862
+00:16:33,509 --> 00:16:33,519
+of the shared memory because you know
+ 
+
+863
+00:16:33,519 --> 00:16:36,069
+of the shared memory because you know
+this memory is being shared
+
+864
+00:16:36,069 --> 00:16:36,079
+this memory is being shared
+ 
+
+865
+00:16:36,079 --> 00:16:38,069
+this memory is being shared
+and the threat binding patterns can be
+
+866
+00:16:38,069 --> 00:16:38,079
+and the threat binding patterns can be
+ 
+
+867
+00:16:38,079 --> 00:16:39,110
+and the threat binding patterns can be
+different
+
+868
+00:16:39,110 --> 00:16:39,120
+different
+ 
+
+869
+00:16:39,120 --> 00:16:40,069
+different
+okay
+
+870
+00:16:40,069 --> 00:16:40,079
+okay
+ 
+
+871
+00:16:40,079 --> 00:16:42,230
+okay
+so the way to and another thing you'll
+
+872
+00:16:42,230 --> 00:16:42,240
+so the way to and another thing you'll
+ 
+
+873
+00:16:42,240 --> 00:16:44,710
+so the way to and another thing you'll
+notice is that as of now
+
+874
+00:16:44,710 --> 00:16:44,720
+notice is that as of now
+ 
+
+875
+00:16:44,720 --> 00:16:45,990
+notice is that as of now
+i1
+
+876
+00:16:45,990 --> 00:16:46,000
+i1
+ 
+
+877
+00:16:46,000 --> 00:16:47,749
+i1
+is in australia index
+
+878
+00:16:47,749 --> 00:16:47,759
+is in australia index
+ 
+
+879
+00:16:47,759 --> 00:16:50,069
+is in australia index
+it appears on the normal computation
+
+880
+00:16:50,069 --> 00:16:50,079
+it appears on the normal computation
+ 
+
+881
+00:16:50,079 --> 00:16:52,550
+it appears on the normal computation
+block but i1 does not appear in here
+
+882
+00:16:52,550 --> 00:16:52,560
+block but i1 does not appear in here
+ 
+
+883
+00:16:52,560 --> 00:16:54,710
+block but i1 does not appear in here
+right so so effectively
+
+884
+00:16:54,710 --> 00:16:54,720
+right so so effectively
+ 
+
+885
+00:16:54,720 --> 00:16:56,550
+right so so effectively
+if we now if around this particular
+
+886
+00:16:56,550 --> 00:16:56,560
+if we now if around this particular
+ 
+
+887
+00:16:56,560 --> 00:16:57,829
+if we now if around this particular
+program
+
+888
+00:16:57,829 --> 00:16:57,839
+program
+ 
+
+889
+00:16:57,839 --> 00:17:00,389
+program
+each of the thread is going to go and
+
+890
+00:17:00,389 --> 00:17:00,399
+each of the thread is going to go and
+ 
+
+891
+00:17:00,399 --> 00:17:01,910
+each of the thread is going to go and
+trying to attempt
+
+892
+00:17:01,910 --> 00:17:01,920
+trying to attempt
+ 
+
+893
+00:17:01,920 --> 00:17:04,549
+trying to attempt
+reading and it's going to go and try to
+
+894
+00:17:04,549 --> 00:17:04,559
+reading and it's going to go and try to
+ 
+
+895
+00:17:04,559 --> 00:17:07,189
+reading and it's going to go and try to
+attempt read most of the
+
+896
+00:17:07,189 --> 00:17:07,199
+attempt read most of the
+ 
+
+897
+00:17:07,199 --> 00:17:08,390
+attempt read most of the
+uh
+
+898
+00:17:08,390 --> 00:17:08,400
+uh
+ 
+
+899
+00:17:08,400 --> 00:17:11,750
+uh
+most of the 100 elements all together so
+
+900
+00:17:11,750 --> 00:17:11,760
+most of the 100 elements all together so
+ 
+
+901
+00:17:11,760 --> 00:17:13,829
+most of the 100 elements all together so
+in that case in that sense it's not it's
+
+902
+00:17:13,829 --> 00:17:13,839
+in that case in that sense it's not it's
+ 
+
+903
+00:17:13,839 --> 00:17:14,710
+in that case in that sense it's not it's
+not
+
+904
+00:17:14,710 --> 00:17:14,720
+not
+ 
+
+905
+00:17:14,720 --> 00:17:16,630
+not
+a very efficient way effectively threat
+
+906
+00:17:16,630 --> 00:17:16,640
+a very efficient way effectively threat
+ 
+
+907
+00:17:16,640 --> 00:17:19,110
+a very efficient way effectively threat
+0 is going to go and read all of them
+
+908
+00:17:19,110 --> 00:17:19,120
+0 is going to go and read all of them
+ 
+
+909
+00:17:19,120 --> 00:17:21,270
+0 is going to go and read all of them
+thread one is also going to read off
+
+910
+00:17:21,270 --> 00:17:21,280
+thread one is also going to read off
+ 
+
+911
+00:17:21,280 --> 00:17:23,270
+thread one is also going to read off
+so so what would distributor work a bit
+
+912
+00:17:23,270 --> 00:17:23,280
+so so what would distributor work a bit
+ 
+
+913
+00:17:23,280 --> 00:17:25,429
+so so what would distributor work a bit
+to mount the amount of threads in the
+
+914
+00:17:25,429 --> 00:17:25,439
+to mount the amount of threads in the
+ 
+
+915
+00:17:25,439 --> 00:17:26,630
+to mount the amount of threads in the
+computation
+
+916
+00:17:26,630 --> 00:17:26,640
+computation
+ 
+
+917
+00:17:26,640 --> 00:17:28,549
+computation
+we can do is we can try to get the loops
+
+918
+00:17:28,549 --> 00:17:28,559
+we can do is we can try to get the loops
+ 
+
+919
+00:17:28,559 --> 00:17:29,430
+we can do is we can try to get the loops
+here
+
+920
+00:17:29,430 --> 00:17:29,440
+here
+ 
+
+921
+00:17:29,440 --> 00:17:32,070
+here
+split it and then rebind the strand so
+
+922
+00:17:32,070 --> 00:17:32,080
+split it and then rebind the strand so
+ 
+
+923
+00:17:32,080 --> 00:17:33,669
+split it and then rebind the strand so
+in this new program
+
+924
+00:17:33,669 --> 00:17:33,679
+in this new program
+ 
+
+925
+00:17:33,679 --> 00:17:36,789
+in this new program
+what's happening is that you can find
+
+926
+00:17:36,789 --> 00:17:36,799
+what's happening is that you can find
+ 
+
+927
+00:17:36,799 --> 00:17:40,549
+what's happening is that you can find
+this is the reading region
+
+928
+00:17:40,549 --> 00:17:40,559
+
+ 
+
+929
+00:17:40,559 --> 00:17:42,230
+
+and that one thing you notice that you
+
+930
+00:17:42,230 --> 00:17:42,240
+and that one thing you notice that you
+ 
+
+931
+00:17:42,240 --> 00:17:44,150
+and that one thing you notice that you
+know this thread index finally appears
+
+932
+00:17:44,150 --> 00:17:44,160
+know this thread index finally appears
+ 
+
+933
+00:17:44,160 --> 00:17:45,590
+know this thread index finally appears
+multiple times
+
+934
+00:17:45,590 --> 00:17:45,600
+multiple times
+ 
+
+935
+00:17:45,600 --> 00:17:48,150
+multiple times
+but within our computations you know
+
+936
+00:17:48,150 --> 00:17:48,160
+but within our computations you know
+ 
+
+937
+00:17:48,160 --> 00:17:50,549
+but within our computations you know
+because all x is directly maps to this
+
+938
+00:17:50,549 --> 00:17:50,559
+because all x is directly maps to this
+ 
+
+939
+00:17:50,559 --> 00:17:52,230
+because all x is directly maps to this
+value index right so we are only going
+
+940
+00:17:52,230 --> 00:17:52,240
+value index right so we are only going
+ 
+
+941
+00:17:52,240 --> 00:17:54,070
+value index right so we are only going
+to count for one term
+
+942
+00:17:54,070 --> 00:17:54,080
+to count for one term
+ 
+
+943
+00:17:54,080 --> 00:17:55,990
+to count for one term
+and effectively what it says is that i'm
+
+944
+00:17:55,990 --> 00:17:56,000
+and effectively what it says is that i'm
+ 
+
+945
+00:17:56,000 --> 00:17:58,549
+and effectively what it says is that i'm
+going to distribute the loading task of
+
+946
+00:17:58,549 --> 00:17:58,559
+going to distribute the loading task of
+ 
+
+947
+00:17:58,559 --> 00:17:59,350
+going to distribute the loading task of
+the
+
+948
+00:17:59,350 --> 00:17:59,360
+the
+ 
+
+949
+00:17:59,360 --> 00:18:02,230
+the
+of the a shirt across multiple straps in
+
+950
+00:18:02,230 --> 00:18:02,240
+of the a shirt across multiple straps in
+ 
+
+951
+00:18:02,240 --> 00:18:04,390
+of the a shirt across multiple straps in
+particular this program will try to
+
+952
+00:18:04,390 --> 00:18:04,400
+particular this program will try to
+ 
+
+953
+00:18:04,400 --> 00:18:06,310
+particular this program will try to
+distribute a loading task
+
+954
+00:18:06,310 --> 00:18:06,320
+distribute a loading task
+ 
+
+955
+00:18:06,320 --> 00:18:08,789
+distribute a loading task
+of a shirt on from
+
+956
+00:18:08,789 --> 00:18:08,799
+of a shirt on from
+ 
+
+957
+00:18:08,799 --> 00:18:11,590
+of a shirt on from
+uh you know if i were i i could assign
+
+958
+00:18:11,590 --> 00:18:11,600
+uh you know if i were i i could assign
+ 
+
+959
+00:18:11,600 --> 00:18:13,590
+uh you know if i were i i could assign
+stride zero to read this one to read
+
+960
+00:18:13,590 --> 00:18:13,600
+stride zero to read this one to read
+ 
+
+961
+00:18:13,600 --> 00:18:15,830
+stride zero to read this one to read
+this to to read this for to release and
+
+962
+00:18:15,830 --> 00:18:15,840
+this to to read this for to release and
+ 
+
+963
+00:18:15,840 --> 00:18:17,830
+this to to read this for to release and
+zero one again
+
+964
+00:18:17,830 --> 00:18:17,840
+zero one again
+ 
+
+965
+00:18:17,840 --> 00:18:20,150
+zero one again
+so at most you know one thread have to
+
+966
+00:18:20,150 --> 00:18:20,160
+so at most you know one thread have to
+ 
+
+967
+00:18:20,160 --> 00:18:22,870
+so at most you know one thread have to
+read two elements from that
+
+968
+00:18:22,870 --> 00:18:22,880
+read two elements from that
+ 
+
+969
+00:18:22,880 --> 00:18:24,549
+read two elements from that
+from the shared memory as opposed to
+
+970
+00:18:24,549 --> 00:18:24,559
+from the shared memory as opposed to
+ 
+
+971
+00:18:24,559 --> 00:18:26,549
+from the shared memory as opposed to
+reading all the elements or you know
+
+972
+00:18:26,549 --> 00:18:26,559
+reading all the elements or you know
+ 
+
+973
+00:18:26,559 --> 00:18:27,909
+reading all the elements or you know
+reading the corresponding elements that
+
+974
+00:18:27,909 --> 00:18:27,919
+reading the corresponding elements that
+ 
+
+975
+00:18:27,919 --> 00:18:30,310
+reading the corresponding elements that
+are interesting
+
+976
+00:18:30,310 --> 00:18:30,320
+are interesting
+ 
+
+977
+00:18:30,320 --> 00:18:32,390
+are interesting
+this is a technique called cooperative
+
+978
+00:18:32,390 --> 00:18:32,400
+this is a technique called cooperative
+ 
+
+979
+00:18:32,400 --> 00:18:33,350
+this is a technique called cooperative
+fetching
+
+980
+00:18:33,350 --> 00:18:33,360
+fetching
+ 
+
+981
+00:18:33,360 --> 00:18:35,430
+fetching
+because each of threads are kind of
+
+982
+00:18:35,430 --> 00:18:35,440
+because each of threads are kind of
+ 
+
+983
+00:18:35,440 --> 00:18:37,270
+because each of threads are kind of
+cooperating with each other to fetch the
+
+984
+00:18:37,270 --> 00:18:37,280
+cooperating with each other to fetch the
+ 
+
+985
+00:18:37,280 --> 00:18:40,630
+cooperating with each other to fetch the
+data that we're collectively needed and
+
+986
+00:18:40,630 --> 00:18:40,640
+data that we're collectively needed and
+ 
+
+987
+00:18:40,640 --> 00:18:42,950
+data that we're collectively needed and
+this is a very commonly used technique
+
+988
+00:18:42,950 --> 00:18:42,960
+this is a very commonly used technique
+ 
+
+989
+00:18:42,960 --> 00:18:44,630
+this is a very commonly used technique
+in gpu programming to fetch the
+
+990
+00:18:44,630 --> 00:18:44,640
+in gpu programming to fetch the
+ 
+
+991
+00:18:44,640 --> 00:18:47,909
+in gpu programming to fetch the
+necessary data from the external global
+
+992
+00:18:47,909 --> 00:18:47,919
+necessary data from the external global
+ 
+
+993
+00:18:47,919 --> 00:18:51,669
+necessary data from the external global
+memory onto the on to the local field
+
+994
+00:18:51,669 --> 00:18:51,679
+memory onto the on to the local field
+ 
+
+995
+00:18:51,679 --> 00:18:57,990
+memory onto the on to the local field
+memory that we're interested in
+
+996
+00:18:57,990 --> 00:18:58,000
+
+ 
+
+997
+00:18:58,000 --> 00:18:59,669
+
+okay
+
+998
+00:18:59,669 --> 00:18:59,679
+okay
+ 
+
+999
+00:18:59,679 --> 00:19:01,750
+okay
+finally we can actually go and inspect a
+
+1000
+00:19:01,750 --> 00:19:01,760
+finally we can actually go and inspect a
+ 
+
+1001
+00:19:01,760 --> 00:19:03,590
+finally we can actually go and inspect a
+bit what does final code look like so
+
+1002
+00:19:03,590 --> 00:19:03,600
+bit what does final code look like so
+ 
+
+1003
+00:19:03,600 --> 00:19:06,470
+bit what does final code look like so
+right now we have this uh tensor ion
+
+1004
+00:19:06,470 --> 00:19:06,480
+right now we have this uh tensor ion
+ 
+
+1005
+00:19:06,480 --> 00:19:08,070
+right now we have this uh tensor ion
+code in here
+
+1006
+00:19:08,070 --> 00:19:08,080
+code in here
+ 
+
+1007
+00:19:08,080 --> 00:19:09,350
+code in here
+and
+
+1008
+00:19:09,350 --> 00:19:09,360
+and
+ 
+
+1009
+00:19:09,360 --> 00:19:11,029
+and
+what i'm going to do is i'm going to try
+
+1010
+00:19:11,029 --> 00:19:11,039
+what i'm going to do is i'm going to try
+ 
+
+1011
+00:19:11,039 --> 00:19:13,110
+what i'm going to do is i'm going to try
+to build it to a put up program and try
+
+1012
+00:19:13,110 --> 00:19:13,120
+to build it to a put up program and try
+ 
+
+1013
+00:19:13,120 --> 00:19:15,990
+to build it to a put up program and try
+to print out the source code so in this
+
+1014
+00:19:15,990 --> 00:19:16,000
+to print out the source code so in this
+ 
+
+1015
+00:19:16,000 --> 00:19:17,909
+to print out the source code so in this
+case when we view the kuda code under
+
+1016
+00:19:17,909 --> 00:19:17,919
+case when we view the kuda code under
+ 
+
+1017
+00:19:17,919 --> 00:19:20,150
+case when we view the kuda code under
+under the hood we try to generate two
+
+1018
+00:19:20,150 --> 00:19:20,160
+under the hood we try to generate two
+ 
+
+1019
+00:19:20,160 --> 00:19:22,950
+under the hood we try to generate two
+components in here the one component is
+
+1020
+00:19:22,950 --> 00:19:22,960
+components in here the one component is
+ 
+
+1021
+00:19:22,960 --> 00:19:25,110
+components in here the one component is
+what we call host driver that
+
+1022
+00:19:25,110 --> 00:19:25,120
+what we call host driver that
+ 
+
+1023
+00:19:25,120 --> 00:19:27,270
+what we call host driver that
+calls on to the gpu driver and it
+
+1024
+00:19:27,270 --> 00:19:27,280
+calls on to the gpu driver and it
+ 
+
+1025
+00:19:27,280 --> 00:19:29,270
+calls on to the gpu driver and it
+launches the kernel and then the other
+
+1026
+00:19:29,270 --> 00:19:29,280
+launches the kernel and then the other
+ 
+
+1027
+00:19:29,280 --> 00:19:31,029
+launches the kernel and then the other
+component is the cuda kernel that runs
+
+1028
+00:19:31,029 --> 00:19:31,039
+component is the cuda kernel that runs
+ 
+
+1029
+00:19:31,039 --> 00:19:33,669
+component is the cuda kernel that runs
+the corresponding computations
+
+1030
+00:19:33,669 --> 00:19:33,679
+the corresponding computations
+ 
+
+1031
+00:19:33,679 --> 00:19:35,350
+the corresponding computations
+the phone code prints out the
+
+1032
+00:19:35,350 --> 00:19:35,360
+the phone code prints out the
+ 
+
+1033
+00:19:35,360 --> 00:19:37,270
+the phone code prints out the
+corresponding cuda kernel
+
+1034
+00:19:37,270 --> 00:19:37,280
+corresponding cuda kernel
+ 
+
+1035
+00:19:37,280 --> 00:19:39,430
+corresponding cuda kernel
+and
+
+1036
+00:19:39,430 --> 00:19:39,440
+and
+ 
+
+1037
+00:19:39,440 --> 00:19:41,029
+and
+in order to run this crack now it still
+
+1038
+00:19:41,029 --> 00:19:41,039
+in order to run this crack now it still
+ 
+
+1039
+00:19:41,039 --> 00:19:42,470
+in order to run this crack now it still
+needs to be driven by the host program
+
+1040
+00:19:42,470 --> 00:19:42,480
+needs to be driven by the host program
+ 
+
+1041
+00:19:42,480 --> 00:19:44,710
+needs to be driven by the host program
+but the cooldown kernel itself kind of
+
+1042
+00:19:44,710 --> 00:19:44,720
+but the cooldown kernel itself kind of
+ 
+
+1043
+00:19:44,720 --> 00:19:46,470
+but the cooldown kernel itself kind of
+is a good way for us to tell you know
+
+1044
+00:19:46,470 --> 00:19:46,480
+is a good way for us to tell you know
+ 
+
+1045
+00:19:46,480 --> 00:19:48,470
+is a good way for us to tell you know
+what is the final code looks like if you
+
+1046
+00:19:48,470 --> 00:19:48,480
+what is the final code looks like if you
+ 
+
+1047
+00:19:48,480 --> 00:19:50,150
+what is the final code looks like if you
+look like this code you can find that
+
+1048
+00:19:50,150 --> 00:19:50,160
+look like this code you can find that
+ 
+
+1049
+00:19:50,160 --> 00:19:51,909
+look like this code you can find that
+hey we have a short memory component in
+
+1050
+00:19:51,909 --> 00:19:51,919
+hey we have a short memory component in
+ 
+
+1051
+00:19:51,919 --> 00:19:52,710
+hey we have a short memory component in
+here
+
+1052
+00:19:52,710 --> 00:19:52,720
+here
+ 
+
+1053
+00:19:52,720 --> 00:19:54,950
+here
+there's a shared memory loading
+
+1054
+00:19:54,950 --> 00:19:54,960
+there's a shared memory loading
+ 
+
+1055
+00:19:54,960 --> 00:19:56,470
+there's a shared memory loading
+and you can realize that you know
+
+1056
+00:19:56,470 --> 00:19:56,480
+and you can realize that you know
+ 
+
+1057
+00:19:56,480 --> 00:19:58,230
+and you can realize that you know
+there's no sugar memory loop thing here
+
+1058
+00:19:58,230 --> 00:19:58,240
+there's no sugar memory loop thing here
+ 
+
+1059
+00:19:58,240 --> 00:20:00,630
+there's no sugar memory loop thing here
+right the shared memory loops directly
+
+1060
+00:20:00,630 --> 00:20:00,640
+right the shared memory loops directly
+ 
+
+1061
+00:20:00,640 --> 00:20:02,390
+right the shared memory loops directly
+translate onto the australian accent
+
+1062
+00:20:02,390 --> 00:20:02,400
+translate onto the australian accent
+ 
+
+1063
+00:20:02,400 --> 00:20:03,350
+translate onto the australian accent
+here
+
+1064
+00:20:03,350 --> 00:20:03,360
+here
+ 
+
+1065
+00:20:03,360 --> 00:20:05,990
+here
+once we load things on the shared memory
+
+1066
+00:20:05,990 --> 00:20:06,000
+once we load things on the shared memory
+ 
+
+1067
+00:20:06,000 --> 00:20:08,630
+once we load things on the shared memory
+we will run this windowed computation
+
+1068
+00:20:08,630 --> 00:20:08,640
+we will run this windowed computation
+ 
+
+1069
+00:20:08,640 --> 00:20:10,870
+we will run this windowed computation
+which uh if you scroll over you will
+
+1070
+00:20:10,870 --> 00:20:10,880
+which uh if you scroll over you will
+ 
+
+1071
+00:20:10,880 --> 00:20:12,470
+which uh if you scroll over you will
+find that you know hey this is a window
+
+1072
+00:20:12,470 --> 00:20:12,480
+find that you know hey this is a window
+ 
+
+1073
+00:20:12,480 --> 00:20:14,149
+find that you know hey this is a window
+computation over three elements thank
+
+1074
+00:20:14,149 --> 00:20:14,159
+computation over three elements thank
+ 
+
+1075
+00:20:14,159 --> 00:20:15,190
+computation over three elements thank
+you
+
+1076
+00:20:15,190 --> 00:20:15,200
+you
+ 
+
+1077
+00:20:15,200 --> 00:20:17,830
+you
+another thing that we can we need we i
+
+1078
+00:20:17,830 --> 00:20:17,840
+another thing that we can we need we i
+ 
+
+1079
+00:20:17,840 --> 00:20:19,830
+another thing that we can we need we i
+want to note in here is that if you look
+
+1080
+00:20:19,830 --> 00:20:19,840
+want to note in here is that if you look
+ 
+
+1081
+00:20:19,840 --> 00:20:21,750
+want to note in here is that if you look
+at the size of shield memory it's
+
+1082
+00:20:21,750 --> 00:20:21,760
+at the size of shield memory it's
+ 
+
+1083
+00:20:21,760 --> 00:20:23,909
+at the size of shield memory it's
+actually smaller than the original
+
+1084
+00:20:23,909 --> 00:20:23,919
+actually smaller than the original
+ 
+
+1085
+00:20:23,919 --> 00:20:27,190
+actually smaller than the original
+original size which is 127.
+
+1086
+00:20:27,190 --> 00:20:27,200
+original size which is 127.
+ 
+
+1087
+00:20:27,200 --> 00:20:29,270
+original size which is 127.
+and this is the reason this is because
+
+1088
+00:20:29,270 --> 00:20:29,280
+and this is the reason this is because
+ 
+
+1089
+00:20:29,280 --> 00:20:31,190
+and this is the reason this is because
+you know during the build process the
+
+1090
+00:20:31,190 --> 00:20:31,200
+you know during the build process the
+ 
+
+1091
+00:20:31,200 --> 00:20:32,870
+you know during the build process the
+overar
+
+1092
+00:20:32,870 --> 00:20:32,880
+overar
+ 
+
+1093
+00:20:32,880 --> 00:20:35,430
+overar
+program or try to compact the memory
+
+1094
+00:20:35,430 --> 00:20:35,440
+program or try to compact the memory
+ 
+
+1095
+00:20:35,440 --> 00:20:37,909
+program or try to compact the memory
+buffers during the build so that only
+
+1096
+00:20:37,909 --> 00:20:37,919
+buffers during the build so that only
+ 
+
+1097
+00:20:37,919 --> 00:20:41,029
+buffers during the build so that only
+try to use the shared memory size in
+
+1098
+00:20:41,029 --> 00:20:41,039
+try to use the shared memory size in
+ 
+
+1099
+00:20:41,039 --> 00:20:42,870
+try to use the shared memory size in
+corresponding to the size of memory that
+
+1100
+00:20:42,870 --> 00:20:42,880
+corresponding to the size of memory that
+ 
+
+1101
+00:20:42,880 --> 00:20:45,350
+corresponding to the size of memory that
+we touches in intermediate stage so
+
+1102
+00:20:45,350 --> 00:20:45,360
+we touches in intermediate stage so
+ 
+
+1103
+00:20:45,360 --> 00:20:48,070
+we touches in intermediate stage so
+normally that's more efficient than you
+
+1104
+00:20:48,070 --> 00:20:48,080
+normally that's more efficient than you
+ 
+
+1105
+00:20:48,080 --> 00:20:49,909
+normally that's more efficient than you
+know directly allocating the bigger
+
+1106
+00:20:49,909 --> 00:20:49,919
+know directly allocating the bigger
+ 
+
+1107
+00:20:49,919 --> 00:20:51,350
+know directly allocating the bigger
+achievement which actually sometimes
+
+1108
+00:20:51,350 --> 00:20:51,360
+achievement which actually sometimes
+ 
+
+1109
+00:20:51,360 --> 00:20:55,669
+achievement which actually sometimes
+runs out of memory of the gpu capacity
+
+1110
+00:20:55,669 --> 00:20:55,679
+runs out of memory of the gpu capacity
+ 
+
+1111
+00:20:55,679 --> 00:20:57,590
+runs out of memory of the gpu capacity
+okay so far i'm going to now we've
+
+1112
+00:20:57,590 --> 00:20:57,600
+okay so far i'm going to now we've
+ 
+
+1113
+00:20:57,600 --> 00:20:59,510
+okay so far i'm going to now we've
+talked about two concepts how we can go
+
+1114
+00:20:59,510 --> 00:20:59,520
+talked about two concepts how we can go
+ 
+
+1115
+00:20:59,520 --> 00:21:02,310
+talked about two concepts how we can go
+and bind things to gpu threads and how
+
+1116
+00:21:02,310 --> 00:21:02,320
+and bind things to gpu threads and how
+ 
+
+1117
+00:21:02,320 --> 00:21:04,390
+and bind things to gpu threads and how
+we can leverage shared memory and do
+
+1118
+00:21:04,390 --> 00:21:04,400
+we can leverage shared memory and do
+ 
+
+1119
+00:21:04,400 --> 00:21:06,549
+we can leverage shared memory and do
+co-operative fashion to bring data from
+
+1120
+00:21:06,549 --> 00:21:06,559
+co-operative fashion to bring data from
+ 
+
+1121
+00:21:06,559 --> 00:21:08,549
+co-operative fashion to bring data from
+global parts onto
+
+1122
+00:21:08,549 --> 00:21:08,559
+global parts onto
+ 
+
+1123
+00:21:08,559 --> 00:21:11,750
+global parts onto
+this uh onto this um stream
+
+1124
+00:21:11,750 --> 00:21:11,760
+this uh onto this um stream
+ 
+
+1125
+00:21:11,760 --> 00:21:13,750
+this uh onto this um stream
+multi-processor shared memory and then
+
+1126
+00:21:13,750 --> 00:21:13,760
+multi-processor shared memory and then
+ 
+
+1127
+00:21:13,760 --> 00:21:17,350
+multi-processor shared memory and then
+run computation there
+
+1128
+00:21:17,350 --> 00:21:17,360
+run computation there
+ 
+
+1129
+00:21:17,360 --> 00:21:19,029
+run computation there
+and so far we've talked about you know
+
+1130
+00:21:19,029 --> 00:21:19,039
+and so far we've talked about you know
+ 
+
+1131
+00:21:19,039 --> 00:21:21,830
+and so far we've talked about you know
+how to build this entire process in a
+
+1132
+00:21:21,830 --> 00:21:21,840
+how to build this entire process in a
+ 
+
+1133
+00:21:21,840 --> 00:21:23,909
+how to build this entire process in a
+cuda platform
+
+1134
+00:21:23,909 --> 00:21:23,919
+cuda platform
+ 
+
+1135
+00:21:23,919 --> 00:21:26,149
+cuda platform
+a typical machine compiler allows us to
+
+1136
+00:21:26,149 --> 00:21:26,159
+a typical machine compiler allows us to
+ 
+
+1137
+00:21:26,159 --> 00:21:27,750
+a typical machine compiler allows us to
+support multiple kinds of hardware
+
+1138
+00:21:27,750 --> 00:21:27,760
+support multiple kinds of hardware
+ 
+
+1139
+00:21:27,760 --> 00:21:30,470
+support multiple kinds of hardware
+platforms but we can also join the
+
+1140
+00:21:30,470 --> 00:21:30,480
+platforms but we can also join the
+ 
+
+1141
+00:21:30,480 --> 00:21:31,990
+platforms but we can also join the
+opencl code
+
+1142
+00:21:31,990 --> 00:21:32,000
+opencl code
+ 
+
+1143
+00:21:32,000 --> 00:21:34,390
+opencl code
+by taking a different target string so
+
+1144
+00:21:34,390 --> 00:21:34,400
+by taking a different target string so
+ 
+
+1145
+00:21:34,400 --> 00:21:37,270
+by taking a different target string so
+in this case i'm passing opencl here and
+
+1146
+00:21:37,270 --> 00:21:37,280
+in this case i'm passing opencl here and
+ 
+
+1147
+00:21:37,280 --> 00:21:38,390
+in this case i'm passing opencl here and
+if you have
+
+1148
+00:21:38,390 --> 00:21:38,400
+if you have
+ 
+
+1149
+00:21:38,400 --> 00:21:40,630
+if you have
+run opencl kernel before you can find
+
+1150
+00:21:40,630 --> 00:21:40,640
+run opencl kernel before you can find
+ 
+
+1151
+00:21:40,640 --> 00:21:42,710
+run opencl kernel before you can find
+that these are the syntax that
+
+1152
+00:21:42,710 --> 00:21:42,720
+that these are the syntax that
+ 
+
+1153
+00:21:42,720 --> 00:21:45,350
+that these are the syntax that
+writes out the same kernel in opencl
+
+1154
+00:21:45,350 --> 00:21:45,360
+writes out the same kernel in opencl
+ 
+
+1155
+00:21:45,360 --> 00:21:47,510
+writes out the same kernel in opencl
+now the syntax is you know roughly have
+
+1156
+00:21:47,510 --> 00:21:47,520
+now the syntax is you know roughly have
+ 
+
+1157
+00:21:47,520 --> 00:21:49,430
+now the syntax is you know roughly have
+a one-to-one translation actually you if
+
+1158
+00:21:49,430 --> 00:21:49,440
+a one-to-one translation actually you if
+ 
+
+1159
+00:21:49,440 --> 00:21:51,029
+a one-to-one translation actually you if
+you read the kuda kernel you will be
+
+1160
+00:21:51,029 --> 00:21:51,039
+you read the kuda kernel you will be
+ 
+
+1161
+00:21:51,039 --> 00:21:53,190
+you read the kuda kernel you will be
+able to tell that hey there's a roughly
+
+1162
+00:21:53,190 --> 00:21:53,200
+able to tell that hey there's a roughly
+ 
+
+1163
+00:21:53,200 --> 00:21:54,870
+able to tell that hey there's a roughly
+one one-to-one mapping that allows you
+
+1164
+00:21:54,870 --> 00:21:54,880
+one one-to-one mapping that allows you
+ 
+
+1165
+00:21:54,880 --> 00:21:57,029
+one one-to-one mapping that allows you
+to map the original cuda column to the
+
+1166
+00:21:57,029 --> 00:21:57,039
+to map the original cuda column to the
+ 
+
+1167
+00:21:57,039 --> 00:21:59,190
+to map the original cuda column to the
+corresponding uh to the corresponding
+
+1168
+00:21:59,190 --> 00:21:59,200
+corresponding uh to the corresponding
+ 
+
+1169
+00:21:59,200 --> 00:22:02,710
+corresponding uh to the corresponding
+opencl kernel here
+
+1170
+00:22:02,710 --> 00:22:02,720
+opencl kernel here
+ 
+
+1171
+00:22:02,720 --> 00:22:03,590
+opencl kernel here
+and
+
+1172
+00:22:03,590 --> 00:22:03,600
+and
+ 
+
+1173
+00:22:03,600 --> 00:22:06,230
+and
+we also support other targets like metal
+
+1174
+00:22:06,230 --> 00:22:06,240
+we also support other targets like metal
+ 
+
+1175
+00:22:06,240 --> 00:22:08,230
+we also support other targets like metal
+other cases let's say
+
+1176
+00:22:08,230 --> 00:22:08,240
+other cases let's say
+ 
+
+1177
+00:22:08,240 --> 00:22:10,789
+other cases let's say
+if metal is enabled i'm not too sure but
+
+1178
+00:22:10,789 --> 00:22:10,799
+if metal is enabled i'm not too sure but
+ 
+
+1179
+00:22:10,799 --> 00:22:12,870
+if metal is enabled i'm not too sure but
+okay yeah so this is the metal kernel
+
+1180
+00:22:12,870 --> 00:22:12,880
+okay yeah so this is the metal kernel
+ 
+
+1181
+00:22:12,880 --> 00:22:15,510
+okay yeah so this is the metal kernel
+that allows you to run the same program
+
+1182
+00:22:15,510 --> 00:22:15,520
+that allows you to run the same program
+ 
+
+1183
+00:22:15,520 --> 00:22:16,310
+that allows you to run the same program
+on
+
+1184
+00:22:16,310 --> 00:22:16,320
+on
+ 
+
+1185
+00:22:16,320 --> 00:22:19,270
+on
+apple gpus
+
+1186
+00:22:19,270 --> 00:22:19,280
+apple gpus
+ 
+
+1187
+00:22:19,280 --> 00:22:20,470
+apple gpus
+okay
+
+1188
+00:22:20,470 --> 00:22:20,480
+okay
+ 
+
+1189
+00:22:20,480 --> 00:22:22,070
+okay
+so that's the first part now we talk
+
+1190
+00:22:22,070 --> 00:22:22,080
+so that's the first part now we talk
+ 
+
+1191
+00:22:22,080 --> 00:22:24,310
+so that's the first part now we talk
+about some of the gpu basics
+
+1192
+00:22:24,310 --> 00:22:24,320
+about some of the gpu basics
+ 
+
+1193
+00:22:24,320 --> 00:22:27,909
+about some of the gpu basics
+moving next let's start to try out um
+
+1194
+00:22:27,909 --> 00:22:27,919
+moving next let's start to try out um
+ 
+
+1195
+00:22:27,919 --> 00:22:29,110
+moving next let's start to try out um
+running
+
+1196
+00:22:29,110 --> 00:22:29,120
+running
+ 
+
+1197
+00:22:29,120 --> 00:22:29,990
+running
+uh
+
+1198
+00:22:29,990 --> 00:22:30,000
+uh
+ 
+
+1199
+00:22:30,000 --> 00:22:32,950
+uh
+running um our tensile transformations
+
+1200
+00:22:32,950 --> 00:22:32,960
+running um our tensile transformations
+ 
+
+1201
+00:22:32,960 --> 00:22:34,549
+running um our tensile transformations
+and try to optimize a slightly more
+
+1202
+00:22:34,549 --> 00:22:34,559
+and try to optimize a slightly more
+ 
+
+1203
+00:22:34,559 --> 00:22:36,549
+and try to optimize a slightly more
+complicated program which is matrix
+
+1204
+00:22:36,549 --> 00:22:36,559
+complicated program which is matrix
+ 
+
+1205
+00:22:36,559 --> 00:22:38,630
+complicated program which is matrix
+multiplication that we have
+
+1206
+00:22:38,630 --> 00:22:38,640
+multiplication that we have
+ 
+
+1207
+00:22:38,640 --> 00:22:39,669
+multiplication that we have
+studied
+
+1208
+00:22:39,669 --> 00:22:39,679
+studied
+ 
+
+1209
+00:22:39,679 --> 00:22:42,549
+studied
+in some of the past few lectures
+
+1210
+00:22:42,549 --> 00:22:42,559
+in some of the past few lectures
+ 
+
+1211
+00:22:42,559 --> 00:22:45,909
+in some of the past few lectures
+so this is our original pencil program
+
+1212
+00:22:45,909 --> 00:22:45,919
+so this is our original pencil program
+ 
+
+1213
+00:22:45,919 --> 00:22:47,750
+so this is our original pencil program
+that chris won through
+
+1214
+00:22:47,750 --> 00:22:47,760
+that chris won through
+ 
+
+1215
+00:22:47,760 --> 00:22:49,750
+that chris won through
+120
+
+1216
+00:22:49,750 --> 00:22:49,760
+120
+ 
+
+1217
+00:22:49,760 --> 00:22:51,510
+120
+1024
+
+1218
+00:22:51,510 --> 00:22:51,520
+1024
+ 
+
+1219
+00:22:51,520 --> 00:22:53,430
+1024
+matrices
+
+1220
+00:22:53,430 --> 00:22:53,440
+matrices
+ 
+
+1221
+00:22:53,440 --> 00:22:55,669
+matrices
+a and b and multiplied together and we
+
+1222
+00:22:55,669 --> 00:22:55,679
+a and b and multiplied together and we
+ 
+
+1223
+00:22:55,679 --> 00:22:56,789
+a and b and multiplied together and we
+are going to
+
+1224
+00:22:56,789 --> 00:22:56,799
+are going to
+ 
+
+1225
+00:22:56,799 --> 00:22:58,789
+are going to
+load that onto c
+
+1226
+00:22:58,789 --> 00:22:58,799
+load that onto c
+ 
+
+1227
+00:22:58,799 --> 00:23:01,270
+load that onto c
+so we have a few transformations to
+
+1228
+00:23:01,270 --> 00:23:01,280
+so we have a few transformations to
+ 
+
+1229
+00:23:01,280 --> 00:23:03,510
+so we have a few transformations to
+optimize this then try to map that on
+
+1230
+00:23:03,510 --> 00:23:03,520
+optimize this then try to map that on
+ 
+
+1231
+00:23:03,520 --> 00:23:05,909
+optimize this then try to map that on
+the gpu
+
+1232
+00:23:05,909 --> 00:23:05,919
+the gpu
+ 
+
+1233
+00:23:05,919 --> 00:23:07,270
+the gpu
+the first technique that we're going to
+
+1234
+00:23:07,270 --> 00:23:07,280
+the first technique that we're going to
+ 
+
+1235
+00:23:07,280 --> 00:23:09,590
+the first technique that we're going to
+use is what we call our local blocking
+
+1236
+00:23:09,590 --> 00:23:09,600
+use is what we call our local blocking
+ 
+
+1237
+00:23:09,600 --> 00:23:11,270
+use is what we call our local blocking
+or register blocking
+
+1238
+00:23:11,270 --> 00:23:11,280
+or register blocking
+ 
+
+1239
+00:23:11,280 --> 00:23:14,470
+or register blocking
+the idea is that for each of us thread
+
+1240
+00:23:14,470 --> 00:23:14,480
+the idea is that for each of us thread
+ 
+
+1241
+00:23:14,480 --> 00:23:18,310
+the idea is that for each of us thread
+by trying to load um we're trying to do
+
+1242
+00:23:18,310 --> 00:23:18,320
+by trying to load um we're trying to do
+ 
+
+1243
+00:23:18,320 --> 00:23:19,590
+by trying to load um we're trying to do
+instead of computing each of the
+
+1244
+00:23:19,590 --> 00:23:19,600
+instead of computing each of the
+ 
+
+1245
+00:23:19,600 --> 00:23:21,750
+instead of computing each of the
+elements we're trying to compute one sub
+
+1246
+00:23:21,750 --> 00:23:21,760
+elements we're trying to compute one sub
+ 
+
+1247
+00:23:21,760 --> 00:23:23,990
+elements we're trying to compute one sub
+matrices at a time
+
+1248
+00:23:23,990 --> 00:23:24,000
+matrices at a time
+ 
+
+1249
+00:23:24,000 --> 00:23:27,190
+matrices at a time
+so for example i could choose to compute
+
+1250
+00:23:27,190 --> 00:23:27,200
+so for example i could choose to compute
+ 
+
+1251
+00:23:27,200 --> 00:23:31,190
+so for example i could choose to compute
+uh four by four sub matrices here
+
+1252
+00:23:31,190 --> 00:23:31,200
+uh four by four sub matrices here
+ 
+
+1253
+00:23:31,200 --> 00:23:33,270
+uh four by four sub matrices here
+and you know it together so the ideas
+
+1254
+00:23:33,270 --> 00:23:33,280
+and you know it together so the ideas
+ 
+
+1255
+00:23:33,280 --> 00:23:35,110
+and you know it together so the ideas
+you know formula um
+
+1256
+00:23:35,110 --> 00:23:35,120
+you know formula um
+ 
+
+1257
+00:23:35,120 --> 00:23:36,470
+you know formula um
+each of the iterations what i'm going to
+
+1258
+00:23:36,470 --> 00:23:36,480
+each of the iterations what i'm going to
+ 
+
+1259
+00:23:36,480 --> 00:23:39,029
+each of the iterations what i'm going to
+do is i'm going to read in one stripe
+
+1260
+00:23:39,029 --> 00:23:39,039
+do is i'm going to read in one stripe
+ 
+
+1261
+00:23:39,039 --> 00:23:40,710
+do is i'm going to read in one stripe
+of this
+
+1262
+00:23:40,710 --> 00:23:40,720
+of this
+ 
+
+1263
+00:23:40,720 --> 00:23:42,549
+of this
+input from a
+
+1264
+00:23:42,549 --> 00:23:42,559
+input from a
+ 
+
+1265
+00:23:42,559 --> 00:23:44,870
+input from a
+another stripe from b
+
+1266
+00:23:44,870 --> 00:23:44,880
+another stripe from b
+ 
+
+1267
+00:23:44,880 --> 00:23:47,830
+another stripe from b
+recall that my our matrix multiplication
+
+1268
+00:23:47,830 --> 00:23:47,840
+recall that my our matrix multiplication
+ 
+
+1269
+00:23:47,840 --> 00:23:50,470
+recall that my our matrix multiplication
+operations formula is c i j
+
+1270
+00:23:50,470 --> 00:23:50,480
+operations formula is c i j
+ 
+
+1271
+00:23:50,480 --> 00:23:51,750
+operations formula is c i j
+equals
+
+1272
+00:23:51,750 --> 00:23:51,760
+equals
+ 
+
+1273
+00:23:51,760 --> 00:23:53,029
+equals
+sum
+
+1274
+00:23:53,029 --> 00:23:53,039
+sum
+ 
+
+1275
+00:23:53,039 --> 00:23:54,149
+sum
+k
+
+1276
+00:23:54,149 --> 00:23:54,159
+k
+ 
+
+1277
+00:23:54,159 --> 00:23:56,310
+k
+a i k times
+
+1278
+00:23:56,310 --> 00:23:56,320
+a i k times
+ 
+
+1279
+00:23:56,320 --> 00:23:58,149
+a i k times
+b k j
+
+1280
+00:23:58,149 --> 00:23:58,159
+b k j
+ 
+
+1281
+00:23:58,159 --> 00:24:00,870
+b k j
+so in here i'm trying to compute this
+
+1282
+00:24:00,870 --> 00:24:00,880
+so in here i'm trying to compute this
+ 
+
+1283
+00:24:00,880 --> 00:24:01,830
+so in here i'm trying to compute this
+for
+
+1284
+00:24:01,830 --> 00:24:01,840
+for
+ 
+
+1285
+00:24:01,840 --> 00:24:05,029
+for
+a sub region of i from i can compute it
+
+1286
+00:24:05,029 --> 00:24:05,039
+a sub region of i from i can compute it
+ 
+
+1287
+00:24:05,039 --> 00:24:07,510
+a sub region of i from i can compute it
+for i equals 0 to 4
+
+1288
+00:24:07,510 --> 00:24:07,520
+for i equals 0 to 4
+ 
+
+1289
+00:24:07,520 --> 00:24:09,830
+for i equals 0 to 4
+and j equals
+
+1290
+00:24:09,830 --> 00:24:09,840
+and j equals
+ 
+
+1291
+00:24:09,840 --> 00:24:13,750
+and j equals
+j inside 0 to 4 so so it's effectively a
+
+1292
+00:24:13,750 --> 00:24:13,760
+j inside 0 to 4 so so it's effectively a
+ 
+
+1293
+00:24:13,760 --> 00:24:16,470
+j inside 0 to 4 so so it's effectively a
+loop that that allows us to loop into a
+
+1294
+00:24:16,470 --> 00:24:16,480
+loop that that allows us to loop into a
+ 
+
+1295
+00:24:16,480 --> 00:24:18,230
+loop that that allows us to loop into a
+sub region
+
+1296
+00:24:18,230 --> 00:24:18,240
+sub region
+ 
+
+1297
+00:24:18,240 --> 00:24:20,070
+sub region
+so what is the advantage here
+
+1298
+00:24:20,070 --> 00:24:20,080
+so what is the advantage here
+ 
+
+1299
+00:24:20,080 --> 00:24:22,470
+so what is the advantage here
+the advantage is that because i'm going
+
+1300
+00:24:22,470 --> 00:24:22,480
+the advantage is that because i'm going
+ 
+
+1301
+00:24:22,480 --> 00:24:24,870
+the advantage is that because i'm going
+to compute this sub region
+
+1302
+00:24:24,870 --> 00:24:24,880
+to compute this sub region
+ 
+
+1303
+00:24:24,880 --> 00:24:26,950
+to compute this sub region
+each of the time i'm going to
+
+1304
+00:24:26,950 --> 00:24:26,960
+each of the time i'm going to
+ 
+
+1305
+00:24:26,960 --> 00:24:28,789
+each of the time i'm going to
+read in this drive
+
+1306
+00:24:28,789 --> 00:24:28,799
+read in this drive
+ 
+
+1307
+00:24:28,799 --> 00:24:30,950
+read in this drive
+and this strike right
+
+1308
+00:24:30,950 --> 00:24:30,960
+and this strike right
+ 
+
+1309
+00:24:30,960 --> 00:24:32,470
+and this strike right
+and
+
+1310
+00:24:32,470 --> 00:24:32,480
+and
+ 
+
+1311
+00:24:32,480 --> 00:24:34,549
+and
+and in order to compute this first
+
+1312
+00:24:34,549 --> 00:24:34,559
+and in order to compute this first
+ 
+
+1313
+00:24:34,559 --> 00:24:37,269
+and in order to compute this first
+element actually i'm going to need the
+
+1314
+00:24:37,269 --> 00:24:37,279
+element actually i'm going to need the
+ 
+
+1315
+00:24:37,279 --> 00:24:38,870
+element actually i'm going to need the
+first element of a
+
+1316
+00:24:38,870 --> 00:24:38,880
+first element of a
+ 
+
+1317
+00:24:38,880 --> 00:24:41,830
+first element of a
+first element of b
+
+1318
+00:24:41,830 --> 00:24:41,840
+first element of b
+ 
+
+1319
+00:24:41,840 --> 00:24:44,149
+first element of b
+let's say that this is a to simplify
+
+1320
+00:24:44,149 --> 00:24:44,159
+let's say that this is a to simplify
+ 
+
+1321
+00:24:44,159 --> 00:24:46,470
+let's say that this is a to simplify
+like this let's say v equals 2 okay in
+
+1322
+00:24:46,470 --> 00:24:46,480
+like this let's say v equals 2 okay in
+ 
+
+1323
+00:24:46,480 --> 00:24:47,510
+like this let's say v equals 2 okay in
+this case
+
+1324
+00:24:47,510 --> 00:24:47,520
+this case
+ 
+
+1325
+00:24:47,520 --> 00:24:48,950
+this case
+you know in order to compute this
+
+1326
+00:24:48,950 --> 00:24:48,960
+you know in order to compute this
+ 
+
+1327
+00:24:48,960 --> 00:24:53,110
+you know in order to compute this
+element i need to read this element
+
+1328
+00:24:53,110 --> 00:24:53,120
+element i need to read this element
+ 
+
+1329
+00:24:53,120 --> 00:24:53,990
+element i need to read this element
+and
+
+1330
+00:24:53,990 --> 00:24:54,000
+and
+ 
+
+1331
+00:24:54,000 --> 00:24:56,230
+and
+this element of b
+
+1332
+00:24:56,230 --> 00:24:56,240
+this element of b
+ 
+
+1333
+00:24:56,240 --> 00:24:57,990
+this element of b
+then in order to compute the second
+
+1334
+00:24:57,990 --> 00:24:58,000
+then in order to compute the second
+ 
+
+1335
+00:24:58,000 --> 00:24:59,510
+then in order to compute the second
+element i still need to read the same
+
+1336
+00:24:59,510 --> 00:24:59,520
+element i still need to read the same
+ 
+
+1337
+00:24:59,520 --> 00:25:02,310
+element i still need to read the same
+element of a and the second element of b
+
+1338
+00:25:02,310 --> 00:25:02,320
+element of a and the second element of b
+ 
+
+1339
+00:25:02,320 --> 00:25:03,990
+element of a and the second element of b
+now i'll compute this element i'm going
+
+1340
+00:25:03,990 --> 00:25:04,000
+now i'll compute this element i'm going
+ 
+
+1341
+00:25:04,000 --> 00:25:06,630
+now i'll compute this element i'm going
+to need to read this element and this
+
+1342
+00:25:06,630 --> 00:25:06,640
+to need to read this element and this
+ 
+
+1343
+00:25:06,640 --> 00:25:07,750
+to need to read this element and this
+element
+
+1344
+00:25:07,750 --> 00:25:07,760
+element
+ 
+
+1345
+00:25:07,760 --> 00:25:09,190
+element
+in order to compute this element i'm
+
+1346
+00:25:09,190 --> 00:25:09,200
+in order to compute this element i'm
+ 
+
+1347
+00:25:09,200 --> 00:25:10,549
+in order to compute this element i'm
+going to read
+
+1348
+00:25:10,549 --> 00:25:10,559
+going to read
+ 
+
+1349
+00:25:10,559 --> 00:25:13,110
+going to read
+this element at this side
+
+1350
+00:25:13,110 --> 00:25:13,120
+this element at this side
+ 
+
+1351
+00:25:13,120 --> 00:25:14,870
+this element at this side
+you can find that interesting case is
+
+1352
+00:25:14,870 --> 00:25:14,880
+you can find that interesting case is
+ 
+
+1353
+00:25:14,880 --> 00:25:17,110
+you can find that interesting case is
+that when we're reading these stripes
+
+1354
+00:25:17,110 --> 00:25:17,120
+that when we're reading these stripes
+ 
+
+1355
+00:25:17,120 --> 00:25:19,590
+that when we're reading these stripes
+a and b
+
+1356
+00:25:19,590 --> 00:25:19,600
+a and b
+ 
+
+1357
+00:25:19,600 --> 00:25:22,149
+a and b
+in order to compute four elements right
+
+1358
+00:25:22,149 --> 00:25:22,159
+in order to compute four elements right
+ 
+
+1359
+00:25:22,159 --> 00:25:23,590
+in order to compute four elements right
+each of the
+
+1360
+00:25:23,590 --> 00:25:23,600
+each of the
+ 
+
+1361
+00:25:23,600 --> 00:25:26,310
+each of the
+uh inputs a and b stripes
+
+1362
+00:25:26,310 --> 00:25:26,320
+uh inputs a and b stripes
+ 
+
+1363
+00:25:26,320 --> 00:25:29,430
+uh inputs a and b stripes
+is is being re-twice because you know
+
+1364
+00:25:29,430 --> 00:25:29,440
+is is being re-twice because you know
+ 
+
+1365
+00:25:29,440 --> 00:25:32,549
+is is being re-twice because you know
+uh because for each of these elements in
+
+1366
+00:25:32,549 --> 00:25:32,559
+uh because for each of these elements in
+ 
+
+1367
+00:25:32,559 --> 00:25:34,310
+uh because for each of these elements in
+here it's going to be needed for
+
+1368
+00:25:34,310 --> 00:25:34,320
+here it's going to be needed for
+ 
+
+1369
+00:25:34,320 --> 00:25:36,870
+here it's going to be needed for
+computing the output of all these
+
+1370
+00:25:36,870 --> 00:25:36,880
+computing the output of all these
+ 
+
+1371
+00:25:36,880 --> 00:25:38,390
+computing the output of all these
+results in here
+
+1372
+00:25:38,390 --> 00:25:38,400
+results in here
+ 
+
+1373
+00:25:38,400 --> 00:25:41,269
+results in here
+so this helps in in a sense that it
+
+1374
+00:25:41,269 --> 00:25:41,279
+so this helps in in a sense that it
+ 
+
+1375
+00:25:41,279 --> 00:25:43,269
+so this helps in in a sense that it
+helps to reduce the amount of read that
+
+1376
+00:25:43,269 --> 00:25:43,279
+helps to reduce the amount of read that
+ 
+
+1377
+00:25:43,279 --> 00:25:45,830
+helps to reduce the amount of read that
+we need to read the data from a global
+
+1378
+00:25:45,830 --> 00:25:45,840
+we need to read the data from a global
+ 
+
+1379
+00:25:45,840 --> 00:25:48,310
+we need to read the data from a global
+memory and this is also called register
+
+1380
+00:25:48,310 --> 00:25:48,320
+memory and this is also called register
+ 
+
+1381
+00:25:48,320 --> 00:25:50,470
+memory and this is also called register
+reuse because we are
+
+1382
+00:25:50,470 --> 00:25:50,480
+reuse because we are
+ 
+
+1383
+00:25:50,480 --> 00:25:52,870
+reuse because we are
+normally reading data onto a and b and
+
+1384
+00:25:52,870 --> 00:25:52,880
+normally reading data onto a and b and
+ 
+
+1385
+00:25:52,880 --> 00:25:54,390
+normally reading data onto a and b and
+you know we can reuse those data
+
+1386
+00:25:54,390 --> 00:25:54,400
+you know we can reuse those data
+ 
+
+1387
+00:25:54,400 --> 00:25:56,070
+you know we can reuse those data
+multiple times as we compute this sub
+
+1388
+00:25:56,070 --> 00:25:56,080
+multiple times as we compute this sub
+ 
+
+1389
+00:25:56,080 --> 00:25:57,350
+multiple times as we compute this sub
+matrix
+
+1390
+00:25:57,350 --> 00:25:57,360
+matrix
+ 
+
+1391
+00:25:57,360 --> 00:25:59,750
+matrix
+and and this helps us to reduce the
+
+1392
+00:25:59,750 --> 00:25:59,760
+and and this helps us to reduce the
+ 
+
+1393
+00:25:59,760 --> 00:26:02,230
+and and this helps us to reduce the
+amount of load that we need to load the
+
+1394
+00:26:02,230 --> 00:26:02,240
+amount of load that we need to load the
+ 
+
+1395
+00:26:02,240 --> 00:26:04,630
+amount of load that we need to load the
+data from outside things so usually this
+
+1396
+00:26:04,630 --> 00:26:04,640
+data from outside things so usually this
+ 
+
+1397
+00:26:04,640 --> 00:26:07,190
+data from outside things so usually this
+is a very helpful technique in both
+
+1398
+00:26:07,190 --> 00:26:07,200
+is a very helpful technique in both
+ 
+
+1399
+00:26:07,200 --> 00:26:09,110
+is a very helpful technique in both
+most of our actually you know in both
+
+1400
+00:26:09,110 --> 00:26:09,120
+most of our actually you know in both
+ 
+
+1401
+00:26:09,120 --> 00:26:11,190
+most of our actually you know in both
+cpus and gpus
+
+1402
+00:26:11,190 --> 00:26:11,200
+cpus and gpus
+ 
+
+1403
+00:26:11,200 --> 00:26:12,710
+cpus and gpus
+so we're going to do that then this
+
+1404
+00:26:12,710 --> 00:26:12,720
+so we're going to do that then this
+ 
+
+1405
+00:26:12,720 --> 00:26:14,630
+so we're going to do that then this
+program is slightly more complicated
+
+1406
+00:26:14,630 --> 00:26:14,640
+program is slightly more complicated
+ 
+
+1407
+00:26:14,640 --> 00:26:16,230
+program is slightly more complicated
+than we our previous one i'm going to
+
+1408
+00:26:16,230 --> 00:26:16,240
+than we our previous one i'm going to
+ 
+
+1409
+00:26:16,240 --> 00:26:18,710
+than we our previous one i'm going to
+walk you through that
+
+1410
+00:26:18,710 --> 00:26:18,720
+walk you through that
+ 
+
+1411
+00:26:18,720 --> 00:26:20,789
+walk you through that
+this is our original
+
+1412
+00:26:20,789 --> 00:26:20,799
+this is our original
+ 
+
+1413
+00:26:20,799 --> 00:26:22,789
+this is our original
+this is our original loops we're going
+
+1414
+00:26:22,789 --> 00:26:22,799
+this is our original loops we're going
+ 
+
+1415
+00:26:22,799 --> 00:26:25,350
+this is our original loops we're going
+to do is we're going to try to split
+
+1416
+00:26:25,350 --> 00:26:25,360
+to do is we're going to try to split
+ 
+
+1417
+00:26:25,360 --> 00:26:27,750
+to do is we're going to try to split
+i j and k
+
+1418
+00:26:27,750 --> 00:26:27,760
+i j and k
+ 
+
+1419
+00:26:27,760 --> 00:26:30,710
+i j and k
+into two components and and or actually
+
+1420
+00:26:30,710 --> 00:26:30,720
+into two components and and or actually
+ 
+
+1421
+00:26:30,720 --> 00:26:32,230
+into two components and and or actually
+in the case of i j we're going to split
+
+1422
+00:26:32,230 --> 00:26:32,240
+in the case of i j we're going to split
+ 
+
+1423
+00:26:32,240 --> 00:26:33,909
+in the case of i j we're going to split
+the three components
+
+1424
+00:26:33,909 --> 00:26:33,919
+the three components
+ 
+
+1425
+00:26:33,919 --> 00:26:36,230
+the three components
+and then try to try to reorder that a
+
+1426
+00:26:36,230 --> 00:26:36,240
+and then try to try to reorder that a
+ 
+
+1427
+00:26:36,240 --> 00:26:39,269
+and then try to try to reorder that a
+bit and then try to map it outside on
+
+1428
+00:26:39,269 --> 00:26:39,279
+bit and then try to map it outside on
+ 
+
+1429
+00:26:39,279 --> 00:26:41,750
+bit and then try to map it outside on
+the gpu thread the innermost remember
+
+1430
+00:26:41,750 --> 00:26:41,760
+the gpu thread the innermost remember
+ 
+
+1431
+00:26:41,760 --> 00:26:43,669
+the gpu thread the innermost remember
+that i want to keep this register
+
+1432
+00:26:43,669 --> 00:26:43,679
+that i want to keep this register
+ 
+
+1433
+00:26:43,679 --> 00:26:45,990
+that i want to keep this register
+blocking here okay
+
+1434
+00:26:45,990 --> 00:26:46,000
+blocking here okay
+ 
+
+1435
+00:26:46,000 --> 00:26:47,909
+blocking here okay
+so so let's walk you through this so the
+
+1436
+00:26:47,909 --> 00:26:47,919
+so so let's walk you through this so the
+ 
+
+1437
+00:26:47,919 --> 00:26:49,669
+so so let's walk you through this so the
+first thing we're going to do is we're
+
+1438
+00:26:49,669 --> 00:26:49,679
+first thing we're going to do is we're
+ 
+
+1439
+00:26:49,679 --> 00:26:51,590
+first thing we're going to do is we're
+going to get the block c
+
+1440
+00:26:51,590 --> 00:26:51,600
+going to get the block c
+ 
+
+1441
+00:26:51,600 --> 00:26:52,789
+going to get the block c
+another thing that we're going to
+
+1442
+00:26:52,789 --> 00:26:52,799
+another thing that we're going to
+ 
+
+1443
+00:26:52,799 --> 00:26:54,950
+another thing that we're going to
+because we're going to try to um you
+
+1444
+00:26:54,950 --> 00:26:54,960
+because we're going to try to um you
+ 
+
+1445
+00:26:54,960 --> 00:26:57,269
+because we're going to try to um you
+know first
+
+1446
+00:26:57,269 --> 00:26:57,279
+know first
+ 
+
+1447
+00:26:57,279 --> 00:26:59,110
+know first
+compute run computations and store that
+
+1448
+00:26:59,110 --> 00:26:59,120
+compute run computations and store that
+ 
+
+1449
+00:26:59,120 --> 00:27:01,750
+compute run computations and store that
+onto local memory i'm going to create a
+
+1450
+00:27:01,750 --> 00:27:01,760
+onto local memory i'm going to create a
+ 
+
+1451
+00:27:01,760 --> 00:27:04,870
+onto local memory i'm going to create a
+different stage called c local that
+
+1452
+00:27:04,870 --> 00:27:04,880
+different stage called c local that
+ 
+
+1453
+00:27:04,880 --> 00:27:09,110
+different stage called c local that
+that we use to cache the computations on
+
+1454
+00:27:09,110 --> 00:27:09,120
+that we use to cache the computations on
+ 
+
+1455
+00:27:09,120 --> 00:27:10,230
+that we use to cache the computations on
+and then
+
+1456
+00:27:10,230 --> 00:27:10,240
+and then
+ 
+
+1457
+00:27:10,240 --> 00:27:12,789
+and then
+um what what we are doing here is we are
+
+1458
+00:27:12,789 --> 00:27:12,799
+um what what we are doing here is we are
+ 
+
+1459
+00:27:12,799 --> 00:27:14,710
+um what what we are doing here is we are
+going to split
+
+1460
+00:27:14,710 --> 00:27:14,720
+going to split
+ 
+
+1461
+00:27:14,720 --> 00:27:17,669
+going to split
+loop i and j onto three components and
+
+1462
+00:27:17,669 --> 00:27:17,679
+loop i and j onto three components and
+ 
+
+1463
+00:27:17,679 --> 00:27:20,470
+loop i and j onto three components and
+loop k on to two components
+
+1464
+00:27:20,470 --> 00:27:20,480
+loop k on to two components
+ 
+
+1465
+00:27:20,480 --> 00:27:22,470
+loop k on to two components
+we're going to reorder
+
+1466
+00:27:22,470 --> 00:27:22,480
+we're going to reorder
+ 
+
+1467
+00:27:22,480 --> 00:27:25,029
+we're going to reorder
+the the looper bit
+
+1468
+00:27:25,029 --> 00:27:25,039
+the the looper bit
+ 
+
+1469
+00:27:25,039 --> 00:27:27,190
+the the looper bit
+so that uh
+
+1470
+00:27:27,190 --> 00:27:27,200
+so that uh
+ 
+
+1471
+00:27:27,200 --> 00:27:29,269
+so that uh
+they form a more interleaved pattern
+
+1472
+00:27:29,269 --> 00:27:29,279
+they form a more interleaved pattern
+ 
+
+1473
+00:27:29,279 --> 00:27:31,110
+they form a more interleaved pattern
+these are called tiling patterns that
+
+1474
+00:27:31,110 --> 00:27:31,120
+these are called tiling patterns that
+ 
+
+1475
+00:27:31,120 --> 00:27:33,269
+these are called tiling patterns that
+allows you know that forms the outermost
+
+1476
+00:27:33,269 --> 00:27:33,279
+allows you know that forms the outermost
+ 
+
+1477
+00:27:33,279 --> 00:27:34,710
+allows you know that forms the outermost
+loop in here
+
+1478
+00:27:34,710 --> 00:27:34,720
+loop in here
+ 
+
+1479
+00:27:34,720 --> 00:27:37,750
+loop in here
+and then then then i won
+
+1480
+00:27:37,750 --> 00:27:37,760
+and then then then i won
+ 
+
+1481
+00:27:37,760 --> 00:27:42,870
+and then then then i won
+the iterators and j1 and i2 i2 and j2
+
+1482
+00:27:42,870 --> 00:27:42,880
+the iterators and j1 and i2 i2 and j2
+ 
+
+1483
+00:27:42,880 --> 00:27:45,590
+the iterators and j1 and i2 i2 and j2
+once you notice that we are ordering j2
+
+1484
+00:27:45,590 --> 00:27:45,600
+once you notice that we are ordering j2
+ 
+
+1485
+00:27:45,600 --> 00:27:48,149
+once you notice that we are ordering j2
+and i2 inside the reduction rule and
+
+1486
+00:27:48,149 --> 00:27:48,159
+and i2 inside the reduction rule and
+ 
+
+1487
+00:27:48,159 --> 00:27:51,110
+and i2 inside the reduction rule and
+this is exactly to do what we call this
+
+1488
+00:27:51,110 --> 00:27:51,120
+this is exactly to do what we call this
+ 
+
+1489
+00:27:51,120 --> 00:27:51,909
+this is exactly to do what we call this
+uh
+
+1490
+00:27:51,909 --> 00:27:51,919
+uh
+ 
+
+1491
+00:27:51,919 --> 00:27:53,669
+uh
+register blocking that allows us to
+
+1492
+00:27:53,669 --> 00:27:53,679
+register blocking that allows us to
+ 
+
+1493
+00:27:53,679 --> 00:27:55,029
+register blocking that allows us to
+compute
+
+1494
+00:27:55,029 --> 00:27:55,039
+compute
+ 
+
+1495
+00:27:55,039 --> 00:27:56,470
+compute
+all the elements
+
+1496
+00:27:56,470 --> 00:27:56,480
+all the elements
+ 
+
+1497
+00:27:56,480 --> 00:27:59,350
+all the elements
+and that's in the domain of i2 and j2 in
+
+1498
+00:27:59,350 --> 00:27:59,360
+and that's in the domain of i2 and j2 in
+ 
+
+1499
+00:27:59,360 --> 00:28:01,830
+and that's in the domain of i2 and j2 in
+here that correspond to effectively and
+
+1500
+00:28:01,830 --> 00:28:01,840
+here that correspond to effectively and
+ 
+
+1501
+00:28:01,840 --> 00:28:04,950
+here that correspond to effectively and
+this direction can be viewed as i2
+
+1502
+00:28:04,950 --> 00:28:04,960
+this direction can be viewed as i2
+ 
+
+1503
+00:28:04,960 --> 00:28:08,710
+this direction can be viewed as i2
+and this direction can be filled at j2
+
+1504
+00:28:08,710 --> 00:28:08,720
+and this direction can be filled at j2
+ 
+
+1505
+00:28:08,720 --> 00:28:11,430
+and this direction can be filled at j2
+and finally we are bringing in this c
+
+1506
+00:28:11,430 --> 00:28:11,440
+and finally we are bringing in this c
+ 
+
+1507
+00:28:11,440 --> 00:28:14,950
+and finally we are bringing in this c
+local computations back onto
+
+1508
+00:28:14,950 --> 00:28:14,960
+local computations back onto
+ 
+
+1509
+00:28:14,960 --> 00:28:17,750
+local computations back onto
+this in j1 loop
+
+1510
+00:28:17,750 --> 00:28:17,760
+this in j1 loop
+ 
+
+1511
+00:28:17,760 --> 00:28:19,590
+this in j1 loop
+and then we're going to bind the outside
+
+1512
+00:28:19,590 --> 00:28:19,600
+and then we're going to bind the outside
+ 
+
+1513
+00:28:19,600 --> 00:28:22,950
+and then we're going to bind the outside
+loop onto the block indices
+
+1514
+00:28:22,950 --> 00:28:22,960
+loop onto the block indices
+ 
+
+1515
+00:28:22,960 --> 00:28:25,110
+loop onto the block indices
+and finally the decomposed reduction had
+
+1516
+00:28:25,110 --> 00:28:25,120
+and finally the decomposed reduction had
+ 
+
+1517
+00:28:25,120 --> 00:28:26,870
+and finally the decomposed reduction had
+to you know decompose original
+
+1518
+00:28:26,870 --> 00:28:26,880
+to you know decompose original
+ 
+
+1519
+00:28:26,880 --> 00:28:29,190
+to you know decompose original
+reductions on
+
+1520
+00:28:29,190 --> 00:28:29,200
+reductions on
+ 
+
+1521
+00:28:29,200 --> 00:28:32,549
+reductions on
+onto a a certain level okay so i'm going
+
+1522
+00:28:32,549 --> 00:28:32,559
+onto a a certain level okay so i'm going
+ 
+
+1523
+00:28:32,559 --> 00:28:35,990
+onto a a certain level okay so i'm going
+to run this all together
+
+1524
+00:28:35,990 --> 00:28:36,000
+to run this all together
+ 
+
+1525
+00:28:36,000 --> 00:28:36,710
+to run this all together
+and
+
+1526
+00:28:36,710 --> 00:28:36,720
+and
+ 
+
+1527
+00:28:36,720 --> 00:28:38,710
+and
+this is a resulting program
+
+1528
+00:28:38,710 --> 00:28:38,720
+this is a resulting program
+ 
+
+1529
+00:28:38,720 --> 00:28:40,230
+this is a resulting program
+actually one thing that we you can also
+
+1530
+00:28:40,230 --> 00:28:40,240
+actually one thing that we you can also
+ 
+
+1531
+00:28:40,240 --> 00:28:41,510
+actually one thing that we you can also
+try to do is you can try to run
+
+1532
+00:28:41,510 --> 00:28:41,520
+try to do is you can try to run
+ 
+
+1533
+00:28:41,520 --> 00:28:43,510
+try to do is you can try to run
+interactively so you will be able to
+
+1534
+00:28:43,510 --> 00:28:43,520
+interactively so you will be able to
+ 
+
+1535
+00:28:43,520 --> 00:28:45,830
+interactively so you will be able to
+perform a few transformations and use
+
+1536
+00:28:45,830 --> 00:28:45,840
+perform a few transformations and use
+ 
+
+1537
+00:28:45,840 --> 00:28:48,870
+perform a few transformations and use
+the ir module.show to see what is going
+
+1538
+00:28:48,870 --> 00:28:48,880
+the ir module.show to see what is going
+ 
+
+1539
+00:28:48,880 --> 00:28:50,549
+the ir module.show to see what is going
+on in each of the steps
+
+1540
+00:28:50,549 --> 00:28:50,559
+on in each of the steps
+ 
+
+1541
+00:28:50,559 --> 00:28:51,830
+on in each of the steps
+but let's first take a look at this
+
+1542
+00:28:51,830 --> 00:28:51,840
+but let's first take a look at this
+ 
+
+1543
+00:28:51,840 --> 00:28:53,350
+but let's first take a look at this
+final program you can find that the
+
+1544
+00:28:53,350 --> 00:28:53,360
+final program you can find that the
+ 
+
+1545
+00:28:53,360 --> 00:28:55,430
+final program you can find that the
+camera structure first of all
+
+1546
+00:28:55,430 --> 00:28:55,440
+camera structure first of all
+ 
+
+1547
+00:28:55,440 --> 00:28:58,230
+camera structure first of all
+if you if you go and look at the final
+
+1548
+00:28:58,230 --> 00:28:58,240
+if you if you go and look at the final
+ 
+
+1549
+00:28:58,240 --> 00:29:00,070
+if you if you go and look at the final
+output matrix you'll find that logically
+
+1550
+00:29:00,070 --> 00:29:00,080
+output matrix you'll find that logically
+ 
+
+1551
+00:29:00,080 --> 00:29:01,590
+output matrix you'll find that logically
+we're trying to divide it into small
+
+1552
+00:29:01,590 --> 00:29:01,600
+we're trying to divide it into small
+ 
+
+1553
+00:29:01,600 --> 00:29:03,510
+we're trying to divide it into small
+tiles that's why we're calling it
+
+1554
+00:29:03,510 --> 00:29:03,520
+tiles that's why we're calling it
+ 
+
+1555
+00:29:03,520 --> 00:29:05,269
+tiles that's why we're calling it
+dividing tiles
+
+1556
+00:29:05,269 --> 00:29:05,279
+dividing tiles
+ 
+
+1557
+00:29:05,279 --> 00:29:08,549
+dividing tiles
+where the outermost iterators correspond
+
+1558
+00:29:08,549 --> 00:29:08,559
+where the outermost iterators correspond
+ 
+
+1559
+00:29:08,559 --> 00:29:11,350
+where the outermost iterators correspond
+to the block into this and then threat
+
+1560
+00:29:11,350 --> 00:29:11,360
+to the block into this and then threat
+ 
+
+1561
+00:29:11,360 --> 00:29:14,149
+to the block into this and then threat
+indexes right and and finally the
+
+1562
+00:29:14,149 --> 00:29:14,159
+indexes right and and finally the
+ 
+
+1563
+00:29:14,159 --> 00:29:16,549
+indexes right and and finally the
+innermost it is really corresponding to
+
+1564
+00:29:16,549 --> 00:29:16,559
+innermost it is really corresponding to
+ 
+
+1565
+00:29:16,559 --> 00:29:19,269
+innermost it is really corresponding to
+the the register tile block in this case
+
+1566
+00:29:19,269 --> 00:29:19,279
+the the register tile block in this case
+ 
+
+1567
+00:29:19,279 --> 00:29:21,510
+the the register tile block in this case
+v equals eight
+
+1568
+00:29:21,510 --> 00:29:21,520
+v equals eight
+ 
+
+1569
+00:29:21,520 --> 00:29:23,750
+v equals eight
+um
+
+1570
+00:29:23,750 --> 00:29:23,760
+um
+ 
+
+1571
+00:29:23,760 --> 00:29:25,830
+um
+and then
+
+1572
+00:29:25,830 --> 00:29:25,840
+and then
+ 
+
+1573
+00:29:25,840 --> 00:29:27,510
+and then
+this final program you know first we
+
+1574
+00:29:27,510 --> 00:29:27,520
+this final program you know first we
+ 
+
+1575
+00:29:27,520 --> 00:29:29,350
+this final program you know first we
+initialize the corresponding say local
+
+1576
+00:29:29,350 --> 00:29:29,360
+initialize the corresponding say local
+ 
+
+1577
+00:29:29,360 --> 00:29:30,549
+initialize the corresponding say local
+regions
+
+1578
+00:29:30,549 --> 00:29:30,559
+regions
+ 
+
+1579
+00:29:30,559 --> 00:29:32,389
+regions
+and then we are going to do a reduction
+
+1580
+00:29:32,389 --> 00:29:32,399
+and then we are going to do a reduction
+ 
+
+1581
+00:29:32,399 --> 00:29:35,110
+and then we are going to do a reduction
+that go and you know runs the local
+
+1582
+00:29:35,110 --> 00:29:35,120
+that go and you know runs the local
+ 
+
+1583
+00:29:35,120 --> 00:29:37,909
+that go and you know runs the local
+computation the aspect to say local
+
+1584
+00:29:37,909 --> 00:29:37,919
+computation the aspect to say local
+ 
+
+1585
+00:29:37,919 --> 00:29:40,710
+computation the aspect to say local
+and finally uh this c local region gets
+
+1586
+00:29:40,710 --> 00:29:40,720
+and finally uh this c local region gets
+ 
+
+1587
+00:29:40,720 --> 00:29:43,830
+and finally uh this c local region gets
+written back onto the global memory
+
+1588
+00:29:43,830 --> 00:29:43,840
+written back onto the global memory
+ 
+
+1589
+00:29:43,840 --> 00:29:45,990
+written back onto the global memory
+uh through another loop
+
+1590
+00:29:45,990 --> 00:29:46,000
+uh through another loop
+ 
+
+1591
+00:29:46,000 --> 00:29:48,149
+uh through another loop
+so when we compile this program
+
+1592
+00:29:48,149 --> 00:29:48,159
+so when we compile this program
+ 
+
+1593
+00:29:48,159 --> 00:29:50,870
+so when we compile this program
+uh this local memory actually will turn
+
+1594
+00:29:50,870 --> 00:29:50,880
+uh this local memory actually will turn
+ 
+
+1595
+00:29:50,880 --> 00:29:51,830
+uh this local memory actually will turn
+into
+
+1596
+00:29:51,830 --> 00:29:51,840
+into
+ 
+
+1597
+00:29:51,840 --> 00:29:54,149
+into
+registers in a low level com no lab
+
+1598
+00:29:54,149 --> 00:29:54,159
+registers in a low level com no lab
+ 
+
+1599
+00:29:54,159 --> 00:29:56,070
+registers in a low level com no lab
+computation because after we compact
+
+1600
+00:29:56,070 --> 00:29:56,080
+computation because after we compact
+ 
+
+1601
+00:29:56,080 --> 00:29:59,350
+computation because after we compact
+them it's going to become an 8x8 region
+
+1602
+00:29:59,350 --> 00:29:59,360
+them it's going to become an 8x8 region
+ 
+
+1603
+00:29:59,360 --> 00:30:03,990
+them it's going to become an 8x8 region
+that can be transformed onto registers
+
+1604
+00:30:03,990 --> 00:30:04,000
+
+ 
+
+1605
+00:30:04,000 --> 00:30:06,230
+
+okay so one of the things we can go and
+
+1606
+00:30:06,230 --> 00:30:06,240
+okay so one of the things we can go and
+ 
+
+1607
+00:30:06,240 --> 00:30:09,669
+okay so one of the things we can go and
+try out is we can go and try
+
+1608
+00:30:09,669 --> 00:30:09,679
+try out is we can go and try
+ 
+
+1609
+00:30:09,679 --> 00:30:12,230
+try out is we can go and try
+build this particular program
+
+1610
+00:30:12,230 --> 00:30:12,240
+build this particular program
+ 
+
+1611
+00:30:12,240 --> 00:30:15,830
+build this particular program
+and and here i'm trying to allocate the
+
+1612
+00:30:15,830 --> 00:30:15,840
+and and here i'm trying to allocate the
+ 
+
+1613
+00:30:15,840 --> 00:30:16,710
+and and here i'm trying to allocate the
+input
+
+1614
+00:30:16,710 --> 00:30:16,720
+input
+ 
+
+1615
+00:30:16,720 --> 00:30:17,590
+input
+data
+
+1616
+00:30:17,590 --> 00:30:17,600
+data
+ 
+
+1617
+00:30:17,600 --> 00:30:19,750
+data
+and output placeholders and i'm going to
+
+1618
+00:30:19,750 --> 00:30:19,760
+and output placeholders and i'm going to
+ 
+
+1619
+00:30:19,760 --> 00:30:21,510
+and output placeholders and i'm going to
+run what we call tummy evaluation to
+
+1620
+00:30:21,510 --> 00:30:21,520
+run what we call tummy evaluation to
+ 
+
+1621
+00:30:21,520 --> 00:30:22,389
+run what we call tummy evaluation to
+evaluate
+
+1622
+00:30:22,389 --> 00:30:22,399
+evaluate
+ 
+
+1623
+00:30:22,399 --> 00:30:24,230
+evaluate
+the runtimes on this
+
+1624
+00:30:24,230 --> 00:30:24,240
+the runtimes on this
+ 
+
+1625
+00:30:24,240 --> 00:30:26,789
+the runtimes on this
+on this uh device
+
+1626
+00:30:26,789 --> 00:30:26,799
+on this uh device
+ 
+
+1627
+00:30:26,799 --> 00:30:28,950
+on this uh device
+one of the common metrics that we use to
+
+1628
+00:30:28,950 --> 00:30:28,960
+one of the common metrics that we use to
+ 
+
+1629
+00:30:28,960 --> 00:30:31,029
+one of the common metrics that we use to
+measure you know how fast
+
+1630
+00:30:31,029 --> 00:30:31,039
+measure you know how fast
+ 
+
+1631
+00:30:31,039 --> 00:30:32,950
+measure you know how fast
+a program runs actually we can pro we
+
+1632
+00:30:32,950 --> 00:30:32,960
+a program runs actually we can pro we
+ 
+
+1633
+00:30:32,960 --> 00:30:35,510
+a program runs actually we can pro we
+can print now you know the milliseconds
+
+1634
+00:30:35,510 --> 00:30:35,520
+can print now you know the milliseconds
+ 
+
+1635
+00:30:35,520 --> 00:30:38,070
+can print now you know the milliseconds
+another way to to evaluate it is through
+
+1636
+00:30:38,070 --> 00:30:38,080
+another way to to evaluate it is through
+ 
+
+1637
+00:30:38,080 --> 00:30:40,950
+another way to to evaluate it is through
+about what we call a flops matrix
+
+1638
+00:30:40,950 --> 00:30:40,960
+about what we call a flops matrix
+ 
+
+1639
+00:30:40,960 --> 00:30:42,950
+about what we call a flops matrix
+and this flops matrix
+
+1640
+00:30:42,950 --> 00:30:42,960
+and this flops matrix
+ 
+
+1641
+00:30:42,960 --> 00:30:46,310
+and this flops matrix
+matrix uh measures
+
+1642
+00:30:46,310 --> 00:30:46,320
+matrix uh measures
+ 
+
+1643
+00:30:46,320 --> 00:30:49,510
+matrix uh measures
+uh how many floating point operations
+
+1644
+00:30:49,510 --> 00:30:49,520
+uh how many floating point operations
+ 
+
+1645
+00:30:49,520 --> 00:30:53,029
+uh how many floating point operations
+we perform per second so the evaluator
+
+1646
+00:30:53,029 --> 00:30:53,039
+we perform per second so the evaluator
+ 
+
+1647
+00:30:53,039 --> 00:30:54,630
+we perform per second so the evaluator
+will return the
+
+1648
+00:30:54,630 --> 00:30:54,640
+will return the
+ 
+
+1649
+00:30:54,640 --> 00:30:56,149
+will return the
+the time
+
+1650
+00:30:56,149 --> 00:30:56,159
+the time
+ 
+
+1651
+00:30:56,159 --> 00:30:58,230
+the time
+that's um
+
+1652
+00:30:58,230 --> 00:30:58,240
+that's um
+ 
+
+1653
+00:30:58,240 --> 00:30:59,269
+that's um
+that
+
+1654
+00:30:59,269 --> 00:30:59,279
+that
+ 
+
+1655
+00:30:59,279 --> 00:31:01,430
+that
+will return the term
+
+1656
+00:31:01,430 --> 00:31:01,440
+will return the term
+ 
+
+1657
+00:31:01,440 --> 00:31:03,350
+will return the term
+that we take to run this particular
+
+1658
+00:31:03,350 --> 00:31:03,360
+that we take to run this particular
+ 
+
+1659
+00:31:03,360 --> 00:31:04,870
+that we take to run this particular
+computations
+
+1660
+00:31:04,870 --> 00:31:04,880
+computations
+ 
+
+1661
+00:31:04,880 --> 00:31:05,669
+computations
+and
+
+1662
+00:31:05,669 --> 00:31:05,679
+and
+ 
+
+1663
+00:31:05,679 --> 00:31:07,590
+and
+this is a number of protein point
+
+1664
+00:31:07,590 --> 00:31:07,600
+this is a number of protein point
+ 
+
+1665
+00:31:07,600 --> 00:31:09,190
+this is a number of protein point
+operations to perform this major
+
+1666
+00:31:09,190 --> 00:31:09,200
+operations to perform this major
+ 
+
+1667
+00:31:09,200 --> 00:31:10,950
+operations to perform this major
+simplification there's a
+
+1668
+00:31:10,950 --> 00:31:10,960
+simplification there's a
+ 
+
+1669
+00:31:10,960 --> 00:31:12,710
+simplification there's a
+scaling factor of two because you know
+
+1670
+00:31:12,710 --> 00:31:12,720
+scaling factor of two because you know
+ 
+
+1671
+00:31:12,720 --> 00:31:14,549
+scaling factor of two because you know
+the multiplier add actually counts as
+
+1672
+00:31:14,549 --> 00:31:14,559
+the multiplier add actually counts as
+ 
+
+1673
+00:31:14,559 --> 00:31:16,630
+the multiplier add actually counts as
+two floating point operations for most
+
+1674
+00:31:16,630 --> 00:31:16,640
+two floating point operations for most
+ 
+
+1675
+00:31:16,640 --> 00:31:19,750
+two floating point operations for most
+of a convention so if we go and run this
+
+1676
+00:31:19,750 --> 00:31:19,760
+of a convention so if we go and run this
+ 
+
+1677
+00:31:19,760 --> 00:31:21,750
+of a convention so if we go and run this
+you can find that you can get around two
+
+1678
+00:31:21,750 --> 00:31:21,760
+you can find that you can get around two
+ 
+
+1679
+00:31:21,760 --> 00:31:24,070
+you can find that you can get around two
+teraflops of computation which is pretty
+
+1680
+00:31:24,070 --> 00:31:24,080
+teraflops of computation which is pretty
+ 
+
+1681
+00:31:24,080 --> 00:31:26,710
+teraflops of computation which is pretty
+decent actually for our first attempt
+
+1682
+00:31:26,710 --> 00:31:26,720
+decent actually for our first attempt
+ 
+
+1683
+00:31:26,720 --> 00:31:28,630
+decent actually for our first attempt
+uh when i started to try to write gpu
+
+1684
+00:31:28,630 --> 00:31:28,640
+uh when i started to try to write gpu
+ 
+
+1685
+00:31:28,640 --> 00:31:31,190
+uh when i started to try to write gpu
+programs it will go and naively directly
+
+1686
+00:31:31,190 --> 00:31:31,200
+programs it will go and naively directly
+ 
+
+1687
+00:31:31,200 --> 00:31:33,590
+programs it will go and naively directly
+go and map the stress without reduced
+
+1688
+00:31:33,590 --> 00:31:33,600
+go and map the stress without reduced
+ 
+
+1689
+00:31:33,600 --> 00:31:35,190
+go and map the stress without reduced
+time like you are going to get a lower
+
+1690
+00:31:35,190 --> 00:31:35,200
+time like you are going to get a lower
+ 
+
+1691
+00:31:35,200 --> 00:31:37,430
+time like you are going to get a lower
+number okay so now we have talked about
+
+1692
+00:31:37,430 --> 00:31:37,440
+number okay so now we have talked about
+ 
+
+1693
+00:31:37,440 --> 00:31:39,269
+number okay so now we have talked about
+the basic technique let's come back to
+
+1694
+00:31:39,269 --> 00:31:39,279
+the basic technique let's come back to
+ 
+
+1695
+00:31:39,279 --> 00:31:40,950
+the basic technique let's come back to
+another technique called shoot memory
+
+1696
+00:31:40,950 --> 00:31:40,960
+another technique called shoot memory
+ 
+
+1697
+00:31:40,960 --> 00:31:41,990
+another technique called shoot memory
+blocking
+
+1698
+00:31:41,990 --> 00:31:42,000
+blocking
+ 
+
+1699
+00:31:42,000 --> 00:31:43,269
+blocking
+so one of the things that we want to
+
+1700
+00:31:43,269 --> 00:31:43,279
+so one of the things that we want to
+ 
+
+1701
+00:31:43,279 --> 00:31:45,909
+so one of the things that we want to
+notice is that originally if we look at
+
+1702
+00:31:45,909 --> 00:31:45,919
+notice is that originally if we look at
+ 
+
+1703
+00:31:45,919 --> 00:31:47,110
+notice is that originally if we look at
+this
+
+1704
+00:31:47,110 --> 00:31:47,120
+this
+ 
+
+1705
+00:31:47,120 --> 00:31:48,230
+this
+program
+
+1706
+00:31:48,230 --> 00:31:48,240
+program
+ 
+
+1707
+00:31:48,240 --> 00:31:51,750
+program
+we only take um notice of these
+
+1708
+00:31:51,750 --> 00:31:51,760
+we only take um notice of these
+ 
+
+1709
+00:31:51,760 --> 00:31:53,750
+we only take um notice of these
+multi-level threading techniques right
+
+1710
+00:31:53,750 --> 00:31:53,760
+multi-level threading techniques right
+ 
+
+1711
+00:31:53,760 --> 00:31:55,990
+multi-level threading techniques right
+we're only trying to do optimizing
+
+1712
+00:31:55,990 --> 00:31:56,000
+we're only trying to do optimizing
+ 
+
+1713
+00:31:56,000 --> 00:31:58,149
+we're only trying to do optimizing
+within a single thread on the other hand
+
+1714
+00:31:58,149 --> 00:31:58,159
+within a single thread on the other hand
+ 
+
+1715
+00:31:58,159 --> 00:32:00,549
+within a single thread on the other hand
+there's another thing that would really
+
+1716
+00:32:00,549 --> 00:32:00,559
+there's another thing that would really
+ 
+
+1717
+00:32:00,559 --> 00:32:03,990
+there's another thing that would really
+benefit uh in terms of gpu memory is we
+
+1718
+00:32:03,990 --> 00:32:04,000
+benefit uh in terms of gpu memory is we
+ 
+
+1719
+00:32:04,000 --> 00:32:05,830
+benefit uh in terms of gpu memory is we
+want to be able to reuse
+
+1720
+00:32:05,830 --> 00:32:05,840
+want to be able to reuse
+ 
+
+1721
+00:32:05,840 --> 00:32:07,990
+want to be able to reuse
+the common parts that we read from
+
+1722
+00:32:07,990 --> 00:32:08,000
+the common parts that we read from
+ 
+
+1723
+00:32:08,000 --> 00:32:09,029
+the common parts that we read from
+different
+
+1724
+00:32:09,029 --> 00:32:09,039
+different
+ 
+
+1725
+00:32:09,039 --> 00:32:11,269
+different
+um gpu threads within the same spread
+
+1726
+00:32:11,269 --> 00:32:11,279
+um gpu threads within the same spread
+ 
+
+1727
+00:32:11,279 --> 00:32:12,230
+um gpu threads within the same spread
+block
+
+1728
+00:32:12,230 --> 00:32:12,240
+block
+ 
+
+1729
+00:32:12,240 --> 00:32:14,070
+block
+so in here let's assume that each of the
+
+1730
+00:32:14,070 --> 00:32:14,080
+so in here let's assume that each of the
+ 
+
+1731
+00:32:14,080 --> 00:32:16,950
+so in here let's assume that each of the
+tiny blocks here corresponds to
+
+1732
+00:32:16,950 --> 00:32:16,960
+tiny blocks here corresponds to
+ 
+
+1733
+00:32:16,960 --> 00:32:19,990
+tiny blocks here corresponds to
+a gpu strap block uh gpu
+
+1734
+00:32:19,990 --> 00:32:20,000
+a gpu strap block uh gpu
+ 
+
+1735
+00:32:20,000 --> 00:32:21,110
+a gpu strap block uh gpu
+threads
+
+1736
+00:32:21,110 --> 00:32:21,120
+threads
+ 
+
+1737
+00:32:21,120 --> 00:32:23,669
+threads
+that within a sram block
+
+1738
+00:32:23,669 --> 00:32:23,679
+that within a sram block
+ 
+
+1739
+00:32:23,679 --> 00:32:26,710
+that within a sram block
+and we have a l by l actually this 2l
+
+1740
+00:32:26,710 --> 00:32:26,720
+and we have a l by l actually this 2l
+ 
+
+1741
+00:32:26,720 --> 00:32:29,110
+and we have a l by l actually this 2l
+can be different
+
+1742
+00:32:29,110 --> 00:32:29,120
+can be different
+ 
+
+1743
+00:32:29,120 --> 00:32:32,149
+can be different
+threads within that gpu threadblock
+
+1744
+00:32:32,149 --> 00:32:32,159
+threads within that gpu threadblock
+ 
+
+1745
+00:32:32,159 --> 00:32:34,470
+threads within that gpu threadblock
+so in this case in order to compute all
+
+1746
+00:32:34,470 --> 00:32:34,480
+so in this case in order to compute all
+ 
+
+1747
+00:32:34,480 --> 00:32:37,830
+so in this case in order to compute all
+the results in this l by l output
+
+1748
+00:32:37,830 --> 00:32:37,840
+the results in this l by l output
+ 
+
+1749
+00:32:37,840 --> 00:32:39,909
+the results in this l by l output
+we won't need to read in a bigger region
+
+1750
+00:32:39,909 --> 00:32:39,919
+we won't need to read in a bigger region
+ 
+
+1751
+00:32:39,919 --> 00:32:41,590
+we won't need to read in a bigger region
+and you can find it as a commonly used
+
+1752
+00:32:41,590 --> 00:32:41,600
+and you can find it as a commonly used
+ 
+
+1753
+00:32:41,600 --> 00:32:44,070
+and you can find it as a commonly used
+kind of example in this case in order to
+
+1754
+00:32:44,070 --> 00:32:44,080
+kind of example in this case in order to
+ 
+
+1755
+00:32:44,080 --> 00:32:45,669
+kind of example in this case in order to
+read um
+
+1756
+00:32:45,669 --> 00:32:45,679
+read um
+ 
+
+1757
+00:32:45,679 --> 00:32:47,990
+read um
+data for this block we can
+
+1758
+00:32:47,990 --> 00:32:48,000
+data for this block we can
+ 
+
+1759
+00:32:48,000 --> 00:32:49,909
+data for this block we can
+go and get
+
+1760
+00:32:49,909 --> 00:32:49,919
+go and get
+ 
+
+1761
+00:32:49,919 --> 00:32:50,630
+go and get
+the
+
+1762
+00:32:50,630 --> 00:32:50,640
+the
+ 
+
+1763
+00:32:50,640 --> 00:32:53,110
+the
+input data from here and here and then
+
+1764
+00:32:53,110 --> 00:32:53,120
+input data from here and here and then
+ 
+
+1765
+00:32:53,120 --> 00:32:54,710
+input data from here and here and then
+in order to read second block you can
+
+1766
+00:32:54,710 --> 00:32:54,720
+in order to read second block you can
+ 
+
+1767
+00:32:54,720 --> 00:32:56,310
+in order to read second block you can
+find this you still need to read the
+
+1768
+00:32:56,310 --> 00:32:56,320
+find this you still need to read the
+ 
+
+1769
+00:32:56,320 --> 00:32:58,310
+find this you still need to read the
+same region all right so we can try to
+
+1770
+00:32:58,310 --> 00:32:58,320
+same region all right so we can try to
+ 
+
+1771
+00:32:58,320 --> 00:33:00,950
+same region all right so we can try to
+do is we can try to go and fetch this
+
+1772
+00:33:00,950 --> 00:33:00,960
+do is we can try to go and fetch this
+ 
+
+1773
+00:33:00,960 --> 00:33:02,630
+do is we can try to go and fetch this
+true stripe of data
+
+1774
+00:33:02,630 --> 00:33:02,640
+true stripe of data
+ 
+
+1775
+00:33:02,640 --> 00:33:05,669
+true stripe of data
+onto the gpu shared memory and then load
+
+1776
+00:33:05,669 --> 00:33:05,679
+onto the gpu shared memory and then load
+ 
+
+1777
+00:33:05,679 --> 00:33:08,230
+onto the gpu shared memory and then load
+from there to be able to help us reduce
+
+1778
+00:33:08,230 --> 00:33:08,240
+from there to be able to help us reduce
+ 
+
+1779
+00:33:08,240 --> 00:33:10,310
+from there to be able to help us reduce
+the memory pressure
+
+1780
+00:33:10,310 --> 00:33:10,320
+the memory pressure
+ 
+
+1781
+00:33:10,320 --> 00:33:11,830
+the memory pressure
+and this is a technical cooperative
+
+1782
+00:33:11,830 --> 00:33:11,840
+and this is a technical cooperative
+ 
+
+1783
+00:33:11,840 --> 00:33:12,870
+and this is a technical cooperative
+function
+
+1784
+00:33:12,870 --> 00:33:12,880
+function
+ 
+
+1785
+00:33:12,880 --> 00:33:14,710
+function
+and the following transformation help us
+
+1786
+00:33:14,710 --> 00:33:14,720
+and the following transformation help us
+ 
+
+1787
+00:33:14,720 --> 00:33:17,590
+and the following transformation help us
+to do that so it's slightly longer but
+
+1788
+00:33:17,590 --> 00:33:17,600
+to do that so it's slightly longer but
+ 
+
+1789
+00:33:17,600 --> 00:33:19,669
+to do that so it's slightly longer but
+it looks quite similar to the original
+
+1790
+00:33:19,669 --> 00:33:19,679
+it looks quite similar to the original
+ 
+
+1791
+00:33:19,679 --> 00:33:22,870
+it looks quite similar to the original
+key cell program the main difference
+
+1792
+00:33:22,870 --> 00:33:22,880
+key cell program the main difference
+ 
+
+1793
+00:33:22,880 --> 00:33:24,549
+key cell program the main difference
+contains two parts the first part is
+
+1794
+00:33:24,549 --> 00:33:24,559
+contains two parts the first part is
+ 
+
+1795
+00:33:24,559 --> 00:33:26,870
+contains two parts the first part is
+that we go and try to
+
+1796
+00:33:26,870 --> 00:33:26,880
+that we go and try to
+ 
+
+1797
+00:33:26,880 --> 00:33:29,269
+that we go and try to
+fuse um these two threading decks
+
+1798
+00:33:29,269 --> 00:33:29,279
+fuse um these two threading decks
+ 
+
+1799
+00:33:29,279 --> 00:33:31,750
+fuse um these two threading decks
+together and only bind to to one strand
+
+1800
+00:33:31,750 --> 00:33:31,760
+together and only bind to to one strand
+ 
+
+1801
+00:33:31,760 --> 00:33:33,990
+together and only bind to to one strand
+this is just to simplify things so that
+
+1802
+00:33:33,990 --> 00:33:34,000
+this is just to simplify things so that
+ 
+
+1803
+00:33:34,000 --> 00:33:34,870
+this is just to simplify things so that
+you know
+
+1804
+00:33:34,870 --> 00:33:34,880
+you know
+ 
+
+1805
+00:33:34,880 --> 00:33:36,549
+you know
+you can either do two dimensional square
+
+1806
+00:33:36,549 --> 00:33:36,559
+you can either do two dimensional square
+ 
+
+1807
+00:33:36,559 --> 00:33:38,710
+you can either do two dimensional square
+and that's one dimension it's index they
+
+1808
+00:33:38,710 --> 00:33:38,720
+and that's one dimension it's index they
+ 
+
+1809
+00:33:38,720 --> 00:33:40,549
+and that's one dimension it's index they
+are usually equivalent if you feel soon
+
+1810
+00:33:40,549 --> 00:33:40,559
+are usually equivalent if you feel soon
+ 
+
+1811
+00:33:40,559 --> 00:33:42,950
+are usually equivalent if you feel soon
+together effectively you are trying to
+
+1812
+00:33:42,950 --> 00:33:42,960
+together effectively you are trying to
+ 
+
+1813
+00:33:42,960 --> 00:33:44,230
+together effectively you are trying to
+in the in the runtime and you will
+
+1814
+00:33:44,230 --> 00:33:44,240
+in the in the runtime and you will
+ 
+
+1815
+00:33:44,240 --> 00:33:45,990
+in the in the runtime and you will
+decompose the
+
+1816
+00:33:45,990 --> 00:33:46,000
+decompose the
+ 
+
+1817
+00:33:46,000 --> 00:33:47,750
+decompose the
+ones right index using module and
+
+1818
+00:33:47,750 --> 00:33:47,760
+ones right index using module and
+ 
+
+1819
+00:33:47,760 --> 00:33:50,549
+ones right index using module and
+division onto the corresponding
+
+1820
+00:33:50,549 --> 00:33:50,559
+division onto the corresponding
+ 
+
+1821
+00:33:50,559 --> 00:33:52,789
+division onto the corresponding
+two is
+
+1822
+00:33:52,789 --> 00:33:52,799
+two is
+ 
+
+1823
+00:33:52,799 --> 00:33:54,549
+two is
+the second thing we're trying to do is
+
+1824
+00:33:54,549 --> 00:33:54,559
+the second thing we're trying to do is
+ 
+
+1825
+00:33:54,559 --> 00:33:56,389
+the second thing we're trying to do is
+what we call cash reading cooperative
+
+1826
+00:33:56,389 --> 00:33:56,399
+what we call cash reading cooperative
+ 
+
+1827
+00:33:56,399 --> 00:33:59,029
+what we call cash reading cooperative
+fashion so in this case the cash flow
+
+1828
+00:33:59,029 --> 00:33:59,039
+fashion so in this case the cash flow
+ 
+
+1829
+00:33:59,039 --> 00:34:01,509
+fashion so in this case the cash flow
+incorporated fashion will try to go and
+
+1830
+00:34:01,509 --> 00:34:01,519
+incorporated fashion will try to go and
+ 
+
+1831
+00:34:01,519 --> 00:34:03,990
+incorporated fashion will try to go and
+take a block like one point in this case
+
+1832
+00:34:03,990 --> 00:34:04,000
+take a block like one point in this case
+ 
+
+1833
+00:34:04,000 --> 00:34:08,310
+take a block like one point in this case
+originally is a v2c and
+
+1834
+00:34:08,310 --> 00:34:08,320
+originally is a v2c and
+ 
+
+1835
+00:34:08,320 --> 00:34:09,190
+originally is a v2c and
+b
+
+1836
+00:34:09,190 --> 00:34:09,200
+b
+ 
+
+1837
+00:34:09,200 --> 00:34:11,030
+b
+if i'm going to do cash read on a i'm
+
+1838
+00:34:11,030 --> 00:34:11,040
+if i'm going to do cash read on a i'm
+ 
+
+1839
+00:34:11,040 --> 00:34:12,790
+if i'm going to do cash read on a i'm
+going to introduce a stage called a
+
+1840
+00:34:12,790 --> 00:34:12,800
+going to introduce a stage called a
+ 
+
+1841
+00:34:12,800 --> 00:34:13,909
+going to introduce a stage called a
+shirt
+
+1842
+00:34:13,909 --> 00:34:13,919
+shirt
+ 
+
+1843
+00:34:13,919 --> 00:34:16,550
+shirt
+and insert in a bit trim
+
+1844
+00:34:16,550 --> 00:34:16,560
+and insert in a bit trim
+ 
+
+1845
+00:34:16,560 --> 00:34:18,069
+and insert in a bit trim
+and
+
+1846
+00:34:18,069 --> 00:34:18,079
+and
+ 
+
+1847
+00:34:18,079 --> 00:34:20,149
+and
+and remember that you know we still need
+
+1848
+00:34:20,149 --> 00:34:20,159
+and remember that you know we still need
+ 
+
+1849
+00:34:20,159 --> 00:34:23,109
+and remember that you know we still need
+to specify for a shirt how we're going
+
+1850
+00:34:23,109 --> 00:34:23,119
+to specify for a shirt how we're going
+ 
+
+1851
+00:34:23,119 --> 00:34:24,310
+to specify for a shirt how we're going
+to read that
+
+1852
+00:34:24,310 --> 00:34:24,320
+to read that
+ 
+
+1853
+00:34:24,320 --> 00:34:26,069
+to read that
+so what we're going to do is we're going
+
+1854
+00:34:26,069 --> 00:34:26,079
+so what we're going to do is we're going
+ 
+
+1855
+00:34:26,079 --> 00:34:29,349
+so what we're going to do is we're going
+to go and try to first of all find out
+
+1856
+00:34:29,349 --> 00:34:29,359
+to go and try to first of all find out
+ 
+
+1857
+00:34:29,359 --> 00:34:30,389
+to go and try to first of all find out
+the loop
+
+1858
+00:34:30,389 --> 00:34:30,399
+the loop
+ 
+
+1859
+00:34:30,399 --> 00:34:32,869
+the loop
+loops in the reading cache actually and
+
+1860
+00:34:32,869 --> 00:34:32,879
+loops in the reading cache actually and
+ 
+
+1861
+00:34:32,879 --> 00:34:35,430
+loops in the reading cache actually and
+then we're going to fuse the two loops
+
+1862
+00:34:35,430 --> 00:34:35,440
+then we're going to fuse the two loops
+ 
+
+1863
+00:34:35,440 --> 00:34:37,750
+then we're going to fuse the two loops
+together
+
+1864
+00:34:37,750 --> 00:34:37,760
+together
+ 
+
+1865
+00:34:37,760 --> 00:34:40,629
+together
+and then we're going to split it by the
+
+1866
+00:34:40,629 --> 00:34:40,639
+and then we're going to split it by the
+ 
+
+1867
+00:34:40,639 --> 00:34:43,349
+and then we're going to split it by the
+number of number of threads so that you
+
+1868
+00:34:43,349 --> 00:34:43,359
+number of number of threads so that you
+ 
+
+1869
+00:34:43,359 --> 00:34:45,669
+number of number of threads so that you
+can spread it out over the thread in
+
+1870
+00:34:45,669 --> 00:34:45,679
+can spread it out over the thread in
+ 
+
+1871
+00:34:45,679 --> 00:34:48,069
+can spread it out over the thread in
+this case the second iterator is being
+
+1872
+00:34:48,069 --> 00:34:48,079
+this case the second iterator is being
+ 
+
+1873
+00:34:48,079 --> 00:34:49,589
+this case the second iterator is being
+bind as red x
+
+1874
+00:34:49,589 --> 00:34:49,599
+bind as red x
+ 
+
+1875
+00:34:49,599 --> 00:34:51,349
+bind as red x
+and finally actually in this case also
+
+1876
+00:34:51,349 --> 00:34:51,359
+and finally actually in this case also
+ 
+
+1877
+00:34:51,359 --> 00:34:53,669
+and finally actually in this case also
+vectorizing it so that
+
+1878
+00:34:53,669 --> 00:34:53,679
+vectorizing it so that
+ 
+
+1879
+00:34:53,679 --> 00:34:54,950
+vectorizing it so that
+you know
+
+1880
+00:34:54,950 --> 00:34:54,960
+you know
+ 
+
+1881
+00:34:54,960 --> 00:34:57,109
+you know
+this is another optimization that we can
+
+1882
+00:34:57,109 --> 00:34:57,119
+this is another optimization that we can
+ 
+
+1883
+00:34:57,119 --> 00:34:59,190
+this is another optimization that we can
+do so when we are reading from
+
+1884
+00:34:59,190 --> 00:34:59,200
+do so when we are reading from
+ 
+
+1885
+00:34:59,200 --> 00:35:01,750
+do so when we are reading from
+the output memory the global memory onto
+
+1886
+00:35:01,750 --> 00:35:01,760
+the output memory the global memory onto
+ 
+
+1887
+00:35:01,760 --> 00:35:04,710
+the output memory the global memory onto
+gpu memories we can leverage possible
+
+1888
+00:35:04,710 --> 00:35:04,720
+gpu memories we can leverage possible
+ 
+
+1889
+00:35:04,720 --> 00:35:05,829
+gpu memories we can leverage possible
+you know
+
+1890
+00:35:05,829 --> 00:35:05,839
+you know
+ 
+
+1891
+00:35:05,839 --> 00:35:07,990
+you know
+loading several floating points together
+
+1892
+00:35:07,990 --> 00:35:08,000
+loading several floating points together
+ 
+
+1893
+00:35:08,000 --> 00:35:09,589
+loading several floating points together
+if possible
+
+1894
+00:35:09,589 --> 00:35:09,599
+if possible
+ 
+
+1895
+00:35:09,599 --> 00:35:11,670
+if possible
+um if this code is a bit more
+
+1896
+00:35:11,670 --> 00:35:11,680
+um if this code is a bit more
+ 
+
+1897
+00:35:11,680 --> 00:35:13,750
+um if this code is a bit more
+complicated for you you know don't worry
+
+1898
+00:35:13,750 --> 00:35:13,760
+complicated for you you know don't worry
+ 
+
+1899
+00:35:13,760 --> 00:35:15,829
+complicated for you you know don't worry
+too much try and play it with a bit you
+
+1900
+00:35:15,829 --> 00:35:15,839
+too much try and play it with a bit you
+ 
+
+1901
+00:35:15,839 --> 00:35:17,510
+too much try and play it with a bit you
+know remember that every bit of
+
+1902
+00:35:17,510 --> 00:35:17,520
+know remember that every bit of
+ 
+
+1903
+00:35:17,520 --> 00:35:19,910
+know remember that every bit of
+transformation you can will be able to
+
+1904
+00:35:19,910 --> 00:35:19,920
+transformation you can will be able to
+ 
+
+1905
+00:35:19,920 --> 00:35:22,550
+transformation you can will be able to
+use ir module.show to see what are the
+
+1906
+00:35:22,550 --> 00:35:22,560
+use ir module.show to see what are the
+ 
+
+1907
+00:35:22,560 --> 00:35:25,270
+use ir module.show to see what are the
+intermediate results and that might help
+
+1908
+00:35:25,270 --> 00:35:25,280
+intermediate results and that might help
+ 
+
+1909
+00:35:25,280 --> 00:35:27,190
+intermediate results and that might help
+us to incrementally look at you know
+
+1910
+00:35:27,190 --> 00:35:27,200
+us to incrementally look at you know
+ 
+
+1911
+00:35:27,200 --> 00:35:29,430
+us to incrementally look at you know
+what's going on but let's look at the
+
+1912
+00:35:29,430 --> 00:35:29,440
+what's going on but let's look at the
+ 
+
+1913
+00:35:29,440 --> 00:35:31,990
+what's going on but let's look at the
+final results of this assured memory
+
+1914
+00:35:31,990 --> 00:35:32,000
+final results of this assured memory
+ 
+
+1915
+00:35:32,000 --> 00:35:33,670
+final results of this assured memory
+blocking
+
+1916
+00:35:33,670 --> 00:35:33,680
+blocking
+ 
+
+1917
+00:35:33,680 --> 00:35:36,069
+blocking
+and you can find that the main
+
+1918
+00:35:36,069 --> 00:35:36,079
+and you can find that the main
+ 
+
+1919
+00:35:36,079 --> 00:35:39,349
+and you can find that the main
+difference in here is that we have
+
+1920
+00:35:39,349 --> 00:35:39,359
+difference in here is that we have
+ 
+
+1921
+00:35:39,359 --> 00:35:41,750
+difference in here is that we have
+two additional stages
+
+1922
+00:35:41,750 --> 00:35:41,760
+two additional stages
+ 
+
+1923
+00:35:41,760 --> 00:35:42,710
+two additional stages
+that
+
+1924
+00:35:42,710 --> 00:35:42,720
+that
+ 
+
+1925
+00:35:42,720 --> 00:35:45,190
+that
+that help us to go and
+
+1926
+00:35:45,190 --> 00:35:45,200
+that help us to go and
+ 
+
+1927
+00:35:45,200 --> 00:35:47,270
+that help us to go and
+bring in
+
+1928
+00:35:47,270 --> 00:35:47,280
+bring in
+ 
+
+1929
+00:35:47,280 --> 00:35:51,030
+bring in
+data from uh a to a sure then b to b
+
+1930
+00:35:51,030 --> 00:35:51,040
+data from uh a to a sure then b to b
+ 
+
+1931
+00:35:51,040 --> 00:35:51,910
+data from uh a to a sure then b to b
+sure
+
+1932
+00:35:51,910 --> 00:35:51,920
+sure
+ 
+
+1933
+00:35:51,920 --> 00:35:53,349
+sure
+another thing they want to notice is
+
+1934
+00:35:53,349 --> 00:35:53,359
+another thing they want to notice is
+ 
+
+1935
+00:35:53,359 --> 00:35:55,670
+another thing they want to notice is
+that you can find you know
+
+1936
+00:35:55,670 --> 00:35:55,680
+that you can find you know
+ 
+
+1937
+00:35:55,680 --> 00:35:57,430
+that you can find you know
+this loading happens inside the
+
+1938
+00:35:57,430 --> 00:35:57,440
+this loading happens inside the
+ 
+
+1939
+00:35:57,440 --> 00:36:00,470
+this loading happens inside the
+reduction right so so that as we do the
+
+1940
+00:36:00,470 --> 00:36:00,480
+reduction right so so that as we do the
+ 
+
+1941
+00:36:00,480 --> 00:36:02,710
+reduction right so so that as we do the
+reduce we are going to go and read the
+
+1942
+00:36:02,710 --> 00:36:02,720
+reduce we are going to go and read the
+ 
+
+1943
+00:36:02,720 --> 00:36:04,390
+reduce we are going to go and read the
+corresponding data onto those shared
+
+1944
+00:36:04,390 --> 00:36:04,400
+corresponding data onto those shared
+ 
+
+1945
+00:36:04,400 --> 00:36:06,150
+corresponding data onto those shared
+memories
+
+1946
+00:36:06,150 --> 00:36:06,160
+memories
+ 
+
+1947
+00:36:06,160 --> 00:36:07,349
+memories
+and
+
+1948
+00:36:07,349 --> 00:36:07,359
+and
+ 
+
+1949
+00:36:07,359 --> 00:36:09,750
+and
+finally because we are fusing all the
+
+1950
+00:36:09,750 --> 00:36:09,760
+finally because we are fusing all the
+ 
+
+1951
+00:36:09,760 --> 00:36:11,270
+finally because we are fusing all the
+threading this together so we can find
+
+1952
+00:36:11,270 --> 00:36:11,280
+threading this together so we can find
+ 
+
+1953
+00:36:11,280 --> 00:36:12,790
+threading this together so we can find
+there are some modular individual
+
+1954
+00:36:12,790 --> 00:36:12,800
+there are some modular individual
+ 
+
+1955
+00:36:12,800 --> 00:36:15,910
+there are some modular individual
+operations that try to redivide and
+
+1956
+00:36:15,910 --> 00:36:15,920
+operations that try to redivide and
+ 
+
+1957
+00:36:15,920 --> 00:36:19,750
+operations that try to redivide and
+and get all get indices out okay
+
+1958
+00:36:19,750 --> 00:36:19,760
+and get all get indices out okay
+ 
+
+1959
+00:36:19,760 --> 00:36:21,990
+and get all get indices out okay
+so for this particular program if we go
+
+1960
+00:36:21,990 --> 00:36:22,000
+so for this particular program if we go
+ 
+
+1961
+00:36:22,000 --> 00:36:24,230
+so for this particular program if we go
+and view that
+
+1962
+00:36:24,230 --> 00:36:24,240
+and view that
+ 
+
+1963
+00:36:24,240 --> 00:36:26,310
+and view that
+you'll find that actually will get much
+
+1964
+00:36:26,310 --> 00:36:26,320
+you'll find that actually will get much
+ 
+
+1965
+00:36:26,320 --> 00:36:28,150
+you'll find that actually will get much
+better performance right this this
+
+1966
+00:36:28,150 --> 00:36:28,160
+better performance right this this
+ 
+
+1967
+00:36:28,160 --> 00:36:30,390
+better performance right this this
+number is uh at least larger than our
+
+1968
+00:36:30,390 --> 00:36:30,400
+number is uh at least larger than our
+ 
+
+1969
+00:36:30,400 --> 00:36:31,990
+number is uh at least larger than our
+previous level it may not be the best on
+
+1970
+00:36:31,990 --> 00:36:32,000
+previous level it may not be the best on
+ 
+
+1971
+00:36:32,000 --> 00:36:34,310
+previous level it may not be the best on
+this particular gpu but now
+
+1972
+00:36:34,310 --> 00:36:34,320
+this particular gpu but now
+ 
+
+1973
+00:36:34,320 --> 00:36:36,470
+this particular gpu but now
+as a manual attempt these two techniques
+
+1974
+00:36:36,470 --> 00:36:36,480
+as a manual attempt these two techniques
+ 
+
+1975
+00:36:36,480 --> 00:36:38,069
+as a manual attempt these two techniques
+kind of covers a lot of the common
+
+1976
+00:36:38,069 --> 00:36:38,079
+kind of covers a lot of the common
+ 
+
+1977
+00:36:38,079 --> 00:36:42,630
+kind of covers a lot of the common
+techniques that people use to optimize
+
+1978
+00:36:42,630 --> 00:36:42,640
+
+ 
+
+1979
+00:36:42,640 --> 00:36:44,230
+
+optimize the tensile lining algebra
+
+1980
+00:36:44,230 --> 00:36:44,240
+optimize the tensile lining algebra
+ 
+
+1981
+00:36:44,240 --> 00:36:46,550
+optimize the tensile lining algebra
+program more in gpu
+
+1982
+00:36:46,550 --> 00:36:46,560
+program more in gpu
+ 
+
+1983
+00:36:46,560 --> 00:36:48,790
+program more in gpu
+so i've talked about how we can manually
+
+1984
+00:36:48,790 --> 00:36:48,800
+so i've talked about how we can manually
+ 
+
+1985
+00:36:48,800 --> 00:36:51,589
+so i've talked about how we can manually
+write in the transformations on gpu
+
+1986
+00:36:51,589 --> 00:36:51,599
+write in the transformations on gpu
+ 
+
+1987
+00:36:51,599 --> 00:36:53,109
+write in the transformations on gpu
+in the last few lectures we also talked
+
+1988
+00:36:53,109 --> 00:36:53,119
+in the last few lectures we also talked
+ 
+
+1989
+00:36:53,119 --> 00:36:55,030
+in the last few lectures we also talked
+about how we can do automatic program
+
+1990
+00:36:55,030 --> 00:36:55,040
+about how we can do automatic program
+ 
+
+1991
+00:36:55,040 --> 00:36:57,510
+about how we can do automatic program
+program transformation and in this case
+
+1992
+00:36:57,510 --> 00:36:57,520
+program transformation and in this case
+ 
+
+1993
+00:36:57,520 --> 00:36:59,910
+program transformation and in this case
+we can go and do that
+
+1994
+00:36:59,910 --> 00:36:59,920
+we can go and do that
+ 
+
+1995
+00:36:59,920 --> 00:37:02,470
+we can go and do that
+using the meta schedule api so
+
+1996
+00:37:02,470 --> 00:37:02,480
+using the meta schedule api so
+ 
+
+1997
+00:37:02,480 --> 00:37:04,069
+using the meta schedule api so
+in this case we have specified our
+
+1998
+00:37:04,069 --> 00:37:04,079
+in this case we have specified our
+ 
+
+1999
+00:37:04,079 --> 00:37:05,589
+in this case we have specified our
+original workload
+
+2000
+00:37:05,589 --> 00:37:05,599
+original workload
+ 
+
+2001
+00:37:05,599 --> 00:37:07,510
+original workload
+and
+
+2002
+00:37:07,510 --> 00:37:07,520
+and
+ 
+
+2003
+00:37:07,520 --> 00:37:10,550
+and
+and it will run a tuning on a background
+
+2004
+00:37:10,550 --> 00:37:10,560
+and it will run a tuning on a background
+ 
+
+2005
+00:37:10,560 --> 00:37:12,230
+and it will run a tuning on a background
+it can take a while so i'm not going to
+
+2006
+00:37:12,230 --> 00:37:12,240
+it can take a while so i'm not going to
+ 
+
+2007
+00:37:12,240 --> 00:37:14,630
+it can take a while so i'm not going to
+show the final result but you're more
+
+2008
+00:37:14,630 --> 00:37:14,640
+show the final result but you're more
+ 
+
+2009
+00:37:14,640 --> 00:37:17,190
+show the final result but you're more
+than welcome to go and try out this
+
+2010
+00:37:17,190 --> 00:37:17,200
+than welcome to go and try out this
+ 
+
+2011
+00:37:17,200 --> 00:37:19,030
+than welcome to go and try out this
+notebook and see you know what the final
+
+2012
+00:37:19,030 --> 00:37:19,040
+notebook and see you know what the final
+ 
+
+2013
+00:37:19,040 --> 00:37:20,390
+notebook and see you know what the final
+results look like
+
+2014
+00:37:20,390 --> 00:37:20,400
+results look like
+ 
+
+2015
+00:37:20,400 --> 00:37:22,310
+results look like
+usually because we are not selling a
+
+2016
+00:37:22,310 --> 00:37:22,320
+usually because we are not selling a
+ 
+
+2017
+00:37:22,320 --> 00:37:23,910
+usually because we are not selling a
+setting a smaller number of trials so it
+
+2018
+00:37:23,910 --> 00:37:23,920
+setting a smaller number of trials so it
+ 
+
+2019
+00:37:23,920 --> 00:37:26,550
+setting a smaller number of trials so it
+may just be as good as the original menu
+
+2020
+00:37:26,550 --> 00:37:26,560
+may just be as good as the original menu
+ 
+
+2021
+00:37:26,560 --> 00:37:29,750
+may just be as good as the original menu
+version but it's a but you know
+
+2022
+00:37:29,750 --> 00:37:29,760
+version but it's a but you know
+ 
+
+2023
+00:37:29,760 --> 00:37:32,069
+version but it's a but you know
+the takeaway is that it helps you to go
+
+2024
+00:37:32,069 --> 00:37:32,079
+the takeaway is that it helps you to go
+ 
+
+2025
+00:37:32,079 --> 00:37:35,349
+the takeaway is that it helps you to go
+and find out um a possible optimized
+
+2026
+00:37:35,349 --> 00:37:35,359
+and find out um a possible optimized
+ 
+
+2027
+00:37:35,359 --> 00:37:36,950
+and find out um a possible optimized
+kernel using the techniques that we
+
+2028
+00:37:36,950 --> 00:37:36,960
+kernel using the techniques that we
+ 
+
+2029
+00:37:36,960 --> 00:37:39,829
+kernel using the techniques that we
+introduced uh just in the in the past
+
+2030
+00:37:39,829 --> 00:37:39,839
+introduced uh just in the in the past
+ 
+
+2031
+00:37:39,839 --> 00:37:41,430
+introduced uh just in the in the past
+few steps
+
+2032
+00:37:41,430 --> 00:37:41,440
+few steps
+ 
+
+2033
+00:37:41,440 --> 00:37:43,030
+few steps
+okay
+
+2034
+00:37:43,030 --> 00:37:43,040
+okay
+ 
+
+2035
+00:37:43,040 --> 00:37:45,109
+okay
+okay so to summarize
+
+2036
+00:37:45,109 --> 00:37:45,119
+okay so to summarize
+ 
+
+2037
+00:37:45,119 --> 00:37:47,670
+okay so to summarize
+today we started another axis of ml
+
+2038
+00:37:47,670 --> 00:37:47,680
+today we started another axis of ml
+ 
+
+2039
+00:37:47,680 --> 00:37:49,990
+today we started another axis of ml
+series up until now we talk about you
+
+2040
+00:37:49,990 --> 00:37:50,000
+series up until now we talk about you
+ 
+
+2041
+00:37:50,000 --> 00:37:52,870
+series up until now we talk about you
+know how do we take models on to from
+
+2042
+00:37:52,870 --> 00:37:52,880
+know how do we take models on to from
+ 
+
+2043
+00:37:52,880 --> 00:37:54,630
+know how do we take models on to from
+machine learning frameworks onto an ir
+
+2044
+00:37:54,630 --> 00:37:54,640
+machine learning frameworks onto an ir
+ 
+
+2045
+00:37:54,640 --> 00:37:57,990
+machine learning frameworks onto an ir
+module how do we go and transform them
+
+2046
+00:37:57,990 --> 00:37:58,000
+module how do we go and transform them
+ 
+
+2047
+00:37:58,000 --> 00:37:58,950
+module how do we go and transform them
+and
+
+2048
+00:37:58,950 --> 00:37:58,960
+and
+ 
+
+2049
+00:37:58,960 --> 00:38:01,270
+and
+but most of example so far only focuses
+
+2050
+00:38:01,270 --> 00:38:01,280
+but most of example so far only focuses
+ 
+
+2051
+00:38:01,280 --> 00:38:04,390
+but most of example so far only focuses
+on the local cpus that we have on the
+
+2052
+00:38:04,390 --> 00:38:04,400
+on the local cpus that we have on the
+ 
+
+2053
+00:38:04,400 --> 00:38:05,510
+on the local cpus that we have on the
+notebook
+
+2054
+00:38:05,510 --> 00:38:05,520
+notebook
+ 
+
+2055
+00:38:05,520 --> 00:38:07,190
+notebook
+in this particular case
+
+2056
+00:38:07,190 --> 00:38:07,200
+in this particular case
+ 
+
+2057
+00:38:07,200 --> 00:38:10,069
+in this particular case
+uh we we switched here to look at the
+
+2058
+00:38:10,069 --> 00:38:10,079
+uh we we switched here to look at the
+ 
+
+2059
+00:38:10,079 --> 00:38:11,990
+uh we we switched here to look at the
+new hardware acceleration in this case
+
+2060
+00:38:11,990 --> 00:38:12,000
+new hardware acceleration in this case
+ 
+
+2061
+00:38:12,000 --> 00:38:13,670
+new hardware acceleration in this case
+you know a gpu
+
+2062
+00:38:13,670 --> 00:38:13,680
+you know a gpu
+ 
+
+2063
+00:38:13,680 --> 00:38:15,829
+you know a gpu
+and modern gpus are becoming more and
+
+2064
+00:38:15,829 --> 00:38:15,839
+and modern gpus are becoming more and
+ 
+
+2065
+00:38:15,839 --> 00:38:18,310
+and modern gpus are becoming more and
+more complicated so you know be beside
+
+2066
+00:38:18,310 --> 00:38:18,320
+more complicated so you know be beside
+ 
+
+2067
+00:38:18,320 --> 00:38:21,109
+more complicated so you know be beside
+the normal threat and shield memories
+
+2068
+00:38:21,109 --> 00:38:21,119
+the normal threat and shield memories
+ 
+
+2069
+00:38:21,119 --> 00:38:22,630
+the normal threat and shield memories
+there are additional concepts like
+
+2070
+00:38:22,630 --> 00:38:22,640
+there are additional concepts like
+ 
+
+2071
+00:38:22,640 --> 00:38:24,630
+there are additional concepts like
+cancer cause and specialized computing
+
+2072
+00:38:24,630 --> 00:38:24,640
+cancer cause and specialized computing
+ 
+
+2073
+00:38:24,640 --> 00:38:26,390
+cancer cause and specialized computing
+unit that we're going to touch in the in
+
+2074
+00:38:26,390 --> 00:38:26,400
+unit that we're going to touch in the in
+ 
+
+2075
+00:38:26,400 --> 00:38:28,310
+unit that we're going to touch in the in
+the incoming lectures
+
+2076
+00:38:28,310 --> 00:38:28,320
+the incoming lectures
+ 
+
+2077
+00:38:28,320 --> 00:38:29,670
+the incoming lectures
+and uh
+
+2078
+00:38:29,670 --> 00:38:29,680
+and uh
+ 
+
+2079
+00:38:29,680 --> 00:38:32,150
+and uh
+they are and you know depending on which
+
+2080
+00:38:32,150 --> 00:38:32,160
+they are and you know depending on which
+ 
+
+2081
+00:38:32,160 --> 00:38:34,310
+they are and you know depending on which
+gpu environment where i use a machining
+
+2082
+00:38:34,310 --> 00:38:34,320
+gpu environment where i use a machining
+ 
+
+2083
+00:38:34,320 --> 00:38:35,829
+gpu environment where i use a machining
+compilation processor can help us to
+
+2084
+00:38:35,829 --> 00:38:35,839
+compilation processor can help us to
+ 
+
+2085
+00:38:35,839 --> 00:38:38,550
+compilation processor can help us to
+bridge that gap by bringing input input
+
+2086
+00:38:38,550 --> 00:38:38,560
+bridge that gap by bringing input input
+ 
+
+2087
+00:38:38,560 --> 00:38:40,950
+bridge that gap by bringing input input
+models and try to target different gpu
+
+2088
+00:38:40,950 --> 00:38:40,960
+models and try to target different gpu
+ 
+
+2089
+00:38:40,960 --> 00:38:43,589
+models and try to target different gpu
+program models and environments
+
+2090
+00:38:43,589 --> 00:38:43,599
+program models and environments
+ 
+
+2091
+00:38:43,599 --> 00:38:45,190
+program models and environments
+we'll visit more highway specialization
+
+2092
+00:38:45,190 --> 00:38:45,200
+we'll visit more highway specialization
+ 
+
+2093
+00:38:45,200 --> 00:38:46,710
+we'll visit more highway specialization
+topics in the future
+
+2094
+00:38:46,710 --> 00:38:46,720
+topics in the future
+ 
+
+2095
+00:38:46,720 --> 00:38:48,630
+topics in the future
+and you know you're more than welcome to
+
+2096
+00:38:48,630 --> 00:38:48,640
+and you know you're more than welcome to
+ 
+
+2097
+00:38:48,640 --> 00:38:50,950
+and you know you're more than welcome to
+check out this notebook and play with it
+
+2098
+00:38:50,950 --> 00:38:50,960
+check out this notebook and play with it
+ 
+
+2099
+00:38:50,960 --> 00:38:53,190
+check out this notebook and play with it
+and thanks folks this is the
+
+2100
+00:38:53,190 --> 00:38:53,200
+and thanks folks this is the
+ 
+
+2101
+00:38:53,200 --> 00:38:55,990
+and thanks folks this is the
+end of the part one and today's lecture
+
+2102
+00:38:55,990 --> 00:38:56,000
+end of the part one and today's lecture
+ 
+
+2103
+00:38:56,000 --> 00:38:57,750
+end of the part one and today's lecture
+and i will see you folks next week for
+
+2104
+00:38:57,750 --> 00:38:57,760
+and i will see you folks next week for
+ 
+
+2105
+00:38:57,760 --> 00:39:00,230
+and i will see you folks next week for
+the part two of gpu and power
+
+2106
+00:39:00,230 --> 00:39:00,240
+the part two of gpu and power
+ 
+
+2107
+00:39:00,240 --> 00:39:03,240
+the part two of gpu and power
+acceleration
+

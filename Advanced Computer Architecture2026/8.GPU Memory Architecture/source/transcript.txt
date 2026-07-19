@@ -1,0 +1,1582 @@
+[00:00:00] Okay, so we spent three lectures talking
+[00:00:02] about GPU GPU architecture. It should be
+[00:00:05] lecture eight. Forgot to update the le
+[00:00:07] number again. Um, so this is GPU
+[00:00:10] architecture 4. I I remember to update
+[00:00:12] the GPU architecture 4, but I forgot to
+[00:00:15] update the lecture five. So, uh, this is
+[00:00:17] the fourth lecture for GP architecture
+[00:00:19] and this is the last one. So, let's give
+[00:00:21] a quick review for what happened in the
+[00:00:24] previous slides
+[00:00:26] in the previous lectures. So we talk
+[00:00:29] about GPU architecture then there are a
+[00:00:31] few key aspect that you need to
+[00:00:33] remember. So first thing is uh the CU
+[00:00:38] contains CP AC and GPU contains CP AC
+[00:00:43] and CU right CU or CUS are the cores of
+[00:00:46] the GPU is where the instructions are
+[00:00:49] executed and there is a process of
+[00:00:52] dispatching the kernels
+[00:00:54] into the computer unit and it's actually
+[00:00:58] the unit that is dispatching is the
+[00:01:00] blocks. So we dispatch the blocks into
+[00:01:03] the computer unit. Then one block can
+[00:01:06] only exist in one one block. All the
+[00:01:10] threads in one block must be executed in
+[00:01:13] one CU. But one CU can execute many
+[00:01:16] blocks at the same time. Then it can be
+[00:01:20] as small as one and can be as large as
+[00:01:23] 40 if we use the number of AMD um
+[00:01:26] parameters.
+[00:01:28] Okay. So there are a few limiting factor
+[00:01:31] that decides what can uh how many blocks
+[00:01:35] can be dispatched or how many words that
+[00:01:37] can be dispatched into one CU. So by the
+[00:01:40] way if we want to dispatch the words a
+[00:01:43] block to a CU all the words have to go
+[00:01:46] there. It cannot say I can hold two
+[00:01:48] words but I cannot hold two other words.
+[00:01:50] In that case the whole block cannot go.
+[00:01:53] Okay. So in this case uh there are four
+[00:01:58] parameters or four conditions that
+[00:02:00] decide if a block can go or not. Then
+[00:02:03] it's wayfront slot
+[00:02:05] scalar registers vector registers they
+[00:02:08] are allocated similarly to the mylo
+[00:02:11] process. It depends on if you have the
+[00:02:13] resources or not. The shared memory is
+[00:02:15] also a memory allocation process. Okay.
+[00:02:18] Then the wavefront slot is a fixed
+[00:02:20] number uh is the fixed
+[00:02:24] uh number of works or wave fronts that
+[00:02:27] the CU can handle.
+[00:02:30] Then we talk about the internal
+[00:02:32] architecture of a computer unit. So here
+[00:02:35] the most important part is the issuing
+[00:02:38] process. Then there are 40 wayfront or
+[00:02:42] 40 works sitting there to be scheduled.
+[00:02:44] 40 instructions that you can schedule
+[00:02:47] right. So which one can go? Then they
+[00:02:49] must follow a rule. Then in each cycle
+[00:02:54] we can issue five we can issue up to
+[00:02:56] five work level instructions in every
+[00:02:58] cycle. Now what's the rule? They must
+[00:03:01] come from one way from two. This is
+[00:03:04] something that we didn't say when we
+[00:03:06] first introduce the issue state because
+[00:03:08] we haven't talked about the same thing
+[00:03:10] there. Right? But since this time since
+[00:03:12] we talk about the execution of the CMD
+[00:03:14] we know like the first cycle we issue
+[00:03:18] from wayfront one and issue to 7D1.
+[00:03:21] Second cycle way from two issue to 72.
+[00:03:24] Okay means in each cycle we must select
+[00:03:28] up to five warp level instructions from
+[00:03:31] one way pool.
+[00:03:33] They must not running one instruction
+[00:03:36] instruction. So if one work is already
+[00:03:39] running one instruction then we cannot
+[00:03:41] issue it. This is a prevention that we
+[00:03:44] want to prevent header. We don't want
+[00:03:46] GPU to have super complex circuit to
+[00:03:49] deal with hater ordering. We only want
+[00:03:53] to allocate all the resources into cmds
+[00:03:56] in the alus so that the computing power
+[00:03:58] is super high. Right now we must not go
+[00:04:01] into one pipeline unit. For example, if
+[00:04:03] there are two words that both wants to
+[00:04:06] go to LDS for example or VLU, they
+[00:04:08] cannot go together because they have
+[00:04:10] conflict. One unit can only exclude one
+[00:04:13] instruction at a time. So this is the
+[00:04:15] issue rule of the GPU.
+[00:04:20] Then uh the TPU
+[00:04:23] mainly rely on thread level parallelism
+[00:04:26] like remember last time last time we
+[00:04:28] talked about parallelism. We have data
+[00:04:30] level parism, thread level parism or
+[00:04:31] instruction level parism. So GPU rely on
+[00:04:34] both data level parism and thread level
+[00:04:36] parallelism. Right? So there are many
+[00:04:38] many threads waiting there so that if
+[00:04:40] one thread got stuck when it's accessing
+[00:04:43] memory the other thread can go with
+[00:04:45] doing real calculation.
+[00:04:50] Then uh we also talk about internal
+[00:04:53] structure of the SMD unit. Then for we
+[00:04:56] focus on single precision unit. Then for
+[00:04:58] most common setup there are 16 lengths
+[00:05:01] of single precision unit. That means
+[00:05:03] there are 16 groups of ALUS that can
+[00:05:06] process 16 calculation or 16 instruction
+[00:05:10] level 16 thread level instruction in one
+[00:05:15] in every cycle at the same time. Okay,
+[00:05:18] this is a typical parameter for CMD CMDL
+[00:05:21] use. Then like recently floating point
+[00:05:24] like lower precision floating point is
+[00:05:27] popular. So modern GPUs typically has
+[00:05:30] have 32 lengths for half precision. Then
+[00:05:34] probably even more for 8 bit
+[00:05:36] floatingoint numbers. Then if you are
+[00:05:38] talking about double precision it really
+[00:05:40] depends on the market and that this GPU
+[00:05:43] is targeting at. If it's graphics
+[00:05:45] oriented probably they have they have
+[00:05:47] zero lengths for double precision. They
+[00:05:51] just refuse to execute. If you really
+[00:05:52] want to execute,
+[00:05:54] they either takes a very very long time
+[00:05:56] to use single precision to approximate
+[00:05:59] or they just directly refuse to execute
+[00:06:02] and return an error. So either way can
+[00:06:04] happen. Uh so even for higher end GPUs
+[00:06:10] um it's typically 2:1 ratio that's eight
+[00:06:13] uh eight lanes for double precision. Now
+[00:06:16] but like today since machine learning is
+[00:06:20] getting more popular they kind of prefer
+[00:06:24] to add more resources for lower
+[00:06:25] precision rather than high precision um
+[00:06:28] unit. So more common parameter is two
+[00:06:31] lines for double precision. Then you can
+[00:06:34] do a calculation for a double precision
+[00:06:35] operation. Then what's the throughput?
+[00:06:38] Then the throughput is two thread level
+[00:06:41] instructions per
+[00:06:44] cycle for that case. Right. So that's
+[00:06:47] actually very slow and uh it's much much
+[00:06:50] slower than
+[00:06:53] um single precision calculation.
+[00:06:58] Okay. Then also last time we used the R9
+[00:07:00] nano GPU as an example to do this
+[00:07:02] calculation. So there are three
+[00:07:04] different questions. They're related but
+[00:07:06] slightly different. How many threads
+[00:07:08] that the GPU can run concurrently? Then
+[00:07:11] how many instructions a GPU can complete
+[00:07:14] per cycle and how many operations a GPU
+[00:07:17] can complete per cycle
+[00:07:20] per second.
+[00:07:22] Then we get we calculate these three
+[00:07:24] these uh three numbers. So I want you to
+[00:07:27] be able to calculate a similar number.
+[00:07:30] If I give you a different parameter set
+[00:07:32] then
+[00:07:34] uh you
+[00:07:36] you should also know how this parameter
+[00:07:39] and these parameters are different. this
+[00:07:41] calculation. These two are more closely
+[00:07:43] related but the first one is totally
+[00:07:45] different.
+[00:07:48] The first one how many th can run
+[00:07:51] concurrently is how many th are waiting
+[00:07:54] there just staying there to be scheduled
+[00:07:56] and the second one is the computational
+[00:07:59] throughput is how many results in theory
+[00:08:01] that a GPU can really um return. So if
+[00:08:05] you want to know how powerful a GPU is
+[00:08:08] and if you only want to use one
+[00:08:11] parameter to decide if this is the GPU
+[00:08:13] right for you then use the number of
+[00:08:15] teraflops.
+[00:08:18] Yes
+[00:08:20] point operation per second. Okay so this
+[00:08:23] one is 8.19 then there are some higher
+[00:08:26] end 16 uh or 20 or 30 teraflops today.
+[00:08:33] Okay. So we're basically done with the
+[00:08:38] compute part. So we know how the
+[00:08:40] instructions are being computed. Then
+[00:08:42] today we're mainly going to focus on the
+[00:08:44] memory interface and how the GPU memory
+[00:08:47] works. Okay, let's start with memory
+[00:08:49] interface.
+[00:08:51] Then last time we say a CU has three
+[00:08:54] memory interfaces. You need to
+[00:08:56] communicate with three piece of memory.
+[00:08:58] The instruction memory and the vector
+[00:09:00] memory and the scalar memory. So as we
+[00:09:03] talked before
+[00:09:06] there are 16 in 16 lanes because we're
+[00:09:10] mainly talking about vector memory unit
+[00:09:12] right so
+[00:09:15] not 16 there are 64 threads there there
+[00:09:18] are 64 thread that means if we execute
+[00:09:21] one load or store instruction
+[00:09:24] load means bring data from memory to
+[00:09:26] register store means writing the
+[00:09:29] register to the memory so if execute one
+[00:09:32] load or one store instruction is not
+[00:09:34] only storing or loading one piece of
+[00:09:36] data it's loading or storing 64 piece of
+[00:09:39] data right
+[00:09:42] so that means to execute one instruction
+[00:09:45] we actually generate 64
+[00:09:48] piece of addresses
+[00:09:50] and think about the memory bandwidth
+[00:09:52] that is required at here and that's a
+[00:09:54] huge one but a very common pattern is
+[00:09:59] these addresses that the adjacent thread
+[00:10:02] are executing are not independent from
+[00:10:05] each other. They're likely to be
+[00:10:06] related. If they are processing close by
+[00:10:11] data, there's a certain pattern of
+[00:10:13] locality.
+[00:10:15] Okay. Then later on we'll talk about
+[00:10:17] this word locality in more detail when
+[00:10:20] we talk about caches. But here we're
+[00:10:22] talking about adjacent threat accessing
+[00:10:25] close by data. So we don't want to issue
+[00:10:28] 64 memory transactions to a vector
+[00:10:31] memory. Now what do we do?
+[00:10:35] We have one terminology called memory
+[00:10:38] coaling. Okay, this is a rarely used
+[00:10:41] word that sometimes speller spell spell
+[00:10:45] checker may think this is a wrong
+[00:10:46] spelling word but coalesing means we
+[00:10:49] want to combine
+[00:10:52] memory transactions into fewer memory
+[00:10:55] transactions so that they can be
+[00:10:57] combined and eventually we issue fewer
+[00:11:00] um
+[00:11:02] memory transactions.
+[00:11:04] So how we can do that? We need to look
+[00:11:07] at the interface here.
+[00:11:09] So what do we do? What's the interface
+[00:11:12] between the memory vector memory and the
+[00:11:15] computer unit? It's not a single wire
+[00:11:17] but it's a wire of a certain width. So
+[00:11:20] once we want to issue an address, we say
+[00:11:23] we want to read this piece of data and
+[00:11:25] we send the address to the vector
+[00:11:28] memory, right? Then the vector memory
+[00:11:30] will not only return a bite to us and
+[00:11:33] typically we even don't need to specify
+[00:11:35] how many bytes we want to read. So when
+[00:11:38] we send the rest send a read request to
+[00:11:41] the vector memory it will immediately
+[00:11:43] return either 32 by of data 64 by data
+[00:11:46] or 128 by data. Okay.
+[00:11:50] So that's because there are so many
+[00:11:53] that's the number of wires that is put
+[00:11:57] between the vector memory and the
+[00:12:00] computer unit. Think about this number.
+[00:12:03] It's actually a quite large number of
+[00:12:05] wires, right? So it's one more than
+[00:12:08] 1,000 wires just next to each other to
+[00:12:11] hide the data from the vector memory to
+[00:12:13] the computer unit. We don't want to
+[00:12:16] select we just want to get say oh they
+[00:12:18] send me all the data I may need to use
+[00:12:21] it later.
+[00:12:22] So in fact when we send an address to
+[00:12:26] the destination we typically don't even
+[00:12:28] send the whole address.
+[00:12:31] Okay. So we can have an estimation how
+[00:12:35] many
+[00:12:37] bit that we send to the vector memory.
+[00:12:42] What's then how wide the address is?
+[00:12:50] Yeah. How wide is address? Eight by
+[00:12:53] right. So typically when we're saying
+[00:12:55] address is 8 byt so 64 bit right.
+[00:13:03] So address is 64
+[00:13:06] bit.
+[00:13:12] However, there's some part of this
+[00:13:14] address is not useful. Think about 64
+[00:13:17] bit. How large the memory can be and do
+[00:13:20] we really have that large memory?
+[00:13:22] Typically no, right? We don't really
+[00:13:24] have that large memory. So
+[00:13:27] this 64 bit can represent 2 to the^ 64
+[00:13:31] this large memory and 2 to the^ of 30 is
+[00:13:35] DB
+[00:13:36] 40 is TB
+[00:13:39] 50 is
+[00:13:42] pabyte
+[00:13:45] 2 to 60 is datab right
+[00:13:50] I'm not even sure about this term here
+[00:13:53] so because this so rarely used 6460. So
+[00:13:57] we don't really have that large of
+[00:13:59] memory. So what is a reasonable size of
+[00:14:01] memory? So probably at most 40 to 50
+[00:14:06] level, right? So TPUs vendors typically
+[00:14:10] actually do not use that wide memory.
+[00:14:12] They use two they use 48 bit or
+[00:14:16] sometimes even 40 bit memory address
+[00:14:20] between the CU and the vector memory. So
+[00:14:23] that we have a large address but the
+[00:14:26] higher bits are just discarded. We don't
+[00:14:28] consider those part those part are
+[00:14:29] always zero. So we don't need to
+[00:14:31] transfer them. Every bit that transfers
+[00:14:33] on the wire will consume energy and we
+[00:14:35] want to save those energy.
+[00:14:38] Okay. So two to power of 28 then still
+[00:14:43] two to the power of 48. Let's assume 48
+[00:14:46] bit actual addresses.
+[00:14:49] Now if we want to get 64
+[00:14:52] byt
+[00:14:54] data always as a unit we need to send 48
+[00:14:58] bit address.
+[00:15:07] Okay. So one zero or one this is
+[00:15:11] specifies one by
+[00:15:14] two two digit that's two bytes right
+[00:15:18] three that's four by
+[00:15:21] right so if we want always want to get
+[00:15:25] 64
+[00:15:27] byt data we don't really need the
+[00:15:31] address that is specifying which bite
+[00:15:34] within this 64 that we need to access
+[00:15:40] right so let's say this is 8
+[00:15:44] 16
+[00:15:46] 32
+[00:15:48] and 64
+[00:15:50] so and so on right so we can remove all
+[00:15:54] these six zeros there
+[00:15:59] because we don't care
+[00:16:01] which bite within this 64 byt we're
+[00:16:04] actually accessing right we only need to
+[00:16:07] specify which group of 64 byt we're
+[00:16:10] accessing. So then we can reduce to two
+[00:16:14] to the power of 42
+[00:16:18] only 42 bit of data that is good enough
+[00:16:21] to send from the CU to the memory
+[00:16:24] interface.
+[00:16:27] You okay with this calculation?
+[00:16:34] But we don't need to
+[00:16:37] care about which exact bite that we're
+[00:16:40] accessing with within this war bite.
+[00:16:44] So we can just remove them.
+[00:16:49] Okay.
+[00:17:00] So
+[00:17:03] 42 bit of memory interface
+[00:17:06] um for the addressing and once we send
+[00:17:09] the address in there then it will return
+[00:17:11] the data probably a few bytes later
+[00:17:13] hopefully a few a few cycles later.
+[00:17:17] Okay. Then if we want to access 64 byt
+[00:17:20] then what typically this thread each
+[00:17:23] thread may access four by of data 8 by
+[00:17:26] of data or at most 16 16 byt of data no
+[00:17:29] more than that right in this case we
+[00:17:33] waste the resources.
+[00:17:35] So what we do here is basically we just
+[00:17:40] consider this is a group of 64 byt
+[00:17:44] right? We call this we typically call
+[00:17:46] this cache line. It can be slightly
+[00:17:48] different but let's just make it simple.
+[00:17:50] This is one cache line right? What is a
+[00:17:52] cach line? It's the unit of data that is
+[00:17:55] always transferred between the vector
+[00:17:57] memory and the core.
+[00:18:00] Okay. Every time we send a piece of we
+[00:18:02] send a request we get one cache line
+[00:18:05] back and that's 64 byt. I just use
+[00:18:08] number 64. So this is 64 byt. the 64 byt
+[00:18:11] and 64 by right. So we only need to
+[00:18:15] consider
+[00:18:18] which catch lines is being touched by
+[00:18:22] these 64 threads there. Right? So
+[00:18:26] sometimes it can catch can touch 64
+[00:18:29] different
+[00:18:31] um it can touch 64 different catch
+[00:18:35] lines. They're totally accessing very
+[00:18:37] random addresses. That means they're
+[00:18:39] just accessing the whole memory,
+[00:18:41] accessing anywhere. Then there's there's
+[00:18:44] totally no not collizable,
+[00:18:47] right? But sometimes in the best case
+[00:18:50] they can just be accessing one piece of
+[00:18:52] data, one cach line that can happen.
+[00:18:55] Then in that case, we can only send one
+[00:18:57] transaction,
+[00:18:59] one request to the memory system. In
+[00:19:01] this particular diagram, we're reducing
+[00:19:04] 64 transactions down to three
+[00:19:07] transactions.
+[00:19:08] Okay, that can save a lot of energy and
+[00:19:11] a lot of time to get the data from the
+[00:19:13] vector memory. Okay, we reduce the
+[00:19:16] number of transactions because they're
+[00:19:18] only touching a certain number of hash
+[00:19:20] lines.
+[00:19:23] And this whole process is called memory
+[00:19:26] coaling is to combine the memory access
+[00:19:30] that the cash lines that is touch.
+[00:19:33] is the coraling process that they used
+[00:19:36] in GPUs.
+[00:19:42] Okay. So what's the implication? Why we
+[00:19:45] need to care about this?
+[00:19:47] Let's consider a matrix
+[00:19:51] access data. Then when you write a CPU
+[00:19:54] code, then you want to traverse a
+[00:19:57] matrix. It doesn't really matter a lot
+[00:20:00] if you traverse in this way or this way
+[00:20:03] because you just access like 1024 for
+[00:20:06] example that amount of data that piece
+[00:20:08] of data that number of floating point
+[00:20:11] numbers right but for GPU that matters a
+[00:20:14] lot if you consider each row it's 1024
+[00:20:18] okay 1024 elements that's 4 kilobyte
+[00:20:24] 4 kilobyte per row if you're accessing
+[00:20:26] it this way right one Thread two, thread
+[00:20:28] four, three, thread four, right? They
+[00:20:31] are colexible and they are perfectly
+[00:20:34] colexible because the data you are
+[00:20:35] accessing is adjacent to each other.
+[00:20:41] That means we need to send very few
+[00:20:43] transactions
+[00:20:45] to the memory system.
+[00:20:47] If we accessing data in this way
+[00:20:49] horizontally,
+[00:20:52] then consider this way. We thread one
+[00:20:55] access this piece of data. Thread two
+[00:20:57] access this piece of it. Thread three,
+[00:20:59] thread four.
+[00:21:01] Address zero, address 4K, address 8K,
+[00:21:04] address 12K.
+[00:21:06] Definitely they're touching different
+[00:21:08] cach lines and they're not only
+[00:21:10] accessing different cachines, they're
+[00:21:12] accessing different pages.
+[00:21:14] That means they're not collapsible.
+[00:21:18] That collapsible means we're sending 64
+[00:21:21] transactions. And for every transaction
+[00:21:24] although we only need four by of data
+[00:21:27] we're actually getting 64 byt of data.
+[00:21:30] Okay. So in GPU it's strongly preferred
+[00:21:35] we access data in this way rather than
+[00:21:37] this way.
+[00:21:39] Okay. So optimiz optimization how we can
+[00:21:44] do this then
+[00:21:48] we need to carefully consider the data
+[00:21:50] layout
+[00:21:51] right. So if you have a memory if you
+[00:21:54] have a matrix multiplication just let's
+[00:21:56] consider matrix multiplication you have
+[00:21:58] one matrix that is natural just access
+[00:22:00] data this way but the other matrix you
+[00:22:03] have to access this data this way
+[00:22:06] horizontally right this one multiply by
+[00:22:08] this one this one multiply by this one
+[00:22:10] can accumulate together so what you can
+[00:22:12] do is pre transform this matrix
+[00:22:18] then it can get higher performance
+[00:22:21] Okay, another wave very common way is
+[00:22:25] called tiling. What is tiling is
+[00:22:27] basically load a small piece of data
+[00:22:29] maybe 4x4 or 16 by 16 a small pile of
+[00:22:32] data load another small pile of data
+[00:22:35] load in a coal way load data and store
+[00:22:39] it in the memory part that's called lo
+[00:22:42] local data share we call about LDS right
+[00:22:45] we load the data from the memory to
+[00:22:46] local data share in a collable way but
+[00:22:49] local data share is super fast so we can
+[00:22:52] do all the calculation with that tow
+[00:22:54] then stored then then discard the data
+[00:22:57] from LDS and load another batch. In this
+[00:23:00] way, we lower data in a collable way for
+[00:23:04] both matrices. Then we can still get um
+[00:23:07] reasonable performance. Okay, we avoid
+[00:23:10] nonolable load. NOS collable load is
+[00:23:16] a a huge performance damage that you
+[00:23:20] will have really low performance if you
+[00:23:22] do not call load. videos are designed
+[00:23:25] for coal load. So be careful about the
+[00:23:28] data that you load and also that decides
+[00:23:31] for vector for matrix access it's very
+[00:23:35] likely that you can get really fast
+[00:23:37] access right but for some irregular
+[00:23:40] program like graph processing that's
+[00:23:42] hard to proc hard to determine that
+[00:23:45] which part that the graph you're
+[00:23:47] accessing you may just jump to a very
+[00:23:49] far location then for a graph processing
+[00:23:52] this type of irregular workload GPUs are
+[00:23:55] just struggle
+[00:23:59] Okay, another case if we consider job
+[00:24:02] partition
+[00:24:04] remember last time we say it's better to
+[00:24:07] not to launch so many threads is just
+[00:24:10] limit the number of threads for the
+[00:24:11] number of cus or number of threads that
+[00:24:14] we're combo unit can handle right or we
+[00:24:17] can launch maybe two or three more times
+[00:24:19] more but just definitely it's not launch
+[00:24:22] in a way that each thread is processing
+[00:24:24] one piece of data
+[00:24:26] Then naturally we have two different
+[00:24:28] ways to process this data. The first way
+[00:24:32] is how we typically would write a CPU
+[00:24:34] problem that v one will take care of
+[00:24:38] this part
+[00:24:40] two will take part of this part three
+[00:24:42] four and so on. Right? Each takes a
+[00:24:44] chunk of it. It's very natural very
+[00:24:48] comfortable to program. Another way is
+[00:24:50] to do this thread one here then thread
+[00:24:53] two here thread three thread four thread
+[00:24:55] five then thread one here thread two
+[00:24:57] here and so on right in this way. So
+[00:25:01] which way is better for GQ
+[00:25:08] and why? Yeah.
+[00:25:12] >> Yeah.
+[00:25:14] Why?
+[00:25:36] So think about your thread. Let's just
+[00:25:38] make it simple. Two threads execute a
+[00:25:41] lock step. Okay. And just imagine these
+[00:25:44] two parts are very far away. You two
+[00:25:48] piece of data are okay. These two thread
+[00:25:53] this processing and this process will
+[00:25:55] happen in the same cycle. Okay. Can you
+[00:25:58] call us these two? Then just imagine
+[00:26:01] they're very far away from each other.
+[00:26:03] Basically, no. You cannot call us these
+[00:26:05] two. And if you do that 64 thread,
+[00:26:08] they're executing data that is
+[00:26:10] processing data that very far away. They
+[00:26:12] have no way to call us, right? Then come
+[00:26:14] come back this way. this thread, this
+[00:26:16] thread and they are executing a lock
+[00:26:19] step way, right? They're accessing data
+[00:26:21] at the same time. They're next to each
+[00:26:23] other. Then they are collapsible.
+[00:26:26] Then once they're done with this
+[00:26:28] processing these two piece of data, they
+[00:26:30] move together to here. And this is still
+[00:26:32] collable, still collable, still
+[00:26:33] collable.
+[00:26:42] Uh
+[00:26:44] no there's nothing to do with local data
+[00:26:46] share. It's just just consider this is
+[00:26:49] each each
+[00:26:52] just consider this part and this part
+[00:26:55] data are very far away. Just consider if
+[00:26:56] we're processing a one gigabyte of piece
+[00:26:58] of data, right? If we have if we're
+[00:27:02] processing one gigabyte of data then we
+[00:27:04] have 1,000 threads then these part these
+[00:27:08] two points are one megabytes away now
+[00:27:12] and there's no way to coales in these
+[00:27:13] two case in these cases
+[00:27:16] and they're one megabytes away and here
+[00:27:18] what we do is these two are next to each
+[00:27:21] other four by way right then we all jump
+[00:27:25] together we jump just directly jump to
+[00:27:27] one megabytes further But these two
+[00:27:30] threads are still accessing data next to
+[00:27:32] each other. Four by way when it's four
+[00:27:34] by way is coal.
+[00:27:38] Okay.
+[00:27:41] So partition now we need to this is
+[00:27:44] nolizable and this is coastable. So we
+[00:27:47] need to carefully consider the task
+[00:27:49] allocation so that we can make
+[00:27:52] collapsible memory access. Right? So if
+[00:27:54] you use GPU you care about performance.
+[00:27:57] If you care about performance, then if
+[00:28:00] you write simple program, it's probably
+[00:28:02] not as good as CPUs and consider how you
+[00:28:05] can make the X memory access colexible
+[00:28:10] and to achieve the highest performance
+[00:28:12] otherwise you will get a really
+[00:28:13] terrible.
+[00:28:15] This is not a GPU programming course.
+[00:28:17] So, but this is definitely something
+[00:28:19] like a GPU programmer needs to consider.
+[00:28:26] Okay. And let's go with the memory
+[00:28:28] hierarchy. So we're talking about CU.
+[00:28:31] Then at this moment we need to forget
+[00:28:33] what's inside CU and let's look at
+[00:28:36] outside what happens outside CU the
+[00:28:39] memory part. Then
+[00:28:42] so typically we also say front GPU GPU's
+[00:28:46] front end GPU back end. The front end is
+[00:28:49] anything before CPU and the back end is
+[00:28:53] the memory hierarchy.
+[00:28:55] Okay, let's forget about what's inside
+[00:28:58] CU. Then consider a CU as just a simple
+[00:29:01] block. Now CU has a dedicated L1 Vcash.
+[00:29:07] So it's very common to write a dollar
+[00:29:10] sign to represent cash because they
+[00:29:12] pronounce in a similar way. Okay, if you
+[00:29:14] write cash, everyone can understand it.
+[00:29:18] um L1 V cache remember we say there's
+[00:29:21] three type of memory vector memory
+[00:29:24] scalar memory and instruction memory
+[00:29:25] they're defined by different type of
+[00:29:27] data right if you use S load this goes
+[00:29:30] to scalar memory if you use a V lo or
+[00:29:32] global load it goes to L1 V cache and we
+[00:29:36] need a L level one cache and we need a L
+[00:29:39] level one scalar cache or L1 I cache
+[00:29:44] instruction cache three interface
+[00:29:47] three part three caches, three cache
+[00:29:50] unit
+[00:29:51] and actually they are not that simple.
+[00:29:54] Each compute unit has a dedicated L1
+[00:29:57] vcache.
+[00:30:00] Okay, then each L each CU has a
+[00:30:04] dedicated L1 V cache and four sometimes
+[00:30:08] five shares one L1 S and L1 I cache.
+[00:30:13] Okay. Dedicated L1 Vcache and shared L1S
+[00:30:17] and L1 I cache.
+[00:30:22] So can you think about the rationale
+[00:30:24] behind this design?
+[00:30:29] Yeah.
+[00:30:59] Yeah, you need to
+[00:31:02] the direction is correct. You need to
+[00:31:03] consider what data for what we need
+[00:31:06] these three different part of memory.
+[00:31:08] Right. So in a very high level
+[00:31:11] description why we need different
+[00:31:12] caches. Then the standard answer is only
+[00:31:16] answer in one sentence is this type the
+[00:31:20] three type of data have different type
+[00:31:21] of locality
+[00:31:24] okay but let's explain more
+[00:31:27] for I cache
+[00:31:29] do you expect all the computer unit to
+[00:31:31] execute the same program for most of
+[00:31:34] time yes right so then once you load one
+[00:31:39] part of instruction instruction.
+[00:31:43] The second CU then load this type of
+[00:31:45] instruction. It's very very likely a
+[00:31:47] cache and actually the L1 cache is not
+[00:31:50] small. It's a rather big cache there. So
+[00:31:55] you want L1 cache you want instruction
+[00:31:59] L1 I here instruction to have a very
+[00:32:01] very high hash heat rate. Cash G rate
+[00:32:05] means you what percent of time that you
+[00:32:08] can find the data in this L1 cache right
+[00:32:10] although cach rate locality is something
+[00:32:13] that we will expand when we talk about
+[00:32:15] caches but L1 I cache you want have
+[00:32:18] really really high cache gate rate and
+[00:32:21] really low latency so that the
+[00:32:23] instruction is there then you can always
+[00:32:24] issue instructions if instructions are
+[00:32:27] not there loaded
+[00:32:29] then you have no way to issue them then
+[00:32:31] your ALU is your powerful SIM unit is
+[00:32:34] thick
+[00:32:36] and consider L1S.
+[00:32:38] What's what's in being stored in L1S?
+[00:32:41] Now we say L1S typically stores
+[00:32:45] um kernel sizes,
+[00:32:48] block sizes,
+[00:32:50] um kernel arguments, pointers like
+[00:32:53] buffer root, buffer location, right?
+[00:32:56] buffer pointers and do expect they to
+[00:33:00] have the same data rely on the same
+[00:33:02] piece of data or different pieces of
+[00:33:04] data.
+[00:33:07] Just consider kernel arguments, right?
+[00:33:10] They in buffer out buffer all of them,
+[00:33:13] all the threads share the same inbuffer
+[00:33:15] and out buffer. They just need to add
+[00:33:17] their own offsets, their different
+[00:33:20] offset. So when you load a buffer or
+[00:33:22] kernel arguments or kernel sizes, they
+[00:33:25] share the same piece of data.
+[00:33:27] So they help each other for loading this
+[00:33:30] part of data. Then if one loaded this
+[00:33:32] part of data, the second one we use it.
+[00:33:35] So they're not competing for these
+[00:33:36] resources. Then consider a one I cache.
+[00:33:40] Consider a vector add example.
+[00:33:44] We load one piece of data.
+[00:33:47] Do you expect this piece of data to be
+[00:33:49] used by another C, another another work,
+[00:33:52] another block? Typically, no. Right? So,
+[00:33:55] you pro you load this data, you process
+[00:33:57] it, you are done, then you're just throw
+[00:33:59] it away. So, in this case, for vector
+[00:34:03] caches, or vector data, they're very
+[00:34:05] likely they're processing different type
+[00:34:07] of data, different data, right?
+[00:34:08] Different locations. So, if you have a
+[00:34:11] share data, they're competing each
+[00:34:13] other. They're fighting with each other.
+[00:34:15] they take out the data that it belongs
+[00:34:17] to another CU that is bad for
+[00:34:20] performance. In this case, we want them
+[00:34:22] to have dedicated captions just work for
+[00:34:26] them even though that means it's
+[00:34:27] smaller.
+[00:34:29] Okay.
+[00:34:33] Then since this group of four use share
+[00:34:36] some resources, whenever there's a group
+[00:34:38] shared some resources in the computer
+[00:34:40] architecture, we name it with a block.
+[00:34:43] In this particular block we call it
+[00:34:45] shader array but is a shader
+[00:34:49] because GPUs are designed for graphics.
+[00:34:52] Then in internally at AMD they just call
+[00:34:54] a CU sometimes I call CU a shader for
+[00:34:58] most of time if they're designing for
+[00:35:00] both graphics and computer it's just
+[00:35:02] called shader. Remember a shader
+[00:35:06] is something can be either software or
+[00:35:08] hardware that calculates the properties
+[00:35:10] of pixels or vertices right most likely
+[00:35:13] to be color but it can be other
+[00:35:15] properties. So those are the hardware
+[00:35:17] that is responsible for calculating the
+[00:35:20] properties of a pixel or or a vertex.
+[00:35:24] So in this case we call this a shader
+[00:35:26] array. In a GPU we have a lot of shader
+[00:35:30] arrays.
+[00:35:31] Just consider the R9 nano example.
+[00:35:35] How many CUS does an R9 nano have?
+[00:35:41] 64. Right? Last time we use 64 because
+[00:35:44] we like this number is just easy to
+[00:35:45] calculate. So always a power of two. So
+[00:35:48] how many shader arrays we need to have
+[00:35:50] in
+[00:35:53] our model?
+[00:35:58] 16, right? 16 shade arrays.
+[00:36:03] There's actually another level called
+[00:36:04] shader engine but we're not talking
+[00:36:06] about shader engine but the general
+[00:36:08] property a chain of property for AMD GPU
+[00:36:11] is how many shader engine per
+[00:36:16] GPU is two or four sometimes one how
+[00:36:19] many shader array per shader engine how
+[00:36:21] many CU per shader array how many cmd
+[00:36:24] per CU right you need to consider this
+[00:36:26] hierarchy there but anyway when you
+[00:36:29] multiply this number together then you
+[00:36:31] get the how powerful a GPU is. Each data
+[00:36:34] array they all have six L1 caches. Okay.
+[00:36:39] And all these L1 caches are connected
+[00:36:41] with L2 caches. Okay. A group of L2
+[00:36:45] caches. And we call this L2 caches
+[00:36:48] memory side L2.
+[00:36:50] And the L1 caches the core side L1.
+[00:36:54] Not only because L2 is closer to DM but
+[00:36:58] the memory DRM is the memory there right
+[00:37:00] L1 cache is closer to the core core side
+[00:37:04] cache and memory side cache are
+[00:37:05] terminologies
+[00:37:08] uh
+[00:37:10] are terminology to describe the function
+[00:37:12] of a cache
+[00:37:15] if you talk about say if you say core
+[00:37:17] side caches memory side caches to
+[00:37:19] someone who always been studying CPU
+[00:37:21] architecture they probably don't even
+[00:37:22] know this terminology Because in CPUs
+[00:37:25] typically all the caches are core side
+[00:37:26] caches but in GPUs we need to have
+[00:37:29] memory side caches. So what does he mean
+[00:37:32] by memory side caches talk about L2
+[00:37:35] here. So L2 caches they serve their own
+[00:37:39] DM. So there are many DM tiles. Remember
+[00:37:43] the PCB that we're showing right there
+[00:37:46] are many
+[00:37:48] DRAM chips around a GPU where there in
+[00:37:51] the in HPM there are six six piles of
+[00:37:54] HPM around the um around the chip. So
+[00:38:01] each L2 is responsible for their
+[00:38:03] associated DM. There's no network that's
+[00:38:06] connecting. So this L2 never access this
+[00:38:09] DM. So we don't need to consider that
+[00:38:11] only L2 serves one D. They serve as a
+[00:38:15] bandwidth booster. So if they directly
+[00:38:17] access DOM, they get faster. They get
+[00:38:19] higher bandwidth because H2 is using DOM
+[00:38:22] technology or
+[00:38:24] flip-flop flip-flops. Okay, they are
+[00:38:28] faster than DA but their density is
+[00:38:31] smaller. So they they have higher
+[00:38:33] bandwidth, lower latency. So they serve
+[00:38:35] as a bandwidth booster. So they this can
+[00:38:38] pro if you access data and there's a
+[00:38:40] reasonable cache rate then you can get
+[00:38:42] higher bandwidth and lower latency from
+[00:38:45] L2.
+[00:38:48] uh in amidia GPUs basically there's no
+[00:38:51] way that you can directly communicate
+[00:38:53] with dur every data access needs to go
+[00:38:55] from L2 to D in AMD GPUs
+[00:39:00] even DM engines are connected with L2
+[00:39:02] caches in AMD DM engines are directly
+[00:39:05] connected with DS
+[00:39:11] then yeah so then what decides a core
+[00:39:16] side one catch and memory
+[00:39:18] L2 cache or memory side cache or L1
+[00:39:20] cache we need to consider what address
+[00:39:23] range that each cache module is
+[00:39:25] responsible for. So for L1 caches they
+[00:39:29] have no choice they have to serve the
+[00:39:32] whole address range from zero to
+[00:39:33] infinity. to the core one say I want
+[00:39:36] this piece of data they have to provide
+[00:39:38] this data they have no choice right then
+[00:39:41] for L2 cache because they're responsible
+[00:39:45] for memory partitions you have to we
+[00:39:47] have to have some way to partition the
+[00:39:51] uh to partition the memory how we
+[00:39:54] partition them is by using this way hash
+[00:39:57] line level interle
+[00:40:01] this one is respond for 0 to 63. Let's
+[00:40:04] skip the port 127 and so on. Right? And
+[00:40:08] when we arrive at 383, then we go back
+[00:40:11] to 384 and so on. Right? Interview
+[00:40:19] then
+[00:40:24] size. Okay. The missing size.
+[00:40:29] Okay.
+[00:40:31] Then so this is called cash line level
+[00:40:36] or cach line granularity interle. What
+[00:40:39] is why we need this design?
+[00:40:43] An alternative design is one to2 0 to
+[00:40:46] one gigabytes here, one to2 gigabytes
+[00:40:49] here, two to three gigabytes here and so
+[00:40:51] on. Right? We can do that. That's
+[00:40:55] which way is better. Typically we
+[00:40:57] consider this way is better because
+[00:41:00] cus may access say a vector and another
+[00:41:04] vector to together to to get a result to
+[00:41:08] another vector. These vectors are not
+[00:41:10] one gigabytes in size not that large. If
+[00:41:13] you say oh I have one vector 0 to 1 GB
+[00:41:18] they allocate here only this part is
+[00:41:21] useful the rest is not useful at all
+[00:41:24] right so in that case we limit the
+[00:41:27] parallel we want all the part of the
+[00:41:30] port the chip to be busy in this case if
+[00:41:33] we access a catch line since we have so
+[00:41:35] many computer units there are 64 of them
+[00:41:38] more than 100 of them we're very likely
+[00:41:40] to access rather in a rather random way,
+[00:41:43] right? In a mass access of the data,
+[00:41:47] then very likely we can allow all of
+[00:41:50] them to pump data to the CU at the same
+[00:41:52] time to maximize the bandwidth.
+[00:41:56] Okay.
+[00:41:58] So,
+[00:41:59] we need to consider for every L1 cache,
+[00:42:02] let's say this L1 S cache, according to
+[00:42:05] the address it needs to access, it
+[00:42:07] actually need to connect to all the L2
+[00:42:09] caches.
+[00:42:11] Right? It needs to connect to all the L2
+[00:42:14] caches. Then every L1 cache needs to
+[00:42:17] connect to all the L2 caches and every
+[00:42:19] L2 cache needs to connect to the all the
+[00:42:21] L1 caches. So this is something that we
+[00:42:26] call a network on chip. Okay, this is a
+[00:42:30] comp complex network there. Then
+[00:42:32] typically what's the
+[00:42:35] what's the topology here and that the
+[00:42:38] most common topology we use is called a
+[00:42:41] crossbar
+[00:42:43] or if you write xbar is also a common
+[00:42:46] terminology that is acceptable. So a
+[00:42:49] crossbar that connects all the caches
+[00:42:52] together. What is a crossbar? Let me
+[00:42:54] draw a a crossbar here. It's
+[00:42:57] programmable.
+[00:42:59] Okay.
+[00:43:03] I said we have
+[00:43:09] one,
+[00:43:11] I2, I3, I4. Then we have output
+[00:43:19] 01, O2, 03, 04, 4x4. Okay. And these are
+[00:43:26] not connected. But these connections are
+[00:43:29] programmable. So say I4 needs to connect
+[00:43:32] to 01 and we connect here. Then I3 needs
+[00:43:36] to connect to 03. We connect here. Then
+[00:43:38] we connect here. We connect here. Okay.
+[00:43:42] This is a the circuit.
+[00:43:46] Then
+[00:43:50] so this can if you write some gates then
+[00:43:52] it can actually controlled by some
+[00:43:54] external right.
+[00:43:58] So the requirement is that
+[00:44:02] if O1 O1 can only receive from one side
+[00:44:07] from one input right then O2 can only
+[00:44:10] receive from one side then I4 can only
+[00:44:13] output to one place. So this crossbar
+[00:44:17] is actually have the very high
+[00:44:20] performance
+[00:44:22] that can support auto connection.
+[00:44:25] Just just give you a comparison for
+[00:44:27] another alternative design. It's called
+[00:44:29] bus. What is a bus? Bus is basically one
+[00:44:33] group of wires that all of them all
+[00:44:37] input and all output connect to them.
+[00:44:41] Okay.
+[00:44:42] So there's an arbiter that select say oh
+[00:44:45] in this cycle you can send you can
+[00:44:47] receive. So this one is virtually
+[00:44:50] connected then this can send and this
+[00:44:52] can receive. In this way, in in this
+[00:44:54] way, we can send four unit at in one
+[00:44:57] cycle and receive four unit at one
+[00:44:59] cycle. Right? In a bus,
+[00:45:03] we can send one and receive one
+[00:45:06] because there's only one group of wires
+[00:45:08] here.
+[00:45:10] So in this case, we care about
+[00:45:12] parallelism. We want all of them to be
+[00:45:14] able to send data at the same time or
+[00:45:16] you also need to consider rights. Right
+[00:45:18] going to go stop, right? So in this way
+[00:45:21] we have to have a crossbar. However
+[00:45:24] just consider how large your chip is and
+[00:45:26] how large this crossbar is. Right? This
+[00:45:29] is a 100 chip and 100
+[00:45:33] units and our two caches are here.
+[00:45:38] You need to connect the whole cache put
+[00:45:40] the whole chip towards the center.
+[00:45:43] In this way,
+[00:45:46] this is a major performance bottleneck
+[00:45:49] and it will occupy a lot of life sizes.
+[00:45:51] There's probably very likely that this
+[00:45:53] part are all just wires connected that
+[00:45:56] and also you need to consider if you
+[00:45:59] communicate within a combo unit, you
+[00:46:01] probably don't need to consider the
+[00:46:02] latency. But communicate at this level,
+[00:46:06] you need to consider latency. It's not
+[00:46:08] one cycle that you can send data from
+[00:46:09] here to there. Okay? It takes time.
+[00:46:16] This even the signal propagates a light
+[00:46:19] at light speed it can be ach
+[00:46:29] in the center. This is a media media
+[00:46:32] solve this problem by partitioning L2
+[00:46:34] caches in two parts B100 GPU. So the
+[00:46:39] average communication distance is is
+[00:46:42] shorter but this partition is
+[00:46:44] responsible for part of the memory. This
+[00:46:46] partition is responsible for part of
+[00:46:48] memory. These four group of SMS
+[00:46:51] communicate with their their own L2
+[00:46:54] caches. Okay.
+[00:46:56] But if your data is not there then this
+[00:46:59] part of L2 cache partition needs to
+[00:47:01] transfer the data to this part of um L2
+[00:47:05] partition to access data. that creates
+[00:47:07] some sort of numa effect or extra
+[00:47:10] latency but it at least reduces the
+[00:47:13] complexity of the um the huge crossbar
+[00:47:18] network. Okay, this was not a problem
+[00:47:21] when we have like 28 nanometer
+[00:47:23] technology because we don't have so many
+[00:47:25] SM or CUS but it becomes really a big
+[00:47:29] problem when you have 77 nanometer or
+[00:47:31] even lower even smaller trans
+[00:47:33] transistors because we had more SM
+[00:47:36] means more overhead for this
+[00:47:38] communication then a single crossbar may
+[00:47:42] not just be able to solve this problem
+[00:47:44] then they start to have some weird ways
+[00:47:47] to solve this nontraditional way top
+[00:47:50] this problem. By the way, this is
+[00:47:52] probably the largest D size so far,
+[00:47:56] right?
+[00:47:58] 336.66
+[00:48:01] mm squared.
+[00:48:07] Okay, let's quickly go through how cache
+[00:48:09] works. Then uh let's say
+[00:48:13] a group of L2 caches.
+[00:48:15] Then we have a cach line. It's a we mark
+[00:48:19] it as version one. If C wants to read
+[00:48:22] the data, we send a read request.
+[00:48:25] Then it's a cache, right? It's a cashm
+[00:48:27] because the data is not there. You can
+[00:48:29] look up it is pack array to display
+[00:48:33] decide say oh the data is not there.
+[00:48:35] Then let's send another request to
+[00:48:36] request from lower level. If L2 is still
+[00:48:39] miss goes to D. But let's assume it's a
+[00:48:43] F. Okay. Then we send back this signal
+[00:48:47] called data ready. The data is there.
+[00:48:49] Then you can send you the data. Data
+[00:48:51] ready A. Then the data A is stored in L1
+[00:48:55] V cache. Okay. And this L1 V cache is
+[00:48:59] then stored back to data ready. Send
+[00:49:02] another data ready A signal to the
+[00:49:04] compute unit. Then the computer unit has
+[00:49:06] access to this piece of data.
+[00:49:09] Now at the same time I'm not going to
+[00:49:11] draw step by step but this process can
+[00:49:14] happen in another L1 cache.
+[00:49:17] Okay. Then after this if we want to read
+[00:49:20] the data read data A again we don't need
+[00:49:23] to go to L2 cache then we just directly
+[00:49:26] send data ready A back to compute unit.
+[00:49:30] We directly have the data that can
+[00:49:32] reduce the roundtrip time goes to the L2
+[00:49:35] cache which is which needs to go through
+[00:49:38] this crowded XAR and reduce latency and
+[00:49:41] reduce energy consumption.
+[00:49:43] Okay.
+[00:49:47] So there's a coherency problem. There's
+[00:49:49] a minor problem here. Just consider this
+[00:49:52] carefully. What's the problem?
+[00:49:55] If L1 V hash writes a
+[00:49:59] to
+[00:50:01] the
+[00:50:03] this first CU writes a to L1 V cache
+[00:50:06] what happens is in a typical CPU
+[00:50:09] consideration if this is a TPU CPU cache
+[00:50:11] what will happen is it will just write
+[00:50:13] there right locally okay that will make
+[00:50:18] this part of data st
+[00:50:23] and we call this 30
+[00:50:28] because this is the old data. This is
+[00:50:29] version one. No, sorry. This this is
+[00:50:32] version two. No, version one. This is
+[00:50:34] version two.
+[00:50:36] So what happens here is if we read a
+[00:50:39] here
+[00:50:41] now we directly return a data ready a
+[00:50:44] but it's version one.
+[00:50:46] Now we are sending style data back to
+[00:50:50] compute unit.
+[00:50:52] Right.
+[00:50:54] Then we call this co coherency error
+[00:50:57] coherency problem.
+[00:51:00] So it's not our c the data that in our
+[00:51:02] caches are not coherent anymore. They
+[00:51:05] have different versions of this data.
+[00:51:08] Okay. So for later on for when we talk
+[00:51:11] about caches we're going to spend at
+[00:51:13] least one lecture to solve coherency
+[00:51:16] problem.
+[00:51:18] But here GPU is take a very special way
+[00:51:23] to solve this problem. Right? GPU takes
+[00:51:25] two different method to solve to
+[00:51:26] mitigate this problem. The first way is
+[00:51:30] at most mitigation.
+[00:51:32] If we write a from L1 V cache we don't
+[00:51:36] only write into this L1 cache. For every
+[00:51:41] right we just directly write A to L2
+[00:51:44] cache. And we call this right through
+[00:51:47] cache. We write through as if the L1 V
+[00:51:50] is transparent. We write through and
+[00:51:52] write directly to write to L2 cache.
+[00:51:56] Okay. Then L2 cache has the updated
+[00:52:00] version B v2.
+[00:52:04] Then what's the problem is at this
+[00:52:06] moment if C2
+[00:52:08] wants to access A, it's still the still
+[00:52:12] data still a problem, right?
+[00:52:16] So can you guess how GPU solve this
+[00:52:20] problem?
+[00:52:35] Okay, I tell you GPU has a h of solving
+[00:52:39] problem say this supporting this feature
+[00:52:42] is hard then I just simply refuse to
+[00:52:45] support this feature. you just don't
+[00:52:46] write this type of code. I do not
+[00:52:48] support this type of code. Programmers,
+[00:52:50] it's your responsibility to prevent this
+[00:52:53] from happening. Okay. CPU work in a way
+[00:52:56] say no matter what code you write, I
+[00:52:58] will fulfill your requirement. Okay. GPU
+[00:53:01] works in a way that
+[00:53:03] just listen to me. Only write this type
+[00:53:06] of code. Don't try to write something
+[00:53:08] weird. Okay? So, it limits the program
+[00:53:11] model in a GPU program. You should never
+[00:53:15] write from one thread and read from
+[00:53:19] another thread. Okay, remember at the
+[00:53:22] early time we say thread from different
+[00:53:24] blocks can never communicate with each
+[00:53:27] other.
+[00:53:29] If they communicate, they may have this
+[00:53:30] problem,
+[00:53:33] right? So two different block they
+[00:53:37] should on different if right within one
+[00:53:39] block no problem. They can still access
+[00:53:41] this piece of data. There's no coherency
+[00:53:43] issue, right? If nar from two different
+[00:53:46] blocks and one block right and another
+[00:53:49] block wants to read data okay good luck
+[00:53:52] then you can get old data or new data
+[00:53:54] then
+[00:53:56] just I can guarantee you can get some
+[00:53:58] data but I'm not sure which data it is
+[00:54:01] right so if you really want to say I
+[00:54:04] want to get a new data what you do stop
+[00:54:07] the kernel launch another one then the
+[00:54:10] GPU will launch L1 cache back to L2 two.
+[00:54:14] So L1 beta will this one disappear this
+[00:54:18] already disappear but it's a right do
+[00:54:20] right the block doesn't really need any
+[00:54:23] right they simply mark all of them to be
+[00:54:25] empty to be invalid to say don't use
+[00:54:27] this don't use so it's a super quick
+[00:54:31] thing then if you start another kernel
+[00:54:34] always load from L2 again then you
+[00:54:37] guarantee get the most updated version
+[00:54:40] so quick way to say this is L1 cache
+[00:54:43] simply do not uh GPU simply do not
+[00:54:46] support thread to thread communication
+[00:54:49] from different blocks and one reason is
+[00:54:52] what we said in the thread dispatching
+[00:54:55] process. Blocks are dispatching to
+[00:54:57] different cus and cus may not hold all
+[00:55:00] the blocks at one time. So we have to
+[00:55:02] wait for one group of block to retire
+[00:55:04] and another group to come see. So they
+[00:55:06] cannot execute it at the same time.
+[00:55:08] That's why they cannot communicate.
+[00:55:10] Another reason is the memory model does
+[00:55:13] not support that they get the most
+[00:55:15] upto-date data.
+[00:55:17] Okay, that's the last thread we have and
+[00:55:20] we have 20 minutes time that I want to
+[00:55:23] show you something.
+[00:55:25] I hope this works.
+[00:55:28] So, uh what I'm showing you here,
+[00:55:33] I drag this
+[00:55:36] top.
+[00:55:38] Uh, no. I have to
+[00:55:41] minimize this one.
+[00:55:56] Can I stop presentation on this side?
+[00:55:59] Okay, that works.
+[00:56:06] Okay,
+[00:56:08] I don't know what
+[00:56:13] Okay, so we created this visualization
+[00:56:17] to you know one of the most important
+[00:56:21] work during my PhD is create a GPU
+[00:56:23] simulator. So the GPU simulator will
+[00:56:26] simply do something that
+[00:56:29] mimic the behavior of a real GPU and
+[00:56:32] recreate the behavior of every cycle
+[00:56:33] cycle by cycle and try to
+[00:56:37] our eventual goal is to predict if we
+[00:56:39] execute a program on a hardware that
+[00:56:44] doesn't exist. Then we slightly tweak
+[00:56:46] the hardware. Then we say we we estimate
+[00:56:50] the performance of that program on the
+[00:56:52] virtual on a non-existing GPU. Okay.
+[00:56:56] Then we also have a visualization tool.
+[00:56:59] So visualization tool collects data
+[00:57:02] collect traces from um GPU from the GPU
+[00:57:06] simulator. After GPU the GPU simulator
+[00:57:08] while it runs it dumps data into a
+[00:57:11] trace. Then this is the visualization.
+[00:57:14] So I can show you this vis how this
+[00:57:17] visualization works and for the next
+[00:57:19] assignment I know even the first
+[00:57:20] assignment I'm still owing you that
+[00:57:22] assignment have it I just do not have
+[00:57:25] time to put it on GitHub
+[00:57:29] but next for the next assignment I need
+[00:57:31] you to work on this visualization tool
+[00:57:34] on your own to understand how it works
+[00:57:36] then I can go through with you together
+[00:57:38] and I want you to schedule a onehour
+[00:57:41] meeting with Enzo to talk about like how
+[00:57:45] you feel about using the Dyson bot tool
+[00:57:48] which is a agent then see if it can help
+[00:57:50] you understand more other than what I
+[00:57:52] taught in class okay I hope that this
+[00:57:56] tool can actually help you a lot um in
+[00:58:00] this process
+[00:58:03] okay so what's here what's here you see
+[00:58:06] is a group of unit right you can see the
+[00:58:10] driver the command processor and so on
+[00:58:13] Right. Then let's look at let's search
+[00:58:15] for something like L1.
+[00:58:19] V.
+[00:58:20] Let's let's do L2 C. It's probably
+[00:58:23] easier.
+[00:58:27] Yeah. L2. Yeah, L2 cache, right? You can
+[00:58:32] see there are different caches, right?
+[00:58:34] There are uh 16 caches in my
+[00:58:38] configuration.
+[00:58:40] There are 16 caches. Then what's their
+[00:58:42] load? What about their load? And we have
+[00:58:44] two different metrics to show here. This
+[00:58:46] one is incoming request rate. One is
+[00:58:49] average request latency. Then there
+[00:58:52] there are different things that I can
+[00:58:53] show you these things. So from here we
+[00:58:56] can see there are peaks right there are
+[00:58:59] p of request rate and are these pigs
+[00:59:02] aligned? The quick answer is they're not
+[00:59:05] exactly aligned, right? They have
+[00:59:06] different times. So I don't know why
+[00:59:10] exactly we have this piece but
+[00:59:11] definitely they just come at this moment
+[00:59:14] at for different cache units right so
+[00:59:18] just a burst of requests arriving at
+[00:59:21] this particular at each cache and they
+[00:59:23] arrive at a different time and we can
+[00:59:26] also see what's the average request the
+[00:59:28] latency is that changing and the quick
+[00:59:30] answer is it's not changing right so
+[00:59:33] sometimes we can see at the beginning
+[00:59:35] it's very high at the end it's very low
+[00:59:36] that means
+[00:59:37] the c the cache heat rate is getting
+[00:59:40] higher at because the every request
+[00:59:42] latency is getting lower.
+[00:59:45] So there are multiple metrics. Now
+[00:59:47] another metrics that you can see from
+[00:59:49] here is buffer pressure. The buffer
+[00:59:51] pressure means how many requests are
+[00:59:53] waiting there in the buffer of on the
+[00:59:56] top buffer of this unit. That means how
+[00:59:59] many requests needs to be processed by
+[01:00:01] this component. So a full buffer like if
+[01:00:04] a buffer is always full that means this
+[01:00:08] unit is not fast enough always a queue
+[01:00:10] waiting there.
+[01:00:12] empty buffer is this unit probably too
+[01:00:16] it's not busy enough not sending enough
+[01:00:19] request you see the secondary yaxis we
+[01:00:22] have blue lines right so what's the
+[01:00:24] number of elements in here it's always
+[01:00:27] one right but it can go up to 2.5 so it
+[01:00:30] only at this peak there are more units
+[01:00:32] in the buffer but for most of time is
+[01:00:34] one then is it a high number or low
+[01:00:37] number actually don't know so but at
+[01:00:39] least it looks like there's something
+[01:00:41] there. Okay. So then we can zoom in. So
+[01:00:45] if I'm using my mouse to scroll, we can
+[01:00:48] zoom in.
+[01:00:51] Let's zoom in a little bit. In this
+[01:00:54] moment, I just I'm curious about what's
+[01:00:56] exactly is happening. You can see this
+[01:01:00] is sampling process. Now, as you can see
+[01:01:02] here from a very brief view, from very
+[01:01:05] zoomed out view, we see it always one.
+[01:01:07] But if we zoom in now, we can see the
+[01:01:09] buffer level. It's a blue line, right?
+[01:01:11] It's pretty much all zero for most of
+[01:01:13] the time,
+[01:01:16] right? It's pretty much zero for almost
+[01:01:18] all the time. That means at this
+[01:01:20] granularity at the microcond
+[01:01:23] granularity,
+[01:01:25] they're not they're not busy at all in
+[01:01:27] this particular example.
+[01:01:31] Okay?
+[01:01:33] Because the buffer pressure is very is
+[01:01:35] low. And we can also check the
+[01:01:40] uh average request latency. Let's see.
+[01:01:44] So they're are pretty much the same
+[01:01:46] level. So that means very likely they're
+[01:01:48] all catch misses. Okay. If you want to
+[01:01:51] know what exactly is happening at this
+[01:01:54] time, you can click on the on the name
+[01:01:56] of a unit. Then go let's go to a
+[01:01:59] detailed view. Okay.
+[01:02:02] This is a component view. and it shows
+[01:02:05] everything that happens in this
+[01:02:06] particular cache. Okay, if you hover on
+[01:02:09] this one, you see these are read
+[01:02:10] requests and a request out that is a
+[01:02:13] read request. Okay,
+[01:02:17] uh we can zoom in and see what's going
+[01:02:18] on here.
+[01:02:21] So it's it's basically this cache it's I
+[01:02:24] I cannot say it's idle but it's
+[01:02:28] processing
+[01:02:31] a lot of data in burst right this is
+[01:02:34] something that we can see that each bar
+[01:02:37] each bar each bar is a task is a
+[01:02:40] transaction arriving at this comp at
+[01:02:42] this component
+[01:02:44] and um
+[01:02:46] if on this we can see it's 117 ncond
+[01:02:55] So rather than starting from here, I
+[01:02:57] want to show you from the beginning. So
+[01:02:59] let's go through the GPU architecture
+[01:03:02] again and try to understand what's going
+[01:03:04] on. So this is a
+[01:03:06] uh
+[01:03:08] matrix multiplication
+[01:03:10] 256
+[01:03:12] by 256 multiply by 256. Okay. XYZ are
+[01:03:16] all like or K and M are all physics
+[01:03:20] running on R9 GPU
+[01:03:23] then
+[01:03:25] area means the simulation was not even
+[01:03:27] running trace was not collected so this
+[01:03:31] is the whole task you look at simulation
+[01:03:33] simulation that's the root task okay
+[01:03:36] that's a root task now let's see what
+[01:03:39] are the driver command it's memory copy
+[01:03:42] and memory copy so I think It's because
+[01:03:46] there's not long enough. So this is a
+[01:03:48] memory copy device to host copying data
+[01:03:51] back to the CPU and these are memory
+[01:03:53] copy from the host to the device.
+[01:03:56] Okay, then let's look at so if we want
+[01:04:01] to drill down see what's exactly is
+[01:04:03] happening we can click on this one and
+[01:04:05] it goes back to here. So on top we can
+[01:04:07] see this is a current task, parent task
+[01:04:10] and subtask. So what's this one? This is
+[01:04:13] a launch kernel command. We launch the
+[01:04:14] one kernel
+[01:04:16] then.
+[01:04:18] So for every request if we send out
+[01:04:20] something from one part to another part
+[01:04:23] we have this send out and request out
+[01:04:26] and request in. So you can see this
+[01:04:27] request out is from is where
+[01:04:31] undefined. Sorry about that. I don't
+[01:04:33] know why it's undefined. It's probably
+[01:04:35] driver.
+[01:04:38] I guess there's something something
+[01:04:40] wrong here.
+[01:04:42] Uh this should be the driver and this
+[01:04:44] should be the command processor. Okay.
+[01:04:47] Something wrong with the legend part.
+[01:04:50] This is the command processor. Okay. So
+[01:04:52] it's sending out from the CPU driver
+[01:04:54] side to the command processor. The
+[01:04:55] command processor is processing this
+[01:04:57] one. Now I can drill down. Uh
+[01:05:01] okay.
+[01:05:03] Uh okay. Here where is still. So, but at
+[01:05:08] least you can see if we So, here is the
+[01:05:11] GPU one command processor. The current
+[01:05:13] task always have the same location.
+[01:05:17] The current task always have the same
+[01:05:19] location as the component below. So, if
+[01:05:22] we are on that, you can see these two
+[01:05:24] bars are actually the same task but just
+[01:05:27] showing twice in the hierarchical view
+[01:05:30] or the component view. Component view,
+[01:05:31] we try to show all the components here.
+[01:05:34] You can see here to to run this kernel
+[01:05:38] to run this kernel we need to run so
+[01:05:41] many blocks right those are all the
+[01:05:44] blocks within this kernel
+[01:05:46] let's just click a random block then a
+[01:05:49] block remember this is from uh command
+[01:05:52] processor
+[01:05:54] the dispatcher dispatcher is the AC then
+[01:05:57] it go down to the compute unit okay this
+[01:06:00] is the compute unit what's happening in
+[01:06:03] this compute on it.
+[01:06:06] What's this? This is a map work group
+[01:06:10] request or this is a work group in MD
+[01:06:12] terminology is a block. So this is a
+[01:06:15] work group, right?
+[01:06:17] Then here within this block there's only
+[01:06:21] one wavefront. It's a hierarchy.
+[01:06:24] Let's click on this wave front.
+[01:06:30] So very likely there's only wave one
+[01:06:32] wave front executing in this uh in this
+[01:06:37] computer unit and you can see to run
+[01:06:41] this wave front we need to run so many
+[01:06:43] subtasks there
+[01:06:46] and let's see what's the task fetch
+[01:06:51] fetch are instruction fetches like what
+[01:06:54] time is fetches it fetch is definitely
+[01:06:56] in places right you can say is placed
+[01:06:58] very clearly there.
+[01:07:01] What are branches? Branches are executed
+[01:07:04] not very often. Local data share also
+[01:07:08] executed not very scalar instructions
+[01:07:11] almost at the same location. And you can
+[01:07:13] see the very interesting thing.
+[01:07:24] Why they take longer time is because
+[01:07:26] their scaler load and their cash they
+[01:07:29] have cash misses code misses because at
+[01:07:32] the beginning their cache is empty
+[01:07:36] special here are most likely weight
+[01:07:39] count okay the weight count may only
+[01:07:44] doing just simply doing synchronization
+[01:07:46] there so they're not doing actually real
+[01:07:47] work and if you consider special and v
+[01:07:53] Those long time ex long executing
+[01:07:59] the non-executing blocks are vector
+[01:08:02] memory instructions because there are
+[01:08:04] memory instructions they take longer
+[01:08:06] time and you can also see there are
+[01:08:08] definitely some parallel parallelism
+[01:08:10] there. We try to execute four memory
+[01:08:12] instructions and get a result then we do
+[01:08:15] the calculation right this type of
+[01:08:17] pattern that we can see here.
+[01:08:20] Okay. So we can zoom in. Let's just zoom
+[01:08:24] into one group. Now we can definitely
+[01:08:26] see there are some patterns. We can zoom
+[01:08:28] in some one groups. Then we can see
+[01:08:30] these things clear.
+[01:08:33] Okay. What are VUS? VUS are there. So
+[01:08:37] very likely we're loading something on
+[01:08:47] it.
+[01:08:58] with
+[01:09:00] this
+[01:09:01] like
+[01:09:03] this light color memory access that
+[01:09:06] means the alou can overlap with the
+[01:09:08] memory access even within one word
+[01:09:12] okay then let's focus on one
+[01:09:17] vector memory instruction
+[01:09:19] In this memory interaction,
+[01:09:21] it has two subtasks here. Okay, that
+[01:09:26] means it can coales down to two cache
+[01:09:28] lines.
+[01:09:31] I just don't know what's the rest.
+[01:09:33] That's something that we don't record in
+[01:09:35] the in the trace. So, this is my memory
+[01:09:39] access. How long it takes?
+[01:09:42] 800 nano second. Remember R9 nano runs
+[01:09:47] with one GHz. So one nanocond is one
+[01:09:49] cycle. So this takes 800 nano 800
+[01:09:53] cycles. That's
+[01:09:56] long time but not terribly long time.
+[01:09:59] Right? Then you can also see the whole
+[01:10:03] CU is also executing a few memory read
+[01:10:06] requests at this moment.
+[01:10:09] So the Yaxis here doesn't really matter.
+[01:10:12] They just try they try to flow up but
+[01:10:14] but we also want to avoid overlapping.
+[01:10:17] So the y-axis doesn't matter. It just
+[01:10:19] say there are different task executing
+[01:10:21] at the same time.
+[01:10:24] Now keep going down. See here where
+[01:10:27] where we arrive we arrived at the RO
+[01:10:30] buffer. Reorder buffer. We don't have
+[01:10:32] that thing in our slides but this is a
+[01:10:35] reorder buffer. Just guarantee the
+[01:10:38] return in order. Remember when I talk
+[01:10:40] about ISA AMD return requires the
+[01:10:43] instruction to be reordered. This is
+[01:10:45] reorder buffer. We can zoom in and try
+[01:10:48] to see what's happening in this row
+[01:10:49] order buffer based execution right that
+[01:10:54] we can keep straight down. Also we
+[01:10:56] didn't talk about um address translator.
+[01:11:01] Okay here's the interesting thing. So
+[01:11:04] there's a virtual address to physical
+[01:11:06] address translation. We'll talk about
+[01:11:07] that later. But if you h the data here,
+[01:11:11] you can see address translation actually
+[01:11:14] takes much longer than data read at at
+[01:11:16] least at this moment. Right? So
+[01:11:20] people will consider address translation
+[01:11:22] is an overhead
+[01:11:24] because loading data is something we
+[01:11:26] have to do. Translating the translating
+[01:11:29] address is to fulfill some secondary.
+[01:11:33] So we would definitely give us a
+[01:11:36] suggestion that we need to improve the
+[01:11:39] address translation
+[01:11:41] uh
+[01:11:42] performance and we can keep drilling
+[01:11:44] down. Let's go here. Let's just focus on
+[01:11:48] this
+[01:11:50] memory read request.
+[01:11:54] Now in this case the L1 L1 cache is now
+[01:11:57] very busy.
+[01:12:00] Okay,
+[01:12:02] keep building down
+[01:12:07] L. This is L1 cache. Now we go to L2
+[01:12:10] cache. Finally, we arrived the L L2
+[01:12:12] cache.
+[01:12:18] Okay, then let's zoom in. This is an
+[01:12:21] interesting part. There's some weird
+[01:12:24] thing.
+[01:12:25] First thing is this group of four
+[01:12:28] transactions
+[01:12:30] only one has a inside green card. So
+[01:12:33] what is green? Green card is request out
+[01:12:37] as M L2. If it's a cache miss, we need
+[01:12:41] to send a request to the DM to get the
+[01:12:44] data, right? So that's why it's
+[01:12:47] hierarchical, right? To fulfill this
+[01:12:49] request, we need to do that request. We
+[01:12:52] need to do the inside task to the
+[01:12:54] hierarchy from outside to inside. To
+[01:12:56] fulfill this one, we have to do the
+[01:12:58] inside one. There's a light blue one
+[01:13:02] inside. But this three has no nothing
+[01:13:05] inside, right?
+[01:13:08] I know the reason. I know the reason.
+[01:13:10] The reason is this is another sort of
+[01:13:13] coaling in L2 cache. That means this
+[01:13:16] four request is actually accessing the
+[01:13:19] same cach line. So if this one is access
+[01:13:23] is requesting from the main memory, we
+[01:13:26] don't really need to send the other
+[01:13:27] three requests to the main memory. We
+[01:13:28] just wait for this one to return.
+[01:13:31] Okay, but since we haven't touched this
+[01:13:33] part in our lecture, you may not know
+[01:13:35] this difference.
+[01:13:37] Later on definitely when we talk about
+[01:13:39] cache we'll talk about this this
+[01:13:40] technique but here this is what we can
+[01:13:43] see so
+[01:13:45] can see although there are many many
+[01:13:47] requests in the auto cache the the
+[01:13:50] actual transaction going to the dun are
+[01:13:52] not very high they just the whole GPU is
+[01:13:54] accessing small range of data at this
+[01:13:57] moment
+[01:13:59] really this is not a very big matrix so
+[01:14:01] that's why we see um the L2 caches are
+[01:14:04] not very busy Then we can we're not
+[01:14:07] lucky so we didn't select that one but
+[01:14:09] we can see this one. This is uh this one
+[01:14:13] that goes to the DM right this are a DM
+[01:14:17] and can we can zoom out then we can get
+[01:14:20] how busy this DM is and the quick answer
+[01:14:22] is not busy at all.
+[01:14:26] So this is what we can see from this
+[01:14:28] with this visualization tool. Then um
+[01:14:32] definitely that gives you I hope that
+[01:14:34] gives you a quick review of these four
+[01:14:36] lectures that what we can see from this
+[01:14:38] visualization to get you a hand down
+[01:14:41] hand experience just seeing those tasks
+[01:14:44] one by one and so what things can
+[01:14:46] overlap what things cannot overlap
+[01:14:49] um
+[01:14:50] so I'm going to give you this assignment
+[01:14:52] to
+[01:14:54] schedule one time slot just one hour is
+[01:14:56] good enough with to talk about the scene
+[01:15:00] We're trying to develop this cyb tool.
+[01:15:03] So it's a turn to that can help you
+[01:15:06] explain that say you can add something
+[01:15:08] like why it takes so long before this um
+[01:15:12] this request to start why they are so
+[01:15:15] sparse why it's not uh
+[01:15:19] why they're so sparse why there are this
+[01:15:22] region right so you can try to interact
+[01:15:25] with it and see the screenshot um of
+[01:15:28] this web page so I can probably try to
+[01:15:31] help you is definitely some limitation.
+[01:15:34] So, uh we'll send out emails for
+[01:15:37] details.
+[01:15:44] >> Um
+[01:15:47] this the you mean the visualization tool
+[01:15:51] or including the ar simulator?
+[01:15:55] Okay. So for simulator I started first
+[01:15:58] line of code in December 2016 or early
+[01:16:01] 2017. Now our paper paper first paper
+[01:16:04] submission was in 2019.
+[01:16:09] Then it was failed. Then we submitted in
+[01:16:11] 2019 by the end of the year. Then 2020
+[01:16:15] we get a paper the simulator paper
+[01:16:17] published. Then 2022
+[01:16:22] guess it's 2022 we get this paper
+[01:16:24] published. But it's also a few re
+[01:16:26] cycles.
+[01:16:27] Um so if you say say at this time until
+[01:16:31] this time then it's probably five years.
+[01:16:35] Um
+[01:16:38] we're still working on this tool so it
+[01:16:40] keeps improving. Okay. Then you can try
+[01:16:43] and then if you collect a trace that is
+[01:16:45] 10 GB size then your browser will will
+[01:16:48] frozen will be frozen. So there are
+[01:16:50] still problems performance issues with
+[01:16:52] this within to but for a smaller scale
+[01:16:55] you can see things pretty
