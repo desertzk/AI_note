@@ -1,3 +1,0 @@
-[submodule "MLC/notebooks"]
-	path = MLC/notebooks
-	url = https://github.com/mlc-ai/notebooks.git
