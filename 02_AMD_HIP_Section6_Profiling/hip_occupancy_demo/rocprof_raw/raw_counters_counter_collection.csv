@@ -1,0 +1,5 @@
+"Correlation_Id","Dispatch_Id","Agent_Id","Queue_Id","Process_Id","Thread_Id","Grid_Size","Kernel_Id","Kernel_Name","Workgroup_Size","LDS_Block_Size","Scratch_Size","VGPR_Count","Accum_VGPR_Count","SGPR_Count","Counter_Name","Counter_Value","Start_Timestamp","End_Timestamp"
+1,1,"Agent 1",1,1433130,1433130,65536,1,"occupancy_kernel",256,0,0,8,0,128,"GRBM_GUI_ACTIVE",37450598.000000,2251149205573741,2251149226873866
+1,1,"Agent 1",1,1433130,1433130,65536,1,"occupancy_kernel",256,0,0,8,0,128,"SQ_BUSY_CYCLES",605643554.000000,2251149205573741,2251149226873866
+1,1,"Agent 1",1,1433130,1433130,65536,1,"occupancy_kernel",256,0,0,8,0,128,"SQ_WAVE_CYCLES",0.00000000e+00,2251149205573741,2251149226873866
+1,1,"Agent 1",1,1433130,1433130,65536,1,"occupancy_kernel",256,0,0,8,0,128,"SQ_INST_CYCLES_VALU",0.00000000e+00,2251149205573741,2251149226873866

@@ -1,0 +1,12 @@
+Device: AMD Radeon AI PRO R9700 (gfx1201)
+CUs: 32
+Wave size: 32
+Block size: 256 threads
+Active blocks per CU: 8
+Resident waves per CU: 64
+Maximum waves per CU: 64
+Grid: 256 blocks, 65536 threads
+Iterations: 500000
+Kernel duration: 22.0404 ms
+First result: 1.11921
+Validation: passed

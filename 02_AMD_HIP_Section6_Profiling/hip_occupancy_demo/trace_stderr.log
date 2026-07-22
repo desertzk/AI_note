@@ -1,0 +1,23 @@
+W0722 16:11:48.662682 1432194 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.002747 sec
+W0722 16:11:48.662814 1432194 simple_timer.cpp:55] [rocprofv3] './hip_occupancy_demo' ::     0.000000 sec
+W0722 16:11:48.663010 1432194 tool.cpp:2728] HIP (runtime) version 7.13.0 initialized (instance=0)
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+W0722 16:11:48.668320 1432194 tool.cpp:2728] HSA version 1.21.0 initialized (instance=0)
+W0722 16:11:48.731145 1432194 simple_timer.cpp:55] [rocprofv3] './hip_occupancy_demo' ::     0.068330 sec
+E0722 16:11:48.739840 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_kernel_stats.csv
+E0722 16:11:48.739904 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_kernel_trace.csv
+E0722 16:11:48.748693 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_hip_api_stats.csv
+E0722 16:11:48.748763 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_hip_api_trace.csv
+E0722 16:11:48.754171 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_memory_copy_stats.csv
+E0722 16:11:48.754219 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_memory_copy_trace.csv
+E0722 16:11:48.758424 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_memory_allocation_stats.csv
+E0722 16:11:48.758475 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_memory_allocation_trace.csv
+E0722 16:11:48.764155 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_agent_info.csv
+E0722 16:11:48.764213 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_domain_stats.csv
+[031.560]       perfetto.cc:47314 Configured tracing session 1, #sources:1, duration:0 ms, #buffers:1, total buffer size:1048576 KB, total sessions:1, uid:0 session name: ""
+E0722 16:11:48.780755 1432194 output_stream.cpp:111] Opened result file: rocprof_trace/occupancy_trace_results.pftrace
+[031.576]       perfetto.cc:48889 Tracing session 1 ended, total sessions:0
+W0722 16:11:48.783956 1432194 simple_timer.cpp:55] [rocprofv3] output generation ::     0.052016 sec
+W0722 16:11:48.783990 1432194 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.052121 sec
+Warning: Resource leak detected by SharedSignalPool, 8 Signals leaked.

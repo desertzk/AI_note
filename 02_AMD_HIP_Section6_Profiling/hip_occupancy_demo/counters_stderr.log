@@ -1,0 +1,26 @@
+W0722 16:11:50.349540 1432269 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0722 16:11:50.371200 1432269 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.086515 sec
+W0722 16:11:50.371393 1432269 simple_timer.cpp:55] [rocprofv3] './hip_occupancy_demo' ::     0.000000 sec
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+W0722 16:11:50.376939 1432269 tool.cpp:2728] HSA version 1.21.0 initialized (instance=0)
+W0722 16:11:50.425275 1432269 simple_timer.cpp:55] [rocprofv3] './hip_occupancy_demo' ::     0.053881 sec
+E0722 16:11:50.431930 1432269 output_stream.cpp:111] Opened result file: rocprof_occupancy/pass_1/occupancy_counters_counter_collection.csv
+E0722 16:11:50.434515 1432269 output_stream.cpp:111] Opened result file: rocprof_occupancy/pass_1/occupancy_counters_agent_info.csv
+E0722 16:11:50.434567 1432269 output_stream.cpp:111] Opened result file: rocprof_occupancy/pass_1/occupancy_counters_results.json
+W0722 16:11:50.444541 1432269 simple_timer.cpp:55] [rocprofv3] output generation ::     0.018522 sec
+W0722 16:11:50.444575 1432269 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.018557 sec
+Warning: Resource leak detected by SharedSignalPool, 9 Signals leaked.
+W0722 16:11:50.554443 1432274 metadata.cpp:330] rocprofiler_iterate_agent_supported_counters failed for agent 2 (gfx1036) :: Agent HW architecture is not supported, no counter metrics found.
+W0722 16:11:50.575351 1432274 simple_timer.cpp:55] [rocprofv3] tool initialization ::     0.081480 sec
+W0722 16:11:50.575545 1432274 simple_timer.cpp:55] [rocprofv3] './hip_occupancy_demo' ::     0.000000 sec
+Secondary CUID not available: AMDCUID support not enabled.
+Secondary CUID not available: AMDCUID support not enabled.
+W0722 16:11:50.581339 1432274 tool.cpp:2728] HSA version 1.21.0 initialized (instance=0)
+W0722 16:11:50.630685 1432274 simple_timer.cpp:55] [rocprofv3] './hip_occupancy_demo' ::     0.055140 sec
+E0722 16:11:50.637321 1432274 output_stream.cpp:111] Opened result file: rocprof_occupancy/pass_2/occupancy_counters_counter_collection.csv
+E0722 16:11:50.640043 1432274 output_stream.cpp:111] Opened result file: rocprof_occupancy/pass_2/occupancy_counters_agent_info.csv
+E0722 16:11:50.640097 1432274 output_stream.cpp:111] Opened result file: rocprof_occupancy/pass_2/occupancy_counters_results.json
+W0722 16:11:50.650441 1432274 simple_timer.cpp:55] [rocprofv3] output generation ::     0.019074 sec
+W0722 16:11:50.650472 1432274 simple_timer.cpp:55] [rocprofv3] tool finalization ::     0.019107 sec
+Warning: Resource leak detected by SharedSignalPool, 9 Signals leaked.

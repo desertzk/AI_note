@@ -1,0 +1,2 @@
+"Name","Calls","TotalDurationNs","AverageNs","Percentage","MinNs","MaxNs","StdDev"
+"occupancy_kernel",1,21702660,21702660.000000,100.00,21702660,21702660,0.00000000e+00

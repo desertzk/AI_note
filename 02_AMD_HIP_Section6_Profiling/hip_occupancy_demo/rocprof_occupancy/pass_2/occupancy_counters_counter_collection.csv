@@ -1,0 +1,5 @@
+"Correlation_Id","Dispatch_Id","Agent_Id","Queue_Id","Process_Id","Thread_Id","Grid_Size","Kernel_Id","Kernel_Name","Workgroup_Size","LDS_Block_Size","Scratch_Size","VGPR_Count","Accum_VGPR_Count","SGPR_Count","Counter_Name","Counter_Value","Start_Timestamp","End_Timestamp"
+1,1,"Agent 1",1,1432274,1432274,65536,1,"occupancy_kernel",256,0,0,8,0,128,"GPU_UTIL",100.000000,2251033408493829,2251033421407017
+1,1,"Agent 1",1,1432274,1432274,65536,1,"occupancy_kernel",256,0,0,8,0,128,"VALUBusy",0.00000000e+00,2251033408493829,2251033421407017
+1,1,"Agent 1",1,1432274,1432274,65536,1,"occupancy_kernel",256,0,0,8,0,128,"WAVE_DEP_WAIT",0.00000000e+00,2251033408493829,2251033421407017
+1,1,"Agent 1",1,1432274,1432274,65536,1,"occupancy_kernel",256,0,0,8,0,128,"WAVE_ISSUE_WAIT",0.00000000e+00,2251033408493829,2251033421407017
