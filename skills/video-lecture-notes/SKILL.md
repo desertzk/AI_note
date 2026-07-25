@@ -1,18 +1,6 @@
 ---
 name: video-lecture-notes
-description: Watch a lecture or presentation video, obtain its subtitles, detect and capture every substantive slide, and create illustrated Markdown study notes that explain each slide according to the speaker's words. Use when asked to watch a video, take slide-by-slide notes, embed slide images in Markdown, or reconstruct lecture materials from a YouTube URL or local video.
-license: MIT
-metadata:
-  version: "1.0.0"
-  category: education
-  tags:
-    - video
-    - lecture
-    - notes
-    - slides
-    - subtitles
-compatibility:
-  universal: true
+description: Watch a lecture or presentation video, normalize its subtitles, capture every substantive slide or demonstration state, and create three illustrated Markdown deliverables: clean notes with polished explanations, standard slide notes with cleaned narration, and Detail Slide Notes containing every normalized subtitle line without visible timestamps. Use when asked to watch a video, take comprehensive slide-by-slide notes, embed slide images, preserve all subtitle text, remove subtitle timecodes, retain examples and failure cases, or reconstruct lecture materials from a YouTube URL or local video.
 ---
 
 # Video Lecture Notes
@@ -39,6 +27,8 @@ Derive a safe lecture title and create one folder containing all deliverables:
 ```text
 <lecture-title>/
 ├── <lecture-title> - Slide Notes.md
+├── <lecture-title> - Clean Slide Notes.md
+├── <lecture-title> - Detail Slide Notes.md
 ├── <lecture-title> - Slides.pptx        # when requested
 ├── slides/
 │   ├── 001_00-00-04.jpg
@@ -47,7 +37,7 @@ Derive a safe lecture title and create one folder containing all deliverables:
 └── source/                              # optional transcript/metadata
 ```
 
-Keep the Markdown file and its `slides/` directory together so relative image links remain valid.
+Name the folder after the actual video title, using a filesystem-safe equivalent only when required. Put the folder inside any user-specified parent folder. Keep all three Markdown files and `slides/` together so relative image links remain valid. Do not leave the notes or images loose in the parent folder.
 
 ### 2. Acquire video, subtitles, and metadata
 
@@ -72,6 +62,16 @@ Convert VTT/SRT captions into a readable timestamped transcript.
 - Do not silently invent corrections for uncertain technical words.
 - Use slide visuals and context to fix obvious caption errors such as “full error” → “full adder,” but retain the teacher's intended meaning.
 
+Preserve a timestamped normalized transcript in `source/`. Also prepare cleaned narration for the study notes:
+
+- Remove speech fillers, false starts, adjacent repetitions, greetings, and classroom logistics that add no instructional value.
+- Remove caption artifacts and duplicated rolling text.
+- Retain definitions, reasoning, examples, demonstrations, analogies, warnings, tradeoffs, and failure cases.
+- Do not turn cleaned notes into a raw transcript or delete useful detail merely to make them short.
+- Keep uncertain technical terms marked as uncertain rather than guessing.
+
+Treat the timestamped normalized transcript in `source/` as the traceability record. Assign its instructional content to retained slide intervals, then create cleaned narration for the rendered notes. Drop filler-only cues, greetings, vocal particles, repeated fragments, and non-instructional asides. Preserve every substantive teaching point even when several short cues are merged.
+
 ### 4. Detect slide transitions
 
 Sample the video at approximately one or two seconds per frame and compare perceptual thumbnails.
@@ -94,46 +94,113 @@ For every slide or substantive visual state:
 4. Extract definitions, equations, examples, warnings, analogies, and design tradeoffs.
 5. Distinguish visible slide facts from additional spoken explanation.
 
-Do not merely OCR or paraphrase slide bullets. The notes should explain the content according to the teacher's narration.
+Create an explicit interval map from every retained image's timestamp to the next transition. Use surrounding narration when a sentence crosses the boundary. Do not merely OCR or paraphrase slide bullets, use the subtitle transcript as a substitute for explanation, or compress several minutes of teaching into one generic paragraph.
+
+Explain every substantive slide or demonstration state separately. Combine animation states only when they convey the same point and are discussed as one unit. When an added state introduces a new step, tool result, example, warning, or conclusion, give it its own heading and explanation.
+
+For each interval, preserve:
+
+- the teacher's causal reasoning and why the point matters;
+- concrete examples and live-demonstration steps;
+- definitions and implementation details;
+- limitations, counterexamples, warnings, and observed failures;
+- comparisons between similar concepts.
+
+When relevant, explicitly distinguish system prompts from memory, tools from skills, heartbeat from cron, sub-agents from the main context, and context compression from durable storage. Cover security examples and failure cases in enough detail to explain both what happened and why.
 
 ### 6. Write illustrated Markdown notes
 
 For each slide, use this structure:
 
 ```markdown
-### Slide 8 — Half adder ([00:08:02](VIDEO_URL&t=482s))
+### Slide 8 — Half adder ([Video](VIDEO_URL&t=482s))
 
 ![Slide 8 — Half adder](slides/008_00-08-02.jpg)
 
 A half adder adds two one-bit values and produces...
+
+<details>
+<summary><strong>Cleaned narration</strong></summary>
+
+> A half adder adds two one-bit values. It produces a sum bit and a carry bit.
+
+</details>
 ```
 
 Requirements:
 
 - Put the image immediately below the slide heading.
 - Put the subtitle-based explanation immediately below the image.
+- After the structured explanation, add a collapsed `details` section named `Cleaned narration` containing the substantive narration assigned to that slide.
+- Merge caption-sized fragments into one readable paragraph instead of listing individual cues.
+- Remove visible `HH:MM:SS` timecodes, interval labels, and cue counts from the rendered Markdown. Keep timing data in `source/transcript.txt` and `slides/index.csv`.
+- Remove filler-only cues, greetings, false starts, adjacent repetition, discourse padding, and vocal particles while retaining definitions, reasoning, examples, analogies, comparisons, warnings, and failure analysis.
 - Use relative image paths.
-- Include a clickable timestamp when a public URL exists.
+- Include one `[Video]` link to the correct start time for every retained slide or substantive state when a public URL exists. Do not show the timestamp as link text.
 - Use Markdown tables for truth tables.
-- Use KaTeX for equations.
-- Combine closely related animation states under one explanation when appropriate, but embed each retained image.
-- Clearly label inferred titles if the exact title is not visible.
-- Add a final key-formulas and takeaways section.
+- Use KaTeX for equations. Put display-math delimiters on separate lines for broad Markdown-renderer compatibility:
 
-### 7. Create a PowerPoint when requested
+  ```markdown
+  $$
+  E = mc^2
+  $$
+  ```
+
+- Combine only truly redundant animation states; embed every retained image.
+- Clearly label inferred titles if the exact title is not visible.
+- Add final key-formulas, concept distinctions, security or reliability lessons, and takeaways when applicable.
+
+### 7. Create a separate cleaned study-note file
+
+Create `<lecture-title> - Clean Slide Notes.md` from the polished structured explanations.
+
+- Keep the same slide coverage, images, order, and `[Video]` links.
+- Keep the full polished explanation used in the detailed note; do not reduce it merely to make the clean file shorter.
+- Omit all `Cleaned narration` details blocks from the clean file.
+- Rewrite narration into readable study prose rather than copying subtitle fragments.
+- Remove filler, repeated phrases, caption noise, irrelevant banter, and non-instructional asides.
+- Preserve examples, demonstrations, technical distinctions, warnings, security incidents, and failure analysis.
+- The standard and clean files should differ primarily in narration presence: standard = polished explanation plus cleaned narration; clean = polished explanation only.
+- Preserve each deliverable independently; never overwrite or rename away one note while producing another.
+
+### 8. Create the full-subtitle detail file
+
+Create `<lecture-title> - Detail Slide Notes.md` as a third deliverable.
+
+- Keep the same slide headings, images, polished explanations, order, and `[Video]` links as the standard note.
+- Replace each `Cleaned narration` block with one collapsed `All subtitles` block assigned to that slide.
+- Include every normalized subtitle line in source order, including greetings, fillers, repetitions, and asides; do not clean or summarize this file's subtitle text.
+- Remove the visible `HH:MM:SS` prefix from every embedded subtitle line. Preserve timestamped originals only in `source/transcript.txt`.
+- Do not show interval labels or cue counts that contain timestamps. A non-temporal line count such as `682 subtitle lines` is optional.
+- Reflow adjacent subtitle cues into readable blockquote lines instead of rendering every short cue on its own line. Target about 50–70 characters per rendered line; avoid lines shorter than about 30 characters except when a slide interval contains too little text. A final short remainder should be appended to the preceding line, even if that makes the preceding line moderately longer than the target.
+- Preserve every subtitle cue's text and source order exactly while reflowing: do not summarize, correct, omit, duplicate, or rearrange words. Insert only the whitespace needed to join adjacent cues. Preserve exact cue boundaries and timestamps in `source/transcript.txt`, not in the rendered Markdown.
+- Format every reflowed subtitle line as a separate Markdown blockquote line (`> ...`) with no blank line between adjacent subtitle lines.
+- Never modify or replace the clean or standard note when creating the detail file.
+
+### 9. Create a PowerPoint when requested
 
 Create a 16:9 deck with one captured slide image per PowerPoint slide. Preserve source aspect ratio and optionally add a small linked timestamp. Validate by reopening the deck and checking the number of slides and embedded images.
 
 The PowerPoint does not replace the illustrated Markdown notes unless the user asks for only a deck.
 
-### 8. Validate deliverables
+### 10. Validate deliverables
 
 Before completion, verify:
 
 - every Markdown image path exists;
-- every substantive slide/topic has an image and explanation;
+- all three note files exist with exact suffixes `Slide Notes.md`, `Clean Slide Notes.md`, and `Detail Slide Notes.md`;
+- every substantive slide or demonstration state has its own image, explanation, and `[Video]` link targeting the correct start time;
+- every standard-note slide has one balanced `Cleaned narration` details section containing one readable paragraph;
+- every detail-note slide has one balanced `All subtitles` section;
+- after removing source timestamp prefixes and normalizing whitespace, concatenating all detail-note subtitle lines exactly matches the normalized transcript text and order;
+- `All subtitles` blocks use readable reflowed lines, normally about 50–70 characters each, rather than one short line per caption cue;
+- no rendered note contains visible `HH:MM:SS` timecodes, interval labels, or cue counts;
+- cleaned narration contains every substantive spoken point but no filler-only cues, caption fragmentation, or adjacent duplication;
+- the clean note contains the same polished slide explanations and no narration details blocks;
+- the clean note removes filler without losing examples, distinctions, warnings, or failure analysis;
 - timestamps are ordered and within the video duration;
 - equations and truth tables agree with the lecture;
+- display-math delimiters occur on their own lines and are balanced;
 - the Markdown preview renders images correctly;
 - the PowerPoint reopens and contains the expected image count;
 - all outputs are together under the lecture folder.
@@ -141,9 +208,9 @@ Before completion, verify:
 ## Quality standards
 
 - **Faithful:** Base explanations on the actual subtitles and visuals.
-- **Complete:** Cover every substantive slide, not only major chapter headings.
-- **Readable:** Convert speech into structured study notes rather than a raw transcript.
-- **Traceable:** Preserve timestamps so users can verify explanations against the video.
+- **Complete:** Cover every substantive slide and spoken teaching point; completeness applies to instructional content, not filler or caption artifacts.
+- **Readable:** Convert speech into structured study prose rather than a raw or lightly filtered transcript.
+- **Traceable:** Keep timestamped source transcripts and indexes, and link every slide to its correct video position without displaying raw timecodes.
 - **Honest:** Mark uncertain words or inferred boundaries instead of presenting guesses as facts.
 - **Efficient:** Reuse downloaded media and transcripts; do not repeatedly fetch the same source.
 

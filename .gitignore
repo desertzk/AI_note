@@ -1,0 +1,6 @@
+# Keep downloaded lecture source videos local.
+/lihongyi_ml/**/*.mp4
+/lihongyi_ml/**/*.webm
+/lihongyi_ml/**/*.mkv
+/lihongyi_ml/**/*.mov
+/lihongyi_ml/**/*.avi
