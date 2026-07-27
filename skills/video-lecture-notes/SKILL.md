@@ -220,3 +220,47 @@ Before completion, verify:
 - “Embed screenshots from the presentation into the Markdown notes.”
 - “Explain each slide using what the professor says in the subtitles.”
 - “Turn this local lecture video into illustrated notes and a PowerPoint.”
+
+Bilibili (B站) 视频处理
+
+B站视频与 YouTube 有本质区别，需要独立的下载和提取流程。
+
+### B1. 安装 BBDown
+
+BBDown 是 B站视频的命令行下载工具（.NET 程序）：
+
+```bash
+# 方式1：winget 安装（Windows）
+winget install nilaoda.BBDown --accept-package-agreements
+
+# 方式2：从 GitHub 下载独立 exe
+# https://github.com/nilaoda/BBDown/releases
+# 下载 win-x64.zip，解压得到 BBDown.exe
+```
+
+BBDown.exe 会被安装到 winget 的 Packages 目录，需要找到完整路径或添加到 PATH。
+
+### B2. 下载视频 + AI 字幕
+
+**关键**：B站 AI 字幕默认是**跳过**的（`--skip-ai` 默认开启），必须显式传 `--skip-ai=false`！
+
+```bash
+# 仅下载字幕（先看看有什么）
+BBDown.exe "BV1xxxxxx" -p 2 --sub-only --skip-ai=false --work-dir "输出目录"
+
+# 下载视频 + 字幕（用于提取关键帧）
+BBDown.exe "BV1xxxxxx" -p 2 --skip-ai=false --work-dir "输出目录"
+```
+
+**参数说明**：
+
+- `BV1xxxxxx`：B站视频的 BV 号（不需要完整 URL）
+- `-p 2`：仅下载第2个分P
+- `--skip-ai=false`：**必须！**不跳过 AI 字幕下载
+- `--sub-only`：仅下载字幕，不下载视频
+- `--work-dir`：输出目录
+
+**字幕文件**：BBDown 下载的 AI 字幕为 SRT 格式：
+
+- `[P2]标题.ai-zh.srt` — 中文（简体，AI识别）
+- `[P2]标题.ai-en.srt` — 英文（AI生成）
