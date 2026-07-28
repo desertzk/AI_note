@@ -1,6 +1,14 @@
 # Keep downloaded lecture source videos local.
-/lihongyi_ml/**/*.mp4
-/lihongyi_ml/**/*.webm
-/lihongyi_ml/**/*.mkv
-/lihongyi_ml/**/*.mov
-/lihongyi_ml/**/*.avi
+*.mp4
+*.webm
+*.mkv
+*.mov
+*.avi
+*.wav
+
+# IDE / tool config
+.qoder/
+.cline_storage/
+
+# Large extracted data
+116837958291756/

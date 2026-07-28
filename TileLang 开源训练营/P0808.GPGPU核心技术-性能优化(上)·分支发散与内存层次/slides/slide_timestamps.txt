@@ -1,0 +1,6 @@
+slide_0001.jpg  [00:04]  (4s)  diff=0.9997  anim_steps=2
+slide_0002.jpg  [00:52]  (52s)  diff=0.1601  anim_steps=2
+slide_0003.jpg  [02:31]  (151s)  diff=0.0374  anim_steps=2
+slide_0004.jpg  [07:25]  (445s)  diff=1.0000  anim_steps=2
+slide_0005.jpg  [07:34]  (454s)  diff=0.1190  anim_steps=2
+slide_0006.jpg  [12:46]  (766s)  diff=0.9887  anim_steps=3

@@ -1,0 +1,13 @@
+slide_0001.jpg  [00:27]  (27s)  diff=0.4631  anim_steps=18
+slide_0002.jpg  [00:33]  (33s)  diff=0.4610  anim_steps=1
+slide_0003.jpg  [00:52]  (52s)  diff=0.5482  anim_steps=3
+slide_0004.jpg  [01:49]  (109s)  diff=0.1569  anim_steps=2
+slide_0005.jpg  [02:35]  (155s)  diff=0.2260  anim_steps=2
+slide_0006.jpg  [02:55]  (175s)  diff=0.2447  anim_steps=2
+slide_0007.jpg  [03:14]  (194s)  diff=0.0587  anim_steps=4
+slide_0008.jpg  [03:21]  (201s)  diff=0.3534  anim_steps=1
+slide_0009.jpg  [03:35]  (215s)  diff=0.2799  anim_steps=1
+slide_0010.jpg  [03:43]  (223s)  diff=0.2565  anim_steps=2
+slide_0011.jpg  [06:56]  (416s)  diff=0.2076  anim_steps=12
+slide_0012.jpg  [07:55]  (475s)  diff=0.0343  anim_steps=3
+slide_0013.jpg  [10:07]  (607s)  diff=0.9904  anim_steps=1

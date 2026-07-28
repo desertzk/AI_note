@@ -72,7 +72,53 @@ Preserve a timestamped normalized transcript in `source/`. Also prepare cleaned 
 
 Treat the timestamped normalized transcript in `source/` as the traceability record. Assign its instructional content to retained slide intervals, then create cleaned narration for the rendered notes. Drop filler-only cues, greetings, vocal particles, repeated fragments, and non-instructional asides. Preserve every substantive teaching point even when several short cues are merged.
 
-### 4. Detect slide transitions
+### 4. Detect video type (PPT vs talking-head)
+
+Before extracting slides, determine whether the video is a **slide-based presentation** or a **talking-head / commentary video** (person speaking to camera without distinct slides).
+
+Run `scripts/detect_video_type.py <video_path>` which implements the full algorithm below. Add `--no-clip` to skip AI classification.
+
+**Detection methods (in priority order):**
+
+1. **CLIP zero-shot classification** (most accurate, requires `torch` + `transformers`):
+   - Sample 20 frames evenly across the video.
+   - Classify each frame against semantic text prompts: *"a presentation slide with text and diagrams"* vs *"a person speaking to camera"*.
+   - If >60% of frames are classified as "slide" → PPT; otherwise → talking-head.
+   - This understands *what* the frame shows, not just pixel differences.
+
+2. **Median pairwise distance** (fast fallback when CLIP unavailable):
+   - Compute pairwise histogram distances between sampled frames, take median.
+   - Median < 0.35 = talking-head (frames look similar); ≥ 0.35 = PPT (frames are diverse).
+
+3. **Histogram consecutive diffs** (fastest, least accurate):
+   - `max_diff`, `mean_diff`, `ratio`, `high_count` from consecutive frame pairs.
+   - Used only as supplementary metrics when CLIP is unavailable.
+
+**Priority:** CLIP verdict > median pairwise > histogram rules. When CLIP is available, it is the sole classifier.
+
+**Why CLIP:** Hybrid videos (narrator + occasional illustration cutaways) fool histogram methods because cutaways create high diff spikes. CLIP semantically understands "person talking" vs "slide with diagrams" regardless of color changes.
+
+### 4B. Talking-head workflow (non-PPT videos)
+
+When the video is NOT slide-based, do NOT create `slides/` or use the "Slide N" format. Instead produce a single structured note file:
+
+```text
+<lecture-title>/
+├── <lecture-title> Notes.md
+└── source/
+    └── transcript.txt
+```
+
+The note file should contain:
+
+- Title, metadata (speaker, date, duration, source URL)
+- A **核心观点 / Key Takeaways** summary section
+- Content organized by **topic sections** (not slides), each with a timestamp link
+- Tables, bullet points, and structured formatting for key data
+- Full transcript in a collapsible `<details>` block at the end
+- No embedded images (they would all be identical frames of the speaker)
+
+### 5. Detect slide transitions (PPT videos only)
 
 Sample the video at approximately one or two seconds per frame and compare perceptual thumbnails.
 
@@ -84,7 +130,7 @@ Sample the video at approximately one or two seconds per frame and compare perce
 
 Automatic detection is only a first pass. Inspect contact sheets or thumbnails and manually add missing topic frames. Common misses include long drawing demonstrations, slides with small incremental changes, and sections where only annotations change.
 
-### 5. Align narration with slides
+### 6. Align narration with slides
 
 For every slide or substantive visual state:
 
@@ -108,7 +154,7 @@ For each interval, preserve:
 
 When relevant, explicitly distinguish system prompts from memory, tools from skills, heartbeat from cron, sub-agents from the main context, and context compression from durable storage. Cover security examples and failure cases in enough detail to explain both what happened and why.
 
-### 6. Write illustrated Markdown notes
+### 7. Write illustrated Markdown notes
 
 For each slide, use this structure:
 
@@ -150,7 +196,7 @@ Requirements:
 - Clearly label inferred titles if the exact title is not visible.
 - Add final key-formulas, concept distinctions, security or reliability lessons, and takeaways when applicable.
 
-### 7. Create a separate cleaned study-note file
+### 8. Create a separate cleaned study-note file
 
 Create `<lecture-title> - Clean Slide Notes.md` from the polished structured explanations.
 
@@ -163,7 +209,7 @@ Create `<lecture-title> - Clean Slide Notes.md` from the polished structured exp
 - The standard and clean files should differ primarily in narration presence: standard = polished explanation plus cleaned narration; clean = polished explanation only.
 - Preserve each deliverable independently; never overwrite or rename away one note while producing another.
 
-### 8. Create the full-subtitle detail file
+### 9. Create the full-subtitle detail file
 
 Create `<lecture-title> - Detail Slide Notes.md` as a third deliverable.
 
@@ -177,13 +223,13 @@ Create `<lecture-title> - Detail Slide Notes.md` as a third deliverable.
 - Format every reflowed subtitle line as a separate Markdown blockquote line (`> ...`) with no blank line between adjacent subtitle lines.
 - Never modify or replace the clean or standard note when creating the detail file.
 
-### 9. Create a PowerPoint when requested
+### 10. Create a PowerPoint when requested
 
 Create a 16:9 deck with one captured slide image per PowerPoint slide. Preserve source aspect ratio and optionally add a small linked timestamp. Validate by reopening the deck and checking the number of slides and embedded images.
 
 The PowerPoint does not replace the illustrated Markdown notes unless the user asks for only a deck.
 
-### 10. Validate deliverables
+### 11. Validate deliverables
 
 Before completion, verify:
 

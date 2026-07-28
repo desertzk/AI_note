@@ -12,18 +12,27 @@ Use this skill when the user wants to watch a downloaded lecture video and produ
 
 ### Step 1: Organize Directory
 
-Create a clean directory for each lecture:
+Create a clean directory for each lecture. **Notes file must be named after the video file** (not `notes.md`):
 
 ```
 lecture_name/
 ├── video.mp4
-├── notes.md
+├── [video_name].md        ← same name as video, e.g. [P01]01.开营专场-国产GPU生态飞轮.md
 ├── slides/
-│   └── slide_XXXX.jpg
-└── subtitles/
-    ├── lecture.en.srt
-    ├── lecture.en.json3
-    └── transcript_clean.txt
+│   ├── slide_0001.jpg
+│   ├── slide_timestamps.txt
+│   └── index.csv
+└── source/
+    ├── subtitles.srt
+    └── transcript.txt
+```
+
+**Slide extraction & dedup**: Use `scripts/dedup_slides.py` (already exists):
+```bash
+# 1. Extract frames at 1fps
+ffmpeg -i video.mp4 -vf "fps=1" -q:v 2 "slides/frame_%04d.jpg"
+# 2. Dedup: renames unique slides to slide_XXXX.jpg, deletes frame_*.jpg
+python scripts/dedup_slides.py <slides_dir>
 ```
 
 ### Step 2: Download Subtitles (if from YouTube)
