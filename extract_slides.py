@@ -1,13 +1,24 @@
+"""Extract slide transitions from a lecture video.
+
+Usage:
+    python extract_slides.py <video_path> [--output <dir>]
+"""
+import argparse
 from pathlib import Path
 import csv
 
 import cv2
 import numpy as np
 
-ROOT = Path(__file__).resolve().parent
-VIDEO = next((ROOT / "yifan").glob("Common Circuit Blocks*.mp4"))
-OUT = ROOT / "slides"
-OUT.mkdir(exist_ok=True)
+parser = argparse.ArgumentParser(description="Extract slide keyframes from a video.")
+parser.add_argument("video", type=str, help="Path to the input video file")
+parser.add_argument("--output", "-o", type=str, default=None,
+                    help="Output directory for slides (default: <video_dir>/slides)")
+args = parser.parse_args()
+
+VIDEO = Path(args.video)
+OUT = Path(args.output) if args.output else VIDEO.parent / "slides"
+OUT.mkdir(parents=True, exist_ok=True)
 
 cap = cv2.VideoCapture(str(VIDEO))
 fps = cap.get(cv2.CAP_PROP_FPS)
