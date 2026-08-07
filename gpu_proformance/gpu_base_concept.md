@@ -16,6 +16,8 @@ Therefore the whole GPU has:
 32 WGPs × 64 wave slots = 2048 wave slots
 ```
 
+total VGPR number 1536
+
 For each dispatch:
 
 - waves/workgroup = `ceil(block threads / 32)`;
@@ -1514,12 +1516,12 @@ The **VGPR allocation** becomes the limiting factor.
 When you read ROCm profiler output, always ask these two questions **in order**:
 
 1. **Did I launch enough work?**
-
+   
    * If **no**, you'll often see **`GPU limiter = grid`**.
    * The GPU is underfed.
 
 2. **If I launched enough work, what prevents each WGP from becoming full?**
-
+   
    * VGPR?
    * LDS?
    * Barrier/workgroup limit?
@@ -1542,6 +1544,372 @@ Earlier we calculated:
 
 Without doing detailed math, what do you think happens to the **Active-WGP ceiling**?
 
-Will it **increase**, **decrease**, or **stay the same**? More importantly, **why?**
+Will it **increase**, **decrease**, or **stay the same**? More importantly, **why?
 
->
+
+
+你的思路很好，但这里有一个**关键误区**：
+
+> 你把 **总 wave 数量 / waves per SIMD** 当成了 **每个 SIMD 实际驻留的 wave 数量**。
+
+这个不对。我们慢慢拆开。
+
+---
+
+## 1. 先纠正你的计算
+
+你写：
+
+> 2000/10 = 200 each SIMD have 200 wave
+
+这里错误在于：
+
+**10 是每个 SIMD 能容纳的最大 resident waves，不是 GPU 执行分配比例。**
+
+不是：
+
+```
+总waves ÷ 每个SIMD容量
+```
+
+而是：
+
+```
+每个SIMD最多能驻留多少waves 这个和VGPR有关
+```
+
+---
+
+## 2. 128 VGPR 情况
+
+你的 kernel:
+
+```
+reported VGPR = 128
+allocated VGPR = 144
+```
+
+所以：
+
+```
+1536 / 144 = 10 waves/SIMD
+```
+
+意思：
+
+```
+一个 SIMD:
+
++----------------+
+| Wave 0         |
+| Wave 1         |
+| Wave 2         |
+| ...            |
+| Wave 9         |
++----------------+
+
+最多10个wave
+```
+
+一个 WGP 有4个SIMD：
+
+```
+WGP
+
+SIMD0  10 waves
+SIMD1  10 waves
+SIMD2  10 waves
+SIMD3  10 waves
+
+total:
+
+40 waves/WGP
+```
+
+所以：
+
+```
+Active-WGP ceiling
+
+=40/64
+
+=62.5%
+```
+
+---
+
+## 3. 96 VGPR 情况
+
+优化以后：
+
+```
+reported VGPR = 96
+allocated VGPR = 96
+```
+
+计算：
+
+```
+1536 / 96 = 16 waves/SIMD
+```
+
+现在：
+
+```
+一个 SIMD:
+
++----------------+
+| Wave 0         |
+| Wave 1         |
+| ...            |
+| Wave15         |
++----------------+
+
+最多16个wave
+```
+
+一个 WGP:
+
+```
+SIMD0 16 waves
+SIMD1 16 waves
+SIMD2 16 waves
+SIMD3 16 waves
+```
+
+所以：
+
+```
+16 × 4 = 64 waves/WGP
+```
+
+---
+
+## 4. Active-WGP ceiling 变化
+
+以前：
+
+```
+40 waves/WGP
+
+40 / 64
+
+=62.5%
+```
+
+现在：
+
+```
+64 waves/WGP
+
+64 / 64
+
+=100%
+```
+
+所以答案：
+
+> ❌ 不是 stay same  
+> ✅ Active-WGP ceiling 从 62.5% 提升到 100%
+
+---
+
+## 5. 那你的 2000 waves 怎么理解？
+
+你算：
+
+```
+2000/10
+2000/16
+```
+
+这个不是 profiler 的计算方式。
+
+正确方式：
+
+GPU 有：
+
+```
+32 WGP
+```
+
+每个 WGP：
+
+```
+64 wave slots
+```
+
+所以：
+
+```
+GPU总容量:
+
+32 × 64
+
+=2048 waves
+```
+
+---
+
+### 情况 A: 128 VGPR
+
+资源限制：
+
+```
+每WGP只能40 waves
+```
+
+整个GPU：
+
+```
+32 × 40
+
+=1280 resident waves
+```
+
+但是你的grid：
+
+```
+2000 waves
+```
+
+足够。
+
+所以：
+
+```
+实际occupancy
+
+=1280 / 2048
+
+=62.5%
+```
+
+限制因素：
+
+```
+VGPR
+```
+
+---
+
+### 情况 B: 96 VGPR
+
+资源限制：
+
+```
+每WGP 64 waves
+```
+
+整个GPU：
+
+```
+32 ×64
+
+=2048 resident waves
+```
+
+grid：
+
+```
+2000 waves
+```
+
+所以：
+
+```
+实际occupancy
+
+=2000/2048
+
+=97.7%
+```
+
+限制因素：
+
+```
+grid
+```
+
+---
+
+## 6. 这也是为什么降低VGPR很重要
+
+从：
+
+```
+128 VGPR
+```
+
+到：
+
+```
+96 VGPR
+```
+
+发生了：
+
+```
+144 allocated
+        |
+        v
+96 allocated
+```
+
+导致：
+
+```
+10 waves/SIMD
+        |
+        v
+16 waves/SIMD
+```
+
+WGP:
+
+```
+40 waves
+        |
+        v
+64 waves
+```
+
+结果：
+
+```
+Active-WGP ceiling
+
+62.5%
+        |
+        v
+100%
+```
+
+这是一个非常大的变化。
+
+---
+
+## 最后总结一句
+
+你可以这样记：
+
+```
+VGPR决定：
+一个SIMD里面最多放几个wave
+
+LDS决定：
+一个WGP里面最多放几个workgroup
+
+Grid决定：
+整个GPU有没有足够wave填满它
+```
+
+所以：
+
+- **Active-WGP ceiling** → "单个WGP最多能吃多少"
+
+- **GPU-wide ceiling** → "整个dispatch有没有足够食物"
+
+你已经掌握 occupancy 的核心逻辑了。下一步可以看为什么 **降低VGPR可能让kernel变慢（spill），而不是一定变快**，这也是GPU kernel优化最容易踩的坑。**
+
+> 
